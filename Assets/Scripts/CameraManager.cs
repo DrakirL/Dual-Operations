@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CameraManager : MonoBehaviour
 {
@@ -8,11 +9,10 @@ public class CameraManager : MonoBehaviour
     Collider spyCol;
     [SerializeField] CameraScript[] cameras;
     [SerializeField] float shutDownTimer = 10;
+    [SerializeField] RawImage cameraRenderer;
+    [SerializeField] int tempImageChanger = 0;
 
-
-    //test
-    [SerializeField] Camera tcamera; 
-    [SerializeField] SpriteRenderer observer;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -26,8 +26,8 @@ public class CameraManager : MonoBehaviour
 
         //example to see if the spy is detected
         // Debug.Log(isSpySeenByAnyCamera(cameras));
-        Debug.Log(isSpySeenByThisCamera(cameras[0]));
-        
+        Debug.Log(isAgentSeenByThisCamera(cameras[0]));
+
         //example how to see all the cameras that know where the spy is located
         /* List<GameObject> camerasThatSeeTheSpyGO = camerasThatSeeTheSpy(cameras);
         for(int i = 0; i < camerasThatSeeTheSpyGO.Count; i++)
@@ -35,19 +35,21 @@ public class CameraManager : MonoBehaviour
             Debug.Log(camerasThatSeeTheSpyGO[i].name + " detect the spy");
         }*/
 
-        //  observer.sprite = getCameraView(cameras, 1);
+        //cameraRenderer.texture = getCameraView(cameras, 0);
+        //cameraRenderer.texture = getCameraView(cameras, tempImageChanger);
+        cameraRenderer.texture = cameras[tempImageChanger].gameObject.GetComponent<Camera>().targetTexture;
     }
 
 
-    bool isSpySeenByThisCamera(CameraScript[] TracingCameras, int index)
+    bool isAgentSeenByThisCamera(CameraScript[] TracingCameras, int index)
     {
         return TracingCameras[index].isObjectVisible(Spy, spyCol);
     }
-    bool isSpySeenByThisCamera(CameraScript TracingCamera)
+    bool isAgentSeenByThisCamera(CameraScript TracingCamera)
     {
         return TracingCamera.isObjectVisible(Spy, spyCol);
     }
-    bool isSpySeenByAnyCamera(CameraScript[] TracingCameras)
+    bool isAgentSeenByAnyCamera(CameraScript[] TracingCameras)
     {
         for (int i = 0; i < TracingCameras.Length; i++)
         {
@@ -56,24 +58,27 @@ public class CameraManager : MonoBehaviour
         }
         return false;
     }
-    Sprite getCameraView(CameraScript[] TracingCameras, int index)
+    RenderTexture getCameraView(CameraScript[] TracingCameras, int index)
     {
-        tcamera = cameras[index].gameObject.GetComponent<Camera>();
+        /*   Camera camera = cameras[index].gameObject.GetComponent<Camera>();
 
-        // Make a new texture and read the active Render Texture into it.
-        Texture2D image = new Texture2D(tcamera.targetTexture.width, tcamera.targetTexture.height);
-        image.ReadPixels(new Rect(0, 0, tcamera.targetTexture.width, tcamera.targetTexture.height), 0, 0);
-        image.Apply();
+           // Make a new texture and read the active Render Texture into it.
+           Texture2D image = new Texture2D(camera.pixelWidth, camera.pixelHeight);
+           image.ReadPixels(new Rect(0, 0, camera.pixelWidth, camera.pixelWidth), 0, 0);
+           image.Apply();
 
-        Sprite sprite = Sprite.Create(image, new Rect(0.0f, 0.0f, image.width, image.height), new Vector2(0.5f, 0.5f), 100.0f);
-        if (TracingCameras[index].cameraActive)
-        {
-            return sprite;
-        }
-        Debug.LogWarning("camera is not active");
-        return null;
-        
-    //    return cameras[index].gameObject.GetComponent<Camera>().activeTexture;
+           //  Sprite sprite = Sprite.Create(image, new Rect(0.0f, 0.0f, image.width, image.height), new Vector2(0.5f, 0.5f), 100.0f);
+
+           if (TracingCameras[index].cameraActive)
+           {
+               return image;
+           }
+           Debug.LogWarning("camera is not active");
+           return null;
+
+       //    return cameras[index].gameObject.GetComponent<Camera>().activeTexture;
+       */
+       return TracingCameras[index].gameObject.GetComponent<Camera>().targetTexture;
     }
     List<GameObject> camerasThatSeeTheSpy(CameraScript[] TracingCameras)
     {

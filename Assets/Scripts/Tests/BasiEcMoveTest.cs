@@ -70,5 +70,4 @@ public class BasiEcMoveTest : MonoBehaviour
             playerRB.MovePosition(transform.position + (-transform.forward * movementSpeed));
         }
     }
-
 }
