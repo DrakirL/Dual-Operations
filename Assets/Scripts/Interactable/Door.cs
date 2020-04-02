@@ -4,29 +4,44 @@ using UnityEngine;
 
 public class Door : MonoBehaviour, IInteractable
 {
-    bool open = false;
     public GameObject hinge;
-    Animator anim;
 
+    Animator anim;
+    BoxCollider col;
+    
     private void Start()
     {
         // Fetch animator from hinge component
         anim = hinge.GetComponent<Animator>();
+        col = GetComponent<BoxCollider>();
     }
 
+    private void Update()
+    {
+        EnableDoor();
+    }
+ 
     public void GetInteracted()
     {
-        if (!open)
-        {
-            //hinge.transform.Rotate(transform.rotation.x, transform.rotation.y + 90f, transform.rotation.z, Space.World);          
-            anim.Play("Open");
-            open = true;            
+        if (DoorIsClosed())
+        {       
+            anim.Play("Open");          
         }
         else
-        {
-            //hinge.transform.Rotate(transform.rotation.x, transform.rotation.y - 90f, transform.rotation.z, Space.World);           
+        {          
             anim.Play("Close");
-            open = false;
         }
+    }
+    bool DoorIsClosed() => (anim.GetCurrentAnimatorStateInfo(0).IsName("ClosedIdle")) ? true : false;
+    bool DoorIsIdle() => (anim.GetCurrentAnimatorStateInfo(0).IsName("OpenIdle") || anim.GetCurrentAnimatorStateInfo(0).IsName("ClosedIdle")) ? true : false;
+
+    // Enables trigger collider for interaction
+    void EnableDoor()
+    {
+        if (DoorIsIdle())
+            col.enabled = true;
+        else
+            col.enabled = false;
+        
     }
 }

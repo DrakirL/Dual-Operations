@@ -7,22 +7,31 @@ public class DoubleSlideDoor : MonoBehaviour, IInteractable
     public Animator anim1;
     public Animator anim2;
     public BoxCollider col;
-    bool open = false;
 
     private void Update()
     {
-        if (anim1.GetCurrentAnimatorStateInfo(0).IsName("CloseIdle"))
-        {
-            open = true;
-            col.enabled = true;
-        }            
+        EnableDoor(DoorIsClosed());        
     }
+    
+    // Checks current animation status
+    bool DoorIsClosed() => (anim1.GetCurrentAnimatorStateInfo(0).IsName("CloseIdle")) ? true : false;
+
     public void GetInteracted()
+    {
+        OpenDoor();
+    }
+
+    // Play animation for door open, closes itself in animation
+    void OpenDoor()
     {
         anim1.Play("Open");
         anim2.Play("Open");
-        open = false;
-        col.enabled = false;
+    }
+
+    // Sets the trigger collider status
+    void EnableDoor(bool boolToSet)
+    {
+        col.enabled = boolToSet;
     }
     
 }

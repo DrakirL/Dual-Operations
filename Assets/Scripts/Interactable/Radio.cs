@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Radio : MonoBehaviour, IInteractable
 {
-    bool on = false;
     AudioSource sound;
 
     private void Start()
@@ -14,15 +13,15 @@ public class Radio : MonoBehaviour, IInteractable
 
     public void GetInteracted()
     {
-        if (!on)
+        if (!SoundIsPlaying())
         {        
             sound.Play();
-            on = true;
         }
         else
         {
             sound.Pause();
-            on = false;
         }
     }
+
+    bool SoundIsPlaying() => (sound.isPlaying) ? true : false;
 }
