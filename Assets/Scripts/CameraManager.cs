@@ -14,16 +14,13 @@ public struct CameraStruct
 public class CameraManager : MonoBehaviour
 {
     [SerializeField] CameraStruct[] cameraStruct;
-
-    //OBS this is not ment to be public, remove when game is up
-    [SerializeField] public float cameraFOVDistance;
+    
     [SerializeField] float cameraAlertTime;
     [SerializeField] GameObject Spy;
     Collider spyCol;
 
     [SerializeField] float shutDownTimer = 10;
     [SerializeField] RawImage cameraRenderer;
-    [SerializeField] int tempImageChanger = 0;
     
     // Start is called before the first frame update
     void Start()
@@ -37,48 +34,33 @@ public class CameraManager : MonoBehaviour
     void Update()
     {
         List<CameraScript> alertTimes = new List<CameraScript>();
-        alertTimes = camerasThatSeeTheSpy(cameraStruct);
-        for (int i = 0; i < alertTimes.Count; i++)
+        alertTimes = camerasThatSeeTheSpy();
+        if (alertTimes.Count == 0)
         {
-            //TYPE HERE WHAT SHOULD HAPPEN WHEN CAMERA DETECT AGENT
-            //Debug.Log(alertTimes[i].gameObject.name);
+         //   Debug.Log("no camera has spotted the agent");
+        }
+        else
+        {
+            for (int i = 0; i < alertTimes.Count; i++)
+            {
+                //TYPE HERE WHAT SHOULD HAPPEN WHEN CAMERA DETECT AGENT
+                Debug.Log(alertTimes[i].gameObject.name + " has spoted the agent!");
+            }
         }
     }
 
-    //functions that is currently not being used
-    /* bool isAgentSeenByThisCamera(CameraStruct[] TracingCameras, int index)
-     {
-         return TracingCameras[index].camera.isObjectVisible(Spy, spyCol, cameraFOVDistance, cameraAlertTime);
-     }
-     bool isAgentSeenByThisCamera(CameraStruct TracingCamera)
-     {
-         return TracingCamera.camera.isObjectVisible(Spy, spyCol, cameraFOVDistance, cameraAlertTime);
-     }
-
-     bool isAgentSeenByAnyCamera(CameraStruct[] TracingCameras)
-     {
-         for (int i = 0; i < TracingCameras.Length; i++)
-         {
-             if (TracingCameras[i].camera.isObjectVisible(Spy, spyCol, cameraFOVDistance, cameraAlertTime))
-                 return true;
-         }
-         return false;
-     }*/
     //function to detect all cameras that can see the player
-    List<CameraScript> camerasThatSeeTheSpy(CameraStruct[] TracingCameras)
+    List<CameraScript> camerasThatSeeTheSpy()
     {
         List<CameraScript> tempList = new List<CameraScript>();
-        for (int i = 0; i < TracingCameras.Length; i++)
+        //whith the function from the CameraScript, collects all cameras that can see the agent
+        for (int i = 0; i < cameraStruct.Length; i++)
         {
-            if (TracingCameras[i].camera.isObjectVisible(Spy, spyCol, cameraFOVDistance, cameraAlertTime))
-                tempList.Add(TracingCameras[i].camera);
+            if (cameraStruct[i].camera.isObjectVisible(Spy, spyCol, cameraAlertTime))
+                tempList.Add(cameraStruct[i].camera);
         }
         return tempList;
     }
-
-
-
-
 
     //hacker funktioanlaties
     RenderTexture updateHackerCameraView(int index)
