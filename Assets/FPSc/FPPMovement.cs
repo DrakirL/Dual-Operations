@@ -2,17 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class fps_movement : MonoBehaviour
+public class FPPMovement : MonoBehaviour
 {
+	float gravity = 1.0f;
+	float velocity = 1.0f;
+	
     // Start is called before the first frame update
     void Start()
     {
         
     }
 
-    // Update is called once per frame
+
     void Update()
     {
-        
+			
     }
 }

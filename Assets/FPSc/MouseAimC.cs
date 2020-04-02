@@ -11,9 +11,14 @@ public class MouseAimC : MonoBehaviour
 	
 	Vector2 rot = Vector2.zero;
 	
+    void Start()
+    {
+		Cursor.lockState = CursorLockMode.Locked;
+    }
+	
 	void MouseLook()
 	{
-		Cursor.lockState = CursorLockMode.Locked;
+		
 		
 		int inv = Convert.ToInt32(inverted == true ? 1:-1);
 		
@@ -28,11 +33,7 @@ public class MouseAimC : MonoBehaviour
 		transform.localRotation = Quaternion.Euler(y_axis,x_axis,0);
 	}
 	
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+
 
     // Update is called once per frame
     void Update()
