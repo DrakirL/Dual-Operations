@@ -25,7 +25,7 @@ public class CameraManager : MonoBehaviour
     void Start()
     {
         spyCol = Spy.GetComponent<Collider>();
-        shutDownCamera(cameraStruct[0].camera);
+        shutDownCamera(cameraStruct[0]);
 
     }
 
@@ -35,7 +35,7 @@ public class CameraManager : MonoBehaviour
 
         //example to see if the spy is detected
         // Debug.Log(isSpySeenByAnyCamera(cameras));
-        Debug.Log(isAgentSeenByThisCamera(cameraStruct[0].camera));
+        Debug.Log(isAgentSeenByThisCamera(cameraStruct[0]));
 
         //example how to see all the cameras that know where the spy is located
         /* List<GameObject> camerasThatSeeTheSpyGO = camerasThatSeeTheSpy(cameras);
@@ -56,24 +56,24 @@ public class CameraManager : MonoBehaviour
         return cameraStruct[index].cameraView;
         // cameraRenderer.texture = cameraStruct[index].cameraView;
     }
-    bool isAgentSeenByThisCamera(CameraScript[] TracingCameras, int index)
+    bool isAgentSeenByThisCamera(CameraStruct[] TracingCameras, int index)
     {
-        return TracingCameras[index].isObjectVisible(Spy, spyCol);
+        return TracingCameras[index].camera.isObjectVisible(Spy, spyCol);
     }
-    bool isAgentSeenByThisCamera(CameraScript TracingCamera)
+    bool isAgentSeenByThisCamera(CameraStruct TracingCamera)
     {
-        return TracingCamera.isObjectVisible(Spy, spyCol);
+        return TracingCamera.camera.isObjectVisible(Spy, spyCol);
     }
-    bool isAgentSeenByAnyCamera(CameraScript[] TracingCameras)
+    bool isAgentSeenByAnyCamera(CameraStruct[] TracingCameras)
     {
         for (int i = 0; i < TracingCameras.Length; i++)
         {
-            if (TracingCameras[i].isObjectVisible(Spy, spyCol))
+            if (TracingCameras[i].camera.isObjectVisible(Spy, spyCol))
                 return true;
         }
         return false;
     }
-    RenderTexture getCameraView(CameraScript[] TracingCameras, int index)
+    RenderTexture getCameraView(CameraStruct[] TracingCameras, int index)
     {
         /*   Camera camera = cameras[index].gameObject.GetComponent<Camera>();
 
@@ -93,15 +93,15 @@ public class CameraManager : MonoBehaviour
 
        //    return cameras[index].gameObject.GetComponent<Camera>().activeTexture;
        */
-       return TracingCameras[index].gameObject.GetComponent<Camera>().targetTexture;
+       return TracingCameras[index].camera.gameObject.GetComponent<Camera>().targetTexture;
     }
-    List<GameObject> camerasThatSeeTheSpy(CameraScript[] TracingCameras)
+    List<GameObject> camerasThatSeeTheSpy(CameraStruct[] TracingCameras)
     {
         List<GameObject> tempList = new List<GameObject>(); 
         for (int i = 0; i < TracingCameras.Length; i++)
         {
-            if (TracingCameras[i].isObjectVisible(Spy, spyCol))
-                tempList.Add(TracingCameras[i].gameObject);
+            if (TracingCameras[i].camera.isObjectVisible(Spy, spyCol))
+                tempList.Add(TracingCameras[i].camera.gameObject);
         }
         return tempList;
     }
@@ -111,18 +111,18 @@ public class CameraManager : MonoBehaviour
 
  
 
-    public void shutDownCamera(CameraScript camera)
+    public void shutDownCamera(CameraStruct camereStruct)
     {
-        if (camera.cameraActive)
+        if (camereStruct.camera.cameraActive)
         {
-            camera.cameraActive = false;
-            StartCoroutine(acivateCamera(camera, shutDownTimer));
+            camereStruct.camera.cameraActive = false;
+            StartCoroutine(acivateCamera(camereStruct, shutDownTimer));
         }
     }
 
-    private IEnumerator acivateCamera(CameraScript camera, float waitTime)
+    private IEnumerator acivateCamera(CameraStruct camreStruct, float waitTime)
     {
         yield return new WaitForSeconds(waitTime);
-        camera.cameraActive = true;
+        camreStruct.camera.cameraActive = true;
     }
 }

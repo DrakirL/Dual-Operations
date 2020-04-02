@@ -6,7 +6,7 @@ public class CameraScript : MonoBehaviour
 {
     Camera thisCamera;
     Plane[] planes;
-    [HideInInspector] public bool cameraActive;
+    /*[HideInInspector]*/ public bool cameraActive;
     // Start is called before the first frame update
     void Start()
     {
