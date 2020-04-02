@@ -3,11 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+[System.Serializable]
+public struct CameraStruct
+{
+    public CameraScript camera;
+    public RenderTexture cameraView;
+}
+
 public class CameraManager : MonoBehaviour
 {
+    [SerializeField] CameraStruct[] cameraStruct;
     [SerializeField] GameObject Spy;
     Collider spyCol;
-    [SerializeField] CameraScript[] cameras;
+   
     [SerializeField] float shutDownTimer = 10;
     [SerializeField] RawImage cameraRenderer;
     [SerializeField] int tempImageChanger = 0;
@@ -17,7 +25,8 @@ public class CameraManager : MonoBehaviour
     void Start()
     {
         spyCol = Spy.GetComponent<Collider>();
-        shutDownCamera(cameras[0]);
+        shutDownCamera(cameraStruct[0].camera);
+
     }
 
     // Update is called once per frame
@@ -26,7 +35,7 @@ public class CameraManager : MonoBehaviour
 
         //example to see if the spy is detected
         // Debug.Log(isSpySeenByAnyCamera(cameras));
-        Debug.Log(isAgentSeenByThisCamera(cameras[0]));
+        Debug.Log(isAgentSeenByThisCamera(cameraStruct[0].camera));
 
         //example how to see all the cameras that know where the spy is located
         /* List<GameObject> camerasThatSeeTheSpyGO = camerasThatSeeTheSpy(cameras);
@@ -37,10 +46,16 @@ public class CameraManager : MonoBehaviour
 
         //cameraRenderer.texture = getCameraView(cameras, 0);
         //cameraRenderer.texture = getCameraView(cameras, tempImageChanger);
-        cameraRenderer.texture = cameras[tempImageChanger].gameObject.GetComponent<Camera>().targetTexture;
+        
+        
+    
     }
 
-
+    RenderTexture updateHackerCameraView(int index)
+    {
+        return cameraStruct[index].cameraView;
+        // cameraRenderer.texture = cameraStruct[index].cameraView;
+    }
     bool isAgentSeenByThisCamera(CameraScript[] TracingCameras, int index)
     {
         return TracingCameras[index].isObjectVisible(Spy, spyCol);
@@ -94,7 +109,7 @@ public class CameraManager : MonoBehaviour
 
 
 
-
+ 
 
     public void shutDownCamera(CameraScript camera)
     {
