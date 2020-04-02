@@ -217,6 +217,7 @@ GameObject:
   - component: {fileID: 1508739143569813962}
   - component: {fileID: 1508739143569813963}
   - component: {fileID: 1508739143569813964}
+  - component: {fileID: 339300503}
   m_Layer: 9
   m_Name: SlideDoorTrigger
   m_TagString: Untagged
@@ -266,6 +267,20 @@ MonoBehaviour:
   anim1: {fileID: 1508739143420619139}
   anim2: {fileID: 2636527847615170810}
   col: {fileID: 1508739143569813963}
+  openOnTrigger: 1
+--- !u!65 &339300503
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1508739143569813961}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.701221, y: 0.85222393, z: 25.162361}
+  m_Center: {x: -0.33690867, y: -0.017724838, z: 0.4112294}
 --- !u!1 &1508739143641127148
 GameObject:
   m_ObjectHideFlags: 0

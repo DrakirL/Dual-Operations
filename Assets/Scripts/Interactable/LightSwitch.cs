@@ -2,21 +2,21 @@
 
 public class LightSwitch : MonoBehaviour, IInteractable
 {
-    public Animator anim;
+    public Animator switchAnim;
     public new GameObject light;
 
     public void GetInteracted()
     {
         if (!LightIsOn())
-        {
-            light.SetActive(true);          
-            anim.Play("OnIdle");
+        {         
+            switchAnim.Play("OnIdle");
         }
         else
-        {
-            light.SetActive(false);         
-            anim.Play("OffIdle");
+        {        
+            switchAnim.Play("OffIdle");
         }
+
+        light.SetActive(!LightIsOn());
     }
 
     bool LightIsOn() => (light.activeSelf) ? true : false;

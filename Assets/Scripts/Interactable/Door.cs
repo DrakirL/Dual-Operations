@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Door : MonoBehaviour, IInteractable
 {
+    [HideInInspector]
     public GameObject hinge;
 
     Animator anim;
@@ -11,16 +12,13 @@ public class Door : MonoBehaviour, IInteractable
     
     private void Start()
     {
-        // Fetch animator from hinge component
         anim = hinge.GetComponent<Animator>();
         col = GetComponent<BoxCollider>();
     }
-
     private void Update()
     {
         EnableDoor();
     }
- 
     public void GetInteracted()
     {
         if (DoorIsClosed())
@@ -41,7 +39,6 @@ public class Door : MonoBehaviour, IInteractable
         if (DoorIsIdle())
             col.enabled = true;
         else
-            col.enabled = false;
-        
+            col.enabled = false;        
     }
 }

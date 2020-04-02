@@ -13,11 +13,6 @@ public class InputManager : MonoBehaviour
         Interact();
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        
-    }
-
     void Interact()
     {
         // Bit shift the index of the layer (8) to get a bit mask
@@ -34,7 +29,6 @@ public class InputManager : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, interactRange, layerMask))
         {
-            // Activate interact text
             interactText.SetActive(true);
             // Does the ray intersect any objects excluding the player layer
             if (Input.GetButtonDown("Interact"))
@@ -43,10 +37,8 @@ public class InputManager : MonoBehaviour
                 IInteractable interactable = hit.collider.GetComponent<IInteractable>();
                 if(interactable != null)
                 {
-                    // Interact
                     interactable.GetInteracted();
-                }
-                   
+                }                  
             }
         }
         else
