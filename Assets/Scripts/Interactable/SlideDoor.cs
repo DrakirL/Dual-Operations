@@ -4,6 +4,9 @@ public class SlideDoor : MonoBehaviour, IInteractable
 {
     public Animator anim;
     public GameObject door;
+    public new GameObject light;
+    public Sprite lightSpriteOn;
+    public Sprite lightSpriteOff;
 
     BoxCollider col;
 
@@ -15,6 +18,13 @@ public class SlideDoor : MonoBehaviour, IInteractable
     private void Update()
     {
         col.enabled = DoorIsClosed();
+
+        if (DoorIsClosed())
+            light.GetComponent<SpriteRenderer>().sprite = lightSpriteOff;
+        else
+            light.GetComponent<SpriteRenderer>().sprite = lightSpriteOn;
+        
+
     }
 
     public void GetInteracted()

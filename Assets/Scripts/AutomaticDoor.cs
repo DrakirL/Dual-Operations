@@ -6,6 +6,7 @@ public class AutomaticDoor : MonoBehaviour
 {
     public bool activated;
     public Animator anim1;
+    [Tooltip("Field can be empty")]
     public Animator anim2;
 
     private void OnTriggerStay(Collider other)
