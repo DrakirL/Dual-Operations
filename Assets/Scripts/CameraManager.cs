@@ -21,7 +21,10 @@ public class CameraManager : MonoBehaviour
 
     [SerializeField] float shutDownTimer = 10;
     [SerializeField] RawImage cameraRenderer;
-    
+
+
+    [SerializeField] int temp;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -65,14 +68,10 @@ public class CameraManager : MonoBehaviour
     //hacker funktioanlaties
     RenderTexture updateHackerCameraView(int index)
     {
+        //use this function by typing something like this
+        //cameraRenderer.texture = updateHackerCameraView(temp);
         return cameraStruct[index].cameraView;
-        // cameraRenderer.texture = cameraStruct[index].cameraView;
     }
-    RenderTexture getCameraView(CameraStruct[] TracingCameras, int index)
-    {
-        return TracingCameras[index].camera.gameObject.GetComponent<Camera>().targetTexture;
-    }
-
     public void shutDownCamera(CameraStruct cameraStruct)
     {
         if (cameraStruct.camera.cameraActive)
