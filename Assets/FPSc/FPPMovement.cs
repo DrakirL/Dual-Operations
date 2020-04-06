@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class FPPMovement : MonoBehaviour
 {
+	Transform view; 
 	float gravity = 1.0f;
 	float velocity = 1.0f;
 	
