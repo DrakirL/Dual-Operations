@@ -6,6 +6,7 @@ public class InputManager : MonoBehaviour
 {
     [Header("Interaction")]
     public float interactRange = 5f;
+    public bool interactTextOn;
     public GameObject interactText;
 
     void Update()
@@ -29,6 +30,7 @@ public class InputManager : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, interactRange, layerMask))
         {
+            if(interactTextOn)
             interactText.SetActive(true);
             // Does the ray intersect any objects excluding the player layer
             if (Input.GetButtonDown("Interact"))
