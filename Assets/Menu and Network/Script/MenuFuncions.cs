@@ -7,6 +7,12 @@ using Mirror;
 public class MenuFuncions : MonoBehaviour
 {
     public GameObject[] menuLayers;
+    public NetworkRoomManager roomManager;
+
+    void start()
+    {
+        //roomManager = GameObject.FindObjectOfType(typeof (NetworkRoomManager)).GetComponent<NetworkRoomManager>();
+    }
 
     public void HostGame()
     {
