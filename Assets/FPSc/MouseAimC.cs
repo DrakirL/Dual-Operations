@@ -25,9 +25,12 @@ public class MouseAimC : MonoBehaviour
 	public float deacceleration = 3;
 	public float friction = 4;
 	
+	public float cameraOffsetY = 9;
+	
 	public LayerMask colMask;
 	
-	//CharacterController controller; //Plan B
+	private CharacterController controller; //Plan B
+	private bool isGrounded = false;
 	
     void Start()
     {
@@ -41,9 +44,11 @@ public class MouseAimC : MonoBehaviour
 		}
 		
 		Cursor.lockState = CursorLockMode.Locked;
-		cameraView.transform.position = this.transform.position;
+		cameraView.transform.position = new Vector3(transform.position.x,transform.position.y+cameraOffsetY,transform.position.z);		
 		
-		//controller = GetComponent<CharacterController>();
+		
+		controller = GetComponent<CharacterController>();
+		
     }
 	
 	void MoveWalk(float forward,float right)
@@ -63,7 +68,7 @@ public class MouseAimC : MonoBehaviour
 		movementDirection.x += moveSpeed * movdir.x;
 		movementDirection.z += moveSpeed * movdir.z;
 		
-		//movementDirection.y += -gravity;
+		movementDirection.y += -gravity;
 		
 		//Add jump action here
 	}
@@ -144,28 +149,46 @@ public class MouseAimC : MonoBehaviour
 
 	void Collision(float forward,float right)
 	{
-		bool isGrounded = false;
+
 		float dist = GetComponent<BoxCollider>().bounds.extents.y;
 		
 		Ray downRay =  new Ray (transform.position, -transform.up);
-		RaycastHit hitInfo;
+		RaycastHit hit;
+		//RaycastHit hit2;
 		
-		Vector3 col = new Vector3(right,0,forward);
+		//Vector3 col = new Vector3(right,0,forward);
 		
-		//RaycastHit2D hitY = Physics2D.Raycast(rayVector, Vector2.up * directionY, rayLength, entityMask);
-		
-		//            desiredMove = Vector3.ProjectOnPlane(desiredMove, hitInfo.normal).normalized;
-		
-		if(Physics.Raycast(transform.position,Vector3.down, out hitInfo, dist+2f, colMask, QueryTriggerInteraction.Ignore))
+		//Checking below player for surface
+		if(Physics.Raycast(downRay, out hit, dist, colMask))
 		{
-			//int er = (int)dist - (int)hitInfo.distance;
+			MeshCollider meshCollider = hit.collider as MeshCollider;
+			if (meshCollider == null || meshCollider.sharedMesh == null)
+             return;
+		
+			Mesh mesh = meshCollider.sharedMesh;
+			Vector3[] v = mesh.vertices;
 			
-			//if(hitInfo.distance <)
-		//	{
-			movementDirection.y = 0;
-			transform.position = hitInfo.point;//+new Vector3(0f,2,0f);
-			Debug.DrawLine(downRay.origin,hitInfo.point, Color.red);
-		//	}
+		 	Debug.DrawLine(downRay.origin,transform.up, Color.red);
+			
+			//Find the surface 
+			for(int i = 0; i < v.Length;i++)
+			{
+				//Debug.Log("No." + i + " = " + v[i]);
+				double n = (-1*Vector3.Dot(v[i] - movementDirection,hit.normal));
+				//float n2 = Mathf.Clamp(n,0.01f,0.1f);
+				//Debug.Log(n);
+				
+				if(n < -0.01)
+				{
+					movementDirection.y = 0;
+					//transform.position = new Vector3(transform.position.x,movementDirection.y + 2f,transform.position.z);
+					break;
+					//isGrounded = true;
+				}
+			}
+			
+			return;
+
 		}
 		else
 		{
@@ -173,30 +196,37 @@ public class MouseAimC : MonoBehaviour
 		}
 	}	
 	
-    void Update()
-    {
-		movementDirection = Vector3.zero;
-		Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"),Input.GetAxisRaw("Vertical"));
-
-		MouseLook();
-		MoveWalk(input.y,input.x);
-
-		//Collision(input.y,input.x);
-
-		//up vector manipulation (debug-only)
-		if(Input.GetKey(KeyCode.Space))
-		{
-			movementDirection.y = moveSpeed;
-		}
 		
-		Move(movementDirection * Time.deltaTime);
+	void Update()
+	{
+		MouseLook();
 		
 		//Forward vector, only debbuging
 		//------
 		Ray front = new Ray (transform.position, transform.forward);
 		Debug.DrawLine(front.origin,front.direction*60,Color.blue);
 		//------
+	
+		cameraView.position = new Vector3(transform.position.x,transform.position.y+cameraOffsetY,transform.position.z);
+	}
+	
+	
+    void FixedUpdate()
+    {
+		movementDirection = new Vector3(0f,0f,0f);
 		
-		cameraView.position = new Vector3(transform.position.x,transform.position.y,transform.position.z);
+		Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"),Input.GetAxisRaw("Vertical"));
+		
+		MoveWalk(input.y,input.x);
+		Collision(0,0);
+
+		//up vector manipulation (debug-only)
+		if(Input.GetKey(KeyCode.Space))
+		{
+			movementDirection.y = moveSpeed;
+		}
+
+		//final transform calculation
+		Move(movementDirection * Time.fixedDeltaTime);	
     }
 }
