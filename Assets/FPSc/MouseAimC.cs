@@ -31,6 +31,9 @@ public class MouseAimC : MonoBehaviour
 	
 	private CharacterController controller; //Plan B
 	private bool isGrounded = false;
+	public float slopeRise = 1f;
+	public float slopeFall = 1f;
+	public float height = 2f;
 	
     void Start()
     {
@@ -147,53 +150,236 @@ public class MouseAimC : MonoBehaviour
 		transform.localRotation = Quaternion.Euler(0,x_axis,0);
 	}
 
-	void Collision(float forward,float right)
+	void Collision(ref Vector3 movement, float forward,float right)
 	{
-
-		float dist = GetComponent<BoxCollider>().bounds.extents.y;
+		float distY = GetComponent<BoxCollider>().bounds.extents.y;
+		float distZ = GetComponent<BoxCollider>().bounds.extents.z;
+		float distX = GetComponent<BoxCollider>().bounds.extents.x;
+		float dist = GetComponent<SphereCollider>().radius;
 		
 		Ray downRay =  new Ray (transform.position, -transform.up);
-		RaycastHit hit;
-		//RaycastHit hit2;
+		Ray downRay2 =  new Ray (transform.position, -transform.up);
+		Ray upRay =  new Ray (transform.position, transform.up);
 		
-		//Vector3 col = new Vector3(right,0,forward);
+		Ray frontRay =  new Ray (transform.position, transform.forward);
+		Ray backRay = new Ray (transform.position, -transform.forward);
+		
+		Ray rightRay = new Ray (transform.position, transform.right);
+		Ray leftRay = new Ray (transform.position, -transform.right);
+		
+		RaycastHit hit;
+		
+
+		
+		//poor slope collision detection, needs to be improved
+		if(Physics.Raycast(downRay2, out hit, dist, colMask))	
+		{
+				float n2 = (Vector3.Dot(hit.normal,Vector3.up));
+				float ncos = Mathf.Acos(n2);
+				//float nsin = Mathf.Asin(n2);
+				float ang = (Mathf.Rad2Deg*ncos);
+				
+				//example test with 45 deg
+				if(ang <= 45 && ang != 0)
+				{
+					Vector3 t = Vector3.Cross(hit.normal, transform.forward);
+					Vector3 velocity = Vector3.Cross(t,hit.normal).normalized;
+					
+					if(forward > 0|| forward < 0)
+					{ 
+						movement.y = velocity.y*moveSpeed*slopeRise;
+					}
+				}
+			
+		}
 		
 		//Checking below player for surface
 		if(Physics.Raycast(downRay, out hit, dist, colMask))
 		{
 			MeshCollider meshCollider = hit.collider as MeshCollider;
 			if (meshCollider == null || meshCollider.sharedMesh == null)
-             return;
-		
+			{
+				return;
+			}
+			
 			Mesh mesh = meshCollider.sharedMesh;
 			Vector3[] v = mesh.vertices;
 			
-		 	Debug.DrawLine(downRay.origin,transform.up, Color.red);
+		 	//Debug.DrawLine(downRay.origin,transform.up, Color.red);
+			
+			//Find the surface 
+			for(int i = 0; i < v.Length;i++)
+			{
+				//Debug.Log("No." + i + " = " + v[i]);
+				//double n = (-1*Vector3.Dot(v[i] - movementDirection,hit.normal));
+				
+				double n = (-1*Vector3.Dot(v[i] - movementDirection,hit.normal));
+				
+				//Debug.Log(n);
+				
+				if(n < -0.01)
+				{
+					movementDirection.y = 0;
+					break;
+				}
+			}
+		}
+		
+		/*if(Physics.Raycast(upRay, out hit, distY, colMask))
+		{
+			MeshCollider meshCollider = hit.collider as MeshCollider;
+			if (meshCollider == null || meshCollider.sharedMesh == null)
+			{
+				return;
+			}
+			
+			Mesh mesh = meshCollider.sharedMesh;
+			Vector3[] v = mesh.vertices;
+			
+		 	//Debug.DrawLine(downRay.origin,transform.up, Color.red);
 			
 			//Find the surface 
 			for(int i = 0; i < v.Length;i++)
 			{
 				//Debug.Log("No." + i + " = " + v[i]);
 				double n = (-1*Vector3.Dot(v[i] - movementDirection,hit.normal));
-				//float n2 = Mathf.Clamp(n,0.01f,0.1f);
 				//Debug.Log(n);
 				
 				if(n < -0.01)
 				{
 					movementDirection.y = 0;
-					//transform.position = new Vector3(transform.position.x,movementDirection.y + 2f,transform.position.z);
 					break;
-					//isGrounded = true;
+				}
+			}
+		}*/
+		
+		if(forward != 0)
+		{
+			if(Physics.Raycast(frontRay, out hit, dist, colMask))
+			{
+				MeshCollider meshCollider = hit.collider as MeshCollider;
+				if (meshCollider == null || meshCollider.sharedMesh == null)
+				{	
+					return;
+				}
+				
+				Mesh mesh = meshCollider.sharedMesh;
+				Vector3[] v = mesh.vertices;
+			
+				//Find the surface 
+				for(int i = 0; i < v.Length;i++)
+				{
+					//Debug.Log("No." + i + " = " + v[i]);
+					double n = (-1*Vector3.Dot(v[i] - movementDirection,hit.normal));
+					
+					if(n < -0.01 || n > -0.01)
+					{
+						if(forward > 0)
+						{
+							movementDirection.z = 0;
+							break;
+						}
+					}
 				}
 			}
 			
-			return;
-
+			
+			if(Physics.Raycast(backRay, out hit, dist, colMask))
+			{
+				MeshCollider meshCollider = hit.collider as MeshCollider;
+				if (meshCollider == null || meshCollider.sharedMesh == null)
+				{	
+					return;
+				}
+				
+				Mesh mesh = meshCollider.sharedMesh;
+				Vector3[] v = mesh.vertices;
+			
+				//Find the surface 
+				for(int i = 0; i < v.Length;i++)
+				{
+					//Debug.Log("No." + i + " = " + v[i]);
+					double n = (-1*Vector3.Dot(v[i] - movementDirection,hit.normal));
+					
+					if(n < -0.01 || n > -0.01)
+					{
+						if(forward < 0)
+						{
+							movementDirection.z = 0;
+							break;
+						}
+					}
+				}
+			}
 		}
-		else
+		
+		if(right != 0)
+		{
+			if(Physics.Raycast(rightRay, out hit, dist, colMask))
+			{
+				MeshCollider meshCollider = hit.collider as MeshCollider;
+				if (meshCollider == null || meshCollider.sharedMesh == null)
+				{	
+					return;
+				}
+				
+				Mesh mesh = meshCollider.sharedMesh;
+				Vector3[] v = mesh.vertices;
+			
+				//Find the surface 
+				for(int i = 0; i < v.Length;i++)
+				{
+					//Debug.Log("No." + i + " = " + v[i]);
+					double n = (-1*Vector3.Dot(v[i] - movementDirection,hit.normal));
+					
+					if(n < -0.01 || n > -0.01)
+					{
+						if(right > 0)
+						{
+							movementDirection.x = 0;
+							break;
+						}
+					}
+				}
+			}
+			
+			if(Physics.Raycast(leftRay, out hit, dist, colMask))
+			{
+				MeshCollider meshCollider = hit.collider as MeshCollider;
+				if (meshCollider == null || meshCollider.sharedMesh == null)
+				{	
+					return;
+				}
+				
+				Mesh mesh = meshCollider.sharedMesh;
+				Vector3[] v = mesh.vertices;
+			
+				//Find the surface 
+				for(int i = 0; i < v.Length;i++)
+				{
+					//Debug.Log("No." + i + " = " + v[i]);
+					double n = (-1*Vector3.Dot(v[i] - movementDirection,hit.normal));
+					//print(n);
+					if(n < -0.01 || n > -0.01)
+					{
+						if(right < 0)
+						{
+							//print("test");
+							movementDirection.x = 0;
+							break;
+						}
+					}
+				}
+			}
+		}
+			
+			
+		return;
+
+		/*else
 		{
 			Debug.DrawLine(downRay.origin,downRay.direction*100,Color.green);
-		}
+		}*/
 	}	
 	
 		
@@ -213,12 +399,14 @@ public class MouseAimC : MonoBehaviour
 	
     void FixedUpdate()
     {
-		movementDirection = new Vector3(0f,0f,0f);
+		movementDirection = Vector3.zero;
 		
 		Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"),Input.GetAxisRaw("Vertical"));
 		
 		MoveWalk(input.y,input.x);
-		Collision(0,0);
+		Collision(ref movementDirection, input.y,input.x);
+		
+		//Debug.Log(input.x);
 
 		//up vector manipulation (debug-only)
 		if(Input.GetKey(KeyCode.Space))
