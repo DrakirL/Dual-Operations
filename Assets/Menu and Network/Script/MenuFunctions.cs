@@ -4,32 +4,45 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Mirror;
 
-public class MenuFuncions : MonoBehaviour
+public class MenuFunctions : MonoBehaviour
 {
     public GameObject[] menuLayers;
-    public NetworkRoomManager roomManager;
+    public DualOperationsNetworkRoomManager roomManager;
 
-    void start()
+    void Start()
     {
-        //roomManager = GameObject.FindObjectOfType(typeof (NetworkRoomManager)).GetComponent<NetworkRoomManager>();
+        roomManager = (DualOperationsNetworkRoomManager)FindObjectOfType(typeof(DualOperationsNetworkRoomManager));
+
+        if(roomManager != null)
+        {
+            roomManager.menu = this;
+            SwitchLayer(roomManager.layer);
+        }
     }
 
     public void HostGame()
     {
-        // 
+        roomManager.StartHost();
+        roomManager.layer = 0;
     }
 
     // Take address from input field and connect as client
     public void JoinGame()
-    { 
-        
+    {
+        roomManager.StartClient();
+        roomManager.layer = 1;
     }
 
     // Start the game with the current players
     public void PlayGame()
     {
-        // If connection has been established
-        SceneManager.LoadScene(1);
+        roomManager.StartGame();
+    }
+
+    public void StopAndGoBack(int n)
+    {
+        roomManager.BreakConnection();
+        SwitchLayer(n);
     }
 
     // Display a different part of the menu
