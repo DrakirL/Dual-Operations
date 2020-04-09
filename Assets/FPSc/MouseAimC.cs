@@ -33,7 +33,8 @@ public class MouseAimC : MonoBehaviour
 	private bool isGrounded = false;
 	public float slopeRise = 1f;
 	public float slopeFall = 1f;
-	public float height = 2f;
+	public float height = 0.5f;
+	public float posRecover = 5f;
 	
     void Start()
     {
@@ -152,16 +153,18 @@ public class MouseAimC : MonoBehaviour
 
 	void Collision(ref Vector3 movement, float forward,float right)
 	{
-		float distY = GetComponent<BoxCollider>().bounds.extents.y;
-		float distZ = GetComponent<BoxCollider>().bounds.extents.z;
-		float distX = GetComponent<BoxCollider>().bounds.extents.x;
+		//float distY = GetComponent<BoxCollider>().bounds.extents.y;
+		//float distZ = GetComponent<BoxCollider>().bounds.extents.z;
+		//float distX = GetComponent<BoxCollider>().bounds.extents.x;
 		float dist = GetComponent<SphereCollider>().radius;
 		
 		Ray downRay =  new Ray (transform.position, -transform.up);
-		Ray downRay2 =  new Ray (transform.position, -transform.up);
+		Ray frontRay =  new Ray (transform.position, transform.forward);
+				
+		//Ray downRay2 =  new Ray (transform.position, -transform.up);
 		Ray upRay =  new Ray (transform.position, transform.up);
 		
-		Ray frontRay =  new Ray (transform.position, transform.forward);
+
 		Ray backRay = new Ray (transform.position, -transform.forward);
 		
 		Ray rightRay = new Ray (transform.position, transform.right);
@@ -171,8 +174,8 @@ public class MouseAimC : MonoBehaviour
 		
 
 		
-		//poor slope collision detection, needs to be improved
-		if(Physics.Raycast(downRay2, out hit, dist, colMask))	
+		/*//poor slope collision detection, needs to be improved
+		if(Physics.Raycast(downRay2, out hit, distY, colMask))	
 		{
 				float n2 = (Vector3.Dot(hit.normal,Vector3.up));
 				float ncos = Mathf.Acos(n2);
@@ -182,19 +185,20 @@ public class MouseAimC : MonoBehaviour
 				//example test with 45 deg
 				if(ang <= 45 && ang != 0)
 				{
+					//Calculate cross product to get normal 
 					Vector3 t = Vector3.Cross(hit.normal, transform.forward);
 					Vector3 velocity = Vector3.Cross(t,hit.normal).normalized;
 					
 					if(forward > 0|| forward < 0)
 					{ 
-						movement.y = velocity.y*moveSpeed*slopeRise;
+						movement.y = hit.point.y*slopeRise;// + velocity.y*moveSpeed*slopeRise;
 					}
 				}
 			
-		}
+		}*/
 		
 		//Checking below player for surface
-		if(Physics.Raycast(downRay, out hit, dist, colMask))
+		if(Physics.Raycast(downRay, out hit, dist + 0.05f, colMask))
 		{
 			MeshCollider meshCollider = hit.collider as MeshCollider;
 			if (meshCollider == null || meshCollider.sharedMesh == null)
@@ -205,25 +209,58 @@ public class MouseAimC : MonoBehaviour
 			Mesh mesh = meshCollider.sharedMesh;
 			Vector3[] v = mesh.vertices;
 			
-		 	//Debug.DrawLine(downRay.origin,transform.up, Color.red);
-			
-			//Find the surface 
 			for(int i = 0; i < v.Length;i++)
 			{
-				//Debug.Log("No." + i + " = " + v[i]);
-				//double n = (-1*Vector3.Dot(v[i] - movementDirection,hit.normal));
-				
-				double n = (-1*Vector3.Dot(v[i] - movementDirection,hit.normal));
-				
-				//Debug.Log(n);
-				
-				if(n < -0.01)
+				float n = Vector3.Dot(v[i] - movementDirection, hit.normal);
+	
+				if(n > 0.0f)
 				{
+					//Correct the fricking thing from moving into things
+					if(hit.distance < dist) //Vector3.Distance(transform.position,hit.point)
+					{
+						transform.position = Vector3.Lerp(transform.position, hit.point + Vector3.up * dist, posRecover * Time.fixedDeltaTime);
+						//transform.position = Vector3.Lerp(transform.position, transform.position + Vector3.up * dist, 5f * Time.fixedDeltaTime);
+					}
+					//Source for solution (finally)
+					//https://www.youtube.com/watch?v=98MBwtZU2kk
+					
 					movementDirection.y = 0;
 					break;
 				}
 			}
 		}
+		
+
+
+		
+		if(forward > 0f)
+		{
+			Debug.DrawLine(frontRay.origin,Vector3.forward, Color.red);
+			
+			if(Physics.Raycast(frontRay, out hit, dist, colMask))
+			{
+				MeshCollider meshCollider = hit.collider as MeshCollider;
+				if (meshCollider == null || meshCollider.sharedMesh == null)
+				{	
+					return;
+				}
+				
+				Mesh mesh = meshCollider.sharedMesh;
+				Vector3[] v = mesh.vertices;
+			
+				for(int i = 0; i < v.Length;i++)
+				{
+					float n = Vector3.Dot(v[i] - movementDirection, hit.normal);
+		
+					if(n > 0.0f || n < 0.0f)
+					{
+						movementDirection.z = 0;
+						break;
+					}
+				}
+			}
+		}
+		
 		
 		/*if(Physics.Raycast(upRay, out hit, distY, colMask))
 		{
@@ -253,9 +290,9 @@ public class MouseAimC : MonoBehaviour
 			}
 		}*/
 		
-		if(forward != 0)
+		/*if(forward != 0)
 		{
-			if(Physics.Raycast(frontRay, out hit, dist, colMask))
+			if(Physics.Raycast(frontRay, out hit, distY, colMask))
 			{
 				MeshCollider meshCollider = hit.collider as MeshCollider;
 				if (meshCollider == null || meshCollider.sharedMesh == null)
@@ -284,7 +321,7 @@ public class MouseAimC : MonoBehaviour
 			}
 			
 			
-			if(Physics.Raycast(backRay, out hit, dist, colMask))
+			if(Physics.Raycast(backRay, out hit, distZ, colMask))
 			{
 				MeshCollider meshCollider = hit.collider as MeshCollider;
 				if (meshCollider == null || meshCollider.sharedMesh == null)
@@ -315,7 +352,7 @@ public class MouseAimC : MonoBehaviour
 		
 		if(right != 0)
 		{
-			if(Physics.Raycast(rightRay, out hit, dist, colMask))
+			if(Physics.Raycast(rightRay, out hit, distX, colMask))
 			{
 				MeshCollider meshCollider = hit.collider as MeshCollider;
 				if (meshCollider == null || meshCollider.sharedMesh == null)
@@ -343,7 +380,7 @@ public class MouseAimC : MonoBehaviour
 				}
 			}
 			
-			if(Physics.Raycast(leftRay, out hit, dist, colMask))
+			if(Physics.Raycast(leftRay, out hit, distX, colMask))
 			{
 				MeshCollider meshCollider = hit.collider as MeshCollider;
 				if (meshCollider == null || meshCollider.sharedMesh == null)
@@ -371,7 +408,7 @@ public class MouseAimC : MonoBehaviour
 					}
 				}
 			}
-		}
+		}*/
 			
 			
 		return;
@@ -404,15 +441,17 @@ public class MouseAimC : MonoBehaviour
 		Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"),Input.GetAxisRaw("Vertical"));
 		
 		MoveWalk(input.y,input.x);
-		Collision(ref movementDirection, input.y,input.x);
 		
-		//Debug.Log(input.x);
-
 		//up vector manipulation (debug-only)
 		if(Input.GetKey(KeyCode.Space))
 		{
 			movementDirection.y = moveSpeed;
 		}
+		
+		Collision(ref movementDirection, input.y,input.x);
+		
+		//Debug.Log(input.x);
+
 
 		//final transform calculation
 		Move(movementDirection * Time.fixedDeltaTime);	
