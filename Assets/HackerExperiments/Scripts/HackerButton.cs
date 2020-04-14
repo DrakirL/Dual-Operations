@@ -9,9 +9,9 @@ public class HackerButton : MonoBehaviour
     [SerializeField] HackOptions[] preHackOptions;
     [SerializeField] HackOptions[] postHackOptions;
     [SerializeField] int cameraNr;
-    bool isHacked = false;
+    [SerializeField] bool isHacked = false;
 
-    bool isHoverOverThisButton = false;
+    [SerializeField] bool isHoverOverThisButton = false;
     
     void Update()
     {
