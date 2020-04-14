@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using Mirror;
 
 public class MenuFunctions : MonoBehaviour
 {
     public GameObject[] menuLayers;
     public DualOperationsNetworkRoomManager roomManager;
+    public InputField inputField;
 
     void Start()
     {
@@ -17,6 +19,11 @@ public class MenuFunctions : MonoBehaviour
         {
             roomManager.menu = this;
             SwitchLayer(roomManager.layer);
+            
+            if (inputField != null)
+            {
+                inputField.text = roomManager.networkAddress;
+            }
         }
     }
 
@@ -29,6 +36,11 @@ public class MenuFunctions : MonoBehaviour
     // Take address from input field and connect as client
     public void JoinGame()
     {
+        if (inputField != null)
+        {
+            roomManager.networkAddress = inputField.text;
+        }
+
         roomManager.StartClient();
         roomManager.layer = 1;
     }
