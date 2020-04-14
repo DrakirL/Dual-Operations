@@ -8,44 +8,44 @@ public class MouseAimC : MonoBehaviour
 {
 	public Transform cameraView;
 	
-	[Range(0,20)] public float mouseSensitivity = 4;
-	public bool inverted = false;
-	
-	public float moveSpeed = 2;
-		
-	private Vector2 viewLimit = new Vector2(-90,90);
-	private Vector2 XLimit = new Vector2(-90,90);
-	private Vector2 rot = Vector2.zero;
-	
-	Vector3 movementDirection = Vector3.zero;
-	Vector3 actorVelocity = Vector3.zero;
-	
-	public float gravity = 10;
-	public float acceleration = 10;
-	public float deacceleration = 3;
-	public float friction = 4;
-	
-	public float cameraOffsetY = 9;
-	
-	public LayerMask colMask;
-	
-	private bool isGrounded = false;
-	public float slopeRise = 1f;
-	public float slopeFall = 1f;
-	public float height = 0.5f;
-	public float jumpSpeed = 10f;
-	
-
-	float posRecover = 10f;
-	
-	
 	public enum MouseAimStyle
 	{
-		Quake,
-		WolfensteinDoom
+		VerticalHorizontal,
+		HorizontalOnly
 	};
 	
 	public MouseAimStyle mouseAimStyle;
+	
+	[Range(0,20)] public float mouseSensitivity = 4;
+	public bool mouseInverted = false;
+	
+	public float moveSpeed = 2;
+		
+	//private Vector2 viewLimit = new Vector2(-90,90);
+	//private Vector2 XLimit = new Vector2(-90,90);
+	private Vector2 rot = Vector2.zero;
+	
+	Vector3 movementDirection = Vector3.zero;
+	//Vector3 actorVelocity = Vector3.zero;
+	
+	public float gravity = 10;
+	//public float acceleration = 10;
+	//public float deacceleration = 3;
+	//public float friction = 4;
+	
+	public float cameraOffsetY = 9;
+	
+	public LayerMask collisionMask;
+	
+	//private bool isGrounded = false;
+	//public float slopeRise = 1f;
+	//public float slopeFall = 1f;
+	//public float height = 0.5f;
+	public float jumpSpeed = 10f;
+
+	float posRecover = 10f;
+	
+
 	
     void Start()
     {
@@ -71,8 +71,8 @@ public class MouseAimC : MonoBehaviour
 		Vector3 movdir = new Vector3(right,0,forward);
 		movdir.Normalize();
 		
-		float speed = Vector3.Magnitude(movdir);
-		speed *= moveSpeed;
+		//float speed = Vector3.Magnitude(movdir);
+		//speed *= moveSpeed;
 
 		//MoveAccelerate(movdir, speed, acceleration);
 	
@@ -141,11 +141,13 @@ public class MouseAimC : MonoBehaviour
 	
 	void MouseLook()
 	{
-		int inv = Convert.ToInt32(inverted == true ? 1:-1);
+		int inv = Convert.ToInt32(mouseInverted == true ? 1:-1);
+		Vector2 viewLimit = new Vector2(-90,90);
+		Vector2 XLimit = new Vector2(-90,90);
 		
 		rot.x += Input.GetAxisRaw("Mouse X") * mouseSensitivity;
 		
-		if(mouseAimStyle == MouseAimStyle.WolfensteinDoom)
+		if(mouseAimStyle == MouseAimStyle.HorizontalOnly)
 		{
 			rot.y = 0;
 		}
@@ -166,26 +168,29 @@ public class MouseAimC : MonoBehaviour
 		transform.localRotation = Quaternion.Euler(0,x_axis,0);
 	}
 
-	void Collision(ref Vector3 movement, float forward,float right)
+	void Collision(ref Vector3 movement, float forward,float right,ref LayerMask colMask)
 	{		
 		RaycastHit hit;
+		
 		float dist = (GetComponent<SphereCollider>().radius)*0.5f;
 		
 		Ray downRay =  new Ray (transform.position, Vector3.down);
 		Ray upRay =  new Ray (transform.position, Vector3.up);
 		Ray upForwardRay =  new Ray (transform.position, Vector3.up+(forward*transform.forward));
+		Ray downForwardRay =  new Ray (transform.position, Vector3.down+(forward*transform.forward));
 		
 		Ray frontRay =  new Ray (transform.position, forward*transform.forward);
 		Ray rightRay = new Ray (transform.position, right*transform.right);
+		
+		
 		Ray uRightRay = new Ray (transform.position, transform.right);
 		Ray uLeftRay = new Ray (transform.position, -transform.right);
-		//Ray frontRightRay = new Ray (transform.position, right*transform.right+forward*transform.forward);
 		
-		//Ray backRay =  new Ray (transform.position, -transform.forward);
-		//Ray leftRay = new Ray (transform.position, transform.right);
 		
 		Debug.DrawLine(downRay.origin,downRay.origin + downRay.direction * dist, Color.green);
 		Debug.DrawLine(rightRay.origin,rightRay.origin + rightRay.direction * dist, Color.red);	
+		Debug.DrawLine(downForwardRay.origin,downForwardRay.origin + downForwardRay.direction * dist, Color.red);	
+		Debug.DrawLine(upForwardRay.origin,upForwardRay.origin + upForwardRay.direction * dist, Color.red);	
 
 
 		//Checking below player for surface
@@ -212,7 +217,7 @@ public class MouseAimC : MonoBehaviour
 						transform.position = Vector3.Lerp(transform.position, hit.point + Vector3.up * dist, posRecover * Time.fixedDeltaTime);
 					}
 					
-					isGrounded = true;
+					//isGrounded = true;
 					movementDirection.y = 0;
 
 					break;
@@ -240,12 +245,12 @@ public class MouseAimC : MonoBehaviour
 						movementDirection.y = 0;
 					}
 					
-					isGrounded = false;		
+					//isGrounded = false;		
 					break;
 				}
 			}
 		}
-		
+
 		if(Physics.Raycast(upForwardRay, out hit, dist + 0.05f, colMask,QueryTriggerInteraction.Ignore))
 		{
 			MeshCollider meshCollider = hit.collider as MeshCollider;
@@ -257,55 +262,56 @@ public class MouseAimC : MonoBehaviour
 				float n = Vector3.Dot(v[i] - movementDirection, hit.normal);
 			
 				if(n > 0.01f) 
-				{
-					
+				{	
 					movementDirection.y = 0;
-
 					break;
 				}
 			}
 		}
 
-		if(Physics.Raycast(rightRay, out hit, dist, colMask,QueryTriggerInteraction.Ignore))
+		if(right !=0)
 		{
-			MeshCollider meshCollider = hit.collider as MeshCollider;		
-			Mesh mesh = meshCollider.sharedMesh;
-			Vector3[] v = mesh.vertices;
-
-			for(int i = 0; i < v.Length;i++)
+			if(Physics.Raycast(rightRay, out hit, dist, colMask,QueryTriggerInteraction.Ignore))
 			{
-				float n = Vector3.Dot(v[i] - movementDirection, hit.normal);
+				MeshCollider meshCollider = hit.collider as MeshCollider;		
+				Mesh mesh = meshCollider.sharedMesh;
+				Vector3[] v = mesh.vertices;
 
-				if(n > 0.01f || n < 0.01f)
+				for(int i = 0; i < v.Length;i++)
 				{
-					//Debug.Log("front="+n);
+					float n = Vector3.Dot(v[i] - movementDirection, hit.normal);
 
-					movementDirection.x = 0;
-					break;
-				}
-			}		
+					if(n > 0.01f || n < 0.01f)
+					{
+						movementDirection.x = 0;
+						break;
+					}
+				}		
+			}
 		}
 		
-		if(Physics.Raycast(frontRay, out hit, dist+0.05f, colMask,QueryTriggerInteraction.Ignore))
-		{
-			MeshCollider meshCollider = hit.collider as MeshCollider;		
-			Mesh mesh = meshCollider.sharedMesh;
-			Vector3[] v = mesh.vertices;
-
-			for(int i = 0; i < v.Length;i++)
+		if(forward !=0)
+		{		
+			if(Physics.Raycast(frontRay, out hit, dist+0.05f, colMask,QueryTriggerInteraction.Ignore))
 			{
-				float n = Vector3.Dot(v[i] - movementDirection, hit.normal);
+				MeshCollider meshCollider = hit.collider as MeshCollider;		
+				Mesh mesh = meshCollider.sharedMesh;
+				Vector3[] v = mesh.vertices;
 
-				if(n > 0.01f || n < 0.01f)
+				for(int i = 0; i < v.Length;i++)
 				{
-					movementDirection.z = 0;
-					break;
-				}
-			}		
+					float n = Vector3.Dot(v[i] - movementDirection, hit.normal);
+
+					if(n > 0.01f || n < 0.01f)
+					{
+						movementDirection.z = 0;
+						break;
+					}
+				}		
+			}
 		}
-	
 		//--------------------------
-		// Collision correction for "wall-hugging", etc.
+		// Collision correction for "wall-hugging" etc.
 		//--------------------------
 	
 		if(Physics.Raycast(uRightRay, out hit, dist, colMask,QueryTriggerInteraction.Ignore))
@@ -352,6 +358,31 @@ public class MouseAimC : MonoBehaviour
 			}		
 		}
 		
+		if(Physics.Raycast(downRay, out hit, dist + 0.05f, colMask,QueryTriggerInteraction.Ignore)&&
+		Physics.Raycast(downForwardRay, out hit, dist, colMask,QueryTriggerInteraction.Ignore))
+		{
+			MeshCollider meshCollider = hit.collider as MeshCollider;
+			Mesh mesh = meshCollider.sharedMesh;
+			Vector3[] v = mesh.vertices;
+			
+			for(int i = 0; i < v.Length;i++)
+			{
+				float n = Vector3.Dot(v[i] - movementDirection, hit.normal);
+			
+				if(n > 0.01f || n < 0.01f) 
+				{
+					//Height correction with linear interpolation if clipping with mesh's face
+					if(hit.distance < dist)
+					{
+						transform.position = Vector3.Lerp(transform.position, hit.point + Vector3.up * dist, posRecover * Time.fixedDeltaTime);
+					}
+					movementDirection.y = 0;
+
+					break;
+				}
+			}
+		}
+		
 		//------------------------
 	}
 		
@@ -364,14 +395,9 @@ public class MouseAimC : MonoBehaviour
 		Ray front = new Ray (transform.position, transform.forward);
 		Debug.DrawLine(front.origin,front.direction*60,Color.blue);
 		//------
-		
-
-		
 
 		cameraView.position = new Vector3(transform.position.x,transform.position.y+cameraOffsetY,transform.position.z);
 	}
-	
-	static float t = 0.0f;
 	
     void FixedUpdate()
     {
@@ -382,19 +408,18 @@ public class MouseAimC : MonoBehaviour
 		
 		MoveWalk(input.y,input.x);
 		
-
+		movementDirection.y -= gravity;
+		
 		if(Input.GetKey(KeyCode.Space))
 		{
 
-			movementDirection.y += jumpSpeed;
+			movementDirection.y = jumpSpeed;
 			
-			isGrounded = false;
+			//isGrounded = false;
 			//Move(movementDirection * Time.fixedDeltaTime);
 		}
 
-		movementDirection.y -= gravity;
-			
-		Collision(ref movementDirection, input.y,input.x);
+		Collision(ref movementDirection, input.y,input.x,ref collisionMask);
 
 		//final transform calculation
 		Move(movementDirection * Time.fixedDeltaTime);	
