@@ -7,6 +7,7 @@ using System;
 public class MouseAimC : MonoBehaviour
 {
 	public Transform cameraView;
+	public Transform objectModel;
 	
 	public enum MouseAimStyle
 	{
@@ -166,6 +167,7 @@ public class MouseAimC : MonoBehaviour
 
 		cameraView.transform.localRotation = Quaternion.Euler(y_axis,x_axis,0);
 		transform.localRotation = Quaternion.Euler(0,x_axis,0);
+		objectModel.transform.localRotation = Quaternion.Euler(0,0,0);//Quaternion.Euler(y_axis,0,0);
 	}
 
 	void Collision(ref Vector3 movement, float forward,float right)
@@ -185,14 +187,13 @@ public class MouseAimC : MonoBehaviour
 		Ray uLeftRay = new Ray (transform.position, -transform.right);
 		
 		
-		Debug.DrawLine(downRay.origin,downRay.origin + downRay.direction * dist, Color.green);
+		/*Debug.DrawLine(downRay.origin,downRay.origin + downRay.direction * dist, Color.green);
 		Debug.DrawLine(rightRay.origin,rightRay.origin + rightRay.direction * dist, Color.red);	
 		Debug.DrawLine(downForwardRay.origin,downForwardRay.origin + downForwardRay.direction * dist, Color.red);	
-		Debug.DrawLine(upForwardRay.origin,upForwardRay.origin + upForwardRay.direction * dist, Color.red);	
+		Debug.DrawLine(upForwardRay.origin,upForwardRay.origin + upForwardRay.direction * dist, Color.red);	*/
 
 
 		//Checking below player for surface
-		//&& Physics.Raycast(down2Ray, out hit, dist + 0.05f, colMask)
 		if(Physics.Raycast(downRay, out hit, dist + 0.05f, colMask,QueryTriggerInteraction.Ignore))
 		{
 			//MeshCollider meshCollider = hit.collider as MeshCollider;
@@ -226,9 +227,9 @@ public class MouseAimC : MonoBehaviour
 		
 		if(Physics.Raycast(upRay, out hit, dist + 0.05f, colMask,QueryTriggerInteraction.Ignore))
 		{
-			MeshCollider meshCollider = hit.collider as MeshCollider;
-			Mesh mesh = meshCollider.sharedMesh;
-			//Mesh mesh = hit.transform.GetComponent<MeshFilter>().mesh;
+			//MeshCollider meshCollider = hit.collider as MeshCollider;
+			//Mesh mesh = meshCollider.sharedMesh;
+			Mesh mesh = hit.transform.GetComponent<MeshFilter>().mesh;
 			Vector3[] v = mesh.vertices;
 			
 			for(int i = 0; i < v.Length;i++)
@@ -253,9 +254,9 @@ public class MouseAimC : MonoBehaviour
 
 		if(Physics.Raycast(upForwardRay, out hit, dist + 0.05f, colMask,QueryTriggerInteraction.Ignore))
 		{
-			MeshCollider meshCollider = hit.collider as MeshCollider;
-			Mesh mesh = meshCollider.sharedMesh;
-			//Mesh mesh = hit.transform.GetComponent<MeshFilter>().mesh;
+			//MeshCollider meshCollider = hit.collider as MeshCollider;
+			//Mesh mesh = meshCollider.sharedMesh;
+			Mesh mesh = hit.transform.GetComponent<MeshFilter>().mesh;
 			Vector3[] v = mesh.vertices;
 			
 			for(int i = 0; i < v.Length;i++)
@@ -274,9 +275,9 @@ public class MouseAimC : MonoBehaviour
 		{
 			if(Physics.Raycast(rightRay, out hit, dist, colMask,QueryTriggerInteraction.Ignore))
 			{
-				MeshCollider meshCollider = hit.collider as MeshCollider;
-				Mesh mesh = meshCollider.sharedMesh;
-				//Mesh mesh = hit.transform.GetComponent<MeshFilter>().mesh;
+				//MeshCollider meshCollider = hit.collider as MeshCollider;
+				//Mesh mesh = meshCollider.sharedMesh;
+				Mesh mesh = hit.transform.GetComponent<MeshFilter>().mesh;
 				Vector3[] v = mesh.vertices;
 
 				for(int i = 0; i < v.Length;i++)
@@ -296,9 +297,9 @@ public class MouseAimC : MonoBehaviour
 		{		
 			if(Physics.Raycast(frontRay, out hit, dist+0.05f, colMask,QueryTriggerInteraction.Ignore))
 			{
-				MeshCollider meshCollider = hit.collider as MeshCollider;
-				Mesh mesh = meshCollider.sharedMesh;
-				//Mesh mesh = hit.transform.GetComponent<MeshFilter>().mesh;
+				//MeshCollider meshCollider = hit.collider as MeshCollider;
+				//Mesh mesh = meshCollider.sharedMesh;
+				Mesh mesh = hit.transform.GetComponent<MeshFilter>().mesh;
 				Vector3[] v = mesh.vertices;
 
 				for(int i = 0; i < v.Length;i++)
@@ -319,10 +320,10 @@ public class MouseAimC : MonoBehaviour
 	
 		if(Physics.Raycast(uRightRay, out hit, dist, colMask,QueryTriggerInteraction.Ignore))
 		{
-				MeshCollider meshCollider = hit.collider as MeshCollider;
-				Mesh mesh = meshCollider.sharedMesh;
-				//Mesh mesh = hit.transform.GetComponent<MeshFilter>().mesh;
-				Vector3[] v = mesh.vertices;
+			//MeshCollider meshCollider = hit.collider as MeshCollider;
+			//Mesh mesh = meshCollider.sharedMesh;
+			Mesh mesh = hit.transform.GetComponent<MeshFilter>().mesh;
+			Vector3[] v = mesh.vertices;
 
 			for(int i = 0; i < v.Length;i++)
 			{
@@ -342,10 +343,10 @@ public class MouseAimC : MonoBehaviour
 		
 		if(Physics.Raycast(uLeftRay, out hit, dist, colMask,QueryTriggerInteraction.Ignore))
 		{
-			MeshCollider meshCollider = hit.collider as MeshCollider;
-			Mesh mesh = meshCollider.sharedMesh;
-			//Mesh mesh = hit.transform.GetComponent<MeshFilter>().mesh;
-			Vector3[] v = mesh.vertices;
+			//MeshCollider meshCollider = hit.collider as MeshCollider;
+			//Mesh mesh = meshCollider.sharedMesh;
+			Mesh mesh = hit.transform.GetComponent<MeshFilter>().mesh;
+			Vector3[] v = mesh.vertices;	
 
 			for(int i = 0; i < v.Length;i++)
 			{
@@ -366,9 +367,9 @@ public class MouseAimC : MonoBehaviour
 		if(Physics.Raycast(downRay, out hit, dist + 0.05f, colMask,QueryTriggerInteraction.Ignore)&&
 		Physics.Raycast(downForwardRay, out hit, dist, colMask,QueryTriggerInteraction.Ignore))
 		{
-			MeshCollider meshCollider = hit.collider as MeshCollider;
-			Mesh mesh = meshCollider.sharedMesh;
-			//Mesh mesh = hit.transform.GetComponent<MeshFilter>().mesh;
+			//MeshCollider meshCollider = hit.collider as MeshCollider;
+			//Mesh mesh = meshCollider.sharedMesh;
+			Mesh mesh = hit.transform.GetComponent<MeshFilter>().mesh;
 			Vector3[] v = mesh.vertices;
 			
 			for(int i = 0; i < v.Length;i++)
@@ -414,7 +415,7 @@ public class MouseAimC : MonoBehaviour
 		
 		MoveWalk(input.y,input.x);
 		
-		movementDirection.y -= gravity;
+		movementDirection.y = -gravity;
 		
 		if(Input.GetKey(KeyCode.Space))
 		{
