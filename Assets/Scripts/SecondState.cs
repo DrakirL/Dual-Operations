@@ -36,7 +36,7 @@ public class SecondState : State<AI>
     public override void EnterState(AI _owner)
     {
         Debug.Log("Enter 2");
-        _owner.gameObject.GetComponent<NavMeshAgent>().destination = _owner.goal2.position;
+//        _owner.gameObject.GetComponent<NavMeshAgent>().destination = _owner.goal2.position;
     }
 
     public override void ExitState(AI _owner)
@@ -44,9 +44,16 @@ public class SecondState : State<AI>
         Debug.Log("Exit 2");
     }
 
+    public override void movePos(AI _owner)
+    {
+        NavMeshAgent agent = _owner.gameObject.GetComponent<NavMeshAgent>();
+        agent.destination = _owner.goal[_owner.destPoint].position;
+        _owner.destPoint = (_owner.destPoint + 1) % _owner.goal.Length;
+    }
+
     public override void UpdateState(AI _owner)
     {
-        if (_owner.gameObject.GetComponent<NavMeshAgent>().remainingDistance < 1)
+        if (!_owner.gameObject.GetComponent<NavMeshAgent>().pathPending && _owner.gameObject.GetComponent<NavMeshAgent>().remainingDistance < 0.5f)
         {
             _owner.stateMachine.ChangeState(FirstState.Instance);
         }

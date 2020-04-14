@@ -7,12 +7,15 @@ using StateStuff;
 public class AI : MonoBehaviour
 {
     //   public bool switchState = false;
-    public Transform goal;
-    public Transform goal2;
+    public Transform [] goal;
     public StateMachine<AI> stateMachine { get; set; }
+    public int destPoint = 0;
+    public GameObject radio;
+    public bool radioTurnOff;
 
     private void Start()
     {
+
         stateMachine = new StateMachine<AI>(this);
         stateMachine.ChangeState(FirstState.Instance);
         NavMeshAgent agent = GetComponent<NavMeshAgent>();
@@ -21,7 +24,7 @@ public class AI : MonoBehaviour
 
     private void Update()
     {
-
+        radioTurnOff = radio.GetComponent<radioInterract>().on;
         stateMachine.Update();
     }
 }
