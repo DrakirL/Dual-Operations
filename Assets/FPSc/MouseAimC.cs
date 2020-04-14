@@ -406,6 +406,7 @@ public class MouseAimC : MonoBehaviour
 		cameraView.position = new Vector3(transform.position.x,transform.position.y+cameraOffsetY,transform.position.z);
 	}
 	
+	
     void FixedUpdate()
     {
 		movementDirection = Vector3.zero;
