@@ -8,26 +8,44 @@ public class MouseAimC : MonoBehaviour
 {
 	public Transform cameraView;
 	
+	public enum MouseAimStyle
+	{
+		VerticalHorizontal,
+		HorizontalOnly
+	};
+	
+	public MouseAimStyle mouseAimStyle;
+	
 	[Range(0,20)] public float mouseSensitivity = 4;
-	public bool inverted = false;
+	public bool mouseInverted = false;
 	
 	public float moveSpeed = 2;
 		
-	private Vector2 viewLimit = new Vector2(-90,90);
-	private Vector2 XLimit = new Vector2(-90,90);
+	//private Vector2 viewLimit = new Vector2(-90,90);
+	//private Vector2 XLimit = new Vector2(-90,90);
 	private Vector2 rot = Vector2.zero;
 	
 	Vector3 movementDirection = Vector3.zero;
-	Vector3 actorVelocity = Vector3.zero;
+	//Vector3 actorVelocity = Vector3.zero;
 	
 	public float gravity = 10;
-	public float acceleration = 10;
-	public float deacceleration = 3;
-	public float friction = 4;
+	//public float acceleration = 10;
+	//public float deacceleration = 3;
+	//public float friction = 4;
 	
-	public LayerMask colMask;
+	public float cameraOffsetY = 9;
 	
-	//CharacterController controller; //Plan B
+	public LayerMask collisionMask;
+	
+	//private bool isGrounded = false;
+	//public float slopeRise = 1f;
+	//public float slopeFall = 1f;
+	//public float height = 0.5f;
+	public float jumpSpeed = 10f;
+
+	float posRecover = 10f;
+	
+
 	
     void Start()
     {
@@ -41,9 +59,7 @@ public class MouseAimC : MonoBehaviour
 		}
 		
 		Cursor.lockState = CursorLockMode.Locked;
-		cameraView.transform.position = this.transform.position;
-		
-		//controller = GetComponent<CharacterController>();
+		cameraView.transform.position = new Vector3(transform.position.x,transform.position.y+cameraOffsetY,transform.position.z);		
     }
 	
 	void MoveWalk(float forward,float right)
@@ -55,15 +71,15 @@ public class MouseAimC : MonoBehaviour
 		Vector3 movdir = new Vector3(right,0,forward);
 		movdir.Normalize();
 		
-		float speed = Vector3.Magnitude(movdir);
-		speed *= moveSpeed;
+		//float speed = Vector3.Magnitude(movdir);
+		//speed *= moveSpeed;
 
 		//MoveAccelerate(movdir, speed, acceleration);
 	
 		movementDirection.x += moveSpeed * movdir.x;
 		movementDirection.z += moveSpeed * movdir.z;
 		
-		//movementDirection.y += -gravity;
+
 		
 		//Add jump action here
 	}
@@ -125,13 +141,23 @@ public class MouseAimC : MonoBehaviour
 	
 	void MouseLook()
 	{
-		int inv = Convert.ToInt32(inverted == true ? 1:-1);
+		int inv = Convert.ToInt32(mouseInverted == true ? 1:-1);
+		Vector2 viewLimit = new Vector2(-90,90);
+		Vector2 XLimit = new Vector2(-90,90);
 		
 		rot.x += Input.GetAxisRaw("Mouse X") * mouseSensitivity;
-		rot.y += Input.GetAxisRaw("Mouse Y") * mouseSensitivity;
+		
+		if(mouseAimStyle == MouseAimStyle.HorizontalOnly)
+		{
+			rot.y = 0;
+		}
+		else 
+		{
+			rot.y += Input.GetAxisRaw("Mouse Y") * mouseSensitivity;
 
-		//Clamp y-axis view
-		rot.y = Mathf.Clamp(rot.y,viewLimit.x,viewLimit.y);
+			//Clamp y-axis view
+			rot.y = Mathf.Clamp(rot.y,viewLimit.x,viewLimit.y);
+		}
 		
 		cameraView.transform.eulerAngles = new Vector2(0,rot.x);
 		
@@ -142,61 +168,271 @@ public class MouseAimC : MonoBehaviour
 		transform.localRotation = Quaternion.Euler(0,x_axis,0);
 	}
 
-	void Collision(float forward,float right)
-	{
-		bool isGrounded = false;
-		float dist = GetComponent<BoxCollider>().bounds.extents.y;
+	void Collision(ref Vector3 movement, float forward,float right,ref LayerMask colMask)
+	{		
+		RaycastHit hit;
 		
-		Ray downRay =  new Ray (transform.position, -transform.up);
-		RaycastHit hitInfo;
+		float dist = (GetComponent<SphereCollider>().radius)*0.5f;
 		
-		Vector3 col = new Vector3(right,0,forward);
+		Ray downRay =  new Ray (transform.position, Vector3.down);
+		Ray upRay =  new Ray (transform.position, Vector3.up);
+		Ray upForwardRay =  new Ray (transform.position, Vector3.up+(forward*transform.forward));
+		Ray downForwardRay =  new Ray (transform.position, Vector3.down+(forward*transform.forward));
 		
-		//RaycastHit2D hitY = Physics2D.Raycast(rayVector, Vector2.up * directionY, rayLength, entityMask);
+		Ray frontRay =  new Ray (transform.position, forward*transform.forward);
+		Ray rightRay = new Ray (transform.position, right*transform.right);
 		
-		//            desiredMove = Vector3.ProjectOnPlane(desiredMove, hitInfo.normal).normalized;
 		
-		if(Physics.Raycast(transform.position,Vector3.down, out hitInfo, dist+2f, colMask, QueryTriggerInteraction.Ignore))
+		Ray uRightRay = new Ray (transform.position, transform.right);
+		Ray uLeftRay = new Ray (transform.position, -transform.right);
+		
+		
+		Debug.DrawLine(downRay.origin,downRay.origin + downRay.direction * dist, Color.green);
+		Debug.DrawLine(rightRay.origin,rightRay.origin + rightRay.direction * dist, Color.red);	
+		Debug.DrawLine(downForwardRay.origin,downForwardRay.origin + downForwardRay.direction * dist, Color.red);	
+		Debug.DrawLine(upForwardRay.origin,upForwardRay.origin + upForwardRay.direction * dist, Color.red);	
+
+
+		//Checking below player for surface
+		//&& Physics.Raycast(down2Ray, out hit, dist + 0.05f, colMask)
+		if(Physics.Raycast(downRay, out hit, dist + 0.05f, colMask,QueryTriggerInteraction.Ignore))
 		{
-			//int er = (int)dist - (int)hitInfo.distance;
+			//MeshCollider meshCollider = hit.collider as MeshCollider;
+			//Mesh mesh = meshCollider.sharedMesh;
+			Mesh mesh = hit.transform.GetComponent<MeshFilter>().mesh;
+			Vector3[] v = mesh.vertices;
 			
-			//if(hitInfo.distance <)
-		//	{
-			movementDirection.y = 0;
-			transform.position = hitInfo.point;//+new Vector3(0f,2,0f);
-			Debug.DrawLine(downRay.origin,hitInfo.point, Color.red);
-		//	}
-		}
-		else
-		{
-			Debug.DrawLine(downRay.origin,downRay.direction*100,Color.green);
-		}
-	}	
-	
-    void Update()
-    {
-		movementDirection = Vector3.zero;
-		Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"),Input.GetAxisRaw("Vertical"));
+			float n2 = (Vector3.Dot(hit.normal,Vector3.up));
+			float ncos = Mathf.Acos(n2);
+			float ang = (Mathf.Rad2Deg*ncos);	
+			
+			for(int i = 0; i < v.Length;i++)
+			{
+				float n = Vector3.Dot(v[i] - movementDirection,hit.normal);
+				Debug.Log(n);
+			
+				if(n >= 0.01f) 
+				{
+					//Height correction with linear interpolation if clipping with mesh's face
+					if(hit.distance < dist)
+					{
+						transform.position = Vector3.Lerp(transform.position, hit.point + Vector3.up * dist, posRecover * Time.fixedDeltaTime);
+					}
+					
+					//isGrounded = true;
+					movementDirection.y = 0;
 
-		MouseLook();
-		MoveWalk(input.y,input.x);
-
-		//Collision(input.y,input.x);
-
-		//up vector manipulation (debug-only)
-		if(Input.GetKey(KeyCode.Space))
-		{
-			movementDirection.y = moveSpeed;
+					break;
+				}
+			}
 		}
 		
-		Move(movementDirection * Time.deltaTime);
+		
+		if(Physics.Raycast(upRay, out hit, dist + 0.05f, colMask,QueryTriggerInteraction.Ignore))
+		{
+			//MeshCollider meshCollider = hit.collider as MeshCollider;
+			//Mesh mesh = meshCollider.sharedMesh;
+			Mesh mesh = hit.transform.GetComponent<MeshFilter>().mesh;
+			Vector3[] v = mesh.vertices;
+			
+			for(int i = 0; i < v.Length;i++)
+			{
+				float n = Vector3.Dot(v[i] - movementDirection, hit.normal);
+			
+				if(n > 0.01f) 
+				{
+					
+					//Height correction with linear interpolation if clipping with mesh's face
+					if(hit.distance < dist)
+					{
+						transform.position = Vector3.Lerp(transform.position, hit.point + Vector3.down * dist, posRecover * Time.fixedDeltaTime);
+						movementDirection.y = 0;
+					}
+					
+					//isGrounded = false;		
+					break;
+				}
+			}
+		}
+
+		if(Physics.Raycast(upForwardRay, out hit, dist + 0.05f, colMask,QueryTriggerInteraction.Ignore))
+		{
+			//MeshCollider meshCollider = hit.collider as MeshCollider;
+			//Mesh mesh = meshCollider.sharedMesh;
+			Mesh mesh = hit.transform.GetComponent<MeshFilter>().mesh;
+			Vector3[] v = mesh.vertices;
+			
+			for(int i = 0; i < v.Length;i++)
+			{
+				float n = Vector3.Dot(v[i] - movementDirection, hit.normal);
+			
+				if(n > 0.01f) 
+				{	
+					movementDirection.y = 0;
+					break;
+				}
+			}
+		}
+
+		if(right !=0)
+		{
+			if(Physics.Raycast(rightRay, out hit, dist, colMask,QueryTriggerInteraction.Ignore))
+			{
+				//MeshCollider meshCollider = hit.collider as MeshCollider;
+				//Mesh mesh = meshCollider.sharedMesh;
+				Mesh mesh = hit.transform.GetComponent<MeshFilter>().mesh;
+				Vector3[] v = mesh.vertices;
+
+				for(int i = 0; i < v.Length;i++)
+				{
+					float n = Vector3.Dot(v[i] - movementDirection, hit.normal);
+
+					if(n > 0.01f || n < 0.01f)
+					{
+						movementDirection.x = 0;
+						break;
+					}
+				}		
+			}
+		}
+		
+		//if(forward !=0)
+		//{		
+			if(Physics.Raycast(frontRay, out hit, dist+0.05f, colMask,QueryTriggerInteraction.Ignore))
+			{
+				//MeshCollider meshCollider = hit.collider as MeshCollider;
+				//Mesh mesh = meshCollider.sharedMesh;
+				Mesh mesh = hit.transform.GetComponent<MeshFilter>().mesh;
+				Vector3[] v = mesh.vertices;
+
+				for(int i = 0; i < v.Length;i++)
+				{
+					float n = Vector3.Dot(v[i] - movementDirection, hit.normal);
+					Debug.Log(i+" = "+n);
+					
+					if(n > 0.01f || n < 0.01f)
+					{
+						movementDirection.z = 0;
+						break;
+					}
+				}		
+			}
+		//}
+		//--------------------------
+		// Collision correction for "wall-hugging" etc.
+		//--------------------------
+	
+		if(Physics.Raycast(uRightRay, out hit, dist, colMask,QueryTriggerInteraction.Ignore))
+		{
+			//MeshCollider meshCollider = hit.collider as MeshCollider;
+			//Mesh mesh = meshCollider.sharedMesh;
+			Mesh mesh = hit.transform.GetComponent<MeshFilter>().mesh;
+			Vector3[] v = mesh.vertices;
+
+			for(int i = 0; i < v.Length;i++)
+			{
+				float n = Vector3.Dot(v[i] - movementDirection, hit.normal);
+
+				if(n > 0.01f || n < 0.01f)
+				{
+					if(hit.distance < dist)
+					{
+						transform.position = Vector3.Lerp(transform.position, hit.point + (-transform.right) * dist, posRecover * Time.fixedDeltaTime);
+					}
+					
+					break;
+				}
+			}		
+		}
+		
+		if(Physics.Raycast(uLeftRay, out hit, dist, colMask,QueryTriggerInteraction.Ignore))
+		{
+			//MeshCollider meshCollider = hit.collider as MeshCollider;
+			//Mesh mesh = meshCollider.sharedMesh;
+			Mesh mesh = hit.transform.GetComponent<MeshFilter>().mesh;
+			Vector3[] v = mesh.vertices;
+
+			for(int i = 0; i < v.Length;i++)
+			{
+				float n = Vector3.Dot(v[i] - movementDirection, hit.normal);
+
+				if(n > 0.01f || n < 0.01f)
+				{
+					if(hit.distance < dist)
+					{
+						transform.position = Vector3.Lerp(transform.position, hit.point + (transform.right) * dist, posRecover * Time.fixedDeltaTime);
+					}
+					
+					break;
+				}
+			}		
+		}
+		
+		if(Physics.Raycast(downRay, out hit, dist + 0.05f, colMask,QueryTriggerInteraction.Ignore)&&
+		Physics.Raycast(downForwardRay, out hit, dist, colMask,QueryTriggerInteraction.Ignore))
+		{
+			//MeshCollider meshCollider = hit.collider as MeshCollider;
+			//Mesh mesh = meshCollider.sharedMesh;
+			Mesh mesh = hit.transform.GetComponent<MeshFilter>().mesh;
+			Vector3[] v = mesh.vertices;
+			
+			for(int i = 0; i < v.Length;i++)
+			{
+				float n = Vector3.Dot(v[i] - movementDirection, hit.normal);
+			
+				if(n > 0.01f || n < 0.01f) 
+				{
+					//Height correction with linear interpolation if clipping with mesh's face
+					if(hit.distance < dist)
+					{
+						transform.position = Vector3.Lerp(transform.position, hit.point + Vector3.up * dist, posRecover * Time.fixedDeltaTime);
+					}
+					movementDirection.y = 0;
+
+					break;
+				}
+			}
+		}
+		
+		//------------------------
+	}
+		
+	void Update()
+	{
+		MouseLook();
 		
 		//Forward vector, only debbuging
 		//------
 		Ray front = new Ray (transform.position, transform.forward);
 		Debug.DrawLine(front.origin,front.direction*60,Color.blue);
 		//------
+
+		cameraView.position = new Vector3(transform.position.x,transform.position.y+cameraOffsetY,transform.position.z);
+	}
+	
+    void FixedUpdate()
+    {
+		movementDirection = Vector3.zero;
 		
-		cameraView.position = new Vector3(transform.position.x,transform.position.y,transform.position.z);
+		Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"),Input.GetAxisRaw("Vertical"));
+
+		
+		MoveWalk(input.y,input.x);
+		
+		movementDirection.y = -gravity;
+		
+		if(Input.GetKey(KeyCode.Space))
+		{
+
+			movementDirection.y = jumpSpeed;
+			
+			//isGrounded = false;
+			//Move(movementDirection * Time.fixedDeltaTime);
+		}
+
+		Collision(ref movementDirection, input.y,input.x,ref collisionMask);
+
+		//final transform calculation
+		Move(movementDirection * Time.fixedDeltaTime);	
     }
 }
