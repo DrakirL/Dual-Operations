@@ -345,13 +345,13 @@ namespace Mirror
                 //movementDirection = Vector3.zero;
                 Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
                 MoveWalk(input.y, input.x);
-                movementDirection.y -= gravity;
+               // movementDirection.y -= gravity;
 
-               if (Input.GetKey(KeyCode.Space))
-               {
-                   movementDirection.y = jumpSpeed;
-               }
-               Collision(ref movementDirection, input.y, input.x);
+               //if (Input.GetKey(KeyCode.Space))
+               //{
+                //   movementDirection.y = jumpSpeed;
+               //}
+              // Collision(ref movementDirection, input.y, input.x);
 
                 //final transform calculation
                 Move(movementDirection * Time.fixedDeltaTime);
