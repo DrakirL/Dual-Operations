@@ -35,5 +35,7 @@ namespace StateStuff
         public abstract void ExitState(T _owner);
         public abstract void UpdateState(T _owner);
         public abstract void movePos(T _owner);
+        public abstract void test222(T _owner);
+        public abstract void OnDrawGizmos(T _owner);
     }
 }

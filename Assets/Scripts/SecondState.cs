@@ -53,9 +53,73 @@ public class SecondState : State<AI>
 
     public override void UpdateState(AI _owner)
     {
-        if (!_owner.gameObject.GetComponent<NavMeshAgent>().pathPending && _owner.gameObject.GetComponent<NavMeshAgent>().remainingDistance < 0.5f)
+      //  if (!_owner.gameObject.GetComponent<NavMeshAgent>().pathPending && _owner.gameObject.GetComponent<NavMeshAgent>().remainingDistance < 0.5f)
         {
+   //         _owner.stateMachine.ChangeState(FirstState.Instance);
+        }
+
+        test222(_owner);
+        if (_owner.fovtest123)
+        {
+            NavMeshAgent agent = _owner.gameObject.GetComponent<NavMeshAgent>();
+            agent.isStopped = true;
+        }
+        else {
+            _owner.gameObject.GetComponent<NavMeshAgent>().isStopped = false;
             _owner.stateMachine.ChangeState(FirstState.Instance);
         }
+            
     }
+
+    public override void test222(AI _owner)
+    {
+        bool inFov(Transform checkingObject, Transform target, float maxAngle, float maxRadius)
+        {
+            Vector3 direction = (target.position - checkingObject.position).normalized;
+            direction.y *= 0;
+
+            RaycastHit hit;
+            if (Physics.Raycast(checkingObject.position, (target.position - checkingObject.position).normalized, out hit, maxRadius))
+            {
+                if (hit.transform.gameObject.tag == "Player")
+                {
+                    float angle = Vector3.Angle(checkingObject.forward, direction);
+
+                    if (angle <= maxAngle)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+        _owner.fovtest123 = inFov(_owner.transform, _owner.player, _owner.maxAngle, _owner.maxRadius);
+    }
+
+    public override void OnDrawGizmos(AI _owner)
+    {
+
+        // MÅLAR RAYCASTEN, BRA FÖR BUGGTEST I TEORIN FÖR DET FUNKAR FAN INTE 
+
+             Gizmos.color = Color.yellow;
+             Gizmos.DrawWireSphere(_owner.transform.position, _owner.maxRadius);
+
+             Vector3 fovLine1 = Quaternion.AngleAxis(_owner.maxAngle, _owner.transform.up) * _owner.transform.forward * _owner.maxRadius;
+             Vector3 fovLine2 = Quaternion.AngleAxis(-_owner.maxAngle, _owner.transform.up) * _owner.transform.forward * _owner.maxRadius;
+
+             Gizmos.color = Color.blue;
+             Gizmos.DrawRay(_owner.transform.position, fovLine1);
+             Gizmos.DrawRay(_owner.transform.position, fovLine2);
+
+             if (!_owner.fovtest123)
+                 Gizmos.color = Color.red;
+             else
+                 Gizmos.color = Color.green;
+             Gizmos.DrawRay(_owner.transform.position, (_owner.player.position - _owner.transform.position).normalized * _owner.maxRadius);
+
+             Gizmos.color = Color.black;
+             Gizmos.DrawRay(_owner.transform.position, _owner.transform.forward * _owner.maxRadius);
+         
+    }
+    
 }

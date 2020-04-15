@@ -414,7 +414,6 @@ GameObject:
   - component: {fileID: 380418695}
   - component: {fileID: 380418694}
   - component: {fileID: 380418693}
-  - component: {fileID: 380418699}
   m_Layer: 0
   m_Name: Cylinder
   m_TagString: Guard
@@ -440,6 +439,10 @@ MonoBehaviour:
   destPoint: 0
   radio: {fileID: 1305451274}
   radioTurnOff: 0
+  fovtest123: 0
+  maxAngle: 50
+  maxRadius: 5
+  player: {fileID: 2074239440}
 --- !u!195 &380418694
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -537,21 +540,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &380418699
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 380418692}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f3c3574e52b5454792a6961b82a5e77, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  maxAngle: 0
-  maxRadius: 0
 --- !u!1 &640512142
 GameObject:
   m_ObjectHideFlags: 0
@@ -566,7 +554,6 @@ GameObject:
   - component: {fileID: 640512146}
   - component: {fileID: 640512145}
   - component: {fileID: 640512144}
-  - component: {fileID: 640512143}
   m_Layer: 0
   m_Name: Cylinder (1)
   m_TagString: Guard
@@ -574,21 +561,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &640512143
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 640512142}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f3c3574e52b5454792a6961b82a5e77, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  maxAngle: 0
-  maxRadius: 0
 --- !u!114 &640512144
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -606,6 +578,10 @@ MonoBehaviour:
   destPoint: 0
   radio: {fileID: 1305451274}
   radioTurnOff: 0
+  fovtest123: 0
+  maxAngle: 50
+  maxRadius: 5
+  player: {fileID: 2074239440}
 --- !u!195 &640512145
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1399,7 +1375,7 @@ GameObject:
   - component: {fileID: 2074239439}
   - component: {fileID: 2074239438}
   - component: {fileID: 2074239437}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Capsule
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -1475,7 +1451,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2074239436}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.06, y: 0.83, z: 3.7}
+  m_LocalPosition: {x: 3.06, y: 0.83, z: -2.15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
