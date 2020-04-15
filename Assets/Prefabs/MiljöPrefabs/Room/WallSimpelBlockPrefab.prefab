@@ -1,5 +1,19 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!64 &8477604011076290163
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2316020097352272437}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -3014531124919226273, guid: 7edb5ab54093ad94b9754d5ba952d162, type: 3}
 --- !u!1 &2845095793780674127
 GameObject:
   m_ObjectHideFlags: 0
@@ -9,7 +23,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1229768217882881280}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: WallSimpelBlockPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31,20 +45,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!64 &8477604011076290163
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2316020097352272437}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -3014531124919226273, guid: 7edb5ab54093ad94b9754d5ba952d162, type: 3}
 --- !u!1001 &5982404385111954236
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -111,6 +111,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: mesh_Simpleblock
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 7edb5ab54093ad94b9754d5ba952d162,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7edb5ab54093ad94b9754d5ba952d162, type: 3}
