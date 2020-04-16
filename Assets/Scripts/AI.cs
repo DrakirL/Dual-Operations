@@ -20,7 +20,7 @@ public class AI : MonoBehaviour
     public GameObject detectCount;
     [HideInInspector]
     public ParticleSystem warning;
-        
+    public bool dead = false;    
 
 
     private void Start()
@@ -35,6 +35,11 @@ public class AI : MonoBehaviour
     private void Update()
     {
         radioTurnOff = radio.GetComponent<radioInterract>().on;
+        if (dead)
+        {
+            stateMachine.ChangeState(ThirdState.Instance);
+            dead = false;
+        }
         stateMachine.Update();
     }
 }

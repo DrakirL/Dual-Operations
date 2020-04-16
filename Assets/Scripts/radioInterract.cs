@@ -14,7 +14,7 @@ public class radioInterract : MonoBehaviour
         xd123 = GetComponent<Transform>();
         
     }
-
+    
     IEnumerator waiter()
     {
         yield return new WaitForSeconds(10);
