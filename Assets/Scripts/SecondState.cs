@@ -36,12 +36,16 @@ public class SecondState : State<AI>
     public override void EnterState(AI _owner)
     {
         Debug.Log("Enter 2");
-//        _owner.gameObject.GetComponent<NavMeshAgent>().destination = _owner.goal2.position;
+        _owner.detectCount.GetComponent<AlertMeter>().SetDetected(true);
+        _owner.warning.Play(true);
+        //        _owner.gameObject.GetComponent<NavMeshAgent>().destination = _owner.goal2.position;
     }
 
     public override void ExitState(AI _owner)
     {
         Debug.Log("Exit 2");
+        _owner.detectCount.GetComponent<AlertMeter>().SetDetected(false);
+        _owner.warning.Stop();
     }
 
     public override void movePos(AI _owner)
@@ -59,6 +63,7 @@ public class SecondState : State<AI>
         }
 
         test222(_owner);
+        
         if (_owner.fovtest123)
         {
             NavMeshAgent agent = _owner.gameObject.GetComponent<NavMeshAgent>();
