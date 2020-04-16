@@ -134,7 +134,7 @@ namespace Mirror
             }
         }
 
-        void SceneLoadedForPlayer(NetworkConnection conn, GameObject roomPlayer)
+        public virtual void SceneLoadedForPlayer(NetworkConnection conn, GameObject roomPlayer)
         {
             if (LogFilter.Debug) Debug.LogFormat("NetworkRoom SceneLoadedForPlayer scene: {0} {1}", SceneManager.GetActiveScene().name, conn);
 

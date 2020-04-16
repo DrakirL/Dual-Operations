@@ -1385,7 +1385,6 @@ GameObject:
   - component: {fileID: 1283475369}
   - component: {fileID: 1283475366}
   - component: {fileID: 1283475367}
-  - component: {fileID: 1283475368}
   m_Layer: 0
   m_Name: RoomManager
   m_TagString: Untagged
@@ -1456,14 +1455,16 @@ MonoBehaviour:
   networkAddress: localhost
   maxConnections: 2
   authenticator: {fileID: 0}
-  playerPrefab: {fileID: 1480027675339556, guid: 21daf89214c6ee443ad6875b73083c60,
+  agentPrefab: {fileID: 5824834958473384813, guid: 291d2bd986acd9d4c83c5ded5d18948d,
+    type: 3}
+  hackerPrefab: {fileID: 3465779443380523429, guid: 54d8a1b61a786c142b8915b4a1a0a0d8,
     type: 3}
   autoCreatePlayer: 1
   playerSpawnMethod: 0
   spawnPrefabs: []
   showRoomGUI: 0
   minPlayers: 2
-  roomPlayerPrefab: {fileID: 114033720796874720, guid: deae2134a1d77704b9c595efe69767dd,
+  roomPlayerPrefab: {fileID: 5428512978526286771, guid: aa7669b7bc7259b4b88d28d12300ae31,
     type: 3}
   RoomScene: Room
   GameplayScene: Main Level
@@ -1471,21 +1472,6 @@ MonoBehaviour:
   allPlayersReady: 0
   menu: {fileID: 0}
   layer: 0
---- !u!114 &1283475368
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1283475365}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6442dc8070ceb41f094e44de0bf87274, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  showGUI: 1
-  offsetX: 0
-  offsetY: 0
 --- !u!4 &1283475369
 Transform:
   m_ObjectHideFlags: 0
@@ -1937,7 +1923,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1469031852
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1997,9 +1983,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 385.5, y: -232.9}
-  m_SizeDelta: {x: 150, y: 46.8}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 204, y: -190}
+  m_SizeDelta: {x: 150, y: 46.800003}
+  m_Pivot: {x: 0, y: 0}
 --- !u!114 &1695984751
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -232,8 +232,14 @@ namespace Mirror
 
             if (agentPrefab != null && agentPrefab.GetComponent<NetworkIdentity>() == null)
             {
-                Debug.LogError("NetworkManager - playerPrefab must have a NetworkIdentity.");
+                Debug.LogError("NetworkManager - playerPrefab (agent) must have a NetworkIdentity.");
                 agentPrefab = null;
+            }
+
+            if (hackerPrefab != null && hackerPrefab.GetComponent<NetworkIdentity>() == null)
+            {
+                Debug.LogError("NetworkManager - playerPrefab (hacker) must have a NetworkIdentity.");
+                hackerPrefab = null;
             }
         }
 
@@ -733,6 +739,11 @@ namespace Mirror
             {
                 ClientScene.RegisterPrefab(agentPrefab);
             }
+            if (hackerPrefab != null)
+            {
+                ClientScene.RegisterPrefab(hackerPrefab);
+            }
+
             for (int i = 0; i < spawnPrefabs.Count; i++)
             {
                 GameObject prefab = spawnPrefabs[i];
@@ -1138,13 +1149,25 @@ namespace Mirror
 
             if (autoCreatePlayer && agentPrefab == null)
             {
-                Debug.LogError("The PlayerPrefab is empty on the NetworkManager. Please setup a PlayerPrefab object.");
+                Debug.LogError("The PlayerPrefab (agent) is empty on the NetworkManager. Please setup a PlayerPrefab object.");
+                return;
+            }
+
+            if (autoCreatePlayer && hackerPrefab == null)
+            {
+                Debug.LogError("The PlayerPrefab (hacker) is empty on the NetworkManager. Please setup a PlayerPrefab object.");
                 return;
             }
 
             if (autoCreatePlayer && agentPrefab.GetComponent<NetworkIdentity>() == null)
             {
-                Debug.LogError("The PlayerPrefab does not have a NetworkIdentity. Please add a NetworkIdentity to the player prefab.");
+                Debug.LogError("The PlayerPrefab (agent) does not have a NetworkIdentity. Please add a NetworkIdentity to the player prefab.");
+                return;
+            }
+
+            if (autoCreatePlayer && hackerPrefab.GetComponent<NetworkIdentity>() == null)
+            {
+                Debug.LogError("The PlayerPrefab (hacker) does not have a NetworkIdentity. Please add a NetworkIdentity to the player prefab.");
                 return;
             }
 
