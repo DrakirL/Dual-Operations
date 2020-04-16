@@ -97,7 +97,7 @@ public class DualOperationsNetworkRoomManager : NetworkRoomManager
                 gamePlayer = startPos != null
                 ? Instantiate(hackerPrefab, startPos.position, startPos.rotation)
                 : Instantiate(hackerPrefab, Vector3.zero, Quaternion.identity);
-                gamePlayer.name = agentPrefab.name;
+                gamePlayer.name = hackerPrefab.name;
             }
 
             else
