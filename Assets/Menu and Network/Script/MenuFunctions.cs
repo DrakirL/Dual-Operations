@@ -77,4 +77,14 @@ public class MenuFunctions : MonoBehaviour
         Application.Quit();
         Debug.Log("Quit message");
     }
+
+    public void Ready()
+    {
+        roomManager.ConfirmReady();
+    }
+
+    public void ManagePlayers(int amount)
+    {
+
+    }
 }

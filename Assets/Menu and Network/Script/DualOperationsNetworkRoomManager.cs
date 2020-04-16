@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Mirror;
 using Mirror.Examples.NetworkRoom;
 
@@ -19,8 +20,8 @@ public class DualOperationsNetworkRoomManager : NetworkRoomManager
     /// <returns>true unless some code in here decides it needs to abort the replacement</returns>
     public override bool OnRoomServerSceneLoadedForPlayer(NetworkConnection conn, GameObject roomPlayer, GameObject gamePlayer)
     {
-        PlayerScore playerScore = gamePlayer.GetComponent<PlayerScore>();
-        playerScore.index = roomPlayer.GetComponent<NetworkRoomPlayer>().index;
+        //PlayerScore playerScore = gamePlayer.GetComponent<PlayerScore>();
+        //playerScore.index = roomPlayer.GetComponent<NetworkRoomPlayer>().index;
         return true;
     }
 
@@ -54,4 +55,79 @@ public class DualOperationsNetworkRoomManager : NetworkRoomManager
         StopHost();
         Debug.Log("Should return you one step back and leave room");
     }
+
+    public void ConfirmReady()
+    {
+        for(int i = 0; i < roomSlots.Count; i++)
+        {
+            if (NetworkClient.active && roomSlots[i].isLocalPlayer)
+            {
+                if (roomSlots[i].readyToBegin)
+                    roomSlots[i].CmdChangeReadyState(false);
+
+                else
+                    roomSlots[i].CmdChangeReadyState(true);
+            }
+        }
+    }
+
+    public override void SceneLoadedForPlayer(NetworkConnection conn, GameObject roomPlayer)
+    {
+        if (LogFilter.Debug) Debug.LogFormat("NetworkRoom SceneLoadedForPlayer scene: {0} {1}", SceneManager.GetActiveScene().name, conn);
+
+        if (SceneManager.GetActiveScene().name == RoomScene)
+        {
+            // cant be ready in room, add to ready list
+            PendingPlayer pending;
+            pending.conn = conn;
+            pending.roomPlayer = roomPlayer;
+            pendingPlayers.Add(pending);
+            return;
+        }
+
+        GameObject gamePlayer = OnRoomServerCreateGamePlayer(conn, roomPlayer);
+        if (gamePlayer == null)
+        {
+            // get start position from base class
+            Transform startPos = GetStartPosition();
+
+            //Only player 0 becomes a hacker
+            if (roomPlayer.GetComponent<NetworkRoomPlayer>().index == 0)
+            {
+                gamePlayer = startPos != null
+                ? Instantiate(hackerPrefab, startPos.position, startPos.rotation)
+                : Instantiate(hackerPrefab, Vector3.zero, Quaternion.identity);
+                gamePlayer.name = hackerPrefab.name;
+            }
+
+            else
+            {
+                gamePlayer = startPos != null
+                ? Instantiate(agentPrefab, startPos.position, startPos.rotation)
+                : Instantiate(agentPrefab, Vector3.zero, Quaternion.identity);
+                gamePlayer.name = agentPrefab.name;
+            }
+            
+        }
+
+        if (!OnRoomServerSceneLoadedForPlayer(conn, roomPlayer, gamePlayer))
+            return;
+
+        // replace room player with game player
+        NetworkServer.ReplacePlayerForConnection(conn, gamePlayer, true);
+    }
+
+    /*
+    public override void OnRoomServerConnect(NetworkConnection conn)
+    {
+        if (menu != null)
+            menu.ManagePlayers(numPlayers+1);
+    }
+
+    public override void OnRoomServerDisconnect(NetworkConnection conn)
+    {
+        if (menu != null)
+            menu.ManagePlayers(numPlayers-1);
+    }
+    */
 }

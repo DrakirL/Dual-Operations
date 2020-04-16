@@ -13,8 +13,11 @@ public struct CameraStruct
 
 public class CameraManager : MonoBehaviour
 {
+    private static CameraManager instance;
+    public static CameraManager Instance { get { return instance; } }
+    // Use this for initialization
     [SerializeField] CameraStruct[] cameraStruct;
-    
+
     [SerializeField] float cameraAlertTime;
     [SerializeField] GameObject Spy;
     Collider spyCol;
@@ -28,8 +31,12 @@ public class CameraManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (instance == null)
+        {
+            instance = this;
+        }
         spyCol = Spy.GetComponent<Collider>();
-        shutDownCamera(cameraStruct[0]);
+        //shutDownCamera(cameraStruct[0]);
 
     }
 
@@ -40,7 +47,7 @@ public class CameraManager : MonoBehaviour
         alertTimes = camerasThatSeeTheSpy();
         if (alertTimes.Count == 0)
         {
-         //   Debug.Log("no camera has spotted the agent");
+            //   Debug.Log("no camera has spotted the agent");
         }
         else
         {
@@ -64,20 +71,23 @@ public class CameraManager : MonoBehaviour
         }
         return tempList;
     }
-
+    public bool isCameraAvailable(int index)
+    {
+        return cameraStruct[index].camera.cameraActive;
+    }
     //hacker funktioanlaties
-    RenderTexture updateHackerCameraView(int index)
+    public RenderTexture updateHackerCameraView(int index)
     {
         //use this function by typing something like this
         //cameraRenderer.texture = updateHackerCameraView(temp);
         return cameraStruct[index].cameraView;
     }
-    public void shutDownCamera(CameraStruct cameraStruct)
+    public void shutDownCamera(int index)
     {
-        if (cameraStruct.camera.cameraActive)
+        if (cameraStruct[index].camera.cameraActive)
         {
-            cameraStruct.camera.cameraActive = false;
-            StartCoroutine(acivateCamera(cameraStruct, shutDownTimer));
+            cameraStruct[index].camera.cameraActive = false;
+            StartCoroutine(acivateCamera(cameraStruct[index], shutDownTimer));
         }
     }
     private IEnumerator acivateCamera(CameraStruct cameraStruct, float waitTime)
