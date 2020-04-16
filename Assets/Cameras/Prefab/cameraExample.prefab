@@ -119,13 +119,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5830077344561233735}
-  m_LocalRotation: {x: 0.4386225, y: -0.0005011421, z: -0.00024458295, w: 0.8986712}
+  m_LocalRotation: {x: -0.027905038, y: -0.00033076154, z: -0.00044906512, w: 0.9996105}
   m_LocalPosition: {x: 4.4644715e-14, y: -0.0000048801303, z: -0.00000011920929}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5830077345114366624}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 52.032, y: -0.104, z: -0.082}
+  m_LocalEulerAnglesHint: {x: -3.1980002, y: -0.037, z: -0.05}
 --- !u!108 &5830077344561233729
 Light:
   m_ObjectHideFlags: 0
@@ -138,9 +138,9 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 0, b: 0, a: 1}
-  m_Intensity: 1.35
-  m_Range: 1244.4
-  m_SpotAngle: 82
+  m_Intensity: 10
+  m_Range: 4
+  m_SpotAngle: 75.9
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
@@ -276,7 +276,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdc62eb766af4ed4fa745deaabf81c28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distanceCameraCanRegisterAgent: 2
+  distanceCameraCanRegisterAgent: 3.49
   cameraActive: 0
   detectedTime: 0
 --- !u!95 &5830077345114366627
@@ -323,7 +323,7 @@ Transform:
   m_GameObject: {fileID: 5830077345554416240}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 67.213425, y: 34.908344, z: 63.808853}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
+  m_LocalScale: {x: 0.19999999, y: 0.19999999, z: 0.19999999}
   m_Children:
   - {fileID: 5830077343765477929}
   m_Father: {fileID: 0}
