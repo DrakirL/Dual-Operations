@@ -119,13 +119,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5830077344561233735}
-  m_LocalRotation: {x: 0.43862268, y: 2.8421713e-14, z: -0, w: 0.8986713}
+  m_LocalRotation: {x: 0.4386225, y: -0.0005011421, z: -0.00024458295, w: 0.8986712}
   m_LocalPosition: {x: 4.4644715e-14, y: -0.0000048801303, z: -0.00000011920929}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5830077345114366624}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 52.032, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 52.032, y: -0.104, z: -0.082}
 --- !u!108 &5830077344561233729
 Light:
   m_ObjectHideFlags: 0
@@ -213,14 +213,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5830077345114366625}
-  m_LocalRotation: {x: -0, y: 0.9298181, z: -0, w: 0.36801934}
+  m_LocalRotation: {x: 0.012390172, y: 0.9998025, z: -0.013967803, w: 0.0068241656}
   m_LocalPosition: {x: 0, y: 0.1200008, z: -0.6429999}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5830077344561233734}
   m_Father: {fileID: 5830077343765477929}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 136.813, z: 0}
+  m_LocalEulerAnglesHint: {x: 1.6100001, y: 179.238, z: 1.409}
 --- !u!20 &5830077345114366626
 Camera:
   m_ObjectHideFlags: 0
@@ -276,7 +276,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdc62eb766af4ed4fa745deaabf81c28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distanceCameraCanRegisterAgent: 25.5
+  distanceCameraCanRegisterAgent: 2
   cameraActive: 0
   detectedTime: 0
 --- !u!95 &5830077345114366627
@@ -287,7 +287,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5830077345114366625}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 5276ce81d60411048bcd074bda6bd94a, type: 2}
   m_CullingMode: 0
@@ -323,7 +323,7 @@ Transform:
   m_GameObject: {fileID: 5830077345554416240}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 67.213425, y: 34.908344, z: 63.808853}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_Children:
   - {fileID: 5830077343765477929}
   m_Father: {fileID: 0}
