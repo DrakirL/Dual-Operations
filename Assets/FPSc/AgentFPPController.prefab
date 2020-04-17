@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 8497191405225776196}
   - component: {fileID: 8497191405225776198}
   - component: {fileID: 8497191405225776199}
+  - component: {fileID: 909493315695536800}
   m_Layer: 8
   m_Name: AgentFPPController
   m_TagString: Untagged
@@ -84,12 +85,10 @@ MonoBehaviour:
   mouseInverted: 0
   moveSpeed: 2
   gravity: 10
-  cameraOffsetY: 9
+  maxSlopeAngle: 25
   colMask:
     serializedVersion: 2
     m_Bits: 256
-  height: 0.5
-  jumpSpeed: 10
 --- !u!135 &8497191405225776199
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -103,6 +102,18 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &909493315695536800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8497191405225776197}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af6a772aac7fb444ebc31c9bfa2a31ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8497191405265250515
 GameObject:
   m_ObjectHideFlags: 0
