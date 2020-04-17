@@ -5,10 +5,10 @@ using System;
 
 namespace Mirror
 {
-    public class MouseAimC : NetworkBehaviour
+    class MouseAimC : NetworkBehaviour
     {
-        public float test = 0;
         public Transform cameraView;
+        public Transform objectModel;
 
         public enum MouseAimStyle
         {
@@ -51,21 +51,18 @@ namespace Mirror
 
         void Start()
         {
-            if (isLocalPlayer)
+            if (cameraView == null)
             {
-                if (cameraView == null)
+                Camera mainCamera = Camera.main;
+                if (mainCamera != null)
                 {
-                    Camera mainCamera = Camera.main;
-                    if (mainCamera != null)
-                    {
-                        cameraView = mainCamera.gameObject.transform;
-                    }
+                    cameraView = mainCamera.gameObject.transform;
                 }
+            }
 
-                Cursor.lockState = CursorLockMode.Locked;
-                cameraView.transform.position = new Vector3(transform.position.x, transform.position.y + cameraOffsetY, transform.position.z);
-            }
-            }
+            Cursor.lockState = CursorLockMode.Locked;
+            cameraView.transform.position = new Vector3(transform.position.x, transform.position.y + cameraOffsetY, transform.position.z);
+        }
 
         void MoveWalk(float forward, float right)
         {
@@ -171,6 +168,7 @@ namespace Mirror
 
             cameraView.transform.localRotation = Quaternion.Euler(y_axis, x_axis, 0);
             transform.localRotation = Quaternion.Euler(0, x_axis, 0);
+            objectModel.transform.localRotation = Quaternion.Euler(0, 0, 0);//Quaternion.Euler(y_axis,0,0);
         }
 
         void Collision(ref Vector3 movement, float forward, float right)
@@ -190,14 +188,13 @@ namespace Mirror
             Ray uLeftRay = new Ray(transform.position, -transform.right);
 
 
-            Debug.DrawLine(downRay.origin, downRay.origin + downRay.direction * dist, Color.green);
-            Debug.DrawLine(rightRay.origin, rightRay.origin + rightRay.direction * dist, Color.red);
-            Debug.DrawLine(downForwardRay.origin, downForwardRay.origin + downForwardRay.direction * dist, Color.red);
-            Debug.DrawLine(upForwardRay.origin, upForwardRay.origin + upForwardRay.direction * dist, Color.red);
+            /*Debug.DrawLine(downRay.origin,downRay.origin + downRay.direction * dist, Color.green);
+            Debug.DrawLine(rightRay.origin,rightRay.origin + rightRay.direction * dist, Color.red);	
+            Debug.DrawLine(downForwardRay.origin,downForwardRay.origin + downForwardRay.direction * dist, Color.red);	
+            Debug.DrawLine(upForwardRay.origin,upForwardRay.origin + upForwardRay.direction * dist, Color.red);	*/
 
 
             //Checking below player for surface
-            //&& Physics.Raycast(down2Ray, out hit, dist + 0.05f, colMask)
             if (Physics.Raycast(downRay, out hit, dist + 0.05f, colMask, QueryTriggerInteraction.Ignore))
             {
                 //MeshCollider meshCollider = hit.collider as MeshCollider;
@@ -231,9 +228,9 @@ namespace Mirror
 
             if (Physics.Raycast(upRay, out hit, dist + 0.05f, colMask, QueryTriggerInteraction.Ignore))
             {
-                MeshCollider meshCollider = hit.collider as MeshCollider;
-                Mesh mesh = meshCollider.sharedMesh;
-                //Mesh mesh = hit.transform.GetComponent<MeshFilter>().mesh;
+                //MeshCollider meshCollider = hit.collider as MeshCollider;
+                //Mesh mesh = meshCollider.sharedMesh;
+                Mesh mesh = hit.transform.GetComponent<MeshFilter>().mesh;
                 Vector3[] v = mesh.vertices;
 
                 for (int i = 0; i < v.Length; i++)
@@ -258,9 +255,9 @@ namespace Mirror
 
             if (Physics.Raycast(upForwardRay, out hit, dist + 0.05f, colMask, QueryTriggerInteraction.Ignore))
             {
-                MeshCollider meshCollider = hit.collider as MeshCollider;
-                Mesh mesh = meshCollider.sharedMesh;
-                //Mesh mesh = hit.transform.GetComponent<MeshFilter>().mesh;
+                //MeshCollider meshCollider = hit.collider as MeshCollider;
+                //Mesh mesh = meshCollider.sharedMesh;
+                Mesh mesh = hit.transform.GetComponent<MeshFilter>().mesh;
                 Vector3[] v = mesh.vertices;
 
                 for (int i = 0; i < v.Length; i++)
@@ -279,9 +276,9 @@ namespace Mirror
             {
                 if (Physics.Raycast(rightRay, out hit, dist, colMask, QueryTriggerInteraction.Ignore))
                 {
-                    MeshCollider meshCollider = hit.collider as MeshCollider;
-                    Mesh mesh = meshCollider.sharedMesh;
-                    //Mesh mesh = hit.transform.GetComponent<MeshFilter>().mesh;
+                    //MeshCollider meshCollider = hit.collider as MeshCollider;
+                    //Mesh mesh = meshCollider.sharedMesh;
+                    Mesh mesh = hit.transform.GetComponent<MeshFilter>().mesh;
                     Vector3[] v = mesh.vertices;
 
                     for (int i = 0; i < v.Length; i++)
@@ -301,9 +298,9 @@ namespace Mirror
             {
                 if (Physics.Raycast(frontRay, out hit, dist + 0.05f, colMask, QueryTriggerInteraction.Ignore))
                 {
-                    MeshCollider meshCollider = hit.collider as MeshCollider;
-                    Mesh mesh = meshCollider.sharedMesh;
-                    //Mesh mesh = hit.transform.GetComponent<MeshFilter>().mesh;
+                    //MeshCollider meshCollider = hit.collider as MeshCollider;
+                    //Mesh mesh = meshCollider.sharedMesh;
+                    Mesh mesh = hit.transform.GetComponent<MeshFilter>().mesh;
                     Vector3[] v = mesh.vertices;
 
                     for (int i = 0; i < v.Length; i++)
@@ -324,9 +321,9 @@ namespace Mirror
 
             if (Physics.Raycast(uRightRay, out hit, dist, colMask, QueryTriggerInteraction.Ignore))
             {
-                MeshCollider meshCollider = hit.collider as MeshCollider;
-                Mesh mesh = meshCollider.sharedMesh;
-                //Mesh mesh = hit.transform.GetComponent<MeshFilter>().mesh;
+                //MeshCollider meshCollider = hit.collider as MeshCollider;
+                //Mesh mesh = meshCollider.sharedMesh;
+                Mesh mesh = hit.transform.GetComponent<MeshFilter>().mesh;
                 Vector3[] v = mesh.vertices;
 
                 for (int i = 0; i < v.Length; i++)
@@ -347,9 +344,9 @@ namespace Mirror
 
             if (Physics.Raycast(uLeftRay, out hit, dist, colMask, QueryTriggerInteraction.Ignore))
             {
-                MeshCollider meshCollider = hit.collider as MeshCollider;
-                Mesh mesh = meshCollider.sharedMesh;
-                //Mesh mesh = hit.transform.GetComponent<MeshFilter>().mesh;
+                //MeshCollider meshCollider = hit.collider as MeshCollider;
+                //Mesh mesh = meshCollider.sharedMesh;
+                Mesh mesh = hit.transform.GetComponent<MeshFilter>().mesh;
                 Vector3[] v = mesh.vertices;
 
                 for (int i = 0; i < v.Length; i++)
@@ -371,9 +368,9 @@ namespace Mirror
             if (Physics.Raycast(downRay, out hit, dist + 0.05f, colMask, QueryTriggerInteraction.Ignore) &&
             Physics.Raycast(downForwardRay, out hit, dist, colMask, QueryTriggerInteraction.Ignore))
             {
-                MeshCollider meshCollider = hit.collider as MeshCollider;
-                Mesh mesh = meshCollider.sharedMesh;
-                //Mesh mesh = hit.transform.GetComponent<MeshFilter>().mesh;
+                //MeshCollider meshCollider = hit.collider as MeshCollider;
+                //Mesh mesh = meshCollider.sharedMesh;
+                Mesh mesh = hit.transform.GetComponent<MeshFilter>().mesh;
                 Vector3[] v = mesh.vertices;
 
                 for (int i = 0; i < v.Length; i++)
@@ -399,48 +396,42 @@ namespace Mirror
 
         void Update()
         {
-            if (isLocalPlayer)
-            {
-                test += Time.deltaTime;
-                MouseLook();
+            MouseLook();
 
-                //Forward vector, only debbuging
-                //------
-                Ray front = new Ray(transform.position, transform.forward);
-                Debug.DrawLine(front.origin, front.direction * 60, Color.blue);
-                //------
+            //Forward vector, only debbuging
+            //------
+            Ray front = new Ray(transform.position, transform.forward);
+            Debug.DrawLine(front.origin, front.direction * 60, Color.blue);
+            //------
 
-                cameraView.position = new Vector3(transform.position.x, transform.position.y + cameraOffsetY, transform.position.z);
-            }
+            cameraView.position = new Vector3(transform.position.x, transform.position.y + cameraOffsetY, transform.position.z);
         }
+
 
         void FixedUpdate()
         {
-            if (isLocalPlayer)
+            movementDirection = Vector3.zero;
+
+            Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+
+
+            MoveWalk(input.y, input.x);
+
+            movementDirection.y = -gravity;
+
+            if (Input.GetKey(KeyCode.Space))
             {
-                movementDirection = Vector3.zero;
 
-                Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+                movementDirection.y = jumpSpeed;
 
-
-                MoveWalk(input.y, input.x);
-
-                movementDirection.y -= gravity;
-
-                if (Input.GetKey(KeyCode.Space))
-                {
-
-                    movementDirection.y = jumpSpeed;
-
-                    //isGrounded = false;
-                    //Move(movementDirection * Time.fixedDeltaTime);
-                }
-
-                Collision(ref movementDirection, input.y, input.x);
-
-                //final transform calculation
-                Move(movementDirection * Time.fixedDeltaTime);
+                //isGrounded = false;
+                //Move(movementDirection * Time.fixedDeltaTime);
             }
+
+            Collision(ref movementDirection, input.y, input.x);
+
+            //final transform calculation
+            Move(movementDirection * Time.fixedDeltaTime);
         }
     }
 }
