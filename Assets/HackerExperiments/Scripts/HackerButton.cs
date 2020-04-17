@@ -8,7 +8,7 @@ public class HackerButton : MonoBehaviour
    [HideInInspector] public HackerButtonHandler HBH;
     [SerializeField] HackOptions[] preHackOptions;
     [SerializeField] HackOptions[] postHackOptions;
-    [SerializeField] int cameraNr;
+    [SerializeField] int hackableNumber;
     [SerializeField] bool isHacked = false;
 
     [SerializeField] bool isHoverOverThisButton = false;
@@ -43,10 +43,14 @@ public class HackerButton : MonoBehaviour
     }
     public void getCamera()
     {
-        HBH.setUpCameraWatch(cameraNr);
+        HBH.setUpCameraWatch(hackableNumber);
+    }
+    public void turnOnRadio()
+    {
+        HBH.turnOnRadio(hackableNumber);
     }
     public void shutDownCamera()
     {
-        CameraManager.Instance.shutDownCamera(cameraNr);
+        CameraManager.Instance.shutDownCamera(hackableNumber);
     }
 }

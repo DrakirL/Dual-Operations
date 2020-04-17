@@ -11,12 +11,19 @@ public struct CameraStruct
     public bool AgentIsInCamera;
 }
 
+[System.Serializable]
+public struct RadioStruct
+{
+    public radioInterract radio;
+}
+
 public class CameraManager : MonoBehaviour
 {
     private static CameraManager instance;
     public static CameraManager Instance { get { return instance; } }
     // Use this for initialization
     [SerializeField] CameraStruct[] cameraStruct;
+    [SerializeField] RadioStruct[] radioStruct;
 
     [SerializeField] float cameraAlertTime;
     [SerializeField] GameObject Spy;
@@ -76,6 +83,13 @@ public class CameraManager : MonoBehaviour
         return cameraStruct[index].camera.cameraActive;
     }
     //hacker funktioanlaties
+    public void turnOnRadio(int index)
+    {
+        if (!radioStruct[index].radio.on)
+        {
+            radioStruct[index].radio.on = true;
+        }
+    }
     public RenderTexture updateHackerCameraView(int index)
     {
         //use this function by typing something like this
