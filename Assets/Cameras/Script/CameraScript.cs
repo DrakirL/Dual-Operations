@@ -8,6 +8,7 @@ public class CameraScript : MonoBehaviour
     [SerializeField] float distanceCameraCanRegisterAgent;
     [HideInInspector] public bool cameraActive;
     [HideInInspector] public float detectedTime = 0;
+    public GameObject lightSource;
 
     // Start is called before the first frame update
     void Start()
