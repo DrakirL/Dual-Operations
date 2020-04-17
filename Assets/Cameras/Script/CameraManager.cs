@@ -30,10 +30,11 @@ public class CameraManager : MonoBehaviour
     Collider spyCol;
 
     [SerializeField] float shutDownTimer = 10;
-    [SerializeField] RawImage cameraRenderer;
 
+    [Tooltip("this is the variable that defines how much the alert state increase every cameraAlertTime-seconds")]
+    [SerializeField] float alertStateInc;
 
-    [SerializeField] int temp;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -83,7 +84,8 @@ public class CameraManager : MonoBehaviour
                 for (int i = 0; i < alertTimes.Count; i++)
                 {
                     //TYPE HERE WHAT SHOULD HAPPEN WHEN CAMERA DETECT AGENT
-                    Debug.Log(alertTimes[i].gameObject.name + " has spoted the agent!");
+                    //Debug.Log(alertTimes[i].gameObject.name + " has spoted the agent!");
+                    AlertMeter._instance.AddAlert(alertStateInc);
                 }
             }
         }
@@ -116,7 +118,6 @@ public class CameraManager : MonoBehaviour
     public RenderTexture updateHackerCameraView(int index)
     {
         //use this function by typing something like this
-        //cameraRenderer.texture = updateHackerCameraView(temp);
         return cameraStruct[index].cameraView;
     }
     public void shutDownCamera(int index)
@@ -125,11 +126,13 @@ public class CameraManager : MonoBehaviour
         {
             cameraStruct[index].camera.cameraActive = false;
             StartCoroutine(acivateCamera(cameraStruct[index], shutDownTimer));
+            cameraStruct[index].camera.lightSource.SetActive(false);
         }
     }
     private IEnumerator acivateCamera(CameraStruct cameraStruct, float waitTime)
     {
         yield return new WaitForSeconds(waitTime);
         cameraStruct.camera.cameraActive = true;
+        cameraStruct.camera.lightSource.SetActive(true);
     }
 }
