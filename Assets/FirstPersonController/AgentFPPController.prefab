@@ -10,9 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 6598284766150790620}
   - component: {fileID: 6598284766150790622}
+  - component: {fileID: 8459755247723386022}
   - component: {fileID: 6598284766150790623}
   m_Layer: 0
-  m_Name: AgentFPPController 1
+  m_Name: AgentFPPController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -57,6 +58,21 @@ MonoBehaviour:
   colMask:
     serializedVersion: 2
     m_Bits: 256
+--- !u!114 &8459755247723386022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6598284766150790621}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68cfe5e750fee5b42b4bff47bdde85c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactRange: 5
+  interactTextOn: 0
+  interactText: {fileID: 0}
 --- !u!135 &6598284766150790623
 SphereCollider:
   m_ObjectHideFlags: 0

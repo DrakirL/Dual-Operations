@@ -37,13 +37,6 @@ public class AgentControllerScript : MonoBehaviour
 	//public float acceleration = 10;
 	//public float deacceleration = 3;
 	//public float friction = 4;
-	
-	//public float cameraOffsetY = 9;
-	
-
-	// = LayerMask.GetMask("StaticWorldObject");
-	//public float height = 0.5f;
-
 
     void Start()
     {
@@ -144,7 +137,7 @@ public class AgentControllerScript : MonoBehaviour
 		float x_axis = rot.x;
 		
 		cameraView.transform.localRotation = Quaternion.Euler(y_axis,0,0);
-		objectModel.transform.localRotation = Quaternion.Euler(y_axis,0,0);
+		objectModel.transform.localRotation = Quaternion.Euler(0,0,0);
 		transform.localRotation = Quaternion.Euler(0,x_axis,0);
 	}
 
