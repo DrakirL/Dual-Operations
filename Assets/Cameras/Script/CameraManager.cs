@@ -26,7 +26,7 @@ public class CameraManager : MonoBehaviour
     [SerializeField] RadioStruct[] radioStruct;
 
     [SerializeField] float cameraAlertTime;
-    [SerializeField] GameObject Spy;
+    GameObject Spy;
     Collider spyCol;
 
     [SerializeField] float shutDownTimer = 10;
@@ -42,7 +42,15 @@ public class CameraManager : MonoBehaviour
         {
             instance = this;
         }
-        spyCol = Spy.GetComponent<Collider>();
+        try
+        {
+            Spy = GetPlayer.Instance.getPlayer();
+            spyCol = Spy.GetComponent<Collider>();
+        }
+        catch
+        {
+            Debug.LogWarning("if this appears over three times something is wrong");
+        }
         //shutDownCamera(cameraStruct[0]);
 
     }
@@ -50,18 +58,33 @@ public class CameraManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        List<CameraScript> alertTimes = new List<CameraScript>();
-        alertTimes = camerasThatSeeTheSpy();
-        if (alertTimes.Count == 0)
+        if (Spy == null)
         {
-            //   Debug.Log("no camera has spotted the agent");
+            try
+            {
+                Spy = GetPlayer.Instance.getPlayer();
+                spyCol = Spy.GetComponent<Collider>();
+            }
+            catch
+            {
+                Debug.LogWarning("if this appears over three times something is wrong");
+            }
         }
         else
         {
-            for (int i = 0; i < alertTimes.Count; i++)
+            List<CameraScript> alertTimes = new List<CameraScript>();
+            alertTimes = camerasThatSeeTheSpy();
+            if (alertTimes.Count == 0)
             {
-                //TYPE HERE WHAT SHOULD HAPPEN WHEN CAMERA DETECT AGENT
-                Debug.Log(alertTimes[i].gameObject.name + " has spoted the agent!");
+                //   Debug.Log("no camera has spotted the agent");
+            }
+            else
+            {
+                for (int i = 0; i < alertTimes.Count; i++)
+                {
+                    //TYPE HERE WHAT SHOULD HAPPEN WHEN CAMERA DETECT AGENT
+                    Debug.Log(alertTimes[i].gameObject.name + " has spoted the agent!");
+                }
             }
         }
     }
