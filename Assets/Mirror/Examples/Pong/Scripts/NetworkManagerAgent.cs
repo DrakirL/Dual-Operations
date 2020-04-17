@@ -15,7 +15,7 @@ namespace Mirror.Examples.Pong
         {
             // add player at correct spawn position
             Transform start = AgentSpawn;
-            GameObject player = Instantiate(playerPrefab, start.position, start.rotation);
+            GameObject player = Instantiate(agentPrefab, start.position, start.rotation);
             NetworkServer.AddPlayerForConnection(conn, player);
         }
 

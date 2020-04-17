@@ -134,7 +134,7 @@ namespace Mirror
             }
         }
 
-        void SceneLoadedForPlayer(NetworkConnection conn, GameObject roomPlayer)
+        public virtual void SceneLoadedForPlayer(NetworkConnection conn, GameObject roomPlayer)
         {
             if (LogFilter.Debug) Debug.LogFormat("NetworkRoom SceneLoadedForPlayer scene: {0} {1}", SceneManager.GetActiveScene().name, conn);
 
@@ -154,9 +154,9 @@ namespace Mirror
                 // get start position from base class
                 Transform startPos = GetStartPosition();
                 gamePlayer = startPos != null
-                    ? Instantiate(playerPrefab, startPos.position, startPos.rotation)
-                    : Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
-                gamePlayer.name = playerPrefab.name;
+                    ? Instantiate(agentPrefab, startPos.position, startPos.rotation)
+                    : Instantiate(agentPrefab, Vector3.zero, Quaternion.identity);
+                gamePlayer.name = agentPrefab.name;
             }
 
             if (!OnRoomServerSceneLoadedForPlayer(conn, roomPlayer, gamePlayer))
@@ -412,10 +412,10 @@ namespace Mirror
             else
                 ClientScene.RegisterPrefab(roomPlayerPrefab.gameObject);
 
-            if (playerPrefab == null)
+            if (agentPrefab == null)
                 Debug.LogError("NetworkRoomManager no GamePlayer prefab is registered. Please add a GamePlayer prefab.");
             else
-                ClientScene.RegisterPrefab(playerPrefab);
+                ClientScene.RegisterPrefab(agentPrefab);
 
             OnRoomStartClient();
         }
