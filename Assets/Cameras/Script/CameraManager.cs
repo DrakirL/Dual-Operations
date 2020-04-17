@@ -73,6 +73,7 @@ public class CameraManager : MonoBehaviour
         }
         else
         {
+            
             List<CameraScript> alertTimes = new List<CameraScript>();
             alertTimes = camerasThatSeeTheSpy();
             if (alertTimes.Count == 0)
