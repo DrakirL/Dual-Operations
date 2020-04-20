@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using Mirror;
 
 
 public class AgentControllerScript : MonoBehaviour
@@ -23,7 +24,7 @@ public class AgentControllerScript : MonoBehaviour
 	
 	public float moveSpeed = 3;
 	public float gravity = 10;
-	public float maxSlopeAngle = 25f;
+	//public float maxSlopeAngle = 25f;
 	
 	public LayerMask colMask;
 
@@ -159,6 +160,9 @@ public class AgentControllerScript : MonoBehaviour
 		Ray uRightRay = new Ray (transform.position, transform.right);
 		Ray uLeftRay = new Ray (transform.position, -transform.right);
 		
+		Ray forwardRightRay = new Ray(transform.position, (transform.forward)+(right*transform.right));
+		Ray forwardRightRay2 = new Ray(transform.position, (-transform.forward)+(right*transform.right));
+		
 		// +=== HOW THE COLLISION WORKS ======+
 		// Calculation is done by looking for vertices on the mesh, then looking for the normal,
 		// then calculate the dot product of the vertices - player position and the normal of the mesh face.
@@ -286,7 +290,7 @@ public class AgentControllerScript : MonoBehaviour
 		//--------------------------
 		if(ColCorrect)
 		{
-		if(Physics.Raycast(uRightRay, out hit, distH+0.05f, colMask,QueryTriggerInteraction.Ignore))
+		if(Physics.Raycast(uRightRay, out hit, distH, colMask,QueryTriggerInteraction.Ignore))
 		{
 			Mesh mesh = hit.transform.GetComponent<MeshFilter>().mesh;
 			Vector3[] v = mesh.vertices;
@@ -307,7 +311,7 @@ public class AgentControllerScript : MonoBehaviour
 			}		
 		}
 		
-		if(Physics.Raycast(uLeftRay, out hit, distH+0.05f, colMask,QueryTriggerInteraction.Ignore))
+		if(Physics.Raycast(uLeftRay, out hit, distH, colMask,QueryTriggerInteraction.Ignore))
 		{
 			Mesh mesh = hit.transform.GetComponent<MeshFilter>().mesh;
 			Vector3[] v = mesh.vertices;	
@@ -328,7 +332,31 @@ public class AgentControllerScript : MonoBehaviour
 			}		
 		}
 		
-		/*if(Physics.Raycast(downForwardRay, out hit, dist + 0.05f, colMask,QueryTriggerInteraction.Ignore))
+		if(Physics.Raycast(forwardRightRay, out hit, distH, colMask,QueryTriggerInteraction.Ignore)||
+		Physics.Raycast(forwardRightRay2, out hit, distH, colMask,QueryTriggerInteraction.Ignore))
+		{
+			Mesh mesh = hit.transform.GetComponent<MeshFilter>().mesh;
+			Vector3[] v = mesh.vertices;	
+
+			for(int i = 0; i < v.Length;i++)
+			{
+				float n = Vector3.Dot(v[i] - velocity, hit.normal);
+
+				if(n > 0.00f || n < 0.00f)
+				{
+					velocity.x = 0;
+					//velocity.z = 0;
+					/*if(hit.distance < distH)
+					{
+						transform.position = Vector3.Lerp(transform.position, hit.point + (transform.right) * distH, posRecover * Time.fixedDeltaTime);
+					}*/
+					
+					break;
+				}
+			}		
+		}
+		
+		/*if(Physics.Raycast(downForwardRay, out hit, distV - 0.05f, colMask,QueryTriggerInteraction.Ignore))
 		{
 			Mesh mesh = hit.transform.GetComponent<MeshFilter>().mesh;
 			Vector3[] v = mesh.vertices;
@@ -343,9 +371,9 @@ public class AgentControllerScript : MonoBehaviour
 			
 				if(n > 0.00f) 
 				{
-					if(hit.distance < dist)
+					if(hit.distance < distV)
 					{
-						transform.position = Vector3.Lerp(transform.position, hit.point + Vector3.up * dist, posRecover * Time.fixedDeltaTime);
+						transform.position = Vector3.Lerp(transform.position, hit.point + Vector3.up * distV, posRecover * Time.fixedDeltaTime);
 					}
 						
 					break;
@@ -385,8 +413,6 @@ public class AgentControllerScript : MonoBehaviour
 				//							cameraView.transform.position + new Vector3(0,-1f,0), Time.fixedDeltaTime);
 		//	movementDirection.y = jumpSpeed;
 		}
-
-
 
 		CollisionDetection(ref movementDirection, input.y,input.x,true);
 
