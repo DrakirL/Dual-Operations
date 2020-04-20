@@ -145,8 +145,10 @@ public class AgentControllerScript : MonoBehaviour
 	{		
 		RaycastHit hit;
 		
-		float dist = (GetComponent<SphereCollider>().radius)*0.5f;
-
+		//float dist = (GetComponent<SphereCollider>().radius)*0.5f;
+		float distH = (GetComponent<CapsuleCollider>().radius)*0.5f;
+		float distV = (GetComponent<CapsuleCollider>().height)*0.5f;
+		
 		Ray downRay =  new Ray (transform.position, Vector3.down);
 		Ray upRay =  new Ray (transform.position, Vector3.up);
 		Ray downForwardRay =  new Ray (transform.position, Vector3.down+(forward*transform.forward));
@@ -174,7 +176,7 @@ public class AgentControllerScript : MonoBehaviour
 		// suffice for this project. It also allows for simple slope collision.
 		// +==================================+
 		
-		if(Physics.Raycast(downRay, out hit, dist + 0.05f, colMask,QueryTriggerInteraction.Ignore))
+		if(Physics.Raycast(downRay, out hit, distV + 0.05f, colMask,QueryTriggerInteraction.Ignore))
 		{
 			Mesh mesh = hit.transform.GetComponent<MeshFilter>().mesh;
 			Vector3[] v = mesh.vertices;
@@ -192,7 +194,7 @@ public class AgentControllerScript : MonoBehaviour
 			}
 		}
 
-		if(Physics.Raycast(upRay, out hit, dist + 0.05f, colMask,QueryTriggerInteraction.Ignore))
+		/*if(Physics.Raycast(upRay, out hit, dist + 0.05f, colMask,QueryTriggerInteraction.Ignore))
 		{
 			Mesh mesh = hit.transform.GetComponent<MeshFilter>().mesh;
 			Vector3[] v = mesh.vertices;
@@ -238,11 +240,11 @@ public class AgentControllerScript : MonoBehaviour
 					break;
 				}
 			}
-		}
+		}*/
 
 		if(right !=0)
 		{
-			if(Physics.Raycast(rightRay, out hit, dist, colMask,QueryTriggerInteraction.Ignore))
+			if(Physics.Raycast(rightRay, out hit, distH+0.05f, colMask,QueryTriggerInteraction.Ignore))
 			{
 				Mesh mesh = hit.transform.GetComponent<MeshFilter>().mesh;
 				Vector3[] v = mesh.vertices;
@@ -262,7 +264,7 @@ public class AgentControllerScript : MonoBehaviour
 		
 		if(forward !=0)
 		{		
-			if(Physics.Raycast(frontRay, out hit, dist+0.05f, colMask,QueryTriggerInteraction.Ignore))
+			if(Physics.Raycast(frontRay, out hit, distH+0.05f, colMask,QueryTriggerInteraction.Ignore))
 			{
 				Mesh mesh = hit.transform.GetComponent<MeshFilter>().mesh;
 				Vector3[] v = mesh.vertices;
@@ -284,7 +286,7 @@ public class AgentControllerScript : MonoBehaviour
 		//--------------------------
 		if(ColCorrect)
 		{
-		if(Physics.Raycast(uRightRay, out hit, dist, colMask,QueryTriggerInteraction.Ignore))
+		if(Physics.Raycast(uRightRay, out hit, distH+0.05f, colMask,QueryTriggerInteraction.Ignore))
 		{
 			Mesh mesh = hit.transform.GetComponent<MeshFilter>().mesh;
 			Vector3[] v = mesh.vertices;
@@ -295,9 +297,9 @@ public class AgentControllerScript : MonoBehaviour
 
 				if(n > 0.00f || n < 0.00f)
 				{
-					if(hit.distance < dist)
+					if(hit.distance < distH)
 					{
-						transform.position = Vector3.Lerp(transform.position, hit.point + (-transform.right) * dist, posRecover * Time.fixedDeltaTime);
+						transform.position = Vector3.Lerp(transform.position, hit.point + (-transform.right) * distH, posRecover * Time.fixedDeltaTime);
 					}
 					
 					break;
@@ -305,7 +307,7 @@ public class AgentControllerScript : MonoBehaviour
 			}		
 		}
 		
-		if(Physics.Raycast(uLeftRay, out hit, dist, colMask,QueryTriggerInteraction.Ignore))
+		if(Physics.Raycast(uLeftRay, out hit, distH+0.05f, colMask,QueryTriggerInteraction.Ignore))
 		{
 			Mesh mesh = hit.transform.GetComponent<MeshFilter>().mesh;
 			Vector3[] v = mesh.vertices;	
@@ -316,9 +318,9 @@ public class AgentControllerScript : MonoBehaviour
 
 				if(n > 0.00f || n < 0.00f)
 				{
-					if(hit.distance < dist)
+					if(hit.distance < distH)
 					{
-						transform.position = Vector3.Lerp(transform.position, hit.point + (transform.right) * dist, posRecover * Time.fixedDeltaTime);
+						transform.position = Vector3.Lerp(transform.position, hit.point + (transform.right) * distH, posRecover * Time.fixedDeltaTime);
 					}
 					
 					break;
@@ -326,7 +328,7 @@ public class AgentControllerScript : MonoBehaviour
 			}		
 		}
 		
-		if(Physics.Raycast(downForwardRay, out hit, dist + 0.05f, colMask,QueryTriggerInteraction.Ignore))
+		/*if(Physics.Raycast(downForwardRay, out hit, dist + 0.05f, colMask,QueryTriggerInteraction.Ignore))
 		{
 			Mesh mesh = hit.transform.GetComponent<MeshFilter>().mesh;
 			Vector3[] v = mesh.vertices;
@@ -350,7 +352,7 @@ public class AgentControllerScript : MonoBehaviour
 				}
 	
 			}
-		}
+		}*/
 		}
 		
 		//------------------------
