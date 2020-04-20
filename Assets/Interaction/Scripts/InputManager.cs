@@ -34,7 +34,7 @@ public class InputManager : MonoBehaviour
             if(interactTextOn) 
 				interactText.SetActive(true);
             // Does the ray intersect any objects excluding the player layer
-            if (Input.GetButtonDown("Interact"))
+            if (Input.GetKeyDown(KeyCode.E))//.ECGetButtonDown("Interact"))
             {                
                 // Get the component that is being interacted with
                 IInteractable interactable = hit.collider.GetComponent<IInteractable>();
