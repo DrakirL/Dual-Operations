@@ -46,27 +46,23 @@ public class SlideDoor : NetworkBehaviour, IInteractable
         }
         else
         {
-            if (hasAuthority)
-            {
-
                 Debug.Log("I'm the client");
-                CmdCallServertoOpenDoor();
-            }
-
+            //CmdCallServertoOpenDoor();
+            GetPlayer.Instance.openDoorServer(gameObject.name);
         }
         Debug.Log("1");
     }
     
 
-    [Command]
-    private void CmdCallServertoOpenDoor()
+  /*  [Command]
+    public void CmdCallServertoOpenDoor()
     {
         RpcPlayOpenAnimation();
         Debug.Log("2");
-    }
+    }*/
 
-    [ClientRpc]
-    private void RpcPlayOpenAnimation()
+   [ClientRpc]
+    public void RpcPlayOpenAnimation()
     {
         Debug.Log("3");
         if (DoorIsClosed())
