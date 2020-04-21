@@ -13,8 +13,11 @@ public class MenuFunctions : MonoBehaviour
 
     void Start()
     {
-        roomManager = (DualOperationsNetworkRoomManager)FindObjectOfType(typeof(DualOperationsNetworkRoomManager));
+        //Undo manipulation of the cursor
+        Cursor.lockState = CursorLockMode.None;
 
+        //Find the NetworkRoomManager
+        roomManager = (DualOperationsNetworkRoomManager)FindObjectOfType(typeof(DualOperationsNetworkRoomManager));
         if(roomManager != null)
         {
             roomManager.menu = this;

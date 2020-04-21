@@ -15,6 +15,7 @@ public class AI : MonoBehaviour
     public bool fovtest123 = false;
     public float maxAngle = 50;
     public float maxRadius = 5;
+    [HideInInspector]
     public Transform player;
     [HideInInspector]
     public GameObject detectCount;
@@ -34,12 +35,9 @@ public class AI : MonoBehaviour
 
     private void Update()
     {
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         radioTurnOff = radio.GetComponent<radioInterract>().on;
-        if (dead)
-        {
-            stateMachine.ChangeState(ThirdState.Instance);
-            dead = false;
-        }
+        
         stateMachine.Update();
     }
 }

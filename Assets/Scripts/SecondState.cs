@@ -8,13 +8,13 @@ using UnityEngine.AI;
 public class SecondState : State<AI>
 {
     private static SecondState _instance;
-    
-    
+
+
     private SecondState()
     {
         if (_instance != null)
         {
-            
+
             return;
         }
 
@@ -33,8 +33,19 @@ public class SecondState : State<AI>
         }
     }
 
+    IEnumerator lol(AI _owner)
+    {
+        yield return new WaitForSeconds(3);
+        if(_owner.dead == true)
+        {
+            Debug.Log("fyfan vad död du är sopa lol xd");
+        }
+
+    }
+
     public override void EnterState(AI _owner)
     {
+        _owner.StartCoroutine(lol(_owner));
         Debug.Log("Enter 2");
         _owner.detectCount.GetComponent<AlertMeter>().SetDetected(true);
         _owner.warning.Play(true);
@@ -60,6 +71,11 @@ public class SecondState : State<AI>
       //  if (!_owner.gameObject.GetComponent<NavMeshAgent>().pathPending && _owner.gameObject.GetComponent<NavMeshAgent>().remainingDistance < 0.5f)
         {
    //         _owner.stateMachine.ChangeState(FirstState.Instance);
+        }
+
+        if (_owner.dead)
+        {
+            _owner.stateMachine.ChangeState(ThirdState.Instance);
         }
 
         test222(_owner);

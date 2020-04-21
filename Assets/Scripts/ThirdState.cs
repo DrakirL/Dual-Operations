@@ -11,6 +11,7 @@ public class ThirdState : State<AI>
     IEnumerator waiter(AI _owner)
     {
         yield return new WaitForSeconds(10);
+        _owner.dead = false;
         _owner.stateMachine.ChangeState(FirstState.Instance);
     }
 
@@ -47,8 +48,9 @@ public class ThirdState : State<AI>
 
     public override void ExitState(AI _owner)
     {
-        Debug.Log("Exit 3");
         _owner.gameObject.GetComponent<NavMeshAgent>().isStopped = false;
+        Debug.Log("Exit 3");
+
     }
 
     public override void movePos(AI _owner)

@@ -52,13 +52,13 @@ public class HackerButtonHandler : MonoBehaviour
         }
     }
   
-    public void setUpCameraWatch(int cameraNr)
+    public void setUpCameraWatch(int hackableNumber)
     {
-        if (CameraManager.Instance.isCameraAvailable(cameraNr))
+        if (CameraManager.Instance.isCameraAvailable(hackableNumber))
         {
             isCameraup = true;
             cameraImage.enabled = true;
-            cameraImage.texture = CameraManager.Instance.updateHackerCameraView(cameraNr);
+            cameraImage.texture = CameraManager.Instance.updateHackerCameraView(hackableNumber);
         }
         else
         {
@@ -69,6 +69,10 @@ public class HackerButtonHandler : MonoBehaviour
     {
         cameraImage.enabled = false;
         isCameraup = false;
+    }
+    public void turnOnRadio(int hackableNumber)
+    {
+        CameraManager.Instance.turnOnRadio(hackableNumber);
     }
     
     //functions to create and remove the menues

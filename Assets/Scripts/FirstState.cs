@@ -55,6 +55,10 @@ public class FirstState : State<AI>
 
     public override void UpdateState(AI _owner)
     {
+        if (_owner.dead)
+        {
+            _owner.stateMachine.ChangeState(ThirdState.Instance);
+        }
         test222(_owner);
         if (!_owner.gameObject.GetComponent<NavMeshAgent>().pathPending && _owner.gameObject.GetComponent<NavMeshAgent>().remainingDistance < 0.5f && _owner.radioTurnOff == false)
         {   

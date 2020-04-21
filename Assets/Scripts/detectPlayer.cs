@@ -7,7 +7,7 @@ public class detectPlayer : MonoBehaviour
 {
     public Transform player;
     public float maxAngle = 50;
-    private float maxRadius = 5;
+    public float maxRadius = 5;
     private bool fovtest123 = false;
 
     
