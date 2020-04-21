@@ -21,7 +21,7 @@ public class AlertMeter : MonoBehaviour
     [SerializeField] float alertIncreaseValue = 1f;
 
     [Space(10)]
-    [SerializeField] float alertValue;
+    [SerializeField] public float alertValue;
 
     [SerializeField] bool detected;
     float alertTimeStamp;
