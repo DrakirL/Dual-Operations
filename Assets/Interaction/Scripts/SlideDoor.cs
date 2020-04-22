@@ -39,6 +39,8 @@ public class SlideDoor : NetworkBehaviour, IInteractable
 
     public void GetInteracted()
     {
+        GetPlayer.Instance.openDoorServer(gameObject.name);
+        /*
         if (isServer)
         {
             Debug.Log("I'm the server (or host)");
@@ -49,7 +51,7 @@ public class SlideDoor : NetworkBehaviour, IInteractable
                 Debug.Log("I'm the client");
             //CmdCallServertoOpenDoor();
             GetPlayer.Instance.openDoorServer(gameObject.name);
-        }
+        }*/
         Debug.Log("1");
     }
     
@@ -61,7 +63,7 @@ public class SlideDoor : NetworkBehaviour, IInteractable
         Debug.Log("2");
     }*/
 
-   [ClientRpc]
+   //[ClientRpc]
     public void RpcPlayOpenAnimation()
     {
         Debug.Log("3");

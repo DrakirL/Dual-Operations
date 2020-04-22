@@ -10,10 +10,22 @@ public class GetPlayer : NetworkBehaviour
     // Use this for initialization
     void Start()
     {
+        // transform.position = startPos;
+        transform.position = spawnTransform.Instance.transform.position;
+        transform.rotation = spawnTransform.Instance.transform.rotation;
+
         if (instance == null)
         {
             instance = this;
         }
+    }
+
+    float alertMeterValue = 0;
+    private void Update()
+    {
+        //this works for server but not for client
+        CmdGetValueOfMeter();
+        Debug.LogWarning(isServer + " : " + alertMeterValue);
     }
 
     public GameObject getPlayer()
@@ -24,7 +36,20 @@ public class GetPlayer : NetworkBehaviour
     {
         CmdOpendorOnServer(name);
     }
+    //alert meter functions
+    [Command]
+    private void CmdGetValueOfMeter()
+    {
+            alertMeterValue = AlertMeter._instance.getAlert();   
+    }
+    [ClientRpc]
+    private void RpcGetValueClient()
+    {
+        alertMeterValue = AlertMeter._instance.getAlert();
+    }
 
+
+    //door open functions
     [Command]
     private void CmdOpendorOnServer(string name)
     {
