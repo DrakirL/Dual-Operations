@@ -1,11 +1,19 @@
-﻿using System.Collections;
+﻿using System;
+using System.CodeDom.Compiler;
+using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 
 public class DualOperationsAudioPlayer : MonoBehaviour
 {
-    //public TextAsset X;
-    //public TextAsset Y;
+    // Singleton setup
+    public static DualOperationsAudioPlayer audioPlayer;
+
+    void Awake()
+    {
+        audioPlayer = this;
+    }
 
     // MANAGING MUSIC
     private static FMOD.Studio.EventInstance Music;
@@ -18,16 +26,13 @@ public class DualOperationsAudioPlayer : MonoBehaviour
     {
         [SerializeField] public string parameterName;
         [SerializeField] public float fadeFloor;
-        [SerializeField] public float fadeCeiling;
+        [SerializeField] public float fadeCeiling;  
     }
 
     [SerializeField] Track[] tracks;
 
     void Start()
     {
-       // FMODUnity.RuntimeManager.LoadBank(X);
-        //FMODUnity.RuntimeManager.LoadBank(Y);
-
         Music = FMODUnity.RuntimeManager.CreateInstance(musicPath);
         Music.start();
         Music.release();
@@ -52,8 +57,8 @@ public class DualOperationsAudioPlayer : MonoBehaviour
     }
 
     // MANAGING OTHER SOUNDS
-    void PlaySound(string path)
+    void PlaySound(string path, GameObject source)
     {
-        FMODUnity.RuntimeManager.PlayOneShot(path, transform.position);
+        FMODUnity.RuntimeManager.PlayOneShot(path, source.transform.position);
     }
 }

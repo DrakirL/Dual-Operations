@@ -8,7 +8,6 @@ namespace FMODUnity
     {
         public RuntimeManager TargetRuntimeManager = null;
 
-        /*
         private void OnGUI()
         {
             if (TargetRuntimeManager)
@@ -16,6 +15,5 @@ namespace FMODUnity
                 TargetRuntimeManager.ExecuteOnGUI();
             }
         }
-        */
     }
 }
