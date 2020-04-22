@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
+using Mirror;
 
-public class SlideDoor : MonoBehaviour, IInteractable
+public class SlideDoor : NetworkBehaviour, IInteractable
 {
     [Header("These fields are not required and can be empty")]
     public Animator anim1;
@@ -14,7 +15,13 @@ public class SlideDoor : MonoBehaviour, IInteractable
 
     private void Start()
     {
+        
         col = GetComponent<BoxCollider>();
+       // NetworkIdentity.AssignClientAuthority(GetComponent<NetworkIdentity>().AssignClientAuthority(this.GetComponent<NetworkIdentity>().connectionToClient));
+        //NetworkIdentity.AssignClientAuthority(NetworkServer.connections[0]);
+        //NetworkIdentity.clientAuthorityCallback(this, GetComponent<NetworkIdentity>(), true);
+        //NetworkIdentity.AssignClientAuthority(NetworkServer.connections[0].connectionId);
+        // NetworkIdentity.AssignClientAuthority(GetPlayer.Instance.getPlayer().GetComponent<NetworkIdentity>());
     }
 
     private void Update()
@@ -32,13 +39,39 @@ public class SlideDoor : MonoBehaviour, IInteractable
 
     public void GetInteracted()
     {
+        if (isServer)
+        {
+            Debug.Log("I'm the server (or host)");
+            RpcPlayOpenAnimation();
+        }
+        else
+        {
+                Debug.Log("I'm the client");
+            //CmdCallServertoOpenDoor();
+            GetPlayer.Instance.openDoorServer(gameObject.name);
+        }
+        Debug.Log("1");
+    }
+    
+
+  /*  [Command]
+    public void CmdCallServertoOpenDoor()
+    {
+        RpcPlayOpenAnimation();
+        Debug.Log("2");
+    }*/
+
+   [ClientRpc]
+    public void RpcPlayOpenAnimation()
+    {
+        Debug.Log("3");
         if (DoorIsClosed())
         {
-            if(anim1 != null)
-            anim1.Play("Open");
+            if (anim1 != null)
+                anim1.Play("Open");
             if (anim2 != null)
-            anim2.Play("Open");
-        }          
+                anim2.Play("Open");
+        }
     }
 
     bool DoorIsClosed() => (anim1.GetCurrentAnimatorStateInfo(0).IsName("CloseIdle")) ? true : false;

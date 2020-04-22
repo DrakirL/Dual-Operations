@@ -129,6 +129,7 @@ GameObject:
   - component: {fileID: 5524880826162466711}
   - component: {fileID: 4891763770593485160}
   - component: {fileID: 2469038590947001498}
+  - component: {fileID: -2298360144127891606}
   m_Layer: 0
   m_Name: AgentFPPController
   m_TagString: Player
@@ -164,6 +165,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1ead0b584c24ac4ab5f03bef8dc188f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   cameraView: {fileID: 5524880825149089292}
   objectModel: {fileID: 5524880826539744339}
   mouseAimStyle: 0
@@ -238,6 +241,18 @@ MonoBehaviour:
   localRotationSensitivity: 0.01
   localScaleSensitivity: 0.01
   compressRotation: 1
+--- !u!114 &-2298360144127891606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5524880825172794005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af6a772aac7fb444ebc31c9bfa2a31ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5524880826539744336
 GameObject:
   m_ObjectHideFlags: 0

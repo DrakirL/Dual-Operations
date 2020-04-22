@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using Mirror;
 
-public class AgentControllerScript : MonoBehaviour
+public class AgentControllerScript : NetworkBehaviour
 {
 	public Transform cameraView;
 	public Transform objectModel;
@@ -32,24 +33,27 @@ public class AgentControllerScript : MonoBehaviour
 
 	private float posRecover = 10f;
 	private float jumpSpeed = 10f;
-	
-	//public float acceleration = 10;
-	//public float deacceleration = 3;
-	//public float friction = 4;
 
-	void Start()
-	{
-		if(cameraView == null)
-		{
-			Camera mainCamera = Camera.main;
-			if(mainCamera != null)
-			{
-				cameraView = mainCamera.gameObject.transform;
-			}
-		}
-		
-		Cursor.lockState = CursorLockMode.Locked;		
-	}
+    //public float acceleration = 10;
+    //public float deacceleration = 3;
+    //public float friction = 4;
+
+    void Start()
+    {
+        if (isLocalPlayer)
+        {
+            if (cameraView == null)
+            {
+                Camera mainCamera = Camera.main;
+                if (mainCamera != null)
+                {
+                    cameraView = mainCamera.gameObject.transform;
+                }
+            }
+
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+    }
 	
 	void MoveWalk(float forward,float right)
 	{		   
@@ -365,38 +369,38 @@ public class AgentControllerScript : MonoBehaviour
 
 	void Update()
 	{
-		//if (isLocalPlayer)
-//{
-			MouseLook();
-		//}
+        if (isLocalPlayer)
+        {
+            MouseLook();
+        }
 	}
 
-	void FixedUpdate()
-	{
-		//if (isLocalPlayer)
-		//{
-			movementDirection = Vector3.zero;
+    void FixedUpdate()
+    {
+        if (isLocalPlayer)
+        {
+            movementDirection = Vector3.zero;
 
-			Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+            Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
-			MoveWalk(input.y, input.x);
+            MoveWalk(input.y, input.x);
 
-			//Only for testing, not used in final version
-			if (Input.GetKeyDown(KeyCode.Space))
-			{
-				//cameraView.transform.position = Vector3.Lerp(cameraView.transform.position,
-				//							cameraView.transform.position + new Vector3(0,-1f,0), Time.fixedDeltaTime);
-				//	movementDirection.y = jumpSpeed;
-			}
+            //Only for testing, not used in final version
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                //cameraView.transform.position = Vector3.Lerp(cameraView.transform.position,
+                //							cameraView.transform.position + new Vector3(0,-1f,0), Time.fixedDeltaTime);
+                //	movementDirection.y = jumpSpeed;
+            }
 
-			CollisionDetection(ref movementDirection, input.y, input.x, true);
+            CollisionDetection(ref movementDirection, input.y, input.x, true);
 
-			Move(movementDirection * Time.fixedDeltaTime);
+            Move(movementDirection * Time.fixedDeltaTime);
 
-			actorVelocity.y += -gravity * Time.fixedDeltaTime;
+            actorVelocity.y += -gravity * Time.fixedDeltaTime;
 
-			CollisionDetection(ref actorVelocity, 0, 0, false);
-			Move(actorVelocity * Time.fixedDeltaTime);
-		//}
-		}
+            CollisionDetection(ref actorVelocity, 0, 0, false);
+            Move(actorVelocity * Time.fixedDeltaTime);
+        }
+    }
 }
