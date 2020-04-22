@@ -7,7 +7,6 @@ public class GetPlayer : NetworkBehaviour
 {
     private static GetPlayer instance;
     public static GetPlayer Instance { get { return instance; } }
-    [SerializeField] Vector3 startPos;
     // Use this for initialization
     void Start()
     {
