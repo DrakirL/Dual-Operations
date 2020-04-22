@@ -17,7 +17,7 @@ public class AnnoyingTest : MonoBehaviour
         while (true)
         {
             //Trigger event
-            DualOperationsAudioPlayer.audioPlayer.TempFunc(transform.gameObject);
+            //DualOperationsAudioPlayer.audioPlayer.TempFunc(transform.gameObject);
             yield return new WaitForSeconds(1.0f);
         }
     }
