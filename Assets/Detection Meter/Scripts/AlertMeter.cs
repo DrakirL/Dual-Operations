@@ -1,13 +1,14 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Mirror;
 
-public class AlertMeter : MonoBehaviour
+public class AlertMeter : NetworkBehaviour
 {
     public static AlertMeter _instance { get; private set; }
 
-    TextMeshProUGUI text;
-    Slider slider;
+    [HideInInspector] public TextMeshProUGUI text;
+    [HideInInspector] public Slider slider;
 
     [Tooltip("Time in seconds for meter to start decrease")]
     [SerializeField] float alertDecreaseTimer = 3f;
@@ -21,7 +22,7 @@ public class AlertMeter : MonoBehaviour
     [SerializeField] float alertIncreaseValue = 1f;
 
     [Space(10)]
-    [SerializeField] float alertValue;
+   [SyncVar] [SerializeField] float alertValue;
 
     [SerializeField] bool detected;
     float alertTimeStamp;
@@ -112,6 +113,10 @@ public class AlertMeter : MonoBehaviour
     {
         alertValue = Mathf.Clamp(value + alertValue, 0, 100);
         timeStamp = Time.time;
+    }
+    public float getAlert()
+    {
+        return alertValue;
     }
 
     // Check if meter has reached the limit
