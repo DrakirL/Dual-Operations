@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using TMPro;
 
+
 public class AlertMeter : MonoBehaviour
 {
     public static AlertMeter _instance { get; private set; }
