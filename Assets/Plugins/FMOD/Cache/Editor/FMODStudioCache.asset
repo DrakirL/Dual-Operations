@@ -16,7 +16,7 @@ MonoBehaviour:
   Min: 0
   Max: 1
   Default: 0
-  Exists: 1
+  Exists: 0
 --- !u!114 &-8633691131126513268
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -50,7 +50,7 @@ MonoBehaviour:
   Min: 0
   Max: 1
   Default: 0
-  Exists: 1
+  Exists: 0
 --- !u!114 &-7335027247281144823
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -213,6 +213,26 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 153600
+--- !u!114 &-4316371820785627617
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: ../../../../../Downloads/main_theme/main_theme/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637231425030370920
+  LoadResult: 0
+  FileSizes:
+  - Name: 
+    Value: 8364320
+  Exists: 0
 --- !u!114 &-4311852656408532474
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -247,7 +267,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: ../../../../../Downloads/main_theme/main_theme/Build/Desktop/Master.strings.bank
   SubDir: 
-  lastModified: 637229950769297357
+  lastModified: 637231467626738350
   LoadResult: 0
   FileSizes:
   - Name: 
@@ -271,6 +291,23 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 1
+--- !u!114 &-4106964351121052744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Main/ly5
+  m_EditorClassIdentifier: 
+  Name: ly5
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 1
 --- !u!114 &-4021861434993353337
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -288,6 +325,23 @@ MonoBehaviour:
   lastModified: 637229812074987967
   LoadResult: 0
   FileSizes: []
+  Exists: 1
+--- !u!114 &-3639318037971241446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Main/lyx
+  m_EditorClassIdentifier: 
+  Name: lyx
+  Min: 0
+  Max: 1
+  Default: 0
   Exists: 1
 --- !u!114 &-3595503050164356887
 MonoBehaviour:
@@ -340,6 +394,23 @@ MonoBehaviour:
   Max: 1
   Default: 0
   Exists: 1
+--- !u!114 &-3202206330445713696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Main/ly4
+  m_EditorClassIdentifier: 
+  Name: ly4
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 0
 --- !u!114 &-2722083649501170923
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -554,15 +625,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EditorBanks:
   - {fileID: -4219909012258057923}
-  - {fileID: 1603647347970427175}
+  - {fileID: 1673014037825682824}
   EditorEvents:
   - {fileID: 2055209852184302216}
   EditorParameters: []
   MasterBanks:
-  - {fileID: 1603647347970427175}
+  - {fileID: 1673014037825682824}
   StringsBanks:
   - {fileID: -4219909012258057923}
-  stringsBankWriteTime: 637229950769297357
+  stringsBankWriteTime: 637231467626738350
   cacheVersion: 3
 --- !u!114 &189515611792701353
 MonoBehaviour:
@@ -615,7 +686,7 @@ MonoBehaviour:
   Max: 1
   Default: 0
   Exists: 1
---- !u!114 &1429543495623656661
+--- !u!114 &1031792655951082680
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -632,6 +703,23 @@ MonoBehaviour:
   Max: 1
   Default: 0
   Exists: 1
+--- !u!114 &1429543495623656661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Main/ly2
+  m_EditorClassIdentifier: 
+  Name: ly2
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 0
 --- !u!114 &1603647347970427175
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -647,6 +735,26 @@ MonoBehaviour:
   Path: ../../../../../Downloads/main_theme/main_theme/Build/Desktop/Master.bank
   SubDir: 
   lastModified: 637229950769052987
+  LoadResult: 0
+  FileSizes:
+  - Name: 
+    Value: 8364320
+  Exists: 0
+--- !u!114 &1673014037825682824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: ../../../../../Downloads/main_theme/main_theme/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637231467626671018
   LoadResult: 0
   FileSizes:
   - Name: 
@@ -667,19 +775,36 @@ MonoBehaviour:
   Path: event:/Main
   guid: 9f9248511417bf40b1c46065c681c8df
   Banks:
-  - {fileID: 1603647347970427175}
+  - {fileID: 1673014037825682824}
   IsStream: 1
   Is3D: 0
   IsOneShot: 1
   Parameters:
-  - {fileID: -8928615264083831651}
-  - {fileID: 6444917053770315002}
-  - {fileID: 1429543495623656661}
-  - {fileID: -7984662765760731062}
-  - {fileID: 5392782194572228950}
+  - {fileID: -3639318037971241446}
+  - {fileID: 6354977269284134965}
+  - {fileID: 1031792655951082680}
+  - {fileID: 8252722936431929008}
+  - {fileID: -4106964351121052744}
   MinDistance: 0
   MaxDistance: 0
   Length: 153600
+--- !u!114 &2142604960374554311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Main/ly5
+  m_EditorClassIdentifier: 
+  Name: ly5
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 0
 --- !u!114 &2325842537340906842
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -698,6 +823,40 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 1
+--- !u!114 &2374587529602817356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Main/ly2
+  m_EditorClassIdentifier: 
+  Name: ly2
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 0
+--- !u!114 &2474898716160701310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Main/lyx
+  m_EditorClassIdentifier: 
+  Name: lyx
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 0
 --- !u!114 &2841135274083374723
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -867,6 +1026,23 @@ MonoBehaviour:
   Min: 0
   Max: 1
   Default: 0
+  Exists: 0
+--- !u!114 &6354977269284134965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Main/ly3
+  m_EditorClassIdentifier: 
+  Name: ly3
+  Min: 0
+  Max: 1
+  Default: 0
   Exists: 1
 --- !u!114 &6444917053770315002
 MonoBehaviour:
@@ -884,7 +1060,7 @@ MonoBehaviour:
   Min: 0
   Max: 1
   Default: 0
-  Exists: 1
+  Exists: 0
 --- !u!114 &6512831622133956472
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -902,6 +1078,23 @@ MonoBehaviour:
   Max: 1
   Default: 0
   Exists: 1
+--- !u!114 &6600658845569261961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Main/ly3
+  m_EditorClassIdentifier: 
+  Name: ly3
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 0
 --- !u!114 &7342802169874804555
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -983,4 +1176,21 @@ MonoBehaviour:
   FileSizes:
   - Name: Desktop
     Value: 914
+  Exists: 1
+--- !u!114 &8252722936431929008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Main/ly4
+  m_EditorClassIdentifier: 
+  Name: ly4
+  Min: 0
+  Max: 1
+  Default: 0
   Exists: 1

@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class DualOperationsAudioPlayer : MonoBehaviour
 {
+    //public TextAsset X;
+    //public TextAsset Y;
+
     // MANAGING MUSIC
     private static FMOD.Studio.EventInstance Music;
     public string musicPath;
@@ -22,6 +25,9 @@ public class DualOperationsAudioPlayer : MonoBehaviour
 
     void Start()
     {
+       // FMODUnity.RuntimeManager.LoadBank(X);
+        //FMODUnity.RuntimeManager.LoadBank(Y);
+
         Music = FMODUnity.RuntimeManager.CreateInstance(musicPath);
         Music.start();
         Music.release();
