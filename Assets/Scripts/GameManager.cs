@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
 
     [Tooltip("Enter the scene to be loaded when game over")]
     public string reloadSceneNameOnGameOver;
+    public string reloadSceneNameOnWin;
     public float reloadTime = 3;
 
     // Maybe lose scene?
@@ -35,14 +36,14 @@ public class GameManager : MonoBehaviour
         // Lose
         // reload scene?
         loseImage.SetActive(true);
-        StartCoroutine(Reload(loseImage));
+        StartCoroutine(Reload(loseImage, reloadSceneNameOnGameOver));
                     
     }
 
     void WinState()
     {
         winImage.SetActive(true);
-        StartCoroutine(Reload(winImage));
+        StartCoroutine(Reload(winImage, reloadSceneNameOnWin));
     }
 
     void UpdateMap()
@@ -51,10 +52,10 @@ public class GameManager : MonoBehaviour
         // update part of or whole map?
     }
 
-    IEnumerator Reload(GameObject o)
+    IEnumerator Reload(GameObject o, string s)
     {
         yield return new WaitForSeconds(reloadTime);
-        SceneManager.LoadScene(reloadSceneNameOnGameOver);
+        SceneManager.LoadScene(s);
         o.SetActive(false);
     }
 }
