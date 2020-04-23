@@ -6,10 +6,14 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager _instance { get; private set; }
 
-    [Tooltip("Time it takes for scene to be loaded on win/loss")]
+    [Tooltip("Enter the scene to be loaded when game over")]
+    public string reloadSceneNameOnGameOver;
+    public string reloadSceneNameOnWin;
     public float reloadTime = 3;
 
-    [HideInInspector] public int generatorCounter = 0;
+    // Maybe lose scene?
+    public GameObject loseImage;
+    public GameObject winImage;
 
     private void Awake()
     {
@@ -19,20 +23,39 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
     }
 
-   public void LoseState()
+    private void Update()
     {
-        // Lose
-        SceneManager.LoadScene("Lose");
+        if (AlertMeter._instance.IsFull())
+        {
+            LoseState();
+        }
     }
 
-    public void WinState()
+    void LoseState()
     {
-        SceneManager.LoadScene("Win");
+        // Lose
+        // reload scene?
+        loseImage.SetActive(true);
+        StartCoroutine(Reload(loseImage, reloadSceneNameOnGameOver));
+                    
+    }
+
+    void WinState()
+    {
+        winImage.SetActive(true);
+        StartCoroutine(Reload(winImage, reloadSceneNameOnWin));
     }
 
     void UpdateMap()
     {
         // generator interact?
         // update part of or whole map?
+    }
+
+    IEnumerator Reload(GameObject o, string s)
+    {
+        yield return new WaitForSeconds(reloadTime);
+        SceneManager.LoadScene(s);
+        o.SetActive(false);
     }
 }
