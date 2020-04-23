@@ -16,6 +16,23 @@ MonoBehaviour:
   Min: 0
   Max: 1
   Default: 0
+  Exists: 0
+--- !u!114 &-8930603716489155174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Main/ly2
+  m_EditorClassIdentifier: 
+  Name: ly2
+  Min: 0
+  Max: 1
+  Default: 0
   Exists: 1
 --- !u!114 &-8359042903871503816
 MonoBehaviour:
@@ -30,6 +47,40 @@ MonoBehaviour:
   m_Name: parameter:/Main/ly5
   m_EditorClassIdentifier: 
   Name: ly5
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 0
+--- !u!114 &-2826278903959670871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Main/ly4
+  m_EditorClassIdentifier: 
+  Name: ly4
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 1
+--- !u!114 &-2749104464854177739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Main/ly3
+  m_EditorClassIdentifier: 
+  Name: ly3
   Min: 0
   Max: 1
   Default: 0
@@ -51,7 +102,7 @@ MonoBehaviour:
   lastModified: 637231425030370920
   LoadResult: 0
   FileSizes: []
-  Exists: 1
+  Exists: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -66,15 +117,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EditorBanks:
   - {fileID: 6484928650339909775}
-  - {fileID: -1153950686219501290}
+  - {fileID: 6943211105280080463}
   EditorEvents:
   - {fileID: 4609003087103343869}
   EditorParameters: []
   MasterBanks:
-  - {fileID: -1153950686219501290}
+  - {fileID: 6943211105280080463}
   StringsBanks:
   - {fileID: 6484928650339909775}
-  stringsBankWriteTime: 637231425030420965
+  stringsBankWriteTime: 637231791117181130
   cacheVersion: 3
 --- !u!114 &725448874844800598
 MonoBehaviour:
@@ -89,6 +140,23 @@ MonoBehaviour:
   m_Name: parameter:/Main/ly3
   m_EditorClassIdentifier: 
   Name: ly3
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 0
+--- !u!114 &3363231429556645205
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Main/ly5
+  m_EditorClassIdentifier: 
+  Name: ly5
   Min: 0
   Max: 1
   Default: 0
@@ -109,7 +177,7 @@ MonoBehaviour:
   Min: 0
   Max: 1
   Default: 0
-  Exists: 1
+  Exists: 0
 --- !u!114 &4609003087103343869
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -125,16 +193,16 @@ MonoBehaviour:
   Path: event:/Main
   guid: 9f9248511417bf40b1c46065c681c8df
   Banks:
-  - {fileID: -1153950686219501290}
+  - {fileID: 6943211105280080463}
   IsStream: 1
   Is3D: 0
   IsOneShot: 1
   Parameters:
-  - {fileID: -9038365817303107591}
-  - {fileID: 725448874844800598}
-  - {fileID: 6641389634712914810}
-  - {fileID: 3828116334532017244}
-  - {fileID: -8359042903871503816}
+  - {fileID: 7534355993441982717}
+  - {fileID: -2749104464854177739}
+  - {fileID: -8930603716489155174}
+  - {fileID: -2826278903959670871}
+  - {fileID: 3363231429556645205}
   MinDistance: 0
   MaxDistance: 0
   Length: 153600
@@ -152,7 +220,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: Assets/Audio/Build 0/Master.strings.bank
   SubDir: 
-  lastModified: 637231425030420965
+  lastModified: 637231791117181130
   LoadResult: 0
   FileSizes:
   - Name: 
@@ -171,6 +239,41 @@ MonoBehaviour:
   m_Name: parameter:/Main/ly2
   m_EditorClassIdentifier: 
   Name: ly2
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 0
+--- !u!114 &6943211105280080463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Audio/Build 0/Master.bank
+  SubDir: 
+  lastModified: 637231791113907353
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
+--- !u!114 &7534355993441982717
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Main/lyx
+  m_EditorClassIdentifier: 
+  Name: lyx
   Min: 0
   Max: 1
   Default: 0

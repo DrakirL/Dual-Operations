@@ -19,7 +19,7 @@ public class GetPlayer : NetworkBehaviour
         {
             try
             {
-                canvas = transform.FindChild("canvas").gameObject;
+                canvas = transform.Find("canvas").gameObject;
                 //canvasText = canvas.transform.FindChild("tutorial").GetComponent<Text>();
                 canvas.active = true;
             }
@@ -88,12 +88,12 @@ public class GetPlayer : NetworkBehaviour
 
     public void addCanvasText(string text)
     {
-        canvas.transform.FindChild("tutorial").GetComponent<Text>().text = text;
+        canvas.transform.Find("tutorial").GetComponent<Text>().text = text;
         //canvasText.text = text;
     }
     public void removeCanvasText()
     {
-        canvas.transform.FindChild("tutorial").GetComponent<Text>().text = "";
+        canvas.transform.Find("tutorial").GetComponent<Text>().text = "";
         //canvasText.text = "";
     }
 }
