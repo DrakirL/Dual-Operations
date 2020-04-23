@@ -57,6 +57,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a80b2857f20da9649be7b36ce9b3b027, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   allButtons:
   - {fileID: 4026340321091351824}
   - {fileID: 3405447041488984924}
@@ -73,6 +75,7 @@ MonoBehaviour:
   yOffset: 0
   xOffset: 60
   cameraImage: {fileID: 4681697570580582377}
+  hackerScript: {fileID: 913437424240850891}
 --- !u!1 &801867764438713633
 GameObject:
   m_ObjectHideFlags: 0
@@ -160,6 +163,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fd7b6856782c3247863c8f5b753be17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   HBH: {fileID: 0}
   preHackOptions:
   - optionText: Hack
@@ -198,7 +203,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 4834954574940950560}
-          m_MethodName: shutDownCamera
+          m_MethodName: RpcShutDownCamera
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -210,6 +215,7 @@ MonoBehaviour:
           m_CallState: 2
   hackableNumber: 4
   isHacked: 0
+  hackerS: {fileID: 0}
   isHoverOverThisButton: 0
 --- !u!114 &2745214905363827459
 MonoBehaviour:
@@ -341,6 +347,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fd7b6856782c3247863c8f5b753be17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   HBH: {fileID: 0}
   preHackOptions:
   - optionText: Hack
@@ -379,7 +387,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 8368233018973443982}
-          m_MethodName: shutDownCamera
+          m_MethodName: RpcShutDownCamera
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -391,6 +399,7 @@ MonoBehaviour:
           m_CallState: 2
   hackableNumber: 2
   isHacked: 0
+  hackerS: {fileID: 0}
   isHoverOverThisButton: 0
 --- !u!114 &4303783037705429062
 MonoBehaviour:
@@ -498,7 +507,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: 920fc11e36d89cb4a9ae6231fdafab63, type: 3}
+  m_Texture: {fileID: 2800000, guid: 6b7a7333b5af1094da0b135fc7e48608, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -712,6 +721,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fd7b6856782c3247863c8f5b753be17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   HBH: {fileID: 0}
   preHackOptions:
   - optionText: Hack
@@ -747,6 +758,7 @@ MonoBehaviour:
           m_CallState: 2
   hackableNumber: 0
   isHacked: 0
+  hackerS: {fileID: 0}
   isHoverOverThisButton: 0
 --- !u!114 &4651189423762694193
 MonoBehaviour:
@@ -878,6 +890,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fd7b6856782c3247863c8f5b753be17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   HBH: {fileID: 0}
   preHackOptions:
   - optionText: Hack
@@ -916,7 +930,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 3405447041488984924}
-          m_MethodName: shutDownCamera
+          m_MethodName: RpcShutDownCamera
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -928,6 +942,7 @@ MonoBehaviour:
           m_CallState: 2
   hackableNumber: 1
   isHacked: 0
+  hackerS: {fileID: 0}
   isHoverOverThisButton: 0
 --- !u!114 &112740336198917791
 MonoBehaviour:
@@ -1014,7 +1029,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.31132078, g: 0.31132078, b: 0.31132078, a: 0}
+  m_BackGroundColor: {r: 0.46226418, g: 0.46226418, b: 0.46226418, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -1089,7 +1104,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 127.9, y: -58.9}
+  m_AnchoredPosition: {x: 127.899994, y: -58.899994}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3019637547297819367
@@ -1142,9 +1157,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4765575243530466456}
   - component: {fileID: 3413886356290450347}
-  - component: {fileID: 242286823012149861}
   - component: {fileID: 4026340321091351824}
   - component: {fileID: 845459095425056096}
+  - component: {fileID: 7497676447072276812}
   m_Layer: 5
   m_Name: Camera0
   m_TagString: Untagged
@@ -1159,17 +1174,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6865858572454286231}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0.38012475, w: 0.9249353}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.28841, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7057654060143632311}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -44.683002}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -54, y: -116}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: 92.7, y: -85.3}
+  m_SizeDelta: {x: 207, y: 235}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3413886356290450347
 CanvasRenderer:
@@ -1179,34 +1194,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6865858572454286231}
   m_CullTransparentMesh: 0
---- !u!114 &242286823012149861
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6865858572454286231}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 97979b32dbf326d408c8887ae74e33c3, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
 --- !u!114 &4026340321091351824
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1219,6 +1206,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fd7b6856782c3247863c8f5b753be17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   HBH: {fileID: 0}
   preHackOptions:
   - optionText: Hack
@@ -1257,7 +1246,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 4026340321091351824}
-          m_MethodName: shutDownCamera
+          m_MethodName: RpcShutDownCamera
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -1269,6 +1258,7 @@ MonoBehaviour:
           m_CallState: 2
   hackableNumber: 0
   isHacked: 0
+  hackerS: {fileID: 0}
   isHoverOverThisButton: 0
 --- !u!114 &845459095425056096
 MonoBehaviour:
@@ -1313,6 +1303,34 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &7497676447072276812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6865858572454286231}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 9014f8b25f2277443a4d8202e9790c50, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &7256187081044291684
 GameObject:
   m_ObjectHideFlags: 0
@@ -1347,7 +1365,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 127.9, y: -171.1}
+  m_AnchoredPosition: {x: 127.899994, y: -171.1}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9201512216942583272
@@ -1477,6 +1495,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fd7b6856782c3247863c8f5b753be17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   HBH: {fileID: 0}
   preHackOptions:
   - optionText: Hack
@@ -1515,7 +1535,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 5408287234477374}
-          m_MethodName: shutDownCamera
+          m_MethodName: RpcShutDownCamera
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -1527,6 +1547,7 @@ MonoBehaviour:
           m_CallState: 2
   hackableNumber: 3
   isHacked: 0
+  hackerS: {fileID: 0}
   isHoverOverThisButton: 0
 --- !u!114 &6770778883357353856
 MonoBehaviour:
@@ -1728,6 +1749,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fd7b6856782c3247863c8f5b753be17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   HBH: {fileID: 0}
   preHackOptions:
   - optionText: Hack
@@ -1766,7 +1789,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 4820523545665693339}
-          m_MethodName: shutDownCamera
+          m_MethodName: RpcShutDownCamera
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -1778,6 +1801,7 @@ MonoBehaviour:
           m_CallState: 2
   hackableNumber: 5
   isHacked: 0
+  hackerS: {fileID: 0}
   isHoverOverThisButton: 0
 --- !u!114 &3175413463780849605
 MonoBehaviour:
@@ -1874,7 +1898,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 5958069583309489978}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using Mirror;
 
 [System.Serializable]
 public struct HackOptions
@@ -11,7 +12,7 @@ public struct HackOptions
     public UnityEvent optionFunctions;
 }
 
-public class HackerButtonHandler : MonoBehaviour
+public class HackerButtonHandler : NetworkBehaviour
 {
     [Tooltip("this is used to connect all buttons to this script")]
     [SerializeField] HackerButton[] allButtons;
@@ -23,6 +24,7 @@ public class HackerButtonHandler : MonoBehaviour
     [SerializeField] float yOffset;
     [SerializeField] float xOffset;
     [SerializeField] RawImage cameraImage;
+    [SerializeField] HackerScript hackerScript;
     HackOptions currentOption;
     bool isMenuUp = false;
     bool isCameraup = false;
@@ -34,6 +36,7 @@ public class HackerButtonHandler : MonoBehaviour
         for (int i = 0; i < allButtons.Length; i++)
         {
             allButtons[i].HBH = this;
+            allButtons[i].hackerS = hackerScript; 
         }        
     }
     // Update is called once per frame
