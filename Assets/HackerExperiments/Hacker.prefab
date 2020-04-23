@@ -57,6 +57,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a80b2857f20da9649be7b36ce9b3b027, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   allButtons:
   - {fileID: 4026340321091351824}
   - {fileID: 3405447041488984924}
@@ -73,6 +75,7 @@ MonoBehaviour:
   yOffset: 0
   xOffset: 60
   cameraImage: {fileID: 4681697570580582377}
+  hackerScript: {fileID: 913437424240850891}
 --- !u!1 &801867764438713633
 GameObject:
   m_ObjectHideFlags: 0
@@ -160,6 +163,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fd7b6856782c3247863c8f5b753be17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   HBH: {fileID: 0}
   preHackOptions:
   - optionText: Hack
@@ -198,7 +203,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 4834954574940950560}
-          m_MethodName: shutDownCamera
+          m_MethodName: RpcShutDownCamera
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -210,6 +215,7 @@ MonoBehaviour:
           m_CallState: 2
   hackableNumber: 4
   isHacked: 0
+  hackerS: {fileID: 0}
   isHoverOverThisButton: 0
 --- !u!114 &2745214905363827459
 MonoBehaviour:
@@ -341,6 +347,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fd7b6856782c3247863c8f5b753be17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   HBH: {fileID: 0}
   preHackOptions:
   - optionText: Hack
@@ -379,7 +387,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 8368233018973443982}
-          m_MethodName: shutDownCamera
+          m_MethodName: RpcShutDownCamera
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -391,6 +399,7 @@ MonoBehaviour:
           m_CallState: 2
   hackableNumber: 2
   isHacked: 0
+  hackerS: {fileID: 0}
   isHoverOverThisButton: 0
 --- !u!114 &4303783037705429062
 MonoBehaviour:
@@ -712,6 +721,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fd7b6856782c3247863c8f5b753be17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   HBH: {fileID: 0}
   preHackOptions:
   - optionText: Hack
@@ -747,6 +758,7 @@ MonoBehaviour:
           m_CallState: 2
   hackableNumber: 0
   isHacked: 0
+  hackerS: {fileID: 0}
   isHoverOverThisButton: 0
 --- !u!114 &4651189423762694193
 MonoBehaviour:
@@ -878,6 +890,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fd7b6856782c3247863c8f5b753be17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   HBH: {fileID: 0}
   preHackOptions:
   - optionText: Hack
@@ -916,7 +930,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 3405447041488984924}
-          m_MethodName: shutDownCamera
+          m_MethodName: RpcShutDownCamera
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -928,6 +942,7 @@ MonoBehaviour:
           m_CallState: 2
   hackableNumber: 1
   isHacked: 0
+  hackerS: {fileID: 0}
   isHoverOverThisButton: 0
 --- !u!114 &112740336198917791
 MonoBehaviour:
@@ -1191,6 +1206,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fd7b6856782c3247863c8f5b753be17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   HBH: {fileID: 0}
   preHackOptions:
   - optionText: Hack
@@ -1229,7 +1246,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 4026340321091351824}
-          m_MethodName: shutDownCamera
+          m_MethodName: RpcShutDownCamera
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -1241,6 +1258,7 @@ MonoBehaviour:
           m_CallState: 2
   hackableNumber: 0
   isHacked: 0
+  hackerS: {fileID: 0}
   isHoverOverThisButton: 0
 --- !u!114 &845459095425056096
 MonoBehaviour:
@@ -1477,6 +1495,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fd7b6856782c3247863c8f5b753be17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   HBH: {fileID: 0}
   preHackOptions:
   - optionText: Hack
@@ -1515,7 +1535,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 5408287234477374}
-          m_MethodName: shutDownCamera
+          m_MethodName: RpcShutDownCamera
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -1527,6 +1547,7 @@ MonoBehaviour:
           m_CallState: 2
   hackableNumber: 3
   isHacked: 0
+  hackerS: {fileID: 0}
   isHoverOverThisButton: 0
 --- !u!114 &6770778883357353856
 MonoBehaviour:
@@ -1728,6 +1749,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fd7b6856782c3247863c8f5b753be17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   HBH: {fileID: 0}
   preHackOptions:
   - optionText: Hack
@@ -1766,7 +1789,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 4820523545665693339}
-          m_MethodName: shutDownCamera
+          m_MethodName: RpcShutDownCamera
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -1778,6 +1801,7 @@ MonoBehaviour:
           m_CallState: 2
   hackableNumber: 5
   isHacked: 0
+  hackerS: {fileID: 0}
   isHoverOverThisButton: 0
 --- !u!114 &3175413463780849605
 MonoBehaviour:
