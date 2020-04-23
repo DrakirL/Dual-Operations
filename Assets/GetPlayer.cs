@@ -43,13 +43,20 @@ public class GetPlayer : NetworkBehaviour
         {
             AlertMeter._instance.AddAlert(1);
         }
+    
     }
 
     public GameObject getPlayer()
     {
         return this.gameObject;
     }
-    
+    public void incAlertFromCamera(float value)
+    {
+        if (isClientOnly)
+        {
+            AlertMeter._instance.AddAlert(value);
+        }
+    }
     public void addAlertServer(float value)
     {
         CmdAddAlertOnServer(value);
@@ -59,14 +66,15 @@ public class GetPlayer : NetworkBehaviour
     {
         AlertMeter._instance.alertValue = Mathf.Clamp(AlertMeter._instance.alertValue + value, 0, 100);
         AlertMeter._instance.timeStamp = Time.time;
-        RpcAddAlertOnClient(AlertMeter._instance.alertValue, AlertMeter._instance.timeStamp);
+        AlertMeter._instance.tmpCounter = 0;
+        //RpcAddAlertOnClient(AlertMeter._instance.alertValue, AlertMeter._instance.timeStamp);
     }
-    [ClientRpc]
-    private void RpcAddAlertOnClient(float newAlerValue, float newTimeStamp)
-    {
-        AlertMeter._instance.alertValue = newAlerValue;// Mathf.Clamp(AlertMeter._instance.alertValue + value, 0, 100);
-        AlertMeter._instance.timeStamp = newTimeStamp;// Time.time;
-    }
+   // [ClientRpc]
+    //private void RpcAddAlertOnClient(float newAlerValue, float newTimeStamp)
+    //{
+     //   AlertMeter._instance.alertValue = newAlerValue;// Mathf.Clamp(AlertMeter._instance.alertValue + value, 0, 100);
+      //  AlertMeter._instance.timeStamp = newTimeStamp;// Time.time;
+    //}
 
     
 
