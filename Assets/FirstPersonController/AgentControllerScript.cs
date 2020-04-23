@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-using Mirror;
-
+//using Mirror;
 
 public class AgentControllerScript : MonoBehaviour
 {
@@ -24,7 +23,6 @@ public class AgentControllerScript : MonoBehaviour
 	
 	public float moveSpeed = 3;
 	public float gravity = 10;
-	//public float maxSlopeAngle = 25f;
 	
 	public LayerMask colMask;
 
@@ -188,7 +186,6 @@ public class AgentControllerScript : MonoBehaviour
 			for(int i = 0; i < v.Length;i++)
 			{
 				float n = Vector3.Dot(v[i] - velocity, hit.normal);
-				Debug.Log(n);
 				
 				if(n > 0.00f) 
 				{
@@ -290,100 +287,98 @@ public class AgentControllerScript : MonoBehaviour
 		//--------------------------
 		if(ColCorrect)
 		{
-		if(Physics.Raycast(uRightRay, out hit, distH, colMask,QueryTriggerInteraction.Ignore))
-		{
-			Mesh mesh = hit.transform.GetComponent<MeshFilter>().mesh;
-			Vector3[] v = mesh.vertices;
-
-			for(int i = 0; i < v.Length;i++)
+			if(Physics.Raycast(uRightRay, out hit, distH, colMask,QueryTriggerInteraction.Ignore))
 			{
-				float n = Vector3.Dot(v[i] - velocity, hit.normal);
+				Mesh mesh = hit.transform.GetComponent<MeshFilter>().mesh;
+				Vector3[] v = mesh.vertices;
 
-				if(n > 0.00f || n < 0.00f)
+				for(int i = 0; i < v.Length;i++)
 				{
-					if(hit.distance < distH)
-					{
-						transform.position = Vector3.Lerp(transform.position, hit.point + (-transform.right) * distH, posRecover * Time.fixedDeltaTime);
-					}
-					
-					break;
-				}
-			}		
-		}
-		
-		if(Physics.Raycast(uLeftRay, out hit, distH, colMask,QueryTriggerInteraction.Ignore))
-		{
-			Mesh mesh = hit.transform.GetComponent<MeshFilter>().mesh;
-			Vector3[] v = mesh.vertices;	
+					float n = Vector3.Dot(v[i] - velocity, hit.normal);
 
-			for(int i = 0; i < v.Length;i++)
-			{
-				float n = Vector3.Dot(v[i] - velocity, hit.normal);
-
-				if(n > 0.00f || n < 0.00f)
-				{
-					if(hit.distance < distH)
+					if(n > 0.00f || n < 0.00f)
 					{
-						transform.position = Vector3.Lerp(transform.position, hit.point + (transform.right) * distH, posRecover * Time.fixedDeltaTime);
-					}
-					
-					break;
-				}
-			}		
-		}
-		
-		if(Physics.Raycast(forwardRightRay, out hit, distH, colMask,QueryTriggerInteraction.Ignore)||
-		Physics.Raycast(forwardRightRay2, out hit, distH, colMask,QueryTriggerInteraction.Ignore))
-		{
-			Mesh mesh = hit.transform.GetComponent<MeshFilter>().mesh;
-			Vector3[] v = mesh.vertices;	
-
-			for(int i = 0; i < v.Length;i++)
-			{
-				float n = Vector3.Dot(v[i] - velocity, hit.normal);
-
-				if(n > 0.00f || n < 0.00f)
-				{
-					velocity.x = 0;
-					//velocity.z = 0;
-					/*if(hit.distance < distH)
-					{
-						transform.position = Vector3.Lerp(transform.position, hit.point + (transform.right) * distH, posRecover * Time.fixedDeltaTime);
-					}*/
-					
-					break;
-				}
-			}		
-		}
-		
-		/*if(Physics.Raycast(downForwardRay, out hit, distV - 0.05f, colMask,QueryTriggerInteraction.Ignore))
-		{
-			Mesh mesh = hit.transform.GetComponent<MeshFilter>().mesh;
-			Vector3[] v = mesh.vertices;
-			
-			//float n2 = (Vector3.Dot(hit.normal,Vector3.up));
-			//float ncos = Mathf.Acos(n2);
-			//float ang = (Mathf.Rad2Deg*ncos);	
-			
-			for(int i = 0; i < v.Length;i++)
-			{
-				float n = Vector3.Dot(v[i] - velocity, hit.normal);
-			
-				if(n > 0.00f) 
-				{
-					if(hit.distance < distV)
-					{
-						transform.position = Vector3.Lerp(transform.position, hit.point + Vector3.up * distV, posRecover * Time.fixedDeltaTime);
-					}
+						if(hit.distance < distH)
+						{
+							transform.position = Vector3.Lerp(transform.position, hit.point + (-transform.right) * distH, posRecover * Time.fixedDeltaTime);
+						}
 						
-					break;
-				}
-	
+						break;
+					}
+				}		
 			}
-		}*/
-		}
+			
+			if(Physics.Raycast(uLeftRay, out hit, distH, colMask,QueryTriggerInteraction.Ignore))
+			{
+				Mesh mesh = hit.transform.GetComponent<MeshFilter>().mesh;
+				Vector3[] v = mesh.vertices;	
+
+				for(int i = 0; i < v.Length;i++)
+				{
+					float n = Vector3.Dot(v[i] - velocity, hit.normal);
+
+					if(n > 0.00f || n < 0.00f)
+					{
+						if(hit.distance < distH)
+						{
+							transform.position = Vector3.Lerp(transform.position, hit.point + (transform.right) * distH, posRecover * Time.fixedDeltaTime);
+						}
+						
+						break;
+					}
+				}		
+			}
+			
+			if(Physics.Raycast(forwardRightRay, out hit, distH, colMask,QueryTriggerInteraction.Ignore)||
+			Physics.Raycast(forwardRightRay2, out hit, distH, colMask,QueryTriggerInteraction.Ignore))
+			{
+				Mesh mesh = hit.transform.GetComponent<MeshFilter>().mesh;
+				Vector3[] v = mesh.vertices;	
+
+				for(int i = 0; i < v.Length;i++)
+				{
+					float n = Vector3.Dot(v[i] - velocity, hit.normal);
+
+					if(n > 0.00f || n < 0.00f)
+					{
+						velocity.x = 0;
+						//velocity.z = 0;
+						/*if(hit.distance < distH)
+						{
+							transform.position = Vector3.Lerp(transform.position, hit.point + (transform.right) * distH, posRecover * Time.fixedDeltaTime);
+						}*/
+						
+						break;
+					}
+				}		
+			}
+			
+			/*if(Physics.Raycast(downForwardRay, out hit, distV - 0.05f, colMask,QueryTriggerInteraction.Ignore))
+			{
+				Mesh mesh = hit.transform.GetComponent<MeshFilter>().mesh;
+				Vector3[] v = mesh.vertices;
+				
+				//float n2 = (Vector3.Dot(hit.normal,Vector3.up));
+				//float ncos = Mathf.Acos(n2);
+				//float ang = (Mathf.Rad2Deg*ncos);	
+				
+				for(int i = 0; i < v.Length;i++)
+				{
+					float n = Vector3.Dot(v[i] - velocity, hit.normal);
+				
+					if(n > 0.00f) 
+					{
+						if(hit.distance < distV)
+						{
+							transform.position = Vector3.Lerp(transform.position, hit.point + Vector3.up * distV, posRecover * Time.fixedDeltaTime);
+						}
+							
+						break;
+					}
 		
-		//------------------------
+				}
+			}*/
+		}
 	}
 		
 	//Doesn't need to be a function, but is a nice abstraction
@@ -394,11 +389,12 @@ public class AgentControllerScript : MonoBehaviour
 		
 	void Update()
 	{
+		//if(isLocalPlayer)
 		MouseLook();
 	}
 	
-    void FixedUpdate()
-    {
+	void mainLoopFunction()
+	{
 		movementDirection = Vector3.zero;
 		
 		Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"),Input.GetAxisRaw("Vertical"));
@@ -407,12 +403,12 @@ public class AgentControllerScript : MonoBehaviour
 
 		
 		//Only for testing, not used in final version
-		if(Input.GetKeyDown(KeyCode.Space))
-		{
+		//if(Input.GetKeyDown(KeyCode.Space))
+		//{
 			//cameraView.transform.position = Vector3.Lerp(cameraView.transform.position,
 				//							cameraView.transform.position + new Vector3(0,-1f,0), Time.fixedDeltaTime);
 		//	movementDirection.y = jumpSpeed;
-		}
+		//}
 
 		CollisionDetection(ref movementDirection, input.y,input.x,true);
 
@@ -422,5 +418,11 @@ public class AgentControllerScript : MonoBehaviour
 		
 		CollisionDetection(ref actorVelocity, 0,0,false);
 		Move(actorVelocity * Time.fixedDeltaTime);
+	}
+	
+    void FixedUpdate()
+    {
+		//if(isLocalPlayer)
+		 mainLoopFunction();
     }
 }
