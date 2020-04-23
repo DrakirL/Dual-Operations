@@ -46,7 +46,15 @@ public class AlertMeter : NetworkBehaviour
 
     private void Update()
     {
-        UpdateMeter(); 
+        UpdateMeter();
+        // For test purpose
+        if (Input.GetKeyDown(KeyCode.F1))
+        {
+            AddAlert(20f);
+        }
+
+        if (IsFull())
+            GameManager._instance.LoseState();
     }
 
     void UpdateMeter()

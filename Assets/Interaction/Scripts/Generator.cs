@@ -11,9 +11,7 @@ public class Generator : MonoBehaviour, IInteractable
 
     public void GetInteracted()
     {
-        // Do generator stuff
-        // Eventually use bool in another script to do generator stuff
-
+        GameManager._instance.WinState();
         activated = true;    
     }
 
