@@ -1,18 +1,33 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Mirror;
 
 public class GetPlayer : NetworkBehaviour
 {
     private static GetPlayer instance;
     public static GetPlayer Instance { get { return instance; } }
+    public GameObject canvas;
+    public Text canvasText;
     // Use this for initialization
     void Start()
     {
-        // transform.position = startPos;
         transform.position = spawnTransform.Instance.transform.position;
         transform.rotation = spawnTransform.Instance.transform.rotation;
+        if(isLocalPlayer)
+        {
+            try
+            {
+                canvas = transform.FindChild("canvas").gameObject;
+                //canvasText = canvas.transform.FindChild("tutorial").GetComponent<Text>();
+                canvas.active = true;
+            }
+            catch
+            {
+                Debug.LogError("Agent don't seems to have a canvas with the name canvas, that the name is canvas is crucial!");
+            }
+        }
 
         if (instance == null)
         {
@@ -20,58 +35,65 @@ public class GetPlayer : NetworkBehaviour
         }
     }
 
-    float alertMeterValue = 0;
     private void Update()
     {
         //this works for server but not for client
-        CmdGetValueOfMeter();
-        Debug.LogWarning(isServer + " : " + alertMeterValue);
+        Debug.LogWarning(isServer + " : " + AlertMeter._instance.alertValue);
+        if(Input.GetKeyDown(KeyCode.G))
+        {
+            AlertMeter._instance.AddAlert(1);
+        }
     }
 
     public GameObject getPlayer()
     {
         return this.gameObject;
     }
+    
+    public void addAlertServer(float value)
+    {
+        CmdAddAlertOnServer(value);
+    }
+    [Command]
+    private void CmdAddAlertOnServer(float value)
+    {
+        AlertMeter._instance.alertValue = Mathf.Clamp(AlertMeter._instance.alertValue + value, 0, 100);
+        AlertMeter._instance.timeStamp = Time.time;
+        RpcAddAlertOnClient(AlertMeter._instance.alertValue, AlertMeter._instance.timeStamp);
+    }
+    [ClientRpc]
+    private void RpcAddAlertOnClient(float newAlerValue, float newTimeStamp)
+    {
+        AlertMeter._instance.alertValue = newAlerValue;// Mathf.Clamp(AlertMeter._instance.alertValue + value, 0, 100);
+        AlertMeter._instance.timeStamp = newTimeStamp;// Time.time;
+    }
+
+    
+
+    //door open functions
     public void openDoorServer(string name)
     {
         CmdOpendorOnServer(name);
     }
-    //alert meter functions
-    [Command]
-    private void CmdGetValueOfMeter()
-    {
-            alertMeterValue = AlertMeter._instance.getAlert();   
-    }
-    [ClientRpc]
-    private void RpcGetValueClient()
-    {
-        alertMeterValue = AlertMeter._instance.getAlert();
-    }
-
-
-    //door open functions
     [Command]
     private void CmdOpendorOnServer(string name)
     {
-        //door.RpcPlayOpenAnimation();
         RpcPlayOpenAnimation(name);
-        Debug.Log("2");
     }
     [ClientRpc]
     private void RpcPlayOpenAnimation(string name)
     {
         GameObject.Find(name).GetComponent<SlideDoor>().RpcPlayOpenAnimation();
-        Debug.Log("2 " + name);
     }
-        /*public void openDoorServer(SlideDoor door)
-        {
-            CmdOpendorOnServer(door);
-        }
 
-        [Command]
-        private void CmdOpendorOnServer(SlideDoor door)
-        {
-            door.RpcPlayOpenAnimation();
-            Debug.Log("2");
-        }*/
+    public void addCanvasText(string text)
+    {
+        canvas.transform.FindChild("tutorial").GetComponent<Text>().text = text;
+        //canvasText.text = text;
     }
+    public void removeCanvasText()
+    {
+        canvas.transform.FindChild("tutorial").GetComponent<Text>().text = "";
+        //canvasText.text = "";
+    }
+}
