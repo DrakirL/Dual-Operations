@@ -2,14 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using Mirror;
 
-public class HackerButton : MonoBehaviour
+public class HackerButton : NetworkBehaviour
 {
    [HideInInspector] public HackerButtonHandler HBH;
     [SerializeField] HackOptions[] preHackOptions;
     [SerializeField] HackOptions[] postHackOptions;
     [SerializeField] int hackableNumber;
     [SerializeField] bool isHacked = false;
+   [HideInInspector] public HackerScript hackerS;
 
     [SerializeField] bool isHoverOverThisButton = false;
     
@@ -49,8 +51,11 @@ public class HackerButton : MonoBehaviour
     {
         HBH.turnOnRadio(hackableNumber);
     }
-    public void shutDownCamera()
+    
+   // [ClientRpc]
+    public void RpcShutDownCamera()
     {
-        CameraManager.Instance.shutDownCamera(hackableNumber);
+        hackerS.RpcShutDownCamera(hackableNumber);
+        //CameraManager.Instance.shutDownCamera(hackableNumber);
     }
 }

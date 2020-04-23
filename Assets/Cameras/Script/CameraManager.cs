@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Mirror;
 
 [System.Serializable]
 public struct CameraStruct
@@ -17,7 +18,7 @@ public struct RadioStruct
     public radioInterract radio;
 }
 
-public class CameraManager : MonoBehaviour
+public class CameraManager : NetworkBehaviour
 {
     private static CameraManager instance;
     public static CameraManager Instance { get { return instance; } }
