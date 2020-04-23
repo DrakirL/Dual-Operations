@@ -121,6 +121,7 @@ public class CameraManager : MonoBehaviour
         //use this function by typing something like this
         return cameraStruct[index].cameraView;
     }
+
     public void shutDownCamera(int index)
     {
         if (cameraStruct[index].camera.cameraActive)
