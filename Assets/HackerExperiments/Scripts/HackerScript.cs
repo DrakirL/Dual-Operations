@@ -9,6 +9,8 @@ namespace Mirror
     {
         [SerializeField] Text missionTime; 
         public GameObject PlayerCanvasObject;
+        
+
         // Start is called before the first frame update
         void Start()
         {
@@ -36,6 +38,11 @@ namespace Mirror
             }
 
             missionTime.text = timeString;
+        }
+        [ClientRpc]
+        public void RpcShutDownCamera(int hackableNumber)
+        {
+            CameraManager.Instance.shutDownCamera(hackableNumber);
         }
     }
 }

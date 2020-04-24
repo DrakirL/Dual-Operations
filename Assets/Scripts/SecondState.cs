@@ -36,7 +36,7 @@ public class SecondState : State<AI>
     IEnumerator lol(AI _owner)
     {
         yield return new WaitForSeconds(3);
-        if(_owner.dead == true)
+        if(_owner.dead == false)
         {
             Debug.Log("fyfan vad död du är sopa lol xd");
         }
