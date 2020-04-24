@@ -149,7 +149,7 @@ public class AgentControllerScript : NetworkBehaviour
 		RaycastHit hit;
 		
 		//float dist = (GetComponent<SphereCollider>().radius)*0.5f;
-		float distH = (GetComponent<CapsuleCollider>().radius)*0.5f;
+		float distH = (GetComponent<CapsuleCollider>().radius);
 		float distV = (GetComponent<CapsuleCollider>().height)*0.5f;
 		
 		Ray downRay =  new Ray (transform.position, Vector3.down);

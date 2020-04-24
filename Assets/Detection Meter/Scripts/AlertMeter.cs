@@ -22,11 +22,12 @@ public class AlertMeter : NetworkBehaviour
     [SerializeField] float alertIncreaseValue = 1f;
 
     [Space(10)]
-   [SyncVar] [SerializeField] float alertValue;
+    //[SyncVar(hook = nameof(setV))]
+    [SyncVar] [SerializeField] public float alertValue;
 
     [SerializeField] bool detected;
     float alertTimeStamp;
-    float timeStamp;
+   [SyncVar] [HideInInspector] public float timeStamp;
 
     private void Awake()
     {
@@ -111,8 +112,16 @@ public class AlertMeter : NetworkBehaviour
     // Add alert value to the meter
     public void AddAlert(float value)
     {
-        alertValue = Mathf.Clamp(value + alertValue, 0, 100);
-        timeStamp = Time.time;
+        GetPlayer.Instance.addAlertServer(value);
+        //UseAddAlert(value);
+       /*if(isServer)
+        {
+            UseAddAlert(value);
+        }
+        else
+        {
+            GetPlayer.Instance.addAlertServer(value);
+        }*/
     }
     public float getAlert()
     {
@@ -121,4 +130,11 @@ public class AlertMeter : NetworkBehaviour
 
     // Check if meter has reached the limit
     public bool IsFull() => alertValue >= 100f ? true : false;
+
+    public void setV(System.Single oldValue, System.Single newValue)
+    {
+        GetPlayer.Instance.addAlertServer(newValue);
+        oldValue = newValue;
+        alertValue = newValue;
+    }
 }
