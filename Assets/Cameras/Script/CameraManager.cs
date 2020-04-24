@@ -87,7 +87,9 @@ public class CameraManager : NetworkBehaviour
                 {
                     //TYPE HERE WHAT SHOULD HAPPEN WHEN CAMERA DETECT AGENT
                     //Debug.Log(alertTimes[i].gameObject.name + " has spoted the agent!");
-                    AlertMeter._instance.AddAlert(alertStateInc/2);
+
+                    GetPlayer.Instance.incAlertFromCamera(alertStateInc);
+                //AlertMeter._instance.AddAlert(alertStateInc);
                 }
             }
         }

@@ -2,13 +2,16 @@
 using UnityEngine.UI;
 using TMPro;
 using Mirror;
+//olika beroende server/klient
+//upptäckt boolean
+//
 
 public class AlertMeter : NetworkBehaviour
 {
     public static AlertMeter _instance { get; private set; }
 
-    [HideInInspector] public TextMeshProUGUI text;
-    [HideInInspector] public Slider slider;
+   public TextMeshProUGUI text;
+   public Slider slider;
 
     [Tooltip("Time in seconds for meter to start decrease")]
     [SerializeField] float alertDecreaseTimer = 3f;
@@ -27,35 +30,43 @@ public class AlertMeter : NetworkBehaviour
 
     [SerializeField] bool detected;
     float alertTimeStamp;
-   [SyncVar] [HideInInspector] public float timeStamp;
+   /*[SyncVar]*/ [HideInInspector] public float timeStamp;
+   public float tmpCounter = 0;
 
     private void Awake()
     {
         if (_instance == null)
             _instance = this;
         else
+        {
             Destroy(gameObject);
+            Debug.LogError("more than one AlertMeter detected, don't ignore this error");
+        }
     }
 
     private void Start()
     {
-        text = GetComponentInChildren<TextMeshProUGUI>();
-        slider = GetComponent<Slider>();
+        //text = GetComponentInChildren<TextMeshProUGUI>();
+        //slider = GetComponent<Slider>();
 
         SetDetected(false);
     }
 
     private void Update()
     {
-        UpdateMeter(); 
-    }
-
-    void UpdateMeter()
-    {
         // Update value to text
         slider.value = alertValue;
         text.text = alertValue.ToString("0") + "/100";
+        if (NetworkServer.localConnection.connectionId == 0)
+        {
+            UpdateMeter();
+            tmpCounter += Time.deltaTime;
+        }
+    }
 
+
+    void UpdateMeter()
+    {       
         if(detected)
             StartMeter();
         else
@@ -71,6 +82,7 @@ public class AlertMeter : NetworkBehaviour
             {
                 timeStamp += Time.time + alertIncreaseSpeed;
                 AddAlert(alertIncreaseValue);
+                tmpCounter = 0;
             }
             else if (alertValue >= 100f)
             {
@@ -81,19 +93,25 @@ public class AlertMeter : NetworkBehaviour
     }
     void StopMeter()
     {
-        if (Time.time > alertTimeStamp)
+        if(tmpCounter > alertDecreaseTimer)
+        {
+            alertValue = Mathf.Clamp(alertValue-alertDecreaseValue, 0, 100);
+            tmpCounter--; 
+        }
+     
+        /*if (Time.time > alertTimeStamp)
         {
             // Increase the alert meter after set time
             if (Time.time > timeStamp + alertDecreaseSpeed && alertValue >= 0)
             {
                 timeStamp += Time.time + alertDecreaseSpeed;
-                AddAlert(-alertDecreaseValue);
+                  AddAlert(-alertDecreaseValue);
             }
             else if (alertValue <= 0f)
             {
                 alertValue = 0f;
             }
-        }
+        }*/
     }
 
     public void SetDetected(bool boolToSet)
@@ -112,16 +130,21 @@ public class AlertMeter : NetworkBehaviour
     // Add alert value to the meter
     public void AddAlert(float value)
     {
-        GetPlayer.Instance.addAlertServer(value);
-        //UseAddAlert(value);
-       /*if(isServer)
-        {
-            UseAddAlert(value);
-        }
-        else
-        {
-            GetPlayer.Instance.addAlertServer(value);
-        }*/
+        //if (NetworkServer.localConnection.connectionId == 1)
+        //{
+            //UseAddAlert(value);
+            if (isServer)
+            {
+                //Debug.Log("server add alert");
+                alertValue = Mathf.Clamp(alertValue + value, 0, 100);
+                timeStamp = Time.time;
+            }
+            else
+            {
+                //Debug.Log("client add alert");
+                GetPlayer.Instance.addAlertServer(value);
+            }
+        //}
     }
     public float getAlert()
     {
@@ -131,10 +154,10 @@ public class AlertMeter : NetworkBehaviour
     // Check if meter has reached the limit
     public bool IsFull() => alertValue >= 100f ? true : false;
 
-    public void setV(System.Single oldValue, System.Single newValue)
+   /* public void setV(System.Single oldValue, System.Single newValue)
     {
         GetPlayer.Instance.addAlertServer(newValue);
         oldValue = newValue;
         alertValue = newValue;
-    }
+    }*/
 }
