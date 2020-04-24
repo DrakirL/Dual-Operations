@@ -4,16 +4,11 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    // Singleton reference
     public static GameManager _instance { get; private set; }
-
-    [Tooltip("Enter the scene to be loaded when game over")]
-    public string reloadSceneNameOnGameOver;
-    public string reloadSceneNameOnWin;
-    public float reloadTime = 3;
-
-    // Maybe lose scene?
-    public GameObject loseImage;
-    public GameObject winImage;
+    [Tooltip("Time it takes before next scene will be loaded")]
+    public float reloadTime = 0.5f;
+    bool state;
 
     private void Awake()
     {
@@ -22,40 +17,43 @@ public class GameManager : MonoBehaviour
         else
             Destroy(gameObject);
     }
-
     private void Update()
     {
-        if (AlertMeter._instance.IsFull())
+        if (AlertMeter._instance.IsFull() && !state)
         {
             LoseState();
+            state = true;
         }
     }
-
-    void LoseState()
+    public void LoseState()
     {
-        // Lose
-        // reload scene?
-        loseImage.SetActive(true);
-        StartCoroutine(Reload(loseImage, reloadSceneNameOnGameOver));
-                    
+        // Maybe put in alertmeter script, avoiding conflicts atm
+        if (!state)
+        {
+            LoadScene("Lose", reloadTime);
+            state = true;
+        }
+        
     }
-
-    void WinState()
+    public void WinState()
     {
-        winImage.SetActive(true);
-        StartCoroutine(Reload(winImage, reloadSceneNameOnWin));
+        LoadScene("Win", reloadTime);
     }
-
+    // General scene load function with loadtime as a parameter
+    public void LoadScene(string sceneName, float time)
+    {
+        StartCoroutine(Delay(time, sceneName));
+        
+    }
+    // dunno
     void UpdateMap()
     {
         // generator interact?
         // update part of or whole map?
     }
-
-    IEnumerator Reload(GameObject o, string s)
+    IEnumerator Delay(float time, string s)
     {
-        yield return new WaitForSeconds(reloadTime);
+        yield return new WaitForSeconds(time);
         SceneManager.LoadScene(s);
-        o.SetActive(false);
     }
 }
