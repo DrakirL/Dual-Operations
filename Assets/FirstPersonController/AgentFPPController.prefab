@@ -1440,6 +1440,7 @@ GameObject:
   - component: {fileID: 5124947180560494993}
   - component: {fileID: 5124947180560494994}
   - component: {fileID: 5124947180560494995}
+  - component: {fileID: 511774621509560917}
   m_Layer: 0
   m_Name: AgentFPPController
   m_TagString: Untagged
@@ -1475,6 +1476,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1ead0b584c24ac4ab5f03bef8dc188f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   cameraView: {fileID: 5124947180875219965}
   objectModel: {fileID: 5124947181567226883}
   mouseAimStyle: 0
@@ -1514,6 +1517,21 @@ CapsuleCollider:
   m_Height: 0.9
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &511774621509560917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5124947180560494996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 0
+  serverOnly: 0
+  m_AssetId: 
 --- !u!1 &5124947180617714288
 GameObject:
   m_ObjectHideFlags: 0
