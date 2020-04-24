@@ -227,6 +227,7 @@ GameObject:
   - component: {fileID: 1133489754}
   - component: {fileID: 1133489753}
   - component: {fileID: 1133489758}
+  - component: {fileID: 1133489759}
   m_Layer: 5
   m_Name: AlertCanvas
   m_TagString: Untagged
@@ -246,6 +247,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 164783b6d6f453f4c974278b0678f39e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   cameraStruct:
   - camera: {fileID: 1271940344}
     cameraView: {fileID: 8400000, guid: b0fc1ebc5d3f7f3479a204035e0d3e9a, type: 2}
@@ -268,7 +271,7 @@ MonoBehaviour:
   radioStruct: []
   cameraAlertTime: 1
   shutDownTimer: 10
-  alertStateInc: 2
+  alertStateInc: 1
 --- !u!114 &1133489754
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -364,6 +367,31 @@ MonoBehaviour:
   sceneId: 2718390722
   serverOnly: 0
   m_AssetId: 
+--- !u!114 &1133489759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1133489752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ccfd0553e1a1e14ebba3a979dfa95f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  text: {fileID: 3487524296535288036}
+  slider: {fileID: 3487524295972645436}
+  alertDecreaseTimer: 3
+  alertDecreaseSpeed: 1
+  alertDecreaseValue: 1
+  alertIncreaseTimer: 1
+  alertIncreaseSpeed: 1
+  alertIncreaseValue: 1
+  alertValue: 0
+  detected: 0
+  timeStamp: 0
 --- !u!1001 &1271940331
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1501,31 +1529,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 79b04b95dbc4f784f801e9d6a12dd7d0, type: 3}
---- !u!114 &1406312668594510701
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3487524295972645409}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ccfd0553e1a1e14ebba3a979dfa95f8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  text: {fileID: 0}
-  slider: {fileID: 0}
-  alertDecreaseTimer: 5
-  alertDecreaseSpeed: 1
-  alertDecreaseValue: 1
-  alertIncreaseTimer: 1
-  alertIncreaseSpeed: 1
-  alertIncreaseValue: 1
-  alertValue: 0
-  detected: 0
-  timeStamp: 0
 --- !u!224 &3487524295768079093
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1558,7 +1561,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3487524295768079093}
   - component: {fileID: 3487524295972645436}
-  - component: {fileID: 1406312668594510701}
   m_Layer: 5
   m_Name: DetectionMeter
   m_TagString: DetectionCounter

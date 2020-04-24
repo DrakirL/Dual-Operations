@@ -35,6 +35,8 @@ public class CameraManager : NetworkBehaviour
     [Tooltip("this is the variable that defines how much the alert state increase every cameraAlertTime-seconds")]
     [SerializeField] float alertStateInc;
 
+    float maxDistance = 0;
+
     
 
     // Start is called before the first frame update
@@ -44,17 +46,12 @@ public class CameraManager : NetworkBehaviour
         {
             instance = this;
         }
-        try
-        {
-            Spy = GetPlayer.Instance.getPlayer();
-            spyCol = Spy.GetComponent<Collider>();
-        }
-        catch
-        {
-            Debug.LogWarning("if this appears over three times something is wrong");
-        }
-        //shutDownCamera(cameraStruct[0]);
 
+        for(int i = 0; i < cameraStruct.Length; i++)
+        {
+            if (cameraStruct[i].camera.distanceCameraCanRegisterAgent > maxDistance)
+                maxDistance = cameraStruct[i].camera.distanceCameraCanRegisterAgent;
+        }
     }
 
     // Update is called once per frame
@@ -69,7 +66,7 @@ public class CameraManager : NetworkBehaviour
             }
             catch
             {
-                Debug.LogWarning("if this appears over three times something is wrong");
+                Debug.LogWarning("if this appears more than two times something is wrong");
             }
         }
         else
@@ -87,7 +84,9 @@ public class CameraManager : NetworkBehaviour
                 {
                     //TYPE HERE WHAT SHOULD HAPPEN WHEN CAMERA DETECT AGENT
                     //Debug.Log(alertTimes[i].gameObject.name + " has spoted the agent!");
-                    AlertMeter._instance.AddAlert(alertStateInc/2);
+
+                    GetPlayer.Instance.incAlertFromCamera(alertStateInc);
+                //AlertMeter._instance.AddAlert(alertStateInc);
                 }
             }
         }
@@ -100,8 +99,22 @@ public class CameraManager : NetworkBehaviour
         //whith the function from the CameraScript, collects all cameras that can see the agent
         for (int i = 0; i < cameraStruct.Length; i++)
         {
-            if (cameraStruct[i].camera.isObjectVisible(Spy, spyCol, cameraAlertTime))
-                tempList.Add(cameraStruct[i].camera);
+            if (maxDistance >= (Vector3.Distance(cameraStruct[i].camera.gameObject.transform.position, GetPlayer.Instance.getPlayer().transform.position)))
+            {
+                if(cameraStruct[i].camera.cameraState == CameraScript.CameraAState.Neither)
+                { cameraStruct[i].camera.cameraState = CameraScript.CameraAState.AgentCloseEnough; }
+
+                if (cameraStruct[i].camera.cameraState == CameraScript.CameraAState.AgentCloseEnough)
+                {
+                    if (cameraStruct[i].camera.isObjectVisible(Spy, spyCol, cameraAlertTime))
+                        tempList.Add(cameraStruct[i].camera);
+                }
+            }
+            else
+            {
+                if (cameraStruct[i].camera.cameraState == CameraScript.CameraAState.AgentCloseEnough)
+                { cameraStruct[i].camera.cameraState = CameraScript.CameraAState.Neither; }
+            }
         }
         return tempList;
     }
@@ -120,13 +133,15 @@ public class CameraManager : NetworkBehaviour
     public RenderTexture updateHackerCameraView(int index)
     {
         //use this function by typing something like this
-        return cameraStruct[index].cameraView;
+        cameraStruct[index].camera.cameraState = CameraScript.CameraAState.HackerUsesTheCamera;
+        return cameraStruct[index].cameraView;      
     }
 
     public void shutDownCamera(int index)
     {
         if (cameraStruct[index].camera.cameraActive)
         {
+            cameraStruct[index].camera.cameraState = CameraScript.CameraAState.Disabled;
             cameraStruct[index].camera.cameraActive = false;
             StartCoroutine(acivateCamera(cameraStruct[index], shutDownTimer));
             cameraStruct[index].camera.lightSource.SetActive(false);
@@ -137,5 +152,37 @@ public class CameraManager : NetworkBehaviour
         yield return new WaitForSeconds(waitTime);
         cameraStruct.camera.cameraActive = true;
         cameraStruct.camera.lightSource.SetActive(true);
+        afterShutdown(cameraStruct);
+    }
+    private void afterShutdown(CameraStruct cameraStruct)
+    {
+        if (maxDistance >= (Vector3.Distance(cameraStruct.camera.gameObject.transform.position, GetPlayer.Instance.getPlayer().transform.position)))
+        {
+            cameraStruct.camera.cameraState = CameraScript.CameraAState.AgentCloseEnough;
+        }
+        else
+        {
+            cameraStruct.camera.cameraState = CameraScript.CameraAState.Neither;
+        }
+        
+    }
+    public void afterHackerIsDone()
+    {
+        for (int i = 0; i < cameraStruct.Length; i++)
+        {
+            if (cameraStruct[i].camera.cameraState == CameraScript.CameraAState.HackerUsesTheCamera)
+            {
+                if (maxDistance >= (Vector3.Distance(cameraStruct[i].camera.gameObject.transform.position, GetPlayer.Instance.getPlayer().transform.position)))
+                {
+
+                    cameraStruct[i].camera.cameraState = CameraScript.CameraAState.AgentCloseEnough;
+                }
+
+                else
+                {
+                    cameraStruct[i].camera.cameraState = CameraScript.CameraAState.Neither;
+                }
+            }
+        }
     }
 }

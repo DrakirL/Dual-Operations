@@ -51,6 +51,7 @@ public class HackerButtonHandler : NetworkBehaviour
             if(Input.GetKeyDown(KeyCode.Escape))
             {
                 takeDownCamera();
+                CameraManager.Instance.afterHackerIsDone();
             }
         }
     }
