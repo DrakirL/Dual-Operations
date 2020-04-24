@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using StateStuff;
+using Mirror;
 
-public class AI : MonoBehaviour
+public class AI : NetworkBehaviour
 {
     //   public bool switchState = false;
     public Transform[] goal;
@@ -31,13 +32,25 @@ public class AI : MonoBehaviour
         NavMeshAgent agent = GetComponent<NavMeshAgent>();
         detectCount = GameObject.FindGameObjectWithTag("DetectionCounter");
         warning = GetComponent<ParticleSystem>();
-    }
 
+    }
+    
     private void Update()
     {
+<<<<<<< HEAD
         player = GetPlayer.Instance.getPlayer().transform;
         radioTurnOff = radio.GetComponent<radioInterract>().on;
         
         stateMachine.Update();
+=======
+        if (NetworkServer.localConnection.connectionId == 0)
+        {
+            player = GetPlayer.Instance.getPlayer().transform;
+
+            radioTurnOff = radio.GetComponent<radioInterract>().on;
+
+            stateMachine.Update();
+        }
+>>>>>>> skrrt
     }
 }
