@@ -1058,6 +1058,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1150243051}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1150243053 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1406312668650419814, guid: 757fe1ca3fd4ea24c8eba4795070e969,
+    type: 3}
+  m_PrefabInstance: {fileID: 1150243051}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ccfd0553e1a1e14ebba3a979dfa95f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1266461741
 GameObject:
   m_ObjectHideFlags: 0
@@ -1315,7 +1327,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 50, y: 150, z: 0}
 --- !u!1 &1797607293
 GameObject:
@@ -1351,7 +1363,7 @@ Transform:
   - {fileID: 263062949}
   - {fileID: 279923825}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1849769747
 GameObject:
@@ -1465,6 +1477,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 164783b6d6f453f4c974278b0678f39e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   cameraStruct:
   - camera: {fileID: 1920032325}
     cameraView: {fileID: 8400000, guid: b0fc1ebc5d3f7f3479a204035e0d3e9a, type: 2}
@@ -2485,6 +2499,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -4611832076437983780, guid: 96210f6364733e64088a1359ad043280,
+        type: 3}
+      propertyPath: alert
+      value: 
+      objectReference: {fileID: 1150243053}
+    - target: {fileID: -4611832076437983780, guid: 96210f6364733e64088a1359ad043280,
+        type: 3}
+      propertyPath: musicPath
+      value: event:/Main
+      objectReference: {fileID: 0}
+    - target: {fileID: -972699406696462109, guid: 96210f6364733e64088a1359ad043280,
+        type: 3}
+      propertyPath: Event
+      value: event:/Main
+      objectReference: {fileID: 0}
     - target: {fileID: 1001526619202231531, guid: 96210f6364733e64088a1359ad043280,
         type: 3}
       propertyPath: m_LocalPosition.x
