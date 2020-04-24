@@ -35,7 +35,7 @@ public class AI : MonoBehaviour
 
     private void Update()
     {
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        player = GetPlayer.Instance.getPlayer().transform;
         radioTurnOff = radio.GetComponent<radioInterract>().on;
         
         stateMachine.Update();
