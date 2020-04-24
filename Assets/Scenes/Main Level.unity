@@ -963,7 +963,8 @@ PrefabInstance:
       propertyPath: m_textInfo.pageCount
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1406312668650419814, guid: 757fe1ca3fd4ea24c8eba4795070e969, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 757fe1ca3fd4ea24c8eba4795070e969, type: 3}
 --- !u!224 &1150243052 stripped
 RectTransform:
@@ -971,18 +972,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1150243051}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1150243053 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1406312668650419814, guid: 757fe1ca3fd4ea24c8eba4795070e969,
-    type: 3}
-  m_PrefabInstance: {fileID: 1150243051}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ccfd0553e1a1e14ebba3a979dfa95f8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1266461741
 GameObject:
   m_ObjectHideFlags: 0
@@ -1415,6 +1404,8 @@ GameObject:
   - component: {fileID: 1849769749}
   - component: {fileID: 1849769748}
   - component: {fileID: 1849769752}
+  - component: {fileID: 1849769754}
+  - component: {fileID: 1849769753}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1541,6 +1532,47 @@ MonoBehaviour:
   cameraAlertTime: 1
   shutDownTimer: 10
   alertStateInc: 2
+--- !u!114 &1849769753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1849769747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ccfd0553e1a1e14ebba3a979dfa95f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  text: {fileID: 0}
+  slider: {fileID: 0}
+  alertDecreaseTimer: 5
+  alertDecreaseSpeed: 1
+  alertDecreaseValue: 1
+  alertIncreaseTimer: 1
+  alertIncreaseSpeed: 1
+  alertIncreaseValue: 1
+  alertValue: 0
+  detected: 0
+  timeStamp: 0
+  tmpCounter: 0
+--- !u!114 &1849769754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1849769747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 337270279
+  serverOnly: 0
+  m_AssetId: 
 --- !u!1001 &1920032319
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2519,7 +2551,7 @@ PrefabInstance:
         type: 3}
       propertyPath: alert
       value: 
-      objectReference: {fileID: 1150243053}
+      objectReference: {fileID: 0}
     - target: {fileID: -4611832076437983780, guid: 96210f6364733e64088a1359ad043280,
         type: 3}
       propertyPath: musicPath
