@@ -2,20 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using Mirror;
 
-public class detectPlayer : NetworkBehaviour
+public class detectPlayer : MonoBehaviour
 {
-    Transform player;
+    public Transform player;
     public float maxAngle = 50;
     public float maxRadius = 5;
     private bool fovtest123 = false;
 
-    private void Update()
-    {
-        player = GetPlayer.Instance.getPlayer().transform;
-    }
-
+    
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;

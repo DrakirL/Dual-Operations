@@ -14,8 +14,6 @@ GameObject:
   - component: {fileID: 9014188345922318135}
   - component: {fileID: 9014188345922318142}
   - component: {fileID: 9014188345922318137}
-  - component: {fileID: -4016288314156581712}
-  - component: {fileID: 1549286896210618559}
   m_Layer: 0
   m_Name: Cylinder
   m_TagString: Guard
@@ -86,8 +84,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 581cab3926c9d8340b4fc2899d04a8e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
   goal:
   - {fileID: 0}
   - {fileID: 0}
@@ -4823,7 +4819,6 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
-<<<<<<< HEAD
 --- !u!1001 &3509341125437722525
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4899,39 +4894,3 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 3509341125437722525}
   m_PrefabAsset: {fileID: 0}
-=======
---- !u!114 &-4016288314156581712
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9014188345922318134}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneId: 0
-  serverOnly: 0
-  m_AssetId: 
---- !u!114 &1549286896210618559
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9014188345922318134}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f74aedd71d9a4f55b3ce499326d45fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  clientAuthority: 1
-  localPositionSensitivity: 0.01
-  localRotationSensitivity: 0.01
-  localScaleSensitivity: 0.01
-  compressRotation: 1
->>>>>>> skrrt
