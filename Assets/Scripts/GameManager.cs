@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using Mirror;
 
-public class GameManager : MonoBehaviour
+public class GameManager : NetworkBehaviour
 {
     // Singleton reference
     public static GameManager _instance { get; private set; }
@@ -28,6 +29,7 @@ public class GameManager : MonoBehaviour
             }
         }      
     }
+
     public void LoseState()
     {
         // Maybe put in alertmeter script, avoiding conflicts atm
@@ -37,21 +39,37 @@ public class GameManager : MonoBehaviour
             state = true;
         }        
     }
+
     public void WinState()
     {
         LoadScene("Win", reloadTime);
     }
-    // General scene load function with loadtime as a parameter
+
+    [Command]
+    public void CmdLoadScene(string sceneName, float time)
+    {
+        LoadScene(sceneName, time);
+        RpcLoadScene(sceneName, time);
+    }
+
     public void LoadScene(string sceneName, float time)
     {
         StartCoroutine(Delay(time, sceneName));        
     }
+
+    [ClientRpc] 
+    void RpcLoadScene(string sceneName, float time)
+    {
+        LoadScene(sceneName, time);
+    }
+
     // dunno
     void UpdateMap()
     {
         // generator interact?
         // update part of or whole map?
     }
+
     IEnumerator Delay(float time, string s)
     {
         yield return new WaitForSeconds(time);
