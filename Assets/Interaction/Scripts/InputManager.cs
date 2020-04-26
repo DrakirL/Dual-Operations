@@ -9,6 +9,11 @@ public class InputManager : MonoBehaviour
     public bool interactTextOn;
     public GameObject interactText;
 
+    private void Awake()
+    {
+        interactText = GameObject.Find("InteractText");
+    }
+
     void Update()
     {
         Interact();
@@ -44,8 +49,7 @@ public class InputManager : MonoBehaviour
                 }                  
             }
         }
-        else
-         if(interactTextOn) 
+        else if(interactTextOn) 
 			 interactText.SetActive(false);
     }
 }
