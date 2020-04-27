@@ -9,6 +9,11 @@ public class InputManager : MonoBehaviour
     public bool interactTextOn;
     public GameObject interactText;
 
+    private void Awake()
+    {
+        interactText = GameObject.FindGameObjectWithTag("InteractText");
+    }
+
     void Update()
     {
         Interact();
