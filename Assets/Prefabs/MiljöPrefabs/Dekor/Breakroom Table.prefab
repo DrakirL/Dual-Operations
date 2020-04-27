@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2672997093973550523}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Breakroom Table
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -32,6 +32,34 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &8719640052239476610
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 615899369254822725}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 5114082876154382903, guid: a0ba5f499b19f5748bd0fc6109dd1fa4, type: 3}
+--- !u!64 &5255317325524448181
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8752553377958623834}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 5114082876154382903, guid: a0ba5f499b19f5748bd0fc6109dd1fa4, type: 3}
 --- !u!1001 &4073505483696408115
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -43,6 +71,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: OfficeDesk
+      objectReference: {fileID: 0}
+    - target: {fileID: 884977426910686372, guid: b31fb1ec9c2960341a9bff008b48362b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4751490344213478505, guid: b31fb1ec9c2960341a9bff008b48362b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6177629152124750217, guid: b31fb1ec9c2960341a9bff008b48362b,
         type: 3}
@@ -107,6 +145,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 4073505483696408115}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &8752553377958623834 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4751490344213478505, guid: b31fb1ec9c2960341a9bff008b48362b,
+    type: 3}
+  m_PrefabInstance: {fileID: 4073505483696408115}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5295303514931126060
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -118,6 +162,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: OfficeDesk (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 884977426910686372, guid: b31fb1ec9c2960341a9bff008b48362b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4751490344213478505, guid: b31fb1ec9c2960341a9bff008b48362b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6177629152124750217, guid: b31fb1ec9c2960341a9bff008b48362b,
         type: 3}
@@ -179,6 +233,12 @@ PrefabInstance:
 --- !u!4 &2073884014793889445 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6177629152124750217, guid: b31fb1ec9c2960341a9bff008b48362b,
+    type: 3}
+  m_PrefabInstance: {fileID: 5295303514931126060}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &615899369254822725 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4751490344213478505, guid: b31fb1ec9c2960341a9bff008b48362b,
     type: 3}
   m_PrefabInstance: {fileID: 5295303514931126060}
   m_PrefabAsset: {fileID: 0}
