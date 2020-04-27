@@ -7,10 +7,9 @@ public class ChangeGuardMaterial : MonoBehaviour
     public Material m_AngryMaterial;
     public GameObject m_Guard;
 
-    private MeshRenderer[] children;
-
-    private void ChangeMaterial(Material m_Material)
+       private void ChangeMaterial(Material m_Material)
     {
+         MeshRenderer[] children;
         children = GetComponentInChildren<MeshRenderer[]>();
         foreach (MeshRenderer rend in children)
         {
