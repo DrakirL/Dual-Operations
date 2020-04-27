@@ -1,5 +1,32 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!64 &7386069025064043164
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6926746428365834627}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2502843528329499362, guid: 84c020bc9e285b640984ad3d433713f5, type: 3}
+--- !u!65 &6466081921976864528
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6926746428365834627}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 99.99997, y: 106.28027, z: 104.67265}
+  m_Center: {x: 0, y: 3.1401403, z: 2.3363378}
 --- !u!1 &8479781256121360377
 GameObject:
   m_ObjectHideFlags: 0
@@ -98,8 +125,19 @@ PrefabInstance:
       propertyPath: m_Name
       value: mesh_bench_office
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 84c020bc9e285b640984ad3d433713f5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 84c020bc9e285b640984ad3d433713f5, type: 3}
+--- !u!1 &6926746428365834627 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 84c020bc9e285b640984ad3d433713f5,
+    type: 3}
+  m_PrefabInstance: {fileID: 1369466176026759306}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6231828452432247696 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 84c020bc9e285b640984ad3d433713f5,

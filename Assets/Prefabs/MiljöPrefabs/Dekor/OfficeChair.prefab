@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6946566764342901538}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: OfficeChair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31,6 +31,33 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &4623480194602838120
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1092072138287400088}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -6859827617426203574, guid: dc0c07ef48aee4942aaea0a018b589e3, type: 3}
+--- !u!65 &6881532608230041700
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1092072138287400088}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 94.35186, y: 174.54904, z: 89.094025}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &8936897326056185233
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -98,8 +125,19 @@ PrefabInstance:
       propertyPath: m_Name
       value: mesh_chairoffice
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: dc0c07ef48aee4942aaea0a018b589e3,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dc0c07ef48aee4942aaea0a018b589e3, type: 3}
+--- !u!1 &1092072138287400088 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: dc0c07ef48aee4942aaea0a018b589e3,
+    type: 3}
+  m_PrefabInstance: {fileID: 8936897326056185233}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4142335334613399179 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: dc0c07ef48aee4942aaea0a018b589e3,

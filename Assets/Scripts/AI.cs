@@ -29,15 +29,18 @@ public class AI : MonoBehaviour
         stateMachine = new StateMachine<AI>(this);
         stateMachine.ChangeState(FirstState.Instance);
         NavMeshAgent agent = GetComponent<NavMeshAgent>();
-        detectCount = GameObject.FindGameObjectWithTag("DetectionCounter");
         warning = GetComponent<ParticleSystem>();
     }
 
     private void Update()
     {
-        player = GetPlayer.Instance.getPlayer().transform;
-        radioTurnOff = radio.GetComponent<radioInterract>().on;
-        
-        stateMachine.Update();
+        if (NetworkServer.localConnection.connectionId == 0)
+        {
+            player = GetPlayer.Instance.getPlayer().transform;
+
+            radioTurnOff = radio.GetComponent<radioInterract>().on;
+
+            stateMachine.Update();
+        }
     }
 }
