@@ -1,5 +1,88 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &45885705334879396
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2141374988380123167}
+  - component: {fileID: 4706361168086492118}
+  - component: {fileID: 2946143588949122487}
+  m_Layer: 5
+  m_Name: MissionText (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2141374988380123167
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 45885705334879396}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 19.100035}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7057654060143632311}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: -576.27, y: -23}
+  m_SizeDelta: {x: 183.65, y: 758.3}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &4706361168086492118
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 45885705334879396}
+  m_CullTransparentMesh: 0
+--- !u!114 &2946143588949122487
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 45885705334879396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 20
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 0
+    m_MaxSize: 40
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 0
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 0.69
+  m_Text: "Use <HACK COMMAND> to hack the camera. This will allow you to disable
+    it temporarily, or observe the facility\u2019s interior from the camera\u2019s
+    point of view.\n\nUse cameras to get an overview of the upcoming rooms.\n\nYou
+    are able to manipulate the facility\u2019s communication stations. Switching
+    them to a different frequency will surely gain the attention of nearby guards.\n\nSelecting
+    a hacked camera and using <DISABLE COMMAND> will disable it for 10 seconds. Your
+    partner should use that window of opportunity to slip by."
 --- !u!1 &166668645952382238
 GameObject:
   m_ObjectHideFlags: 0
@@ -40,6 +123,7 @@ RectTransform:
   - {fileID: 4249393555870394159}
   - {fileID: 7110647334021330754}
   - {fileID: 7943819261504710308}
+  - {fileID: 2141374988380123167}
   m_Father: {fileID: 6532324086884099090}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1441,8 +1525,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -570, y: 11.5}
-  m_SizeDelta: {x: 152.88, y: 475.6}
+  m_AnchoredPosition: {x: -49.7, y: 286}
+  m_SizeDelta: {x: 715.4, y: 161.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9201512216942583272
 CanvasRenderer:
@@ -1472,28 +1556,24 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 12
+    m_FontSize: 28
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
     m_MaxSize: 40
     m_Alignment: 4
     m_AlignByGeometry: 0
-    m_RichText: 1
+    m_RichText: 0
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 0.69
-  m_Text: "Use the facility map to guide your partner to the main server and alert
+  m_Text: 'Use the facility map to guide your partner to the main server and alert
     them of obstacles ahead. You can only see part of the map at the start - have
     your partner activate computer terminals to reveal new areas. Electrical devices
-    that you can interact with are highlighted on the map.\n\nUse <HACK COMMAND>
-    to hack the camera. This will allow you to disable it temporarily, or observe
-    the facility\u2019s interior from the camera\u2019s point of view.\n\nUse cameras
-    to get an overview of the upcoming rooms.\n\nYou are able to manipulate the facility\u2019s
-    communication stations. Switching them to a different frequency will surely gain
-    the attention of nearby guards.\n\nSelecting a hacked camera and using <DISABLE
-    COMMAND> will disable it for 10 seconds. Your partner should use that window
-    of opportunity to slip by."
+    that you can interact with are highlighted on the map.
+
+
+'
 --- !u!1 &8170157287733550933
 GameObject:
   m_ObjectHideFlags: 0
