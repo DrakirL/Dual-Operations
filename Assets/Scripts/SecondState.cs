@@ -39,6 +39,7 @@ public class SecondState : State<AI>
         if(_owner.dead == false)
         {
             Debug.Log("fyfan vad död du är sopa lol xd");
+            AlertMeter._instance.AddAlert(100);
         }
 
     }
@@ -47,7 +48,7 @@ public class SecondState : State<AI>
     {
         _owner.StartCoroutine(lol(_owner));
         Debug.Log("Enter 2");
-        _owner.detectCount.GetComponent<AlertMeter>().SetDetected(true);
+        AlertMeter._instance.AddAlert(10);
         _owner.warning.Play(true);
         //        _owner.gameObject.GetComponent<NavMeshAgent>().destination = _owner.goal2.position;
     }
@@ -55,7 +56,6 @@ public class SecondState : State<AI>
     public override void ExitState(AI _owner)
     {
         Debug.Log("Exit 2");
-        _owner.detectCount.GetComponent<AlertMeter>().SetDetected(false);
         _owner.warning.Stop();
     }
 

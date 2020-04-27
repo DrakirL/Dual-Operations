@@ -30,7 +30,6 @@ public class AI : NetworkBehaviour
         stateMachine = new StateMachine<AI>(this);
         stateMachine.ChangeState(FirstState.Instance);
         NavMeshAgent agent = GetComponent<NavMeshAgent>();
-        detectCount = GameObject.FindGameObjectWithTag("DetectionCounter");
         warning = GetComponent<ParticleSystem>();
 
     }
