@@ -57,13 +57,19 @@ public class AlertMeter : NetworkBehaviour
         // Update value to text
         slider.value = alertValue;
         text.text = alertValue.ToString("0") + "/100";
-        if (NetworkServer.localConnection.connectionId == 0)
+        try
         {
-            UpdateMeter();
-            tmpCounter += Time.deltaTime;
+            if (NetworkServer.localConnection.connectionId == 0)
+            {
+                UpdateMeter();
+                tmpCounter += Time.deltaTime;
+            }
+        }
+        catch
+        {
+            //nothing should happen here, you are not on the server 
         }
     }
-
 
     void UpdateMeter()
     {       
