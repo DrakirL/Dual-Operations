@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2190220241480287680}
   - component: {fileID: 6252260631496408580}
   - component: {fileID: 7863455006580675122}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 5744037731616797}
   - component: {fileID: 5544601282121602387}
   - component: {fileID: 187849241838183933}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -169,7 +169,7 @@ GameObject:
   - component: {fileID: 1498407209687185685}
   - component: {fileID: 8164495578371925133}
   - component: {fileID: 5861684876116451057}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: eyes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -248,7 +248,7 @@ GameObject:
   - component: {fileID: 1197640375875489058}
   - component: {fileID: 530481072824148191}
   - component: {fileID: 6301133914439305279}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: bags
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -325,8 +325,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 175848371315436474}
-  - component: {fileID: 6007140221118477826}
-  m_Layer: 13
+  - component: {fileID: 8283298222421404982}
+  m_Layer: 0
   m_Name: GuardPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -351,7 +351,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6007140221118477826
+--- !u!114 &8283298222421404982
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -360,8 +360,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 7327253650546140650}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58fc7be514bdb5a48b83a0094472f298, type: 3}
+  m_Script: {fileID: 11500000, guid: 98c7892038084b045973d6dd4638477f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AngryMaterial: {fileID: 2100000, guid: 2c3efaffba6a2f941a96c55a7f9ef355, type: 2}
-  m_Guard: {fileID: 7327253650546140650}
+  setTexture: 1
+  unsuspected: {fileID: 2100000, guid: 21014a3736863cf4cb7c3ca35d157a8e, type: 2}
+  alerted: {fileID: 2100000, guid: 2c3efaffba6a2f941a96c55a7f9ef355, type: 2}
+  target: {fileID: 175848371315436474}
