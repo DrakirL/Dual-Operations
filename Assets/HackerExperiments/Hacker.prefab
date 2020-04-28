@@ -34,8 +34,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -576.27, y: -23}
-  m_SizeDelta: {x: 183.65, y: 758.3}
+  m_AnchoredPosition: {x: -567.8, y: 10}
+  m_SizeDelta: {x: 174.5, y: 758.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4706361168086492118
 CanvasRenderer:
@@ -65,24 +65,21 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 20
+    m_FontSize: 21
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
-    m_MaxSize: 40
+    m_MaxSize: 222
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 0
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 0.69
-  m_Text: "Use <HACK COMMAND> to hack the camera. This will allow you to disable
-    it temporarily, or observe the facility\u2019s interior from the camera\u2019s
-    point of view.\n\nUse cameras to get an overview of the upcoming rooms.\n\nYou
-    are able to manipulate the facility\u2019s communication stations. Switching
-    them to a different frequency will surely gain the attention of nearby guards.\n\nSelecting
-    a hacked camera and using <DISABLE COMMAND> will disable it for 10 seconds. Your
-    partner should use that window of opportunity to slip by."
+  m_Text: "Use the \"Hack\" option to open up the device. Use \"Use\" on a camera
+    to see through it and \"Shut Down\" to disable the camera for 10 seconds. Use
+    these tools to help your companion navigate past guards and cameras. \n\nYou
+    can use \"Turn On\" on the radios to distract nearby guards."
 --- !u!1 &166668645952382238
 GameObject:
   m_ObjectHideFlags: 0
@@ -1525,7 +1522,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -49.7, y: 286}
+  m_AnchoredPosition: {x: -63, y: 268.9}
   m_SizeDelta: {x: 715.4, y: 161.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9201512216942583272
@@ -1567,13 +1564,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 0.69
-  m_Text: 'Use the facility map to guide your partner to the main server and alert
-    them of obstacles ahead. You can only see part of the map at the start - have
-    your partner activate computer terminals to reveal new areas. Electrical devices
-    that you can interact with are highlighted on the map.
-
-
-'
+  m_Text: "Use Right Mouse Button to interact with the highlighted electrical devices
+    on the map. Then with Left Mouse Button you can select \rwhich menu item to to
+    interact with.\n\n"
 --- !u!1 &8170157287733550933
 GameObject:
   m_ObjectHideFlags: 0
