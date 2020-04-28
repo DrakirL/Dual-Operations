@@ -19,10 +19,13 @@ public class GameManager : MonoBehaviour
     }
     private void Update()
     {
-        if (AlertMeter._instance.IsFull() && !state)
+        if (AlertMeter._instance != null)
         {
-            LoseState();
-            state = true;
+            if (AlertMeter._instance.IsFull() && !state)
+            {
+                LoseState();
+                state = true;
+            }
         }
     }
     public void LoseState()
