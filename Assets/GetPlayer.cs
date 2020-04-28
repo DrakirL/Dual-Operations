@@ -37,8 +37,7 @@ public class GetPlayer : NetworkBehaviour
 
     private void Update()
     {
-        //this works for server but not for client
-        Debug.LogWarning(isServer + " : " + AlertMeter._instance.alertValue);
+        //this works for server but not for client'
         if(Input.GetKeyDown(KeyCode.G))
         {
             AlertMeter._instance.AddAlert(1);
