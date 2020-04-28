@@ -68,15 +68,6 @@ public class SecondState : State<AI>
 
         _owner.warning.Stop();
     }
-    //        _owner.gameObject.GetComponent<NavMeshAgent>().destination = _owner.goal2.position;
-}
-
-    public override void ExitState(AI _owner)
-    {
-        Debug.Log("Exit 2");
-        _owner.warning.Stop();
-    }
-
     public override void movePos(AI _owner)
     {
         NavMeshAgent agent = _owner.gameObject.GetComponent<NavMeshAgent>();
