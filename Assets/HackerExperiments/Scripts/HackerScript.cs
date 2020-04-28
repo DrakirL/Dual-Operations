@@ -17,6 +17,7 @@ namespace Mirror
             if (isLocalPlayer)
             {
                 PlayerCanvasObject.SetActive(true);
+                StartCoroutine(a());
             }
         }
 
@@ -43,6 +44,14 @@ namespace Mirror
         public void RpcShutDownCamera(int hackableNumber)
         {
             CameraManager.Instance.shutDownCamera(hackableNumber);
+        }
+
+        IEnumerator a()
+        {
+            yield return new WaitForSeconds(0.5f);
+            GameObject ca = AlertMeter._instance.gameObject;
+            ca.active = false;
+            ca.active = true;
         }
     }
 }

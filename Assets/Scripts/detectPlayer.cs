@@ -13,7 +13,14 @@ public class detectPlayer : NetworkBehaviour
 
     private void Update()
     {
-        player = GetPlayer.Instance.getPlayer().transform;
+        try
+        {
+            player = GetPlayer.Instance.getPlayer().transform;
+        }
+        catch
+        {
+            //we are in the first frame, nothing bad just ignore this
+        }
     }
 
     private void OnDrawGizmos()
