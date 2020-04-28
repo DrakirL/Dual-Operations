@@ -44,6 +44,23 @@ public class GetPlayer : NetworkBehaviour
         }
     
     }
+    /*public void showCanvas()
+    {
+        CmdShowCanvas();
+    }
+    [Command]
+    public void CmdShowCanvas()
+    {
+        RpcCanvas();
+    }
+    [ClientRpc]
+    private void RpcCanvas()
+    {
+        GameObject ca = AlertMeter._instance.gameObject;
+        ca.active = false;
+        ca.active = true;
+    }*/
+
 
     public GameObject getPlayer()
     {
