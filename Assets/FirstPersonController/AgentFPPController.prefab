@@ -57,7 +57,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5524880825149089283}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.314, z: -0.005}
+  m_LocalPosition: {x: 0, y: 0.553, z: -0.005}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5524880824627735922}
@@ -131,6 +131,7 @@ GameObject:
   - component: {fileID: 2469038590947001498}
   - component: {fileID: -2298360144127891606}
   - component: {fileID: -3376478667481377432}
+  - component: {fileID: 6019711509079343769}
   m_Layer: 0
   m_Name: AgentFPPController
   m_TagString: Player
@@ -174,7 +175,7 @@ MonoBehaviour:
   mouseAimStyle: 0
   mouseSensitivity: 4
   mouseInverted: 0
-  moveSpeed: 3
+  moveSpeed: 1.5
   gravity: 10
   maxSlopeAngle: 25
   colMask:
@@ -193,12 +194,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactRange: 3
+<<<<<<< HEAD
 <<<<<<< Updated upstream
   interactTextOn: 0
 =======
   interactTextOn: 1
 >>>>>>> Stashed changes
   interactText: {fileID: 0}
+=======
+  interactTextOn: 1
+  interactText: {fileID: 3725668770781699126, guid: de36afa52ac2bc54aa216bd27dbeb6e1,
+    type: 3}
+>>>>>>> Design
 --- !u!136 &5524880826162466711
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -279,6 +286,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!114 &6019711509079343769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5524880825172794005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ListenerNumber: -1
 --- !u!1 &5524880826539744336
 GameObject:
   m_ObjectHideFlags: 0
