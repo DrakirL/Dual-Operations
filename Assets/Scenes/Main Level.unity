@@ -562,8 +562,8 @@ MonoBehaviour:
     pacifying them for 10 seconds. It requires a moment to recharge between shots,
     and carries limited ammunition.\r\n\nYour mission requires you to stay undetected.
     If you are spotted by a guard, stun them with your taser and slip away. They
-    won\u2019t remember seeing you.\r\n\nThis is not implemented yet :) But you can
-    still be seen :O\n"
+    won\u2019t remember seeing you.\r\n\nThis is not implemented yet :) So if you
+    get seen by a Guard you WILL lose, take it slowly and watch out. :O\n"
 --- !u!114 &298232103
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2539,6 +2539,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6972897294164237200, guid: 1fc9a74d24fc4d44b909c3af4277d20b,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.907
       objectReference: {fileID: 0}
     - target: {fileID: 7365002987387743663, guid: 1fc9a74d24fc4d44b909c3af4277d20b,
         type: 3}
