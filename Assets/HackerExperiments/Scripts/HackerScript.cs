@@ -7,7 +7,6 @@ namespace Mirror
 { 
     public class HackerScript : NetworkBehaviour
     {
-        [SerializeField] GameObject camera;
         [SerializeField] Text missionTime; 
         public GameObject PlayerCanvasObject;
         
@@ -17,8 +16,6 @@ namespace Mirror
         {
             if (isLocalPlayer)
             {
-                MinigameManager.Instance.GetHackerCanvas(PlayerCanvasObject);
-                camera.SetActive(true);
                 PlayerCanvasObject.SetActive(true);
                 StartCoroutine(a());
             }

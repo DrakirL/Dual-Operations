@@ -12,7 +12,6 @@ public class HackerButton : NetworkBehaviour
     [SerializeField] int hackableNumber;
     [SerializeField] bool isHacked = false;
    [HideInInspector] public HackerScript hackerS;
-    public GameObject minigame;
 
     [SerializeField] bool isHoverOverThisButton = false;
     
@@ -58,9 +57,5 @@ public class HackerButton : NetworkBehaviour
     {
         hackerS.RpcShutDownCamera(hackableNumber);
         //CameraManager.Instance.shutDownCamera(hackableNumber);
-    }
-    public void LoadMinigame()
-    {
-        MinigameManager.Instance.Activate(this, minigame);
     }
 }

@@ -10,13 +10,9 @@ public class GetPlayer : NetworkBehaviour
     public static GetPlayer Instance { get { return instance; } }
     public GameObject canvas;
     public Text canvasText;
-    public GameObject camera;
     // Use this for initialization
     void Start()
     {
-        camera.SetActive(false);
-        if (isLocalPlayer)
-            camera.SetActive(true);
         transform.position = spawnTransform.Instance.transform.position;
         transform.rotation = spawnTransform.Instance.transform.rotation;
         if(isLocalPlayer)
