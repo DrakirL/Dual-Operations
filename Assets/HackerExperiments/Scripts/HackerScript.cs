@@ -20,7 +20,7 @@ namespace Mirror
                 MinigameManager.Instance.GetHackerCanvas(PlayerCanvasObject);
                 camera.SetActive(true);
                 PlayerCanvasObject.SetActive(true);
-                StartCoroutine(a());
+                //StartCoroutine(a());
             }
         }
 
