@@ -632,7 +632,7 @@ PrefabInstance:
     - target: {fileID: 3108589037647509578, guid: c40852d1765f0b84cb3d426cf307ecf4,
         type: 3}
       propertyPath: cameraStruct.Array.size
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 3108589037647509578, guid: c40852d1765f0b84cb3d426cf307ecf4,
         type: 3}
@@ -699,6 +699,16 @@ PrefabInstance:
       propertyPath: radioStruct.Array.data[1].radio
       value: 
       objectReference: {fileID: 1920032331}
+    - target: {fileID: 3108589037647509578, guid: c40852d1765f0b84cb3d426cf307ecf4,
+        type: 3}
+      propertyPath: cameraStruct.Array.data[8].camera
+      value: 
+      objectReference: {fileID: 1920032336}
+    - target: {fileID: 3108589037647509578, guid: c40852d1765f0b84cb3d426cf307ecf4,
+        type: 3}
+      propertyPath: cameraStruct.Array.data[8].cameraView
+      value: 
+      objectReference: {fileID: 8400000, guid: a76b11fc1b53a7048b936c6f97487b84, type: 2}
     - target: {fileID: 3108589037647509579, guid: c40852d1765f0b84cb3d426cf307ecf4,
         type: 3}
       propertyPath: m_Name
@@ -1920,6 +1930,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 2207317665124597864, guid: 1fc9a74d24fc4d44b909c3af4277d20b,
+        type: 3}
+      propertyPath: sceneId
+      value: 1882340066
+      objectReference: {fileID: 0}
     - target: {fileID: 2221244060991553904, guid: 1fc9a74d24fc4d44b909c3af4277d20b,
         type: 3}
       propertyPath: m_Layer
@@ -2888,6 +2903,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1920032319}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1920032336 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8003648706947461663, guid: 1fc9a74d24fc4d44b909c3af4277d20b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1920032319}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdc62eb766af4ed4fa745deaabf81c28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2095900653
 PrefabInstance:
   m_ObjectHideFlags: 0
