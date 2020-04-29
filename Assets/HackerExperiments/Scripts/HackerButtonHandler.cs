@@ -14,6 +14,7 @@ public struct HackOptions
 
 public class HackerButtonHandler : NetworkBehaviour
 {
+    
     [Tooltip("this is used to connect all buttons to this script")]
     [SerializeField] HackerButton[] allButtons;
     [Tooltip("these gameobjects NEEDS a image component")]
@@ -23,7 +24,7 @@ public class HackerButtonHandler : NetworkBehaviour
     [SerializeField] float distance;
     [SerializeField] float yOffset;
     [SerializeField] float xOffset;
-    [SerializeField] RawImage cameraImage;
+    public RawImage cameraImage;
     [SerializeField] HackerScript hackerScript;
     HackOptions currentOption;
     bool isMenuUp = false;
@@ -31,13 +32,13 @@ public class HackerButtonHandler : NetworkBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {
+    {   
         cameraImage.enabled = false;
         for (int i = 0; i < allButtons.Length; i++)
         {
             allButtons[i].HBH = this;
             allButtons[i].hackerS = hackerScript; 
-        }        
+        } 
     }
     // Update is called once per frame
     void Update()
