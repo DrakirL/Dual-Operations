@@ -33,8 +33,10 @@ public class CameraScript : NetworkBehaviour
         {
             Debug.LogError("this game object do not have a camera!");
         }
-         planes = GeometryUtility.CalculateFrustumPlanes(thisCamera);
-        
+        if(!cameraIsMoving)
+        {
+            planes = GeometryUtility.CalculateFrustumPlanes(thisCamera);
+        }
     }
     private void Update()
     {
@@ -63,24 +65,14 @@ public class CameraScript : NetworkBehaviour
                 {
                 if(Vector3.Distance(objectToFind.transform.position, transform.position) <= distanceCameraCanRegisterAgent)
                 {
-                    if(!Physics.Linecast(objectToFind.transform.position, transform.position))
+                    RaycastHit objectHit;
+                    if(!Physics.Linecast(objectToFind.transform.position, transform.position/*, out objectHit*/))
                     {
-                        if (cameraIsMoving)
-                        {
-                            planes = GeometryUtility.CalculateFrustumPlanes(thisCamera);
-                        }
-                        if (GeometryUtility.TestPlanesAABB(planes, objectCollider.bounds))
-                        {
-                            detectedTime += Time.deltaTime;
-                            if (detectedTime >= timeBeforeDetected)
-                            {
-                                detectedTime = 0;
-                                return true;
-                            }
-                        }
-                        else
+                        detectedTime += Time.deltaTime;
+                        if (detectedTime >= timeBeforeDetected)
                         {
                             detectedTime = 0;
+                            return true;
                         }
                     }
                     else
