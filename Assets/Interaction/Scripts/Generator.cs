@@ -2,22 +2,34 @@
 
 public class Generator : MonoBehaviour, IInteractable
 {
-    bool activated;
+    [SerializeField] bool activated;
+    [SerializeField] GameObject[] doors;
 
     private void Start()
     {
-        activated = false;     
+        activated = false;
+        foreach (GameObject door in doors)
+        {
+            door.GetComponent<BoxCollider>().enabled = false;
+            door.GetComponent<SlideDoor>().active = false;
+        }
     }
 
     public void GetInteracted()
     {
-        // Do generator stuff
-        // Eventually use bool in another script to do generator stuff
-        if (!activated)
+        if (!IsActivated())
         {
-            GameManager._instance.WinState();
+            foreach (GameObject door in doors)
+            {
+                door.GetComponent<BoxCollider>().enabled = true;
+                door.GetComponent<SlideDoor>().active = true;
+            }
             activated = true;
-        } 
+        }
+
+        Debug.Log("Generator Activated");
+
+
     }
 
     public bool IsActivated() => (activated) ? true : false;

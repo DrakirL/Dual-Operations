@@ -12,6 +12,7 @@ public class SlideDoor : NetworkBehaviour, IInteractable
     public Sprite lightSpriteOff;
 
     BoxCollider col;
+    public bool active;
 
     private void Start()
     {
@@ -26,7 +27,8 @@ public class SlideDoor : NetworkBehaviour, IInteractable
 
     private void Update()
     {
-        col.enabled = DoorIsClosed();
+        if(active)
+            col.enabled = DoorIsClosed();
 
         if(light != null)
         {
@@ -39,6 +41,7 @@ public class SlideDoor : NetworkBehaviour, IInteractable
 
     public void GetInteracted()
     {
+        if(active)
         GetPlayer.Instance.openDoorServer(gameObject.name);
         /*
         if (isServer)
