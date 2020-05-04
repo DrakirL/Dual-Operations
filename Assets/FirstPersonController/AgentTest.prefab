@@ -54,8 +54,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  test: 0
   cameraView: {fileID: 5824834960259707923}
+  objectModel: {fileID: 0}
   mouseAimStyle: 1
   mouseSensitivity: 4
   mouseInverted: 0
@@ -76,23 +76,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 5824834958473384813}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43c236bcdf31e9947b45ed4872fbf110, type: 3}
+  m_Script: {fileID: 11500000, guid: 68cfe5e750fee5b42b4bff47bdde85c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  cameraView: {fileID: 5824834960259707923}
-  mouseAimStyle: 0
-  mouseSensitivity: 4
-  mouseInverted: 0
-  moveSpeed: 20
-  gravity: 9.8
-  cameraOffsetY: 0.21
-  colMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  height: 0.5
-  jumpSpeed: 10
+  interactRange: 5
+  interactTextOn: 0
+  interactText: {fileID: 0}
 --- !u!135 &5824834958473384808
 SphereCollider:
   m_ObjectHideFlags: 0
