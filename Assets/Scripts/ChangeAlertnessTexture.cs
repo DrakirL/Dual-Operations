@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class ChangeAlertnessTexture : MonoBehaviour
 {
+	Outline outline;
+	private void Awake()
+	{
+		outline = GetComponent<Outline>();
+	}
 	public enum SetTexture
 	{
 		Unsuspected,
@@ -44,10 +49,12 @@ public class ChangeAlertnessTexture : MonoBehaviour
 		{
 			case SetTexture.Unsuspected:
 			tex = unsuspected;
+			outline.enabled = false;
 			break;
 			
 			case SetTexture.Alerted:
 			tex = alerted;
+			outline.enabled = true;
 			break;
 			
 			default:

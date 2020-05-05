@@ -3,8 +3,10 @@
 public class Generator : MonoBehaviour, IInteractable
 {
     [SerializeField] bool activated;
-    [Tooltip("These doors will be activated when generator is interacted with6")]
+    [Tooltip("These object's colliders will be activated when generator is interacted with")]
     [SerializeField] GameObject[] doors;
+    [Tooltip("These object's will be activated when generator is interacted with")]
+    [SerializeField] GameObject[] gameObjects;
 
     private void Start()
     {
@@ -26,7 +28,11 @@ public class Generator : MonoBehaviour, IInteractable
         {
             door.GetComponent<BoxCollider>().enabled = boolToSet;
             door.GetComponent<SlideDoor>().active = boolToSet;
-            activated = boolToSet;
-        }       
+        }
+        foreach (GameObject go in gameObjects)
+        {
+            go.SetActive(boolToSet);           
+        }
+        activated = boolToSet;
     }
 }
