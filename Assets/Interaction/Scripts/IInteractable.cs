@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IInteractable
 {
-    void GetInteracted();
+    void GetInteracted(List<int> inter);
 }
