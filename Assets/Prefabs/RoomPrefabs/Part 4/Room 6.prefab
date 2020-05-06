@@ -68,7 +68,6 @@ Transform:
   - {fileID: 7260617757855149023}
   - {fileID: 883302116953012444}
   - {fileID: 6396040450727269617}
-  - {fileID: 2636290571108283777}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -134,36 +133,6 @@ Transform:
   - {fileID: 8078642927759794015}
   m_Father: {fileID: 7176821159615804184}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &5945053383465865399
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2636290571108283777}
-  m_Layer: 0
-  m_Name: Goal1
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2636290571108283777
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5945053383465865399}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.22, y: 0.48, z: 5.752446}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 7176821159615804184}
-  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1243674567875574119
 PrefabInstance:
@@ -762,7 +731,7 @@ PrefabInstance:
         type: 3}
       propertyPath: goal.Array.data[0]
       value: 
-      objectReference: {fileID: 2636290571108283777}
+      objectReference: {fileID: 0}
     - target: {fileID: 9014188345922318135, guid: 1906fb27553bd824482887ad0d3b9a4d,
         type: 3}
       propertyPath: radioTurnOff
