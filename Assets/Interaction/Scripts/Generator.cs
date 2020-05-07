@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 
 public class Generator : MonoBehaviour, IInteractable
 {
@@ -13,7 +14,7 @@ public class Generator : MonoBehaviour, IInteractable
         Activate(false);
     }
 
-    public void GetInteracted()
+    public void GetInteracted(List<int> io)
     {
         if (!activated)
         {

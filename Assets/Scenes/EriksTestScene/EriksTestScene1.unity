@@ -505,6 +505,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 581cab3926c9d8340b4fc2899d04a8e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   goal:
   - {fileID: 248699264}
   destPoint: 0
@@ -5872,7 +5874,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a113812026c2bdb4b85d9583d7d72897, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   on: 0
+  assignedGuards: []
 --- !u!65 &1305451276
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6495,6 +6500,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -4016288314156581712, guid: 1906fb27553bd824482887ad0d3b9a4d,
+        type: 3}
+      propertyPath: sceneId
+      value: 179105022
+      objectReference: {fileID: 0}
     - target: {fileID: 9014188345922318134, guid: 1906fb27553bd824482887ad0d3b9a4d,
         type: 3}
       propertyPath: m_Name

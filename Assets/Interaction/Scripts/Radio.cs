@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 
 public class Radio : MonoBehaviour, IInteractable
 {
@@ -9,7 +10,7 @@ public class Radio : MonoBehaviour, IInteractable
         sound = GetComponent<AudioSource>();
     }
 
-    public void GetInteracted()
+    public void GetInteracted(List<int> io)
     {
         if (!SoundIsPlaying())
         {        

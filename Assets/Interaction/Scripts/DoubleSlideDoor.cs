@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 
 public class DoubleSlideDoor : MonoBehaviour, IInteractable
 {
@@ -16,7 +17,7 @@ public class DoubleSlideDoor : MonoBehaviour, IInteractable
         col.enabled = DoorIsClosed();
     }
 
-    public void GetInteracted()
+    public void GetInteracted(List<int> io)
     {
         if (DoorIsClosed())
         {

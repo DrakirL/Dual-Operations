@@ -8,10 +8,12 @@ public class InputManager : MonoBehaviour
     public float interactRange = 5f;
     public bool interactTextOn;
     public GameObject interactText;
+    public List<int> objectPlayerCanInterRactWith = new List<int>();
 
     private void Awake()
     {
         interactText = GameObject.FindGameObjectWithTag("InteractText");
+        objectPlayerCanInterRactWith.Add(0);
     }
 
     void Update()
@@ -45,7 +47,7 @@ public class InputManager : MonoBehaviour
                 IInteractable interactable = hit.collider.GetComponent<IInteractable>();
                 if(interactable != null)
                 {
-                    interactable.GetInteracted();
+                    interactable.GetInteracted(objectPlayerCanInterRactWith);
                 }                  
             }
         }
