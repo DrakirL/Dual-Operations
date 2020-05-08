@@ -5,6 +5,7 @@ using UnityEngine;
 public class getNewKeyCode : MonoBehaviour, IInteractable
 {
     [SerializeField] int newKeyCode;
+    [SerializeField] GameObject[] destroyThisOnInter;
     BoxCollider col;
     private void Start()
     {
@@ -15,6 +16,10 @@ public class getNewKeyCode : MonoBehaviour, IInteractable
         if (!io.Contains(newKeyCode))
         {
             GetPlayer.Instance.getPlayer().GetComponent<InputManager>().objectPlayerCanInterRactWith.Add(newKeyCode);
+            for(int i = 0; i < destroyThisOnInter.Length; i++)
+            {
+                Destroy(destroyThisOnInter[i]);
+            }
         }
     }
 }
