@@ -19,7 +19,7 @@ public class Door : MonoBehaviour, IInteractable
     {
         EnableDoor();
     }
-    public void GetInteracted()
+    public void GetInteracted(List<int> io)
     {
         if (DoorIsClosed())
         {       

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 
 public class Generator : MonoBehaviour, IInteractable
 {
@@ -9,7 +10,7 @@ public class Generator : MonoBehaviour, IInteractable
         activated = false;     
     }
 
-    public void GetInteracted()
+    public void GetInteracted(List<int> io)
     {
         // Do generator stuff
         // Eventually use bool in another script to do generator stuff

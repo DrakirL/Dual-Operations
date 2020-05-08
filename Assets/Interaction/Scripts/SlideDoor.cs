@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using Mirror;
+using System.Collections.Generic;
 
 public class SlideDoor : NetworkBehaviour, IInteractable
 {
@@ -10,6 +11,9 @@ public class SlideDoor : NetworkBehaviour, IInteractable
     public new GameObject light;
     public Sprite lightSpriteOn;
     public Sprite lightSpriteOff;
+    [SerializeField] int keyCode;
+    [Tooltip("if agent tries to open a door he/she don't have access to, this amount of alertness will  be added")]
+    [SerializeField] float alertInc = 20; 
 
     BoxCollider col;
 
@@ -37,22 +41,30 @@ public class SlideDoor : NetworkBehaviour, IInteractable
         }      
     }
 
-    public void GetInteracted()
+    public void GetInteracted(List<int> io)
     {
-        GetPlayer.Instance.openDoorServer(gameObject.name);
-        /*
-        if (isServer)
+        if(io.Contains(keyCode))
         {
-            Debug.Log("I'm the server (or host)");
-            RpcPlayOpenAnimation();
+
+        GetPlayer.Instance.openDoorServer(gameObject.name);
+            /*
+            if (isServer)
+            {
+                Debug.Log("I'm the server (or host)");
+                RpcPlayOpenAnimation();
+            }
+            else
+            {
+                    Debug.Log("I'm the client");
+                //CmdCallServertoOpenDoor();
+                GetPlayer.Instance.openDoorServer(gameObject.name);
+            }*/
+
         }
         else
         {
-                Debug.Log("I'm the client");
-            //CmdCallServertoOpenDoor();
-            GetPlayer.Instance.openDoorServer(gameObject.name);
-        }*/
-        Debug.Log("1");
+            AlertMeter._instance.AddAlert(alertInc);
+        }
     }
     
 
