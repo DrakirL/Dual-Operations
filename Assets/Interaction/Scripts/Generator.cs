@@ -1,39 +1,41 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using Mirror;
 
-public class Generator : MonoBehaviour, IInteractable
+public class Generator : NetworkBehaviour, IInteractable
 {
+    [SyncVar]
     [SerializeField] bool activated;
     [Tooltip("These object's colliders will be activated when generator is interacted with")]
     [SerializeField] GameObject[] doors;
-    [Tooltip("These object's will be activated when generator is interacted with")]
-    [SerializeField] GameObject[] gameObjects;
-
-    private void Start()
-    {
-        Activate(false);
-    }
+    [Tooltip("Connected to the index in the GeneratorItems script in the hackers' map holder. Starts at 0")]
+    [SerializeField] int generatorNum;
 
     public void GetInteracted(List<int> io)
     {
-        if (!activated)
+        if(!activated)
+            Activate(true);     
+    }
+
+    [Command]
+    void CmdActivate(bool boolToSet)
+    {
+        //foreach (GameObject go in gameObjects)
+        foreach (GameObject go in GeneratorItems.Instance.generators[generatorNum].generatorObjects)
         {
-            Activate(true);          
+            go.SetActive(boolToSet);
         }
     }
 
     // Activates the door's trigger collider
     void Activate(bool boolToSet)
     {
+        activated = true;
         foreach (GameObject door in doors)
         {
             door.GetComponent<BoxCollider>().enabled = boolToSet;
             door.GetComponent<SlideDoor>().active = boolToSet;
         }
-        foreach (GameObject go in gameObjects)
-        {
-            go.SetActive(boolToSet);           
-        }
-        activated = boolToSet;
+        CmdActivate(boolToSet);
     }
 }

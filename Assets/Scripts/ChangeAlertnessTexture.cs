@@ -61,22 +61,20 @@ public class ChangeAlertnessTexture : NetworkBehaviour
 
     void Update()
     {		
-		if(tex != last)
-		  changeTexture(tex);
         if (isServer)
         {
             switch (setTexture)
             {
                 case SetTexture.Unsuspected:
                         tex = unsuspected;
-                        texInt = 1;
                         outline.enabled = false;
+                        texInt = 1;                       
                     break;
 
                 case SetTexture.Alerted:
                         tex = alerted;
-                        texInt = 2;
                         outline.enabled = true;
+                        texInt = 2;
                     break;
 
                 default:

@@ -45,8 +45,10 @@ public class SlideDoor : NetworkBehaviour, IInteractable
 
     public void GetInteracted(List<int> io)
     {
-        if(active)
-        GetPlayer.Instance.openDoorServer(gameObject.name);
+        if (active)
+        {
+            GetPlayer.Instance.openDoorServer(gameObject.name);
+        }     
         /*
         if (isServer)
         {
@@ -64,8 +66,7 @@ public class SlideDoor : NetworkBehaviour, IInteractable
                 //CmdCallServertoOpenDoor();
                 GetPlayer.Instance.openDoorServer(gameObject.name);
             }*/
-
-        }
+        
         else
         {
             AlertMeter._instance.AddAlert(alertInc);
