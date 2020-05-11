@@ -9,9 +9,13 @@ public class InputManager : MonoBehaviour
     public bool interactTextOn;
     public GameObject interactText;
     public List<int> objectPlayerCanInterRactWith = new List<int>();
+    [SerializeField] GameObject purpleCard, orangeCard, greenCard;
 
     private void Awake()
     {
+        purpleCard.SetActive(false);
+        orangeCard.SetActive(false);
+        greenCard.SetActive(false);
         interactText = GameObject.FindGameObjectWithTag("InteractText");
         objectPlayerCanInterRactWith.Add(0);
     }
@@ -54,5 +58,15 @@ public class InputManager : MonoBehaviour
         else
          if(interactTextOn) 
 			 interactText.SetActive(false);
+    }
+    public void newCard()
+    {
+        purpleCard.SetActive(objectPlayerCanInterRactWith.Contains(1));
+        greenCard.SetActive(objectPlayerCanInterRactWith.Contains(2));
+        orangeCard.SetActive(objectPlayerCanInterRactWith.Contains(3));
+
+        // 1 = lila
+        // 2 = grön
+        // 3 = orange
     }
 }
