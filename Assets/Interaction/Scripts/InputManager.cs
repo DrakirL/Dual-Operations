@@ -47,7 +47,7 @@ public class InputManager : MonoBehaviour
                 IInteractable interactable = hit.collider.GetComponent<IInteractable>();
                 if(interactable != null)
                 {
-                    interactable.GetInteracted(objectPlayerCanInterRactWith);
+                    interactable.GetInteracted(objectPlayerCanInterRactWith); //????
                 }                  
             }
         }

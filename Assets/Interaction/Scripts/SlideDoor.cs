@@ -16,6 +16,7 @@ public class SlideDoor : NetworkBehaviour, IInteractable
     [SerializeField] float alertInc = 20; 
 
     BoxCollider col;
+    public bool active;
 
     private void Start()
     {
@@ -30,7 +31,8 @@ public class SlideDoor : NetworkBehaviour, IInteractable
 
     private void Update()
     {
-        col.enabled = DoorIsClosed();
+        if(active)
+            col.enabled = DoorIsClosed();
 
         if(light != null)
         {
@@ -43,7 +45,12 @@ public class SlideDoor : NetworkBehaviour, IInteractable
 
     public void GetInteracted(List<int> io)
     {
-        if(io.Contains(keyCode))
+        if (active)
+        {
+            GetPlayer.Instance.openDoorServer(gameObject.name);
+        }     
+        /*
+        if (isServer)
         {
 
         GetPlayer.Instance.openDoorServer(gameObject.name);
@@ -59,8 +66,7 @@ public class SlideDoor : NetworkBehaviour, IInteractable
                 //CmdCallServertoOpenDoor();
                 GetPlayer.Instance.openDoorServer(gameObject.name);
             }*/
-
-        }
+        
         else
         {
             AlertMeter._instance.AddAlert(alertInc);
