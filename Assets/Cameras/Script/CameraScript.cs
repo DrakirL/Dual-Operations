@@ -34,7 +34,7 @@ public class CameraScript : NetworkBehaviour
             Debug.LogError("this game object do not have a camera!");
         }
          planes = GeometryUtility.CalculateFrustumPlanes(thisCamera);
-        
+
     }
     private void Update()
     {
