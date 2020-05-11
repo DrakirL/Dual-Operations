@@ -205,6 +205,7 @@ GameObject:
   - component: {fileID: -2298360144127891606}
   - component: {fileID: -3376478667481377432}
   - component: {fileID: 241902681443630070}
+  - component: {fileID: 5118164232097877646}
   m_Layer: 0
   m_Name: AgentFPPController
   m_TagString: Player
@@ -391,6 +392,20 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &5118164232097877646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5524880825172794005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7eb30a015e159e449ba121334c45cf0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activeCollider: {fileID: 0}
+  relatedKeyCard: {fileID: 7725076665585869944}
 --- !u!1 &5524880826539744336
 GameObject:
   m_ObjectHideFlags: 0
