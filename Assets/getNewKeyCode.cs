@@ -20,6 +20,7 @@ public class getNewKeyCode : MonoBehaviour, IInteractable
             {
                 Destroy(destroyThisOnInter[i]);
             }
+            GetPlayer.Instance.getPlayer().GetComponent<InputManager>().newCard();
         }
     }
 }
