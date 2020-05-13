@@ -8,7 +8,9 @@ public class ChangeAlertnessTexture : NetworkBehaviour
 	Outline outline;
 	private void Awake()
 	{
-		outline = GetComponent<Outline>();
+		//outline = GetComponent<Outline>();
+        outline.enabled = false;
+		outline = target.GetComponent<Outline>();
 	}
 	public enum SetTexture
 	{
@@ -66,13 +68,13 @@ public class ChangeAlertnessTexture : NetworkBehaviour
             switch (setTexture)
             {
                 case SetTexture.Unsuspected:
-                        tex = unsuspected;
+                        //tex = unsuspected;
                         outline.enabled = false;
                         texInt = 1;                       
                     break;
 
                 case SetTexture.Alerted:
-                        tex = alerted;
+                        //tex = alerted;
                         outline.enabled = true;
                         texInt = 2;
                     break;

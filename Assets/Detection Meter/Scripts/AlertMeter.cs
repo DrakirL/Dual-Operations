@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using Mirror;
@@ -10,8 +11,9 @@ public class AlertMeter : NetworkBehaviour
 {
     public static AlertMeter _instance { get; private set; }
 
-   public TextMeshProUGUI text;
-   public Slider slider;
+    public TextMeshProUGUI text;
+    public Slider slider;
+    public Image alertImage;
 
     [Tooltip("Time in seconds for meter to start decrease")]
     [SerializeField] float alertDecreaseTimer = 3f;
@@ -94,8 +96,7 @@ public class AlertMeter : NetworkBehaviour
             {
                 alertValue = 100f;
             }
-        }
-        
+        }       
     }
     void StopMeter()
     {
@@ -119,7 +120,6 @@ public class AlertMeter : NetworkBehaviour
             }
         }*/
     }
-
     public void SetDetected(bool boolToSet)
     {
         if(boolToSet != detected)
@@ -160,10 +160,39 @@ public class AlertMeter : NetworkBehaviour
     // Check if meter has reached the limit
     public bool IsFull() => alertValue >= 100f ? true : false;
 
-   /* public void setV(System.Single oldValue, System.Single newValue)
+    public void PlayAlertFlash(float time)
     {
-        GetPlayer.Instance.addAlertServer(newValue);
-        oldValue = newValue;
-        alertValue = newValue;
-    }*/
+        StartCoroutine(FadeImage(true, time));
+    }
+
+    IEnumerator FadeImage(bool fadeAway, float time)
+    {
+        // Fade from opaque to transparent
+        if (fadeAway)
+        {
+            for (float i = 1; i >= 0; i -= Time.deltaTime / time)
+            {
+                // Set color with i as alpha
+                alertImage.color = new Color(1, 1, 1, i);
+                yield return null;
+            }
+        }
+        // Fade from transparent to opaque
+        else
+        {
+            for (float i = 0; i <= 1; i += Time.deltaTime / time)
+            {
+                // Set color with i as alpha
+                alertImage.color = new Color(1, 1, 1, i);
+                yield return null;
+            }
+        }
+    }
+
+    /* public void setV(System.Single oldValue, System.Single newValue)
+     {
+         GetPlayer.Instance.addAlertServer(newValue);
+         oldValue = newValue;
+         alertValue = newValue;
+     }*/
 }

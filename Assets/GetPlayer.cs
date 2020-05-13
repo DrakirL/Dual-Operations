@@ -124,4 +124,36 @@ public class GetPlayer : NetworkBehaviour
         canvas.transform.Find("tutorial").GetComponent<Text>().text = "";
         //canvasText.text = "";
     }
+    // Generator functions
+    public void ActivateGeneratorItemsServer(int genNum, bool boolToSet)
+    {
+        CmdActivateGeneratorItems(genNum, boolToSet);
+    }
+    [Command]
+    public void CmdActivateGeneratorItems(int genNum, bool boolToSet)
+    {
+        RpcActivateGeneratorItems(genNum, boolToSet);
+    }
+    [ClientRpc]
+    void RpcActivateGeneratorItems(int genNum, bool boolToSet)
+    {
+        for (int i = 0; i < GeneratorItems.Instance.generators[genNum].generatorObjects.Length; i++)
+        {
+            GeneratorItems.Instance.generators[genNum].generatorObjects[i].SetActive(boolToSet);
+        }
+    }
+    public void LoadScene(string sceneName, float time)
+    {
+        CmdLoadScene(sceneName, time);
+    }
+    [Command]
+    void CmdLoadScene(string scene, float time)
+    {
+        RpcLoadScene(scene, time);
+    }
+    [ClientRpc]
+    void RpcLoadScene(string scene, float time)
+    {
+        GameManager._instance.LoadScene(scene, time);
+    }
 }
