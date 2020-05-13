@@ -413,7 +413,7 @@ public class MinigameManager : MonoBehaviour
         o.SetActive(true);
         button.gameObject.SetActive(true);
         canvas.SetActive(false);
-        GetPuzzle(o.GetComponent<Minigame>().pieces);
+        GetPuzzle(o.GetComponent<Minigame>().pieces);       
     }
     public void Deactivate()
     {
@@ -421,6 +421,7 @@ public class MinigameManager : MonoBehaviour
         o.SetActive(false);
         button.gameObject.SetActive(false);
         canvas.SetActive(true);
+        timer.ResetTimer();
     }
     public void GetHackerCanvas(GameObject o)
     {
