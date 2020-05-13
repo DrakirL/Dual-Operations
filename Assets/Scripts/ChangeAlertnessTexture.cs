@@ -8,7 +8,7 @@ public class ChangeAlertnessTexture : NetworkBehaviour
 	Outline outline;
 	private void Awake()
 	{
-		outline = GetComponent<Outline>();
+		//outline = GetComponent<Outline>();
         outline.enabled = false;
 		outline = target.GetComponent<Outline>();
 	}
