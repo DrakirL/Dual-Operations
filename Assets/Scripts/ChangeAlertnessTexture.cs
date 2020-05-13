@@ -9,6 +9,7 @@ public class ChangeAlertnessTexture : NetworkBehaviour
 	private void Awake()
 	{
 		outline = GetComponent<Outline>();
+        outline.enabled = false;
 	}
 	public enum SetTexture
 	{
