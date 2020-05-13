@@ -35,24 +35,11 @@ public class GameManager : MonoBehaviour
         {
             LoadScene("Lose", reloadTime);
             state = true;
-        }
-        
+        }       
     }
-    public void WinState()
-    {
-        LoadScene("Win", reloadTime);
-    }
-    // General scene load function with loadtime as a parameter
     public void LoadScene(string sceneName, float time)
     {
-        StartCoroutine(Delay(time, sceneName));
-        
-    }
-    // dunno
-    void UpdateMap()
-    {
-        // generator interact?
-        // update part of or whole map?
+        StartCoroutine(Delay(time, sceneName));      
     }
     IEnumerator Delay(float time, string s)
     {
