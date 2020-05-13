@@ -16,21 +16,18 @@ public class SlideDoor : NetworkBehaviour, IInteractable
     [SerializeField] float alertInc = 20; 
 
     BoxCollider col;
+    public bool active = true;
 
     private void Start()
     {
         
         col = GetComponent<BoxCollider>();
-       // NetworkIdentity.AssignClientAuthority(GetComponent<NetworkIdentity>().AssignClientAuthority(this.GetComponent<NetworkIdentity>().connectionToClient));
-        //NetworkIdentity.AssignClientAuthority(NetworkServer.connections[0]);
-        //NetworkIdentity.clientAuthorityCallback(this, GetComponent<NetworkIdentity>(), true);
-        //NetworkIdentity.AssignClientAuthority(NetworkServer.connections[0].connectionId);
-        // NetworkIdentity.AssignClientAuthority(GetPlayer.Instance.getPlayer().GetComponent<NetworkIdentity>());
     }
 
     private void Update()
     {
-        col.enabled = DoorIsClosed();
+        if(active)
+            col.enabled = DoorIsClosed();
 
         if(light != null)
         {
@@ -43,23 +40,16 @@ public class SlideDoor : NetworkBehaviour, IInteractable
 
     public void GetInteracted(List<int> io)
     {
-        if(io.Contains(keyCode))
+        if (active)
         {
-
-        GetPlayer.Instance.openDoorServer(gameObject.name);
-            /*
-            if (isServer)
+            if (io.Contains(keyCode))
             {
-                Debug.Log("I'm the server (or host)");
-                RpcPlayOpenAnimation();
+                GetPlayer.Instance.openDoorServer(gameObject.name);
             }
             else
             {
-                    Debug.Log("I'm the client");
-                //CmdCallServertoOpenDoor();
-                GetPlayer.Instance.openDoorServer(gameObject.name);
-            }*/
-
+                AlertMeter._instance.AddAlert(alertInc);
+            }
         }
         else
         {
@@ -67,18 +57,8 @@ public class SlideDoor : NetworkBehaviour, IInteractable
         }
     }
     
-
-  /*  [Command]
-    public void CmdCallServertoOpenDoor()
-    {
-        RpcPlayOpenAnimation();
-        Debug.Log("2");
-    }*/
-
-   //[ClientRpc]
     public void RpcPlayOpenAnimation()
     {
-        Debug.Log("3");
         if (DoorIsClosed())
         {
             if (anim1 != null)

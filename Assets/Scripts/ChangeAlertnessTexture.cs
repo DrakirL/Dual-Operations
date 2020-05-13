@@ -5,6 +5,11 @@ using Mirror;
 
 public class ChangeAlertnessTexture : NetworkBehaviour
 {
+	Outline outline;
+	private void Awake()
+	{
+		outline = GetComponent<Outline>();
+	}
 	public enum SetTexture
 	{
 		Unsuspected,
@@ -55,21 +60,21 @@ public class ChangeAlertnessTexture : NetworkBehaviour
 	}
 
     void Update()
-    {
+    {		
         if (isServer)
         {
             switch (setTexture)
             {
                 case SetTexture.Unsuspected:
                         tex = unsuspected;
-                        texInt = 1;
-                    
+                        outline.enabled = false;
+                        texInt = 1;                       
                     break;
 
                 case SetTexture.Alerted:
                         tex = alerted;
+                        outline.enabled = true;
                         texInt = 2;
-                    
                     break;
 
                 default:
