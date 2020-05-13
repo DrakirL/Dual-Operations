@@ -1,10 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
-using Mirror;
 
-public class Generator : NetworkBehaviour, IInteractable
-{
-    [SyncVar]
+public class Generator : MonoBehaviour, IInteractable
+{  
     [SerializeField] bool activated;
     [Tooltip("These object's colliders will be activated when generator is interacted with")]
     [SerializeField] GameObject[] doors;
@@ -14,28 +12,7 @@ public class Generator : NetworkBehaviour, IInteractable
     public void GetInteracted(List<int> io)
     {
         if(!activated)
-            Activate(true);     
-    }
-
-    [Command]
-    void CmdActivate(bool boolToSet)
-    {
-        //foreach (GameObject go in gameObjects)
-        foreach (GameObject go in GeneratorItems.Instance.generators[generatorNum].generatorObjects)
-        {
-            go.SetActive(boolToSet);
-        }
-    }
-
-    // Activates the door's trigger collider
-    void Activate(bool boolToSet)
-    {
-        activated = true;
-        foreach (GameObject door in doors)
-        {
-            door.GetComponent<BoxCollider>().enabled = boolToSet;
-            door.GetComponent<SlideDoor>().active = boolToSet;
-        }
-        CmdActivate(boolToSet);
+            GetPlayer.Instance.ActivateGeneratorItemsServer(generatorNum, true);
+        activated = true;        
     }
 }

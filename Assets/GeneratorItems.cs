@@ -1,16 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
-public class GeneratorItems : MonoBehaviour
+public class GeneratorItems : NetworkBehaviour
 {
     public static GeneratorItems Instance { get; private set; }
     [System.Serializable]
     public class GeneratorList
     {
+        [Tooltip("The objects bound to this generator")]
         public GameObject[] generatorObjects;
     }
-
+    [Tooltip("Number of generators that exists on the map")]
     public GeneratorList[] generators;
 
     private void Awake()
@@ -23,17 +25,19 @@ public class GeneratorItems : MonoBehaviour
 
     private void Start()
     {
-        ActivateGeneratorItems(false);
-    }
-
-    void ActivateGeneratorItems(bool boolToSet)
-    {
+        // Deactivates all objects in the generators
         for (int i = 0; i < generators.Length; i++)
         {
-            for (int j = 0; j < generators[i].generatorObjects.Length; j++)
-            {
-                generators[i].generatorObjects[j].SetActive(boolToSet);
-            }
+            ActivateGeneratorItems(i, false);
+        }    
+    }
+
+    // Activates all objects in a specific generator
+    void ActivateGeneratorItems(int genNum, bool boolToSet)
+    {
+        for (int i = 0; i < generators[genNum].generatorObjects.Length; i++)
+        {
+            generators[genNum].generatorObjects[i].SetActive(boolToSet);
         }
     }
 }
