@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 9014188345922318137}
   - component: {fileID: -4016288314156581712}
   - component: {fileID: 1549286896210618559}
+  - component: {fileID: 2527790966809468349}
   m_Layer: 0
   m_Name: Cylinder
   m_TagString: Guard
@@ -4857,6 +4858,24 @@ MonoBehaviour:
   localRotationSensitivity: 0.01
   localScaleSensitivity: 0.01
   compressRotation: 1
+--- !u!114 &2527790966809468349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9014188345922318134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98c7892038084b045973d6dd4638477f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  setTexture: 0
+  unsuspected: {fileID: 2100000, guid: 21014a3736863cf4cb7c3ca35d157a8e, type: 2}
+  alerted: {fileID: 2100000, guid: 2c3efaffba6a2f941a96c55a7f9ef355, type: 2}
+  target: {fileID: 811532836290417562}
 --- !u!1001 &663042868707964960
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4924,7 +4943,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: GuardPrefab
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8283298222421404982, guid: e6326465ec03a5b4ca5ab896434881b6, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: e6326465ec03a5b4ca5ab896434881b6, type: 3}
 --- !u!4 &811532836290417562 stripped
 Transform:
