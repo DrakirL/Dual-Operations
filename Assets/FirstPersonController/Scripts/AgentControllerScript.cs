@@ -48,6 +48,7 @@ public class AgentControllerScript : NetworkBehaviour
                 if (mainCamera != null)
                 {
                     cameraView = mainCamera.gameObject.transform;
+
                 }
             }
 
@@ -367,11 +368,14 @@ public class AgentControllerScript : NetworkBehaviour
 		transform.Translate(vec);
 	}
 
-	void Update()
+    
+
+    void Update()
 	{
         if (isLocalPlayer)
         {
             MouseLook();
+
         }
 	}
 

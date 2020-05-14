@@ -1,13 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
-public class taser : MonoBehaviour
+public class taser : NetworkBehaviour
 {
 
     public Camera aimCam;
     public float range;
-
+    public bool bengt = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,13 +18,19 @@ public class taser : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (isLocalPlayer)
         {
-            Debug.Log("skjut");
+            if (Input.GetKeyDown(KeyCode.H))
+            {
+                Debug.Log("skjut");
+                Shoot();
+            }
+        }
+        if (bengt)
+        {
             Shoot();
         }
     }
-
     void Shoot()
     {
         RaycastHit hit;
