@@ -405,6 +405,12 @@ public class AgentControllerScript : NetworkBehaviour
 
             CollisionDetection(ref actorVelocity, 0, 0, false);
             Move(actorVelocity * Time.fixedDeltaTime);
+
+            if (Input.GetKeyDown(KeyCode.J))
+            {
+                gameObject.GetComponent<taser>().Shoot();
+                
+            }
         }
     }
 }

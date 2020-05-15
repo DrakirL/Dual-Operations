@@ -18,20 +18,25 @@ public class taser : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isLocalPlayer)
+        if (!isServer)
         {
-            if (Input.GetKeyDown(KeyCode.H))
+            if (Input.GetButtonDown("Fire1"))
             {
-                Debug.Log("skjut");
+                Debug.Log("fire");
                 Shoot();
             }
         }
+        
+
+
         if (bengt)
         {
             Shoot();
         }
     }
-    void Shoot()
+
+    
+    public void Shoot()
     {
         RaycastHit hit;
         if (Physics.Raycast(aimCam.transform.position, aimCam.transform.forward, out hit, range))
@@ -41,7 +46,6 @@ public class taser : NetworkBehaviour
             if (target != null)
             {
                 target.dead = true;
-                Debug.Log("xd");
             }
         }
     }

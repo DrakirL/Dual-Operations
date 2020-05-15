@@ -22,7 +22,7 @@ public class AI : NetworkBehaviour
     public GameObject detectCount;
     [HideInInspector]
     public ParticleSystem warning;
-    public bool dead = false;    
+    [SyncVar] public bool dead = false;    
 
 
     private void Start()
