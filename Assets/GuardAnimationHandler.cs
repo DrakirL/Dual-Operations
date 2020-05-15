@@ -35,7 +35,7 @@ public class GuardAnimationHandler : MonoBehaviour
         {
             return;
         }
-        animation.Play();
+        //animation.Play();
         if(Input.GetKeyDown(KeyCode.Q))
         {
             changeAnimation("Walk");
