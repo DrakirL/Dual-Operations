@@ -9,9 +9,9 @@ public class ChangeAlertnessTexture : NetworkBehaviour
 	private void Awake()
 	{
 		//outline = GetComponent<Outline>();
-        outline.enabled = false;
 		outline = target.GetComponent<Outline>();
-	}
+        outline.enabled = false;
+    }
 	public enum SetTexture
 	{
 		Unsuspected,
