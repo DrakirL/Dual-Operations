@@ -71,7 +71,7 @@ LineRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1165942515
-  m_SortingLayer: 3
+  m_SortingLayer: 0
   m_SortingOrder: 3
   m_Positions:
   - {x: 0.5, y: 0, z: 0}
@@ -193,9 +193,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   active: 0
-  startBox: 0
-  endBox: 0
+  startConnector: 0
+  endConnector: 0
   firewall: 1
-  disableRotation: 1
+  rotation: 0
   rotateSpeed: 0
+  input: 1
   values: 00000000010000000100000001000000
+  startValues: 

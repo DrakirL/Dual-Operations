@@ -230,9 +230,6 @@ public class MinigameManager : MonoBehaviour
         }
         else
         {
-            // Play animation for neighbour piece
-            // temp "animation"
-            puzzle.pieces[w, h].GetComponent<LineRenderer>().material.color = Color.green;
             CheckNeighbours(w, h);
         }
             
