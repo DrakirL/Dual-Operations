@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
+using System.Security.Cryptography;
 
 public class radioInterract : NetworkBehaviour
 {
@@ -19,6 +20,7 @@ public class radioInterract : NetworkBehaviour
     {
         yield return new WaitForSeconds(10);
         on = false;
+        DualOperationsAudioPlayer.Instance.UpdateRadio(0.0f, transform.gameObject);
     }
 
         void checkPlayer()

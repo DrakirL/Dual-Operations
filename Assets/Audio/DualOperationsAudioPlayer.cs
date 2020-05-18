@@ -46,6 +46,7 @@ public class DualOperationsAudioPlayer : NetworkBehaviour
 
         //Start radio music
         emitter.SetParameter("RadioState", n, false);
+        UnityEngine.Debug.Log("This radio was updated: " + source);
     }
 
     //[Header("SFX Settings")]

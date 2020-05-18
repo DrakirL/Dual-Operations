@@ -128,6 +128,7 @@ public class CameraManager : NetworkBehaviour
         if (!radioStruct[index].radio.on)
         {
             radioStruct[index].radio.on = true;
+            DualOperationsAudioPlayer.Instance.UpdateRadio(0.0f, radioStruct[index].radio.transform.gameObject);
         }
     }
     public RenderTexture updateHackerCameraView(int index)
