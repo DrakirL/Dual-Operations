@@ -131,6 +131,7 @@ GameObject:
   - component: {fileID: 2469038590947001498}
   - component: {fileID: -2298360144127891606}
   - component: {fileID: -3376478667481377432}
+  - component: {fileID: 6029541590051586420}
   - component: {fileID: 6019711509079343769}
   m_Layer: 0
   m_Name: AgentFPPController
@@ -177,10 +178,16 @@ MonoBehaviour:
   mouseInverted: 0
   moveSpeed: 1.5
   gravity: 10
-  maxSlopeAngle: 25
   colMask:
     serializedVersion: 2
     m_Bits: 256
+  accelMod: 0.1
+  deaccelMod: 0.2
+  moveForward: 119
+  moveBackward: 115
+  strafeLeft: 97
+  strafeRight: 100
+  interactKey: 101
 --- !u!114 &7087142220084282350
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -276,6 +283,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!114 &6029541590051586420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5524880825172794005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0433981247125b46b355c33be24527e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aimCam: {fileID: 5524880825149089293}
+  range: 0
+  bengt: 0
 --- !u!114 &6019711509079343769
 MonoBehaviour:
   m_ObjectHideFlags: 0

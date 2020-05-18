@@ -48,14 +48,24 @@ public class SecondState : State<AI>
     {
         _owner.StartCoroutine(lol(_owner));
         Debug.Log("Enter 2");
+		
+		//Filip 
+		var obj = _owner.gameObject.GetComponentInChildren<ChangeAlertnessTexture>();
+		obj.setTexture = ChangeAlertnessTexture.SetTexture.Alerted;
+		
         AlertMeter._instance.AddAlert(10);
         _owner.warning.Play(true);
-        //        _owner.gameObject.GetComponent<NavMeshAgent>().destination = _owner.goal2.position;
+        //_owner.gameObject.GetComponent<NavMeshAgent>().destination = _owner.goal2.position;
     }
 
     public override void ExitState(AI _owner)
     {
         Debug.Log("Exit 2");
+		
+		//Filip 
+		var obj = _owner.gameObject.GetComponentInChildren<ChangeAlertnessTexture>();
+		obj.setTexture = ChangeAlertnessTexture.SetTexture.Unsuspected;
+		
         _owner.warning.Stop();
     }
 

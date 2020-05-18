@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using StateStuff;
+using Mirror;
 
-public class AI : MonoBehaviour
+public class AI : NetworkBehaviour
 {
     //   public bool switchState = false;
     public Transform[] goal;

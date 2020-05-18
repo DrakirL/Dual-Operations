@@ -9,6 +9,8 @@ public class InputManager : MonoBehaviour
     public bool interactTextOn;
     public GameObject interactText;
 
+	private KeyCode getInteractKey;
+
     private void Awake()
     {
         interactText = GameObject.FindGameObjectWithTag("InteractText");
@@ -16,6 +18,7 @@ public class InputManager : MonoBehaviour
 
     void Update()
     {
+		getInteractKey = GetComponent<AgentControllerScript>().interactKey;
         Interact();
     }
 
@@ -39,7 +42,7 @@ public class InputManager : MonoBehaviour
             if(interactTextOn) 
 				interactText.SetActive(true);
             // Does the ray intersect any objects excluding the player layer
-            if (Input.GetKeyDown(KeyCode.E))//.ECGetButtonDown("Interact"))
+            if(Input.GetKeyDown(getInteractKey))//(Input.GetKeyDown(KeyCode.E))//.ECGetButtonDown("Interact"))
             {                
                 // Get the component that is being interacted with
                 IInteractable interactable = hit.collider.GetComponent<IInteractable>();
