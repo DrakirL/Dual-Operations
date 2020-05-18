@@ -1,24 +1,18 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 
 public class Generator : MonoBehaviour, IInteractable
-{
-    bool activated;
+{  
+    [SerializeField] bool activated;
+    [Tooltip("These object's colliders will be activated when generator is interacted with")]
+    [SerializeField] GameObject[] doors;
+    [Tooltip("Connected to the index in the GeneratorItems script in the hackers' map holder. Starts at 0")]
+    [SerializeField] int generatorNum;
 
-    private void Start()
+    public void GetInteracted(List<int> io)
     {
-        activated = false;     
+        if(!activated)
+            GetPlayer.Instance.ActivateGeneratorItemsServer(generatorNum, true);
+        activated = true;        
     }
-
-    public void GetInteracted()
-    {
-        // Do generator stuff
-        // Eventually use bool in another script to do generator stuff
-        if (!activated)
-        {
-            GameManager._instance.WinState();
-            activated = true;
-        } 
-    }
-
-    public bool IsActivated() => (activated) ? true : false;
 }

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using Mirror;
+using System.Collections.Generic;
 
 public class SlideDoor : NetworkBehaviour, IInteractable
 {
@@ -10,23 +11,23 @@ public class SlideDoor : NetworkBehaviour, IInteractable
     public new GameObject light;
     public Sprite lightSpriteOn;
     public Sprite lightSpriteOff;
+    [SerializeField] int keyCode;
+    [Tooltip("if agent tries to open a door he/she don't have access to, this amount of alertness will  be added")]
+    [SerializeField] float alertInc = 20; 
 
     BoxCollider col;
+    public bool active = true;
 
     private void Start()
     {
         
         col = GetComponent<BoxCollider>();
-       // NetworkIdentity.AssignClientAuthority(GetComponent<NetworkIdentity>().AssignClientAuthority(this.GetComponent<NetworkIdentity>().connectionToClient));
-        //NetworkIdentity.AssignClientAuthority(NetworkServer.connections[0]);
-        //NetworkIdentity.clientAuthorityCallback(this, GetComponent<NetworkIdentity>(), true);
-        //NetworkIdentity.AssignClientAuthority(NetworkServer.connections[0].connectionId);
-        // NetworkIdentity.AssignClientAuthority(GetPlayer.Instance.getPlayer().GetComponent<NetworkIdentity>());
     }
 
     private void Update()
     {
-        col.enabled = DoorIsClosed();
+        if(active)
+            col.enabled = DoorIsClosed();
 
         if(light != null)
         {
@@ -37,36 +38,27 @@ public class SlideDoor : NetworkBehaviour, IInteractable
         }      
     }
 
-    public void GetInteracted()
+    public void GetInteracted(List<int> io)
     {
-        GetPlayer.Instance.openDoorServer(gameObject.name);
-        /*
-        if (isServer)
+        if (active)
         {
-            Debug.Log("I'm the server (or host)");
-            RpcPlayOpenAnimation();
+            if (io.Contains(keyCode))
+            {
+                GetPlayer.Instance.openDoorServer(gameObject.name);
+            }
+            else
+            {
+                AlertMeter._instance.AddAlert(alertInc);
+            }
         }
         else
         {
-                Debug.Log("I'm the client");
-            //CmdCallServertoOpenDoor();
-            GetPlayer.Instance.openDoorServer(gameObject.name);
-        }*/
-        Debug.Log("1");
+            AlertMeter._instance.AddAlert(alertInc);
+        }
     }
     
-
-  /*  [Command]
-    public void CmdCallServertoOpenDoor()
-    {
-        RpcPlayOpenAnimation();
-        Debug.Log("2");
-    }*/
-
-   //[ClientRpc]
     public void RpcPlayOpenAnimation()
     {
-        Debug.Log("3");
         if (DoorIsClosed())
         {
             if (anim1 != null)

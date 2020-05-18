@@ -4,17 +4,31 @@ using UnityEngine;
 
 public class canvasActivate : MonoBehaviour
 {
-    [SerializeField] Canvas canvas;
-    // Start is called before the first frame update
+   /* //[SerializeField] Canvas canvas;
+    GameObject canvas;
+        // Start is called before the first frame update
     void Start()
     {
-        
+        StartCoroutine(a(false)); 
+        //Invoke("activate", 1.0f);
     }
-    
-
-    // Update is called once per frame
-    void Update()
+    IEnumerator a(bool b)
     {
-        
+        yield return new WaitForSeconds(0.5f);
+        try
+            {           
+            GetPlayer.Instance.showCanvas();
+        }
+        catch
+        {
+
+            StartCoroutine(a(false));
+        }
+        //StartCoroutine(a(!b));
     }
+    void activate()
+    {
+        canvas.gameObject.active = true;
+        Invoke("activate", 1.0f);
+    }*/
 }

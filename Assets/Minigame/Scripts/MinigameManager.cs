@@ -3,11 +3,14 @@
 // Only works when lower left piece is set on position (0,0)
 
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class MinigameManager : MonoBehaviour
 {
+    public static MinigameManager Instance { get; private set; }
+    
     [System.Serializable]
     public class Puzzle
     {
@@ -17,9 +20,11 @@ public class MinigameManager : MonoBehaviour
         public Vector2[] firewallCoords;
         public Piece[,] pieces;
     }
-    [HideInInspector]
     public Puzzle puzzle;
+    public GameObject[] minigames;
+    HackerButton hb;
 
+    GameObject canvas;
     [Tooltip("Shuffle pieces when game start/restart")]
     [SerializeField] bool shuffle;
     //[Tooltip("Activate the electrical current starting from the start connection")]
@@ -42,17 +47,25 @@ public class MinigameManager : MonoBehaviour
     bool firewall;   
     bool input = true;
 
+    private void Awake()
+    {
+        if (Instance == null)
+            Instance = this;
+        else
+            Destroy(gameObject);
+    }
+
     void Start()
     {
-        InitializePuzzle();      
+        //InitializePuzzle();      
 
-        FindFirewalls();
+        //FindFirewalls();
 
-        SetSpecialPieceCoords();
+        //SetSpecialPieceCoords();
 
-        if (shuffle)
-            ShuffleBoard();
-        
+        //if (shuffle)
+        //   ShuffleBoard();
+
         //if (activePulse)
         //CheckNeighbours(puzzle.startCoords.x, puzzle.startCoords.y);
     }
@@ -82,8 +95,20 @@ public class MinigameManager : MonoBehaviour
          CheckFirewalls();       
     }
 
+    public void GetPuzzle(Piece[,] p)
+    {
+        InitializePuzzle(p);
+
+        FindFirewalls();
+
+        SetSpecialPieceCoords();
+
+        if (shuffle)
+            ShuffleBoard();
+    }
+
     // Set puzzle dimensions and give each piece a coordinate
-    void InitializePuzzle()
+    void InitializePuzzle(Piece[,] p)
     {
         Vector2 dimensions = GetDimensions();
         puzzle.width = (int)dimensions.x;
@@ -91,10 +116,26 @@ public class MinigameManager : MonoBehaviour
         puzzle.pieces = new Piece[puzzle.width, puzzle.height];
         visited = new bool[puzzle.width, puzzle.height];
 
-        foreach (var piece in GameObject.FindGameObjectsWithTag("Piece"))
+        puzzle.pieces = p;
+
+        List<Piece> lp = new List<Piece>();
+        bool isRepeated = false;
+
+        for (int i = 0; i < puzzle.width; i++)
         {
-            puzzle.pieces[(int)piece.transform.position.x, (int)piece.transform.position.y] = piece.GetComponent<Piece>();
-        }       
+            for (int j = 0; j < puzzle.height; j++)
+            {
+                if (lp.Contains(puzzle.pieces[i, j]))
+                    isRepeated = true;
+                lp.Add(puzzle.pieces[i, j]);               
+            }           
+        }
+        Debug.Log(isRepeated);
+
+        /*foreach (var piece in GameObject.FindGameObjectsWithTag("Piece"))
+        {
+            puzzle.pieces[(int)piece.transform.localPosition.x, (int)piece.transform.localPosition.y] = piece.GetComponent<Piece>();
+        }       */
     }
 
     // Get the board dimensions
@@ -103,10 +144,10 @@ public class MinigameManager : MonoBehaviour
         Vector2 temp = Vector2.zero;
         foreach (var piece in GameObject.FindGameObjectsWithTag("Piece"))
         {
-            if (piece.transform.position.x > temp.x)
-                temp.x = piece.transform.position.x;
-            if (piece.transform.position.y > temp.y)
-                temp.y = piece.transform.position.y;
+            if (piece.transform.localPosition.x > temp.x)
+                temp.x = piece.transform.localPosition.x;
+            if (piece.transform.localPosition.y > temp.y)
+                temp.y = piece.transform.localPosition.y;
         }
         temp.x++;
         temp.y++;
@@ -139,18 +180,18 @@ public class MinigameManager : MonoBehaviour
                 if (puzzle.pieces[i, j].startConnector)
                 {
                     puzzle.pieces[i, j].active = true;
-                    puzzle.startCoords.x = (int)puzzle.pieces[i, j].transform.position.x;
-                    puzzle.startCoords.y = (int)puzzle.pieces[i, j].transform.position.y;
+                    puzzle.startCoords.x = (int)puzzle.pieces[i, j].transform.localPosition.x;
+                    puzzle.startCoords.y = (int)puzzle.pieces[i, j].transform.localPosition.y;
                 }
                 if (puzzle.pieces[i, j].endConnector)
                 {
-                    puzzle.endCoords.x = (int)puzzle.pieces[i, j].transform.position.x;
-                    puzzle.endCoords.y = (int)puzzle.pieces[i, j].transform.position.y;
+                    puzzle.endCoords.x = (int)puzzle.pieces[i, j].transform.localPosition.x;
+                    puzzle.endCoords.y = (int)puzzle.pieces[i, j].transform.localPosition.y;
                 }
                 if (puzzle.pieces[i, j].firewall)
                 {
-                    puzzle.firewallCoords[firewallIndex].x = (int)puzzle.pieces[i, j].transform.position.x;
-                    puzzle.firewallCoords[firewallIndex].y = (int)puzzle.pieces[i, j].transform.position.y;
+                    puzzle.firewallCoords[firewallIndex].x = (int)puzzle.pieces[i, j].transform.localPosition.x;
+                    puzzle.firewallCoords[firewallIndex].y = (int)puzzle.pieces[i, j].transform.localPosition.y;
                     firewallIndex++;
                 }
             }
@@ -284,9 +325,7 @@ public class MinigameManager : MonoBehaviour
 
     bool WinCondition() => !firewall && puzzle.pieces[puzzle.endCoords.x, puzzle.endCoords.y].active ? true : false;
 
-    void Win()
-    {
-        if (WinCondition())
+    public void Win()
         {
             // Animation holder
             anim.Play("WinAnimation");
@@ -294,25 +333,27 @@ public class MinigameManager : MonoBehaviour
             // Sound holder
             audioSource.PlayOneShot(winSound);
 
-            Debug.Log("Chicken dinner :))");
-        }
+            Deactivate();     
     }
 
     void Lose()
     {
-        if (timer.IsDepleted())
+        if(timer != null)
         {
-            AlertMeter._instance.AddAlert(alertPenaltyValue);
-            // Animation holder
-            anim.Play("LoseAnimation");
+            if (timer.IsDepleted())
+            {
+                AlertMeter._instance.AddAlert(alertPenaltyValue);
+                // Animation holder
+                anim.Play("LoseAnimation");
 
-            // Sound holder/remove if fmod??
-            audioSource.PlayOneShot(loseSound);
+                // Sound holder/remove if fmod??
+                audioSource.PlayOneShot(loseSound);
 
-            // Remove if no reset after win
-            StartCoroutine(Reset(resetTime));
-            Debug.Log("Batsoup dinner :()");
-        }
+                // Remove if no reset after win
+                StartCoroutine(Reset(resetTime));
+                Debug.Log("Batsoup dinner :()");
+            }
+        }      
     }
 
     // Toggle the pulse and update the board
@@ -322,8 +363,9 @@ public class MinigameManager : MonoBehaviour
         {
             //activePulse = true;
             UpdateBoard();
-            Win();
-            StartCoroutine(Reset(resetTime));
+            if(WinCondition())
+                Win();
+            //StartCoroutine(Reset(resetTime));
         }
     }
 
@@ -361,7 +403,28 @@ public class MinigameManager : MonoBehaviour
         timer.ResetTimer();
         timer.TogglePause();
         button.interactable = true;
-        EnableInput(true);
-        
+        EnableInput(true);     
+    }
+    GameObject o;
+    public void Activate(HackerButton hb, GameObject o)
+    {
+        this.o = o;
+        this.hb = hb;
+        o.SetActive(true);
+        button.gameObject.SetActive(true);
+        canvas.SetActive(false);
+        GetPuzzle(o.GetComponent<Minigame>().pieces);       
+    }
+    public void Deactivate()
+    {
+        hb.hack();
+        o.SetActive(false);
+        button.gameObject.SetActive(false);
+        canvas.SetActive(true);
+        timer.ResetTimer();
+    }
+    public void GetHackerCanvas(GameObject o)
+    {
+        canvas = o;
     }
 }

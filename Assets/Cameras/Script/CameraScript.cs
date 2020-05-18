@@ -1,12 +1,13 @@
 ﻿using UnityEngine;
+using Mirror;
 
-public class CameraScript : MonoBehaviour
+public class CameraScript : NetworkBehaviour
 {
     Camera thisCamera;
     Plane[] planes;
     [Tooltip("a varible determain how close the agent needs to be for the camera to pick it up, also this area is rendered with a gizmo")]
     public float distanceCameraCanRegisterAgent;
-    [HideInInspector] public bool cameraActive;
+    /*[HideInInspector]*/ public bool cameraActive;
     [HideInInspector] public float detectedTime = 0;
 
     [SerializeField] bool cameraIsMoving = true;
@@ -17,7 +18,7 @@ public class CameraScript : MonoBehaviour
         Disabled,
         Neither
     }
-    [HideInInspector] public CameraAState cameraState = CameraAState.Neither;
+    /*[HideInInspector]*/ public CameraAState cameraState = CameraAState.Neither;
     public GameObject lightSource;
 
     // Start is called before the first frame update
@@ -32,10 +33,8 @@ public class CameraScript : MonoBehaviour
         {
             Debug.LogError("this game object do not have a camera!");
         }
-        if(!cameraIsMoving)
-        {
-            planes = GeometryUtility.CalculateFrustumPlanes(thisCamera);
-        }
+         planes = GeometryUtility.CalculateFrustumPlanes(thisCamera);
+
     }
     private void Update()
     {
@@ -57,32 +56,21 @@ public class CameraScript : MonoBehaviour
     }
     public bool isObjectVisible(GameObject objectToFind, Collider objectCollider, float timeBeforeDetected)
     {
-        if (cameraState == CameraAState.AgentCloseEnough)
-        {
-            //checks if the camera is activ (not hacked)
-            if (cameraActive)
+            if (cameraState == CameraAState.AgentCloseEnough)
             {
-                //see if the agent is within detection range
-                if (Vector3.Distance(objectToFind.transform.position, this.transform.position) <= distanceCameraCanRegisterAgent)
+                //checks if the camera is activ (not hacked)
+                if (cameraActive)
                 {
-                    //cast a raycast towards the agent
-                    RaycastHit objectHit;
-                    Vector3 direction = Vector3.Normalize(objectToFind.transform.position - transform.position);
-                    Physics.Raycast(transform.position, direction, out objectHit);
-
-                    //if the agent is the one getting hit then continue
-                    //if not, something is standing in the way towards the player 
-                    //meaning player is hidden => do not alert camera 
-                    if (objectHit.transform.gameObject == objectToFind)
+                if(Vector3.Distance(objectToFind.transform.position, transform.position) <= distanceCameraCanRegisterAgent)
+                {
+                    if(!Physics.Linecast(objectToFind.transform.position, transform.position))
                     {
                         if (cameraIsMoving)
                         {
-                            //creates frustum based on the cameras view, and look if agent is inside this frustum
                             planes = GeometryUtility.CalculateFrustumPlanes(thisCamera);
                         }
                         if (GeometryUtility.TestPlanesAABB(planes, objectCollider.bounds))
                         {
-                            //timmer ensuring that the camera is not spaming out signals
                             detectedTime += Time.deltaTime;
                             if (detectedTime >= timeBeforeDetected)
                             {
@@ -90,13 +78,17 @@ public class CameraScript : MonoBehaviour
                                 return true;
                             }
                         }
-                        //if any of the previous checks failed, reset the timer
                         else
                         {
                             detectedTime = 0;
                         }
                     }
                     else
+                    {
+                        detectedTime = 0;
+                    }
+                }
+                else
                     {
                         detectedTime = 0;
                     }
@@ -110,12 +102,9 @@ public class CameraScript : MonoBehaviour
             {
                 detectedTime = 0;
             }
-        }
-        else
-        {
-            detectedTime = 0;
-        }
-        return false;
+        
+            return false;
+        
     }
     void OnDrawGizmosSelected()
     {

@@ -7,6 +7,7 @@ namespace Mirror
 { 
     public class HackerScript : NetworkBehaviour
     {
+        [SerializeField] GameObject camera;
         [SerializeField] Text missionTime; 
         public GameObject PlayerCanvasObject;
         
@@ -16,7 +17,10 @@ namespace Mirror
         {
             if (isLocalPlayer)
             {
+                MinigameManager.Instance.GetHackerCanvas(PlayerCanvasObject);
+                camera.SetActive(true);
                 PlayerCanvasObject.SetActive(true);
+                //StartCoroutine(a());
             }
         }
 
@@ -43,6 +47,14 @@ namespace Mirror
         public void RpcShutDownCamera(int hackableNumber)
         {
             CameraManager.Instance.shutDownCamera(hackableNumber);
+        }
+
+        IEnumerator a()
+        {
+            yield return new WaitForSeconds(0.5f);
+            GameObject ca = AlertMeter._instance.gameObject;
+            ca.active = false;
+            ca.active = true;
         }
     }
 }

@@ -10,9 +10,13 @@ public class GetPlayer : NetworkBehaviour
     public static GetPlayer Instance { get { return instance; } }
     public GameObject canvas;
     public Text canvasText;
+    public GameObject camera;
     // Use this for initialization
     void Start()
     {
+        camera.SetActive(false);
+        if (isLocalPlayer)
+            camera.SetActive(true);
         transform.position = spawnTransform.Instance.transform.position;
         transform.rotation = spawnTransform.Instance.transform.rotation;
         if(isLocalPlayer)
@@ -37,14 +41,30 @@ public class GetPlayer : NetworkBehaviour
 
     private void Update()
     {
-        //this works for server but not for client
-        Debug.LogWarning(isServer + " : " + AlertMeter._instance.alertValue);
+        //this works for server but not for client'
         if(Input.GetKeyDown(KeyCode.G))
         {
             AlertMeter._instance.AddAlert(1);
         }
     
     }
+    /*public void showCanvas()
+    {
+        CmdShowCanvas();
+    }
+    [Command]
+    public void CmdShowCanvas()
+    {
+        RpcCanvas();
+    }
+    [ClientRpc]
+    private void RpcCanvas()
+    {
+        GameObject ca = AlertMeter._instance.gameObject;
+        ca.active = false;
+        ca.active = true;
+    }*/
+
 
     public GameObject getPlayer()
     {
@@ -103,5 +123,37 @@ public class GetPlayer : NetworkBehaviour
     {
         canvas.transform.Find("tutorial").GetComponent<Text>().text = "";
         //canvasText.text = "";
+    }
+    // Generator functions
+    public void ActivateGeneratorItemsServer(int genNum, bool boolToSet)
+    {
+        CmdActivateGeneratorItems(genNum, boolToSet);
+    }
+    [Command]
+    public void CmdActivateGeneratorItems(int genNum, bool boolToSet)
+    {
+        RpcActivateGeneratorItems(genNum, boolToSet);
+    }
+    [ClientRpc]
+    void RpcActivateGeneratorItems(int genNum, bool boolToSet)
+    {
+        for (int i = 0; i < GeneratorItems.Instance.generators[genNum].generatorObjects.Length; i++)
+        {
+            GeneratorItems.Instance.generators[genNum].generatorObjects[i].SetActive(boolToSet);
+        }
+    }
+    public void LoadScene(string sceneName, float time)
+    {
+        CmdLoadScene(sceneName, time);
+    }
+    [Command]
+    void CmdLoadScene(string scene, float time)
+    {
+        RpcLoadScene(scene, time);
+    }
+    [ClientRpc]
+    void RpcLoadScene(string scene, float time)
+    {
+        GameManager._instance.LoadScene(scene, time);
     }
 }

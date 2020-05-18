@@ -10,7 +10,18 @@ public class detectPlayer : MonoBehaviour
     public float maxRadius = 5;
     private bool fovtest123 = false;
 
-    
+    private void Update()
+    {
+        try
+        {
+            player = GetPlayer.Instance.getPlayer().transform;
+        }
+        catch
+        {
+            //we are in the first frame, nothing bad just ignore this
+        }
+    }
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;

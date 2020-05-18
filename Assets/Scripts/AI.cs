@@ -35,13 +35,22 @@ public class AI : NetworkBehaviour
 
     private void Update()
     {
-        if (NetworkServer.localConnection.connectionId == 0)
+        if (isServer)// NetworkServer.localConnection.connectionId == 0)
         {
-            player = GetPlayer.Instance.getPlayer().transform;
-
+            try
+            {
+                player = GetPlayer.Instance.getPlayer().transform;
+            }
+            catch
+            {
+                goto Done;
+            }
             radioTurnOff = radio.GetComponent<radioInterract>().on;
 
             stateMachine.Update();
+
+            Done:
+            return;
         }
     }
 }

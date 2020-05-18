@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 
 public class LightSwitch : MonoBehaviour, IInteractable
 {
     public Animator switchAnim;
     public new GameObject light;
 
-    public void GetInteracted()
+    public void GetInteracted(List<int> io)
     {
         if (!LightIsOn())
         {         
