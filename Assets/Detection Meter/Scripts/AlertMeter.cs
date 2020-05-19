@@ -166,7 +166,8 @@ public class AlertMeter : NetworkBehaviour
             //Debug.Log("server add alert");
             alertValue = Mathf.Clamp(alertValue + value, 0, 100);
             timeStamp = Time.time;
-            PlayAlertFlash(flashLength);
+            GetPlayer.Instance.addAlertServerServer(value, flashLength);
+
         }
         else
         {
@@ -185,6 +186,12 @@ public class AlertMeter : NetworkBehaviour
 
     public void PlayAlertFlash(float time)
     {
+        StartCoroutine(FadeImage(time));
+    }
+    [ClientRpc]
+    public void RpcPlayAlertFlashOnClient(float time)
+    {
+        Debug.LogWarning("thisHappend");
         StartCoroutine(FadeImage(time));
     }
 
