@@ -8,20 +8,17 @@ public class InputManager : MonoBehaviour
     public float interactRange = 5f;
     public bool interactTextOn;
     public GameObject interactText;
-    public List<int> objectPlayerCanInterRactWith = new List<int>();
-    [SerializeField] GameObject purpleCard, orangeCard, greenCard;
+
+    private KeyCode getInteractKey;
 
     private void Awake()
     {
-        purpleCard.SetActive(false);
-        orangeCard.SetActive(false);
-        greenCard.SetActive(false);
         interactText = GameObject.FindGameObjectWithTag("InteractText");
-        objectPlayerCanInterRactWith.Add(0);
     }
 
     void Update()
     {
+        getInteractKey = GetComponent<AgentControllerScript>().interactKey;
         Interact();
     }
 
@@ -42,31 +39,21 @@ public class InputManager : MonoBehaviour
         if (Physics.Raycast(ray, out hit, interactRange, layerMask))
         {
 
-            if(interactTextOn) 
-				interactText.SetActive(true);
+            if (interactTextOn)
+                interactText.SetActive(true);
             // Does the ray intersect any objects excluding the player layer
-            if (Input.GetKeyDown(KeyCode.E))//.ECGetButtonDown("Interact"))
-            {                
+            if (Input.GetKeyDown(getInteractKey))//(Input.GetKeyDown(KeyCode.E))//.ECGetButtonDown("Interact"))
+            {
                 // Get the component that is being interacted with
                 IInteractable interactable = hit.collider.GetComponent<IInteractable>();
-                if(interactable != null)
+                if (interactable != null)
                 {
-                    interactable.GetInteracted(objectPlayerCanInterRactWith); //????
-                }                  
+                    interactable.GetInteracted();
+                }
             }
         }
         else
-         if(interactTextOn) 
-			 interactText.SetActive(false);
-    }
-    public void newCard()
-    {
-        purpleCard.SetActive(objectPlayerCanInterRactWith.Contains(1));
-        greenCard.SetActive(objectPlayerCanInterRactWith.Contains(2));
-        orangeCard.SetActive(objectPlayerCanInterRactWith.Contains(3));
-
-        // 1 = lila
-        // 2 = grön
-        // 3 = orange
+         if (interactTextOn)
+            interactText.SetActive(false);
     }
 }
