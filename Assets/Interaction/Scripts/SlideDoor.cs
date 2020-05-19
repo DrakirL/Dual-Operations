@@ -14,7 +14,7 @@ public class SlideDoor : NetworkBehaviour, IInteractable
     [SerializeField] int keyCode;
     [Tooltip("if agent tries to open a door he/she don't have access to, this amount of alertness will  be added")]
     [SerializeField] float alertInc = 20;
-    public float alertFlashTime = 20f;
+    public float alertFlashTime = 1f;
 
     BoxCollider col;
     public bool active = true;
