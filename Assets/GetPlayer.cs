@@ -75,6 +75,7 @@ public class GetPlayer : NetworkBehaviour
         if (isClientOnly)
         {
             AlertMeter._instance.AddAlert(value);
+            AlertMeter._instance.PlayAlertFlash(100f);
         }
     }
     public void addAlertServer(float value)

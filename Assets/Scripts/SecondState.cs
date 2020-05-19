@@ -57,7 +57,7 @@ public class SecondState : State<AI>
         _owner.warning.Play(true);
         //_owner.gameObject.GetComponent<NavMeshAgent>().destination = _owner.goal2.position;
 
-        AlertMeter._instance.PlayAlertFlash(4.20f);
+        AlertMeter._instance.PlayAlertFlash(1f);
     }
 
     public override void ExitState(AI _owner)
