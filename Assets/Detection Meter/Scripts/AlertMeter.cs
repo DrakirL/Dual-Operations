@@ -156,6 +156,25 @@ public class AlertMeter : NetworkBehaviour
             }
         //}
     }
+    public void AddAlert(float value, float flashLength)
+    {
+        //if (NetworkServer.localConnection.connectionId == 1)
+        //{
+        //UseAddAlert(value);
+        if (isServer)
+        {
+            //Debug.Log("server add alert");
+            alertValue = Mathf.Clamp(alertValue + value, 0, 100);
+            timeStamp = Time.time;
+            PlayAlertFlash(flashLength);
+        }
+        else
+        {
+            //Debug.Log("client add alert");
+            GetPlayer.Instance.addAlertServer(value, flashLength);
+        }
+        //}
+    }
     public float getAlert()
     {
         return alertValue;
