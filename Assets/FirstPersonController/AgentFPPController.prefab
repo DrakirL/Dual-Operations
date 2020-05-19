@@ -278,6 +278,7 @@ GameObject:
   - component: {fileID: -2298360144127891606}
   - component: {fileID: -3376478667481377432}
   - component: {fileID: 241902681443630070}
+  - component: {fileID: 1901013628417060441}
   m_Layer: 11
   m_Name: AgentFPPController
   m_TagString: Player
@@ -467,6 +468,23 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &1901013628417060441
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5524880825172794005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e025dbe61bfdff4c809f20e9749155b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  aimCam: {fileID: 5524880825149089293}
+  range: 20
+  bengt: 0
 --- !u!1 &5524880826539744336
 GameObject:
   m_ObjectHideFlags: 0
