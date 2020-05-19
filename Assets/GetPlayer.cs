@@ -82,6 +82,11 @@ public class GetPlayer : NetworkBehaviour
     {
         CmdAddAlertOnServer(value);
     }
+    public void addAlertServer(float value,float flashLength)
+    {
+        addAlertServer(value);
+        AlertMeter._instance.PlayAlertFlash(flashLength);
+    }
     [Command]
     private void CmdAddAlertOnServer(float value)
     {
