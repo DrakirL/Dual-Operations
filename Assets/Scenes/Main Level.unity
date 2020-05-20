@@ -307,6 +307,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a848ad25046c844cbc6290a5baa5b97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &28206290 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 10324846431445174, guid: d3b60b5388ba0d248b5f5cb08dac51af,
+    type: 3}
+  m_PrefabInstance: {fileID: 28206288}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &40546456
 GameObject:
   m_ObjectHideFlags: 0
@@ -413,18 +425,6 @@ Transform:
   m_Father: {fileID: 1797607294}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &69723102 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 10324846431445174, guid: d3b60b5388ba0d248b5f5cb08dac51af,
-    type: 3}
-  m_PrefabInstance: {fileID: 28206288}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &224543137
 GameObject:
   m_ObjectHideFlags: 0
@@ -1374,7 +1374,7 @@ PrefabInstance:
         type: 3}
       propertyPath: button
       value: 
-      objectReference: {fileID: 69723102}
+      objectReference: {fileID: 28206290}
     - target: {fileID: 7217834836935929102, guid: 07b13bde366655040b038efe538bf4dd,
         type: 3}
       propertyPath: anim
