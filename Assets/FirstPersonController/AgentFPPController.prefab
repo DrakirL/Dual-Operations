@@ -279,7 +279,6 @@ GameObject:
   - component: {fileID: -3376478667481377432}
   - component: {fileID: 241902681443630070}
   - component: {fileID: 1901013628417060441}
-  - component: {fileID: 4942115296044598331}
   m_Layer: 11
   m_Name: AgentFPPController
   m_TagString: Player
@@ -325,10 +324,16 @@ MonoBehaviour:
   mouseInverted: 0
   moveSpeed: 1.5
   gravity: 10
-  maxSlopeAngle: 25
   colMask:
     serializedVersion: 2
     m_Bits: 256
+  accelMod: 0.1
+  deaccelMod: 0.2
+  moveForward: 119
+  moveBackward: 115
+  strafeLeft: 97
+  strafeRight: 100
+  interactKey: 101
 --- !u!114 &7087142220084282350
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -341,6 +346,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68cfe5e750fee5b42b4bff47bdde85c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   interactRange: 1
   interactTextOn: 1
   interactText: {fileID: 3725668770781699126, guid: de36afa52ac2bc54aa216bd27dbeb6e1,
@@ -486,26 +493,6 @@ MonoBehaviour:
   aimCam: {fileID: 5524880825149089293}
   range: 20
   bengt: 0
---- !u!114 &4942115296044598331
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5524880825172794005}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68cfe5e750fee5b42b4bff47bdde85c4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interactRange: 5
-  interactTextOn: 0
-  interactText: {fileID: 3725668770781699126, guid: de36afa52ac2bc54aa216bd27dbeb6e1,
-    type: 3}
-  objectPlayerCanInterRactWith: 
-  purpleCard: {fileID: 5605848731635140568}
-  orangeCard: {fileID: 3072779718623330723}
-  greenCard: {fileID: 7725076665585869944}
 --- !u!1 &5524880826539744336
 GameObject:
   m_ObjectHideFlags: 0

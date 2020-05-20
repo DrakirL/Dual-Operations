@@ -18,7 +18,7 @@ public class taser : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (!isServer)
+        if (isClientOnly)
         {
             if (Input.GetButtonDown("Fire1"))
             {
