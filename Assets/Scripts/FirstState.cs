@@ -35,8 +35,8 @@ public class FirstState : State<AI>
 
     public override void EnterState(AI _owner)
     {
-        
 
+        _owner.startMoveCheck();
         Debug.Log("Enter 1");
      //   _owner.gameObject.GetComponent<NavMeshAgent>().destination = _owner.goal.position;
     }
