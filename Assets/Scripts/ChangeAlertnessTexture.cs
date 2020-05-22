@@ -30,7 +30,8 @@ public class ChangeAlertnessTexture : NetworkBehaviour
     [SyncVar] int texInt = 0;
 
     public Transform target;
-	
+
+    
     [ClientRpc]
 	void RpcChangeTexture()
 	{
@@ -65,6 +66,7 @@ public class ChangeAlertnessTexture : NetworkBehaviour
     {		
         if (isServer)
         {
+            
             switch (setTexture)
             {
                 case SetTexture.Unsuspected:
@@ -87,8 +89,9 @@ public class ChangeAlertnessTexture : NetworkBehaviour
             }
             if (texInt != lastInt)
             {
-                RpcChangeTexture();
+               // RpcChangeTexture();
             }
+            
         }
     }
 }

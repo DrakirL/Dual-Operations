@@ -46,6 +46,7 @@ public class SecondState : State<AI>
 
     public override void EnterState(AI _owner)
     {
+        _owner.changeAnimation("GUN DRAW");
         _owner.StartCoroutine(lol(_owner));
         Debug.Log("Enter 2");
 
