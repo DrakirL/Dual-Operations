@@ -39,14 +39,14 @@ public class DualOperationsAudioPlayer : NetworkBehaviour
     }
 
     //public event Action onUpdateRadio;
-    public void UpdateRadio(float n, GameObject source)
+    [ClientRpc]
+    public void RpcUpdateRadio(float n, int index)
     {
         //Teleport this to the radio
-        transform.position = source.transform.position;
-
+        transform.position = CameraManager.Instance.radioStruct[index].radio.transform.position;
+               
         //Start radio music
         emitter.SetParameter("RadioState", n, false);
-        UnityEngine.Debug.Log("This radio was updated: " + source);
     }
 
     //[Header("SFX Settings")]

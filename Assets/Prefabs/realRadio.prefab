@@ -106,6 +106,8 @@ GameObject:
   - component: {fileID: 1684505676773301194}
   - component: {fileID: 8351345751076554955}
   - component: {fileID: 7434120582136776423}
+  - component: {fileID: 7233052971845584687}
+  - component: {fileID: 942402046874417389}
   m_Layer: 8
   m_Name: realRadio
   m_TagString: Untagged
@@ -190,6 +192,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   on: 1
+  index: 0
   assignedGuards: []
 --- !u!64 &7434120582136776423
 MeshCollider:
@@ -205,3 +208,37 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4330613152091056127, guid: 1adb7c81e18e195459c637a05a8a80ac, type: 3}
+--- !u!114 &7233052971845584687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5506892511686668572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 0
+  serverOnly: 0
+  m_AssetId: 
+--- !u!114 &942402046874417389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5506892511686668572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f74aedd71d9a4f55b3ce499326d45fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  clientAuthority: 0
+  localPositionSensitivity: 0.01
+  localRotationSensitivity: 0.01
+  localScaleSensitivity: 0.01
+  compressRotation: 1

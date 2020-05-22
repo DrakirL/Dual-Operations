@@ -78,6 +78,9 @@ public class HackerButtonHandler : NetworkBehaviour
     public void turnOnRadio(int hackableNumber)
     {
         CameraManager.Instance.turnOnRadio(hackableNumber);
+        
+        //Sounds pls
+        DualOperationsAudioPlayer.Instance.RpcUpdateRadio(1.0f, hackableNumber);
     }
     
     //functions to create and remove the menues

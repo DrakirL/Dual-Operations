@@ -8,6 +8,7 @@ public class radioInterract : NetworkBehaviour
 {
     Transform xd123;
     public bool on;
+    public int index;
     public GameObject[] assignedGuards;
     // Start is called before the first frame update
     void Start()
@@ -20,7 +21,10 @@ public class radioInterract : NetworkBehaviour
     {
         yield return new WaitForSeconds(10);
         on = false;
-        DualOperationsAudioPlayer.Instance.UpdateRadio(0.0f, transform.gameObject);
+
+        //Sound pls
+        if(isServer)
+        DualOperationsAudioPlayer.Instance.RpcUpdateRadio(0.0f, index);
     }
 
         void checkPlayer()
