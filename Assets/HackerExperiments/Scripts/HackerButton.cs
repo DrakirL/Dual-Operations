@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Mirror;
-using UnityEngine.UI;
 
 public class HackerButton : NetworkBehaviour
 {
@@ -15,20 +14,8 @@ public class HackerButton : NetworkBehaviour
    [HideInInspector] public HackerScript hackerS;
     public GameObject minigame;
 
-
-    //[SerializeField] Sprite StartButton;
-    [SerializeField] Sprite hackedButton;
-    [SerializeField] Sprite usingButton;
-    [SerializeField] Sprite turnedOffButton;
-    Image currentSprite;
-
-
     [SerializeField] bool isHoverOverThisButton = false;
-    private void Start()
-    {
-        currentSprite = GetComponent<Image>();
-    }
-
+    
     void Update()
     {
         
@@ -56,8 +43,6 @@ public class HackerButton : NetworkBehaviour
     public void hack()
     {
         isHacked = true;
-        currentSprite.sprite = hackedButton;
-
     }
     public void getCamera()
     {

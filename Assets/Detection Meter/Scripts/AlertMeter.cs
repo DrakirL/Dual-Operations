@@ -71,10 +71,6 @@ public class AlertMeter : NetworkBehaviour
         {
             //nothing should happen here, you are not on the server 
         }
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            PlayAlertFlash(2);
-        }
     }
 
     void UpdateMeter()
@@ -82,7 +78,7 @@ public class AlertMeter : NetworkBehaviour
         if(detected)
             StartMeter();
         else
-            StopMeter();      
+            StopMeter();
     }
 
     void StartMeter()
@@ -156,26 +152,6 @@ public class AlertMeter : NetworkBehaviour
             }
         //}
     }
-    public void AddAlert(float value, float flashLength)
-    {
-        //if (NetworkServer.localConnection.connectionId == 1)
-        //{
-        //UseAddAlert(value);
-        if (isServer)
-        {
-            //Debug.Log("server add alert");
-            alertValue = Mathf.Clamp(alertValue + value, 0, 100);
-            timeStamp = Time.time;
-            GetPlayer.Instance.addAlertServerServer(value, flashLength);
-
-        }
-        else
-        {
-            //Debug.Log("client add alert");
-            GetPlayer.Instance.addAlertServer(value, flashLength);
-        }
-        //}
-    }
     public float getAlert()
     {
         return alertValue;
@@ -186,23 +162,30 @@ public class AlertMeter : NetworkBehaviour
 
     public void PlayAlertFlash(float time)
     {
-        StartCoroutine(FadeImage(time));
-    }
-    [ClientRpc]
-    public void RpcPlayAlertFlashOnClient(float time)
-    {
-        Debug.LogWarning("thisHappend");
-        StartCoroutine(FadeImage(time));
+        StartCoroutine(FadeImage(true, time));
     }
 
-    IEnumerator FadeImage(float time)
+    IEnumerator FadeImage(bool fadeAway, float time)
     {
         // Fade from opaque to transparent
-        for (float i = 1; i >= 0; i -= Time.deltaTime / time)
+        if (fadeAway)
         {
-            // Set color with i as alpha
-            alertImage.color = new Color(alertImage.color.r, alertImage.color.g, alertImage.color.b, i);
-            yield return null;
+            for (float i = 1; i >= 0; i -= Time.deltaTime / time)
+            {
+                // Set color with i as alpha
+                alertImage.color = new Color(1, 1, 1, i);
+                yield return null;
+            }
+        }
+        // Fade from transparent to opaque
+        else
+        {
+            for (float i = 0; i <= 1; i += Time.deltaTime / time)
+            {
+                // Set color with i as alpha
+                alertImage.color = new Color(1, 1, 1, i);
+                yield return null;
+            }
         }
     }
 

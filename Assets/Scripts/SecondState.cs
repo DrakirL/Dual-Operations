@@ -53,11 +53,9 @@ public class SecondState : State<AI>
         var obj = _owner.gameObject.GetComponentInChildren<ChangeAlertnessTexture>();
         obj.setTexture = ChangeAlertnessTexture.SetTexture.Alerted;
 
-        AlertMeter._instance.AddAlert(10,2f);
+        AlertMeter._instance.AddAlert(10);
         _owner.warning.Play(true);
         //_owner.gameObject.GetComponent<NavMeshAgent>().destination = _owner.goal2.position;
-
-        //AlertMeter._instance.PlayAlertFlash(2f);
     }
 
     public override void ExitState(AI _owner)

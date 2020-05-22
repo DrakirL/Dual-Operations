@@ -6,11 +6,7 @@ public class Piece : MonoBehaviour
     [Header("Connection type")]   
     public bool startConnector;
     public bool endConnector;
-    public bool firewall;
-    public Sprite defaultSprite;
-    public Sprite activeSprite;
-
-    public SpriteRenderer sprite;
+    public bool firewall;   
 
     [Header("Rotation")]
     [SerializeField] bool rotation;
@@ -27,8 +23,7 @@ public class Piece : MonoBehaviour
     float realRotation;
 
     private void Awake()
-    {
-        sprite = GetComponent<SpriteRenderer>();
+    {       
         // Rotates the values in runtime on objects that is rotated in editor
         int mod = Mathf.RoundToInt(transform.rotation.eulerAngles.z / 90);
         if(mod > 0)
@@ -45,8 +40,6 @@ public class Piece : MonoBehaviour
 
     private void Start()
     {
-        if(defaultSprite != null)
-            sprite.sprite = defaultSprite;
         realRotation = transform.rotation.eulerAngles.z;
         startRot = transform.rotation.eulerAngles.z;
         startValues = new int[values.Length];
@@ -58,17 +51,15 @@ public class Piece : MonoBehaviour
 
     void Update()       
     {
-        if (active)
+        if(!startConnector && !endConnector && !firewall)
         {
-            if (activeSprite != null)
-                sprite.sprite = activeSprite;
+            // Temporary for feedback
+            if (active)
+                gameObject.GetComponent<LineRenderer>().material.color = Color.green;
+            else
+                gameObject.GetComponent<LineRenderer>().material.color = Color.white;
         }
-        else
-        {
-            if (defaultSprite != null)
-                sprite.sprite = defaultSprite;
-        }
-                 
+
         if (transform.rotation.eulerAngles.z != realRotation)
         {
             transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0,0,realRotation), rotateSpeed / 10);
