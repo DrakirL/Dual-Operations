@@ -8,7 +8,6 @@ public class ChangeAlertnessTexture : NetworkBehaviour
 	Outline outline;
 	private void Awake()
 	{
-		//outline = GetComponent<Outline>();
 		outline = target.GetComponent<Outline>();
         outline.enabled = false;
     }
@@ -30,7 +29,8 @@ public class ChangeAlertnessTexture : NetworkBehaviour
     [SyncVar] int texInt = 0;
 
     public Transform target;
-	
+    [SerializeField] Renderer[] changeMaterialObject; 
+  
     [ClientRpc]
 	void RpcChangeTexture()
 	{
@@ -46,14 +46,11 @@ public class ChangeAlertnessTexture : NetworkBehaviour
         {
             Debug.LogError("this should not happen!" + texInt);
         }
-        Transform child;
-        int n = target.transform.childCount;
-
-        for (int i = 0; i < n; i++)
+        foreach(Renderer rend in changeMaterialObject)
         {
-            child = target.transform.GetChild(i);
-            child.GetComponentInChildren<Renderer>().material = tex;
+            rend.material = tex;
         }
+
         if (!isServer)
         {
             lastInt = texInt;
@@ -65,6 +62,7 @@ public class ChangeAlertnessTexture : NetworkBehaviour
     {		
         if (isServer)
         {
+            
             switch (setTexture)
             {
                 case SetTexture.Unsuspected:
@@ -89,6 +87,7 @@ public class ChangeAlertnessTexture : NetworkBehaviour
             {
                 RpcChangeTexture();
             }
+            
         }
     }
 }

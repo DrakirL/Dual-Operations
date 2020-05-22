@@ -41,6 +41,7 @@ public class ThirdState : State<AI>
 
     public override void EnterState(AI _owner)
     {
+        _owner.changeAnimation("STUNNED");
         _owner.gameObject.GetComponent<NavMeshAgent>().isStopped = true;
         Debug.Log("Enter 3");
         _owner.StartCoroutine(waiter(_owner));

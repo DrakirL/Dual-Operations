@@ -22,7 +22,8 @@ public class AI : NetworkBehaviour
     public GameObject detectCount;
     [HideInInspector]
     public ParticleSystem warning;
-    public bool dead = false;    
+    [SyncVar] public bool dead = false;
+    [SerializeField] AnimationHandler animationH;
 
 
     private void Start()
@@ -33,7 +34,47 @@ public class AI : NetworkBehaviour
         warning = GetComponent<ParticleSystem>();
 
     }
-    
+    public void changeAnimation(string nameOfAnimation)
+    {
+        if(isServer)
+        {
+            RpcChangeGuardAnimation(nameOfAnimation);
+        }
+    }
+
+    [ClientRpc]
+    public void RpcChangeGuardAnimation(string newAnimation)
+    {
+        if (animationH != null)
+        {
+            animationH.changeAnimation(newAnimation);
+        }
+    }
+    // IEnumerator routine = AI.guardMoivingState();
+    public void startMoveCheck()
+    {
+        StartCoroutine(guardMoivingState());
+    }
+    public IEnumerator guardMoivingState()
+    {
+        Vector2 guardPos = new Vector2(transform.position.x, transform.position.z);
+        yield return new WaitForSeconds(0.2f);
+
+        if (stateMachine.currentState == FirstState.Instance)
+        {
+            if (guardPos == new Vector2(transform.position.x, transform.position.z))
+            {
+                changeAnimation("IDLE");
+            }
+            else
+            {
+                changeAnimation("WALK");
+            }
+
+            StartCoroutine(guardMoivingState());
+        }
+    }
+
     private void Update()
     {
         if (isServer)// NetworkServer.localConnection.connectionId == 0)
