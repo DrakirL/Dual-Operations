@@ -6,10 +6,19 @@ public class Timer : MonoBehaviour
 {
     [Header("Detection timer in minutes, set before entering runtime")]
     [Range(0f, 60f)]
-    public float timer;
+    [SerializeField] float timer;
     float startTime;
-    public TextMeshProUGUI text;
+    [SerializeField] TextMeshProUGUI text;
     bool paused;
+    bool depleted = false;
+
+    public enum TimerTypes
+    {
+        agent, 
+        minigame,
+    }
+
+    public TimerTypes timerType;
 
     private void Start()
     {
@@ -27,9 +36,15 @@ public class Timer : MonoBehaviour
     private void Update()
     {
 
-        if (IsDepleted())
+        if (IsDepleted() && !depleted)
         {
-            Debug.Log("Timer reached 0");
+            if (timerType == TimerTypes.agent)
+            {
+                GameManager._instance.LoseState();
+                depleted = true;
+            }
+            else
+                return;
         }
     }
     void UpdateTimer()

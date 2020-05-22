@@ -187,7 +187,7 @@ public class AgentControllerScript : NetworkBehaviour
 			for(int i = 0; i < v.Length;i++)
 			{
 				float n = Vector3.Dot(v[i] - velocity, hit.normal);
-				//Debug.Log(n);
+				Debug.Log(n);
 				
 				if(n > 0.00f) 
 				{
