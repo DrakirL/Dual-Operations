@@ -1494,10 +1494,10 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 55
+    m_FontSize: 60
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 6
     m_MaxSize: 89
     m_Alignment: 0
     m_AlignByGeometry: 0
@@ -5686,7 +5686,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4545033051447945130
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5703,8 +5703,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: -576.6, y: 112.7}
-  m_SizeDelta: {x: 582.57, y: 1201.1001}
+  m_AnchoredPosition: {x: -456, y: 168}
+  m_SizeDelta: {x: 1364.1, y: 701.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2796429460777868146
 CanvasRenderer:
@@ -5734,21 +5734,19 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 41
+    m_FontSize: 90
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
-    m_MaxSize: 89
+    m_MinSize: 0
+    m_MaxSize: 300
     m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 0.8
-  m_Text: "Use the \"Hack\" option to open up the device. Use \"Use\" on a camera
-    to see through it and \"Shut Down\" to disable the camera for 10 seconds. Use
-    these tools to help your companion navigate past guards and cameras. \n\nYou
-    can use \"Turn On\" on the radios to distract nearby guards."
+  m_Text: By selecting a hacked camera, you can see through it. Use cameras to guide
+    your partner through the room. To exit the camera view, use the ESC button.
 --- !u!1 &6121762583985135495
 GameObject:
   m_ObjectHideFlags: 0
@@ -8650,7 +8648,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &6532324086884099090
 RectTransform:
   m_ObjectHideFlags: 0
