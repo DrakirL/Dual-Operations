@@ -57,7 +57,6 @@ public class AI : NetworkBehaviour
     }
     public IEnumerator guardMoivingState()
     {
-        Debug.Log("inside ienumerable");
         Vector2 guardPos = new Vector2(transform.position.x, transform.position.z);
         yield return new WaitForSeconds(0.2f);
 
