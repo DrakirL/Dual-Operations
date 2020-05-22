@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
+/*[System.Serializable]
 public struct GuardAnimation
 {
     public string nameOfAnim;
@@ -12,11 +12,11 @@ public struct GuardAnimation
     //public GameObject body;
     //public GameObject eyes;
     //public GameObject gun;
-}
+}*/
 
 public class GuardAnimationHandler : MonoBehaviour
 {
-    [SerializeField] GuardAnimation[] allAnimations;
+   /* [SerializeField] GuardAnimation[] allAnimations;
     [SerializeField] private GuardAnimation currentAnimation;
     [SerializeField] Animation animation;
     private void Start()
@@ -28,10 +28,10 @@ public class GuardAnimationHandler : MonoBehaviour
         currentAnimation = findAnimation(newAnimation);
         animation.clip = currentAnimation.animation;
         animation.Play();
-    }
+    }*/
     private void Update()
     {
-        if (animation.isPlaying)
+       /* if (animation.isPlaying)
         {
             return;
         }
@@ -55,10 +55,10 @@ public class GuardAnimationHandler : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.T))
         {
             changeAnimation("Stunned");
-        }
+        }*/
     }
 
-    private GuardAnimation findAnimation(string nameOfAnim)
+    /*private GuardAnimation findAnimation(string nameOfAnim)
     {
         GuardAnimation anim = new GuardAnimation();
         for(int i = 0; i < allAnimations.Length; i++)
@@ -70,5 +70,5 @@ public class GuardAnimationHandler : MonoBehaviour
         }
         Debug.LogError("no animation found with the name " + nameOfAnim);
         return anim;
-    }
+    }*/
 }

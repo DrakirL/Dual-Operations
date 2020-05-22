@@ -14,7 +14,6 @@ public struct HackOptions
 
 public class HackerButtonHandler : NetworkBehaviour
 {
-    
     [Tooltip("this is used to connect all buttons to this script")]
     [SerializeField] HackerButton[] allButtons;
     [Tooltip("these gameobjects NEEDS a image component")]
