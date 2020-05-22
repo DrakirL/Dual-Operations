@@ -7,7 +7,8 @@ public class GameManager : MonoBehaviour
     // Singleton reference
     public static GameManager _instance { get; private set; }
     [Tooltip("Time it takes before next scene will be loaded")]
-    public float reloadTime = 0.5f;
+    public float reloadTime = 0.2f;
+    public bool winState = false;
     bool state;
 
     private void Awake()
