@@ -2,83 +2,73 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using Mirror;
 
 
 [System.Serializable]
 public struct AnimationFunction
 {
-    public string nameOfAnim;
     public AnimationClip animation;
     public UnityEvent animEvent;
 }
 public class AnimationHandler : MonoBehaviour
 {
     [SerializeField] AnimationFunction[] allAnimations;
-    [SerializeField] private AnimationFunction currentAnimation;
-    [SerializeField] RuntimeAnimatorController controller;
-    [SerializeField] Animation anim;
-    // [SerializeField] Animation animation;
+    private AnimationFunction currentAnimation;
+    [SerializeField] Animator anim;
+    string comp = "new";
 
-    private void Start()
-    {
-        for(int i = 0; i < allAnimations.Length; i++)
-        {
-            Debug.Log("ok");
-            anim.AddClip(allAnimations[i].animation, allAnimations[i].nameOfAnim);
-        }
-        //anim.clip = anim.GetClip(allAnimations[1]);
-        anim.Play();
-        changeAnimation("Walk");
-    }
     public void changeAnimation(string newAnimation)
     {
-        currentAnimation = findAnimation(newAnimation);
-        
-        //animation.clip = currentAnimation.animation;
-        //animation.Play();
-    }
-    private void Update()
-    {
-        /*if (animation.isPlaying)
+        if (anim != null)
         {
-            return;
-        }*/
-        #region old stuff
-        /* //animation.Play();
-         if (Input.GetKeyDown(KeyCode.Q))
-         {
-             changeAnimation("Walk");
-         }
-         if (Input.GetKeyDown(KeyCode.W))
-         {
-             changeAnimation("Idle");
-         }
-         if (Input.GetKeyDown(KeyCode.E))
-         {
-             changeAnimation("Draw");
-         }
-         if (Input.GetKeyDown(KeyCode.R))
-         {
-             changeAnimation("Shoot");
-         }
-         if (Input.GetKeyDown(KeyCode.T))
-         {
-             changeAnimation("Stunned");
-         }*/
-        #endregion
+            if (comp != newAnimation || comp == "new")
+            {
+                comp = newAnimation;
+                currentAnimation = findAnim(newAnimation);
+                currentAnimation.animEvent.Invoke();
+                anim.Play(currentAnimation.animation.name, 0, 0);
+            }
+        }
     }
-
-    private AnimationFunction findAnimation(string nameOfAnim)
+    AnimationFunction findAnim(string nameOfAnim)
     {
-        AnimationFunction anim = new AnimationFunction();
+        AnimationFunction tempFunc = new AnimationFunction();
         for (int i = 0; i < allAnimations.Length; i++)
         {
-            if (allAnimations[i].nameOfAnim == nameOfAnim)
+            if (nameOfAnim == allAnimations[i].animation.name)
             {
                 return allAnimations[i];
             }
         }
         Debug.LogError("no animation found with the name " + nameOfAnim);
-        return anim;
+        return tempFunc;
+    }
+
+    //update is only debug tools, delete when done
+    private void Update()
+    {
+        if (false)
+        {
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                changeAnimation("WALK");
+            }
+
+            if (Input.GetKeyDown(KeyCode.W))
+            {
+                changeAnimation("GUN DRAW");
+            }
+
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                changeAnimation("STUNNED");
+            }
+
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                changeAnimation("IDLE");
+            }
+        }
     }
 }
