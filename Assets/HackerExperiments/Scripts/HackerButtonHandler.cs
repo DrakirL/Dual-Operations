@@ -11,11 +11,12 @@ public struct HackOptions
     public string optionText;
     public UnityEvent optionFunctions;
 }
-
 public class HackerButtonHandler : NetworkBehaviour
 {
     [Tooltip("this is used to connect all buttons to this script")]
     [SerializeField] HackerButton[] allButtons;
+     HackerButton[] allCameras;
+     HackerButton[] allRadios;
     [Tooltip("these gameobjects NEEDS a image component")]
     [SerializeField] GameObject optionSprite;
     [SerializeField] GameObject optionFrameSprite;
@@ -31,13 +32,38 @@ public class HackerButtonHandler : NetworkBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {   
+    {
+        int amountOfCameras = 0;
+        int amountOfRadios = 0;
+
         cameraImage.enabled = false;
         for (int i = 0; i < allButtons.Length; i++)
         {
+            if (allButtons[i].hackableType == HackerButton.HackableType.camera)
+            {
+                amountOfCameras++;
+            }
+            else
+            {
+                amountOfRadios++;
+            }
             allButtons[i].HBH = this;
-            allButtons[i].hackerS = hackerScript; 
-        } 
+            allButtons[i].hackerS = hackerScript;
+        }
+        allCameras = new HackerButton[amountOfCameras];
+        allRadios = new HackerButton[amountOfRadios];
+
+        for (int i = 0; i < allButtons.Length; i++)
+        {
+            if (allButtons[i].hackableType == HackerButton.HackableType.camera)
+            {
+                allCameras[allButtons[i].hackableNumber] = allButtons[i];
+            }
+            else
+            {
+                allRadios[allButtons[i].hackableNumber] = allButtons[i];
+            }
+        }
     }
     // Update is called once per frame
     void Update()
@@ -55,7 +81,16 @@ public class HackerButtonHandler : NetworkBehaviour
             }
         }
     }
-  
+    public void cameraBackOnline(int index)
+    {
+        allCameras[index].changeTextureHacked();
+    }
+
+    public void RadioBackOnline(int index)
+    {
+        allRadios[index].changeTextureHacked();
+    }
+
     public void setUpCameraWatch(int hackableNumber)
     {
         if (CameraManager.Instance.isCameraAvailable(hackableNumber))

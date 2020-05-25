@@ -10,6 +10,7 @@ namespace Mirror
         [SerializeField] GameObject camera;
         [SerializeField] Text missionTime; 
         public GameObject PlayerCanvasObject;
+        [SerializeField] HackerButtonHandler HB;
         
 
         // Start is called before the first frame update
@@ -22,6 +23,8 @@ namespace Mirror
                 PlayerCanvasObject.SetActive(true);
                 //StartCoroutine(a());
             }
+
+            CameraManager.Instance.hacker = this;
         }
 
         // Update is called once per frame
@@ -51,12 +54,12 @@ namespace Mirror
         [Command]
         public void CmdCameraNoLongerShutdown(int index)
         {
-
+            HB.cameraBackOnline(index);
         }
         [Command]
-        public void CmdRadioIsNowTurnedOn()
+        public void CmdRadioIsNowTurnedOn(int index)
         {
-
+            HB.RadioBackOnline(index);
         }
 
 
