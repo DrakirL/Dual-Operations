@@ -1463,8 +1463,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: -576.6, y: 112.7}
-  m_SizeDelta: {x: 582.57, y: 1201.1001}
+  m_AnchoredPosition: {x: -454.30005, y: 168.04997}
+  m_SizeDelta: {x: 1387.5, y: 701.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2180724748410248059
 CanvasRenderer:
@@ -1494,24 +1494,24 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 60
+    m_FontSize: 70
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 6
-    m_MaxSize: 89
+    m_MaxSize: 90
     m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 0.8
-  m_Text: "Use the facility map to guide your partner to the main server and alert
+  m_Text: 'Use the facility map to guide your partner to the main server and alert
     them of obstacles ahead. You can only see part of the map at the start - have
     your partner activate computer terminals to reveal new areas. Electrical devices
     that you can interact with are highlighted on the map. You can select these with
-    the Right Mouse Button.\n\nUse the Left Mouse Button to hack the camera. This
-    will allow you to disable it temporarily, or observe the facility\u2019s interior
-    from the camera\u2019s point of view."
+    the Right Mouse Button.
+
+'
 --- !u!1 &1224564964796126065
 GameObject:
   m_ObjectHideFlags: 0
@@ -2709,6 +2709,85 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &2074630893965459538
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8987510767676176241}
+  - component: {fileID: 3051907914819179869}
+  - component: {fileID: 179489349698842141}
+  m_Layer: 5
+  m_Name: MissionText2 (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &8987510767676176241
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2074630893965459538}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.25177523, y: 0.25177523, z: 0.25177523}
+  m_Children: []
+  m_Father: {fileID: 6130536996802522805}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: -456, y: 168}
+  m_SizeDelta: {x: 1364.1, y: 701.4}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &3051907914819179869
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2074630893965459538}
+  m_CullTransparentMesh: 0
+--- !u!114 &179489349698842141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2074630893965459538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 90
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 0
+    m_MaxSize: 300
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 0.8
+  m_Text: "You are able to manipulate the facility\u2019s communication stations.
+    Switching them to a different frequency will surely gain the attention of nearby
+    guards."
 --- !u!1 &2355524294679517809
 GameObject:
   m_ObjectHideFlags: 0
@@ -4511,6 +4590,85 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &4287934246045158872
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5068594336529891157}
+  - component: {fileID: 9130011815288253596}
+  - component: {fileID: 8743383853979214882}
+  m_Layer: 5
+  m_Name: MissionText (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &5068594336529891157
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4287934246045158872}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.25177523, y: 0.25177523, z: 0.25177523}
+  m_Children: []
+  m_Father: {fileID: 6130536996802522805}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: -454.3, y: 175.6}
+  m_SizeDelta: {x: 1387.5, y: 701.5}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &9130011815288253596
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4287934246045158872}
+  m_CullTransparentMesh: 0
+--- !u!114 &8743383853979214882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4287934246045158872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 90
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 6
+    m_MaxSize: 90
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 0.8
+  m_Text: "Use the Left Mouse Button to hack the camera. This will allow you to disable
+    it temporarily, or observe the facility\u2019s interior from the camera\u2019s
+    point of view."
 --- !u!1 &4488538771953898025
 GameObject:
   m_ObjectHideFlags: 0
@@ -5231,7 +5389,7 @@ RectTransform:
   m_LocalScale: {x: 0.25177523, y: 0.25177523, z: 0.25177523}
   m_Children: []
   m_Father: {fileID: 6130536996802522805}
-  m_RootOrder: 5
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0.5}
@@ -5686,7 +5844,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &4545033051447945130
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5699,7 +5857,7 @@ RectTransform:
   m_LocalScale: {x: 0.25177523, y: 0.25177523, z: 0.25177523}
   m_Children: []
   m_Father: {fileID: 6130536996802522805}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0.5}
@@ -5746,7 +5904,7 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 0.8
   m_Text: By selecting a hacked camera, you can see through it. Use cameras to guide
-    your partner through the room. To exit the camera view, use the ESC button.
+    your partner through the room.
 --- !u!1 &6121762583985135495
 GameObject:
   m_ObjectHideFlags: 0
@@ -6559,6 +6717,86 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &7191151756236271968
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5867461462229427982}
+  - component: {fileID: 6838392465403644858}
+  - component: {fileID: 9009503614036784565}
+  m_Layer: 5
+  m_Name: MissionText2 (3)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &5867461462229427982
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7191151756236271968}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.25177523, y: 0.25177523, z: 0.25177523}
+  m_Children: []
+  m_Father: {fileID: 6130536996802522805}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: -456, y: 168}
+  m_SizeDelta: {x: 1364.1, y: 701.4}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &6838392465403644858
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7191151756236271968}
+  m_CullTransparentMesh: 0
+--- !u!114 &9009503614036784565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7191151756236271968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 85
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 0
+    m_MaxSize: 300
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 0.8
+  m_Text: Your partner can equip keycards to open facility doors of different tiers,
+    represented by color. Each keycard picked up will allow them to open the next
+    tier of doors, but only you can see which doors belong to which tier. Your partner
+    already has the keycard of the first tier.
 --- !u!1 &7258172968101032216
 GameObject:
   m_ObjectHideFlags: 0
@@ -6589,7 +6827,11 @@ RectTransform:
   m_Children:
   - {fileID: 5611806250568688971}
   - {fileID: 5593520124827971413}
+  - {fileID: 5068594336529891157}
   - {fileID: 4545033051447945130}
+  - {fileID: 7767029366150790733}
+  - {fileID: 8987510767676176241}
+  - {fileID: 5867461462229427982}
   - {fileID: 863179182198940452}
   - {fileID: 1203338631696875004}
   - {fileID: 3933083027847879824}
@@ -6615,9 +6857,91 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   missionStuff:
   - {fileID: 931334174927132793}
+  - {fileID: 4287934246045158872}
   - {fileID: 5982973080796288433}
+  - {fileID: 7280789800657831505}
+  - {fileID: 2074630893965459538}
+  - {fileID: 7191151756236271968}
   pageof: {fileID: 4585223143190097503}
   allowLoop: 1
+--- !u!1 &7280789800657831505
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7767029366150790733}
+  - component: {fileID: 2898046207321996082}
+  - component: {fileID: 8154206961810574329}
+  m_Layer: 5
+  m_Name: MissionText2 (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &7767029366150790733
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7280789800657831505}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.25177523, y: 0.25177523, z: 0.25177523}
+  m_Children: []
+  m_Father: {fileID: 6130536996802522805}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: -456, y: 168}
+  m_SizeDelta: {x: 1364.1, y: 701.4}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &2898046207321996082
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7280789800657831505}
+  m_CullTransparentMesh: 0
+--- !u!114 &8154206961810574329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7280789800657831505}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 90
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 0
+    m_MaxSize: 300
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 0.8
+  m_Text: Selecting a hacked camera will allow you to disable it for about 10 seconds.
+    Your partner should use that window of opportunity to slip past it.
 --- !u!1 &7511448456580776967
 GameObject:
   m_ObjectHideFlags: 0
@@ -8112,7 +8436,7 @@ RectTransform:
   m_Children:
   - {fileID: 381793465053594597}
   m_Father: {fileID: 6130536996802522805}
-  m_RootOrder: 3
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -8387,7 +8711,7 @@ RectTransform:
   m_Children:
   - {fileID: 3783185114374886214}
   m_Father: {fileID: 6130536996802522805}
-  m_RootOrder: 4
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -9115,15 +9439,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a85adcd54b59dc346b972f5561fcee86, type: 3}
---- !u!1 &5492467241828801369 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7449783890058897499, guid: a85adcd54b59dc346b972f5561fcee86,
-    type: 3}
-  m_PrefabInstance: {fileID: 3124331701792125698}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2099568230575003870 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3925152124544084956, guid: a85adcd54b59dc346b972f5561fcee86,
+    type: 3}
+  m_PrefabInstance: {fileID: 3124331701792125698}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5492467241828801369 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7449783890058897499, guid: a85adcd54b59dc346b972f5561fcee86,
     type: 3}
   m_PrefabInstance: {fileID: 3124331701792125698}
   m_PrefabAsset: {fileID: 0}
@@ -9277,15 +9601,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 773a9b899277d01428a61b7e8825b4ef, type: 3}
---- !u!1 &5682989700699872230 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1082166510391646676, guid: 773a9b899277d01428a61b7e8825b4ef,
-    type: 3}
-  m_PrefabInstance: {fileID: 4745291734053585458}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &70838332838542769 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4693035200338132867, guid: 773a9b899277d01428a61b7e8825b4ef,
+    type: 3}
+  m_PrefabInstance: {fileID: 4745291734053585458}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5682989700699872230 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1082166510391646676, guid: 773a9b899277d01428a61b7e8825b4ef,
     type: 3}
   m_PrefabInstance: {fileID: 4745291734053585458}
   m_PrefabAsset: {fileID: 0}
@@ -9853,15 +10177,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1c357708de061374da467844ed80dabc, type: 3}
---- !u!1 &7759965414978026343 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1696434852104116544, guid: 1c357708de061374da467844ed80dabc,
-    type: 3}
-  m_PrefabInstance: {fileID: 8951500112112575015}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7590564181909519737 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1543894666491191134, guid: 1c357708de061374da467844ed80dabc,
+    type: 3}
+  m_PrefabInstance: {fileID: 8951500112112575015}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7759965414978026343 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1696434852104116544, guid: 1c357708de061374da467844ed80dabc,
     type: 3}
   m_PrefabInstance: {fileID: 8951500112112575015}
   m_PrefabAsset: {fileID: 0}
