@@ -83,6 +83,9 @@ public class GetPlayer : NetworkBehaviour
     public void addAlertServer(float value)
     {
         CmdAddAlertOnServer(value);
+
+        if (isServer)
+            DualOperationsAudioPlayer.Instance.RpcDetected();
     }
     [Command]
     private void CmdAddAlertOnServer(float value)

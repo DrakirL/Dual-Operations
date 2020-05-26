@@ -54,7 +54,8 @@ public class DualOperationsAudioPlayer : NetworkBehaviour
     [SerializeField]
     private string playerDetectedPath;
 
-    public void Detected()
+    [ClientRpc]
+    public void RpcDetected()
     {
         UnityEngine.Debug.Log("Nådde ljudets Detected");
         PlaySound(playerDetectedPath, GetPlayer.Instance.getPlayer());
