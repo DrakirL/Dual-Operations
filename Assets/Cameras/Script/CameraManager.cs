@@ -128,6 +128,7 @@ public class CameraManager : NetworkBehaviour
         if (!radioStruct[index].radio.on)
         {
             radioStruct[index].radio.on = true;
+            radioStruct[index].radio.index = index;
         }
     }
     public RenderTexture updateHackerCameraView(int index)
@@ -143,16 +144,18 @@ public class CameraManager : NetworkBehaviour
         {
             cameraStruct[index].camera.cameraState = CameraScript.CameraAState.Disabled;
             cameraStruct[index].camera.cameraActive = false;
-            StartCoroutine(acivateCamera(cameraStruct[index], shutDownTimer));
+            StartCoroutine(acivateCamera(cameraStruct[index], shutDownTimer, index));
             cameraStruct[index].camera.lightSource.SetActive(false);
+            GetPlayer.Instance.CmdCameraGoneOffline(index);
         }
     }
-    private IEnumerator acivateCamera(CameraStruct cameraStruct, float waitTime)
+    private IEnumerator acivateCamera(CameraStruct cameraStruct, float waitTime,int index)
     {
         yield return new WaitForSeconds(waitTime);
         cameraStruct.camera.cameraActive = true;
         cameraStruct.camera.lightSource.SetActive(true);
         afterShutdown(cameraStruct);
+        GetPlayer.Instance.CmdCameraBackOnline(index);
     }
     private void afterShutdown(CameraStruct cameraStruct)
     {
