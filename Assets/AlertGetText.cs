@@ -5,8 +5,10 @@ using UnityEngine.UI;
 
 public class AlertGetText : MonoBehaviour
 {
+    [SerializeField] Slider alertSlide; 
     float Value;
     [SerializeField] Text StringValue;
+
 
     // Start is called before the first frame update
     void Start()
@@ -18,6 +20,13 @@ public class AlertGetText : MonoBehaviour
     void Update()
     {
         Value = AlertMeter._instance.alertValue;
-        StringValue.text = Value.ToString("0") + "/100";
+        if (alertSlide != null)
+        {
+            alertSlide.value = Value;
+        }
+        if (StringValue != null)
+        {
+            StringValue.text = Value.ToString("0") + "/100";
+        }
     }
 }
