@@ -11,12 +11,13 @@ public struct HackOptions
     public string optionText;
     public UnityEvent optionFunctions;
 }
-
 public class HackerButtonHandler : NetworkBehaviour
 {
     
     [Tooltip("this is used to connect all buttons to this script")]
     [SerializeField] HackerButton[] allButtons;
+     HackerButton[] allCameras;
+     HackerButton[] allRadios;
     [Tooltip("these gameobjects NEEDS a image component")]
     [SerializeField] GameObject optionSprite;
     [SerializeField] GameObject optionFrameSprite;
@@ -29,16 +30,42 @@ public class HackerButtonHandler : NetworkBehaviour
     HackOptions currentOption;
     bool isMenuUp = false;
     bool isCameraup = false;
+  public int currentCamera = 0;
 
     // Start is called before the first frame update
     void Start()
-    {   
+    {
+        int amountOfCameras = 0;
+        int amountOfRadios = 0;
+
         cameraImage.enabled = false;
         for (int i = 0; i < allButtons.Length; i++)
         {
+            if (allButtons[i].hackableType == HackerButton.HackableType.camera)
+            {
+                amountOfCameras++;
+            }
+            else
+            {
+                amountOfRadios++;
+            }
             allButtons[i].HBH = this;
-            allButtons[i].hackerS = hackerScript; 
-        } 
+            allButtons[i].hackerS = hackerScript;
+        }
+        allCameras = new HackerButton[amountOfCameras];
+        allRadios = new HackerButton[amountOfRadios];
+
+        for (int i = 0; i < allButtons.Length; i++)
+        {
+            if (allButtons[i].hackableType == HackerButton.HackableType.camera)
+            {
+                allCameras[allButtons[i].hackableNumber] = allButtons[i];
+            }
+            else
+            {
+                allRadios[allButtons[i].hackableNumber] = allButtons[i];
+            }
+        }
     }
     // Update is called once per frame
     void Update()
@@ -56,24 +83,60 @@ public class HackerButtonHandler : NetworkBehaviour
             }
         }
     }
+    public void cameraBackOnline(int index)
+    {
+        allCameras[index].changeTextureHacked();
+    }
+    public void cameraGoneOffline(int index)
+    {
+        allCameras[index].changeTextureShutdown();
+    }
+    public void UsingCamera(int index)
+    {
+        allCameras[index].changeTextureUsing();
+    }
+    public void RadioBackOnline(int index)
+    {
+        allRadios[index].changeTextureHacked();
+    }
   
+
     public void setUpCameraWatch(int hackableNumber)
     {
         if (CameraManager.Instance.isCameraAvailable(hackableNumber))
         {
+            if (isCameraup)
+            {
+                takeDownCamera();
+            }
             isCameraup = true;
             cameraImage.enabled = true;
             cameraImage.texture = CameraManager.Instance.updateHackerCameraView(hackableNumber);
+            allCameras[hackableNumber].changeTextureUsing();
+            currentCamera = hackableNumber;
         }
         else
         {
             //play error sound?
         }
     }
-    private void takeDownCamera()
+    public void takeDownCamera()
     {
         cameraImage.enabled = false;
         isCameraup = false;
+        allCameras[currentCamera].changeTextureHacked();
+    }
+    public void forcedDown(int index)
+    {
+        if (currentCamera == index)
+        {
+
+            cameraImage.enabled = false;
+            isCameraup = false;
+            //takeDownCamera();
+            //allCameras[currentCamera].changeTextureShutdown();
+        }
+        // allCameras[currentCamera].changeTextureShutdown();
     }
     public void turnOnRadio(int hackableNumber)
     {
@@ -93,8 +156,7 @@ public class HackerButtonHandler : NetworkBehaviour
         }
         else
         {
-            if (!isCameraup)
-            {
+           
                 isMenuUp = true;
                 //add the frame
                 GameObject frame = Instantiate(optionFrameSprite);
@@ -119,7 +181,7 @@ public class HackerButtonHandler : NetworkBehaviour
                     Button.HBH = this;
                     Button.UE = options[i].optionFunctions;
                     Button.transform.GetComponentInChildren<Text>().text = options[i].optionText;
-                }
+                //}
             }
         }
     }

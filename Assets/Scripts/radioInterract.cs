@@ -25,6 +25,9 @@ public class radioInterract : NetworkBehaviour
         //Sound pls
         if(isServer)
         DualOperationsAudioPlayer.Instance.RpcUpdateRadio(0.0f, index);
+        
+        GetPlayer.Instance.radioNoLongerInUse(index);
+        // CameraManager.Instance.hacker.CmdRadioIsNoTurnedOff(index);     
     }
 
         void checkPlayer()

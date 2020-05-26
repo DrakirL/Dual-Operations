@@ -13,6 +13,7 @@ public class GetPlayer : NetworkBehaviour
     public GameObject camera;
     
     public float flashTimer = 1;
+    [HideInInspector] public HackerScript Hs;
     // Use this for initialization
     void Start()
     {
@@ -66,7 +67,25 @@ public class GetPlayer : NetworkBehaviour
         ca.active = false;
         ca.active = true;
     }*/
-
+    [Command]
+    public void CmdCameraBackOnline(int index)
+    {
+        Hs.cameraBackOnline(index);
+    }
+    [Command]
+    public void CmdCameraGoneOffline(int index)
+    {
+        Hs.cameraGoneOffline(index);
+    }
+    public void radioNoLongerInUse(int radioIndex)
+    {
+        Hs.RadioBackOnline(radioIndex);
+    }
+    /*[Command]
+    public void UsingCamera(int index)
+    {
+        Hs.UsingCamera(index);
+    }*/
 
     public GameObject getPlayer()
     {

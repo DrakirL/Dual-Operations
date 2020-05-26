@@ -10,6 +10,7 @@ namespace Mirror
         [SerializeField] GameObject camera;
         [SerializeField] Text missionTime; 
         public GameObject PlayerCanvasObject;
+        [SerializeField] HackerButtonHandler HB;
         
 
         // Start is called before the first frame update
@@ -22,8 +23,15 @@ namespace Mirror
                 PlayerCanvasObject.SetActive(true);
                 //StartCoroutine(a());
             }
+            StartCoroutine(delayedSetHacker());
+            //CameraManager.Instance.hacker = this;
+          
         }
-
+        IEnumerator delayedSetHacker()
+        {
+            yield return new WaitForSeconds(1);
+            GetPlayer.Instance.Hs = this;
+        }
         // Update is called once per frame
         void Update()
         {
@@ -46,19 +54,26 @@ namespace Mirror
         [ClientRpc]
         public void RpcShutDownCamera(int hackableNumber)
         {
+            HB.forcedDown(hackableNumber);
             CameraManager.Instance.shutDownCamera(hackableNumber);
         }
-        [Command]
-        public void CmdCameraNoLongerShutdown(int index)
+
+        public void cameraBackOnline(int index)
         {
-
+            HB.cameraBackOnline(index);
         }
-        [Command]
-        public void CmdRadioIsNowTurnedOn()
+        public void cameraGoneOffline(int index)
         {
-
+            HB.cameraGoneOffline(index);
         }
-
+        public void UsingCamera(int index)
+        {
+            HB.UsingCamera(index);
+        }
+        public void RadioBackOnline(int index)
+        {
+            HB.RadioBackOnline(index);
+        }
 
 
         IEnumerator a()
