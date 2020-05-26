@@ -87,7 +87,6 @@ public class ChangeAlertnessTexture : NetworkBehaviour
             {
                 RpcChangeTexture();
             }
-            
         }
     }
 }

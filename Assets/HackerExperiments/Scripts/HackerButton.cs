@@ -69,7 +69,7 @@ public class HackerButton : NetworkBehaviour
     {
         image.sprite = hackedTexture;
     }
-    void changeTextureShutdown()
+    public void changeTextureShutdown()
     {
         image.sprite = shutdownCameraTexture;
     }
@@ -81,13 +81,14 @@ public class HackerButton : NetworkBehaviour
     public void turnOnRadio()
     {
         HBH.turnOnRadio(hackableNumber);
+        image.sprite = usingTexture;
     }
     
    // [ClientRpc]
     public void RpcShutDownCamera()
     {
         hackerS.RpcShutDownCamera(hackableNumber);
-        changeTextureShutdown();
+        //changeTextureShutdown();
     }
     public void LoadMinigame()
     {

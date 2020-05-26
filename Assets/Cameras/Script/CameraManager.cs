@@ -34,7 +34,6 @@ public class CameraManager : NetworkBehaviour
 
     [Tooltip("this is the variable that defines how much the alert state increase every cameraAlertTime-seconds")]
     [SerializeField] float alertStateInc;
-    public HackerScript hacker;
 
     float maxDistance = 0;
 
@@ -147,6 +146,7 @@ public class CameraManager : NetworkBehaviour
             cameraStruct[index].camera.cameraActive = false;
             StartCoroutine(acivateCamera(cameraStruct[index], shutDownTimer, index));
             cameraStruct[index].camera.lightSource.SetActive(false);
+            GetPlayer.Instance.CmdCameraGoneOffline(index);
         }
     }
     private IEnumerator acivateCamera(CameraStruct cameraStruct, float waitTime,int index)
@@ -155,7 +155,7 @@ public class CameraManager : NetworkBehaviour
         cameraStruct.camera.cameraActive = true;
         cameraStruct.camera.lightSource.SetActive(true);
         afterShutdown(cameraStruct);
-        hacker.CmdCameraNoLongerShutdown(index);
+        GetPlayer.Instance.CmdCameraBackOnline(index);
     }
     private void afterShutdown(CameraStruct cameraStruct)
     {

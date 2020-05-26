@@ -23,10 +23,15 @@ namespace Mirror
                 PlayerCanvasObject.SetActive(true);
                 //StartCoroutine(a());
             }
-
-            CameraManager.Instance.hacker = this;
+            StartCoroutine(delayedSetHacker());
+            //CameraManager.Instance.hacker = this;
+          
         }
-
+        IEnumerator delayedSetHacker()
+        {
+            yield return new WaitForSeconds(1);
+            GetPlayer.Instance.Hs = this;
+        }
         // Update is called once per frame
         void Update()
         {
@@ -51,17 +56,23 @@ namespace Mirror
         {
             CameraManager.Instance.shutDownCamera(hackableNumber);
         }
-        [Command]
-        public void CmdCameraNoLongerShutdown(int index)
+
+        public void cameraBackOnline(int index)
         {
             HB.cameraBackOnline(index);
         }
-        [Command]
-        public void CmdRadioIsNowTurnedOn(int index)
+        public void cameraGoneOffline(int index)
+        {
+            HB.cameraGoneOffline(index);
+        }
+        public void UsingCamera(int index)
+        {
+            HB.UsingCamera(index);
+        }
+        public void RadioBackOnline(int index)
         {
             HB.RadioBackOnline(index);
         }
-
 
 
         IEnumerator a()

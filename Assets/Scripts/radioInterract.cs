@@ -20,7 +20,9 @@ public class radioInterract : NetworkBehaviour
     {
         yield return new WaitForSeconds(10);
         on = false;
-        CameraManager.Instance.hacker.CmdRadioIsNowTurnedOn(index);
+        GetPlayer.Instance.radioNoLongerInUse(index);
+        // CameraManager.Instance.hacker.CmdRadioIsNoTurnedOff(index);
+      
     }
 
         void checkPlayer()
