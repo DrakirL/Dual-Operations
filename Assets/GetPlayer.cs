@@ -11,6 +11,8 @@ public class GetPlayer : NetworkBehaviour
     public GameObject canvas;
     public Text canvasText;
     public GameObject camera;
+    
+    public float flashTimer = 1;
     // Use this for initialization
     void Start()
     {
@@ -42,10 +44,10 @@ public class GetPlayer : NetworkBehaviour
     private void Update()
     {
         //this works for server but not for client'
-        if(Input.GetKeyDown(KeyCode.G))
-        {
-            AlertMeter._instance.AddAlert(1);
-        }
+        //if(Input.GetKeyDown(KeyCode.G))
+        //{
+        //    AlertMeter._instance.AddAlert(1);
+        //}
     
     }
     /*public void showCanvas()
@@ -75,6 +77,7 @@ public class GetPlayer : NetworkBehaviour
         if (isClientOnly)
         {
             AlertMeter._instance.AddAlert(value);
+            AlertMeter._instance.PlayAlertFlash(flashTimer);
         }
     }
     public void addAlertServer(float value)

@@ -18,6 +18,8 @@ public class SlideDoor : NetworkBehaviour, IInteractable
     BoxCollider col;
     public bool active = true;
 
+    public float flashTimer = 1;
+
     private void Start()
     {
         
@@ -49,11 +51,13 @@ public class SlideDoor : NetworkBehaviour, IInteractable
             else
             {
                 AlertMeter._instance.AddAlert(alertInc);
+                AlertMeter._instance.PlayAlertFlash(flashTimer);
             }
         }
         else
         {
             AlertMeter._instance.AddAlert(alertInc);
+            AlertMeter._instance.PlayAlertFlash(flashTimer);
         }
     }
     
