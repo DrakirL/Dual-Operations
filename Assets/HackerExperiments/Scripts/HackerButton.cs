@@ -3,19 +3,35 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Mirror;
+using UnityEngine.UI;
 
 public class HackerButton : NetworkBehaviour
 {
    [HideInInspector] public HackerButtonHandler HBH;
     [SerializeField] HackOptions[] preHackOptions;
     [SerializeField] HackOptions[] postHackOptions;
-    [SerializeField] int hackableNumber;
+    public int hackableNumber;
     [SerializeField] bool isHacked = false;
    [HideInInspector] public HackerScript hackerS;
+    public enum HackableType
+    {
+        camera,
+        radio
+    }
+  public HackableType hackableType;
     public GameObject minigame;
 
     [SerializeField] bool isHoverOverThisButton = false;
-    
+    [SerializeField] Sprite hackedTexture;
+    [SerializeField] Sprite usingTexture;
+    [Tooltip("leave this blank for radios")]
+    [SerializeField] Sprite shutdownCameraTexture;
+
+    Image image;
+    private void Start()
+    {
+        image = gameObject.GetComponent<Image>();
+    }
     void Update()
     {
         
@@ -43,7 +59,21 @@ public class HackerButton : NetworkBehaviour
     public void hack()
     {
         isHacked = true;
+        image.sprite = hackedTexture;
     }
+    public void changeTextureUsing()
+    {
+        image.sprite = usingTexture;
+    }
+    public void changeTextureHacked()
+    {
+        image.sprite = hackedTexture;
+    }
+    public void changeTextureShutdown()
+    {
+        image.sprite = shutdownCameraTexture;
+    }
+
     public void getCamera()
     {
         HBH.setUpCameraWatch(hackableNumber);
@@ -51,13 +81,14 @@ public class HackerButton : NetworkBehaviour
     public void turnOnRadio()
     {
         HBH.turnOnRadio(hackableNumber);
+        image.sprite = usingTexture;
     }
     
    // [ClientRpc]
     public void RpcShutDownCamera()
     {
         hackerS.RpcShutDownCamera(hackableNumber);
-        //CameraManager.Instance.shutDownCamera(hackableNumber);
+        //changeTextureShutdown();
     }
     public void LoadMinigame()
     {

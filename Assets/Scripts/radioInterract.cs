@@ -7,6 +7,7 @@ public class radioInterract : NetworkBehaviour
 {
     Transform xd123;
     public bool on;
+    public int index;
     public GameObject[] assignedGuards;
     // Start is called before the first frame update
     void Start()
@@ -19,6 +20,9 @@ public class radioInterract : NetworkBehaviour
     {
         yield return new WaitForSeconds(10);
         on = false;
+        GetPlayer.Instance.radioNoLongerInUse(index);
+        // CameraManager.Instance.hacker.CmdRadioIsNoTurnedOff(index);
+      
     }
 
         void checkPlayer()
