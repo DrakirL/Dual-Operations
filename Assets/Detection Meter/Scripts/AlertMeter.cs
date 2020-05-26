@@ -173,7 +173,7 @@ public class AlertMeter : NetworkBehaviour
             for (float i = 1; i >= 0; i -= Time.deltaTime / time)
             {
                 // Set color with i as alpha
-                alertImage.color = new Color(1, 1, 1, i);
+                alertImage.color = new Color(alertImage.color.r, alertImage.color.g, alertImage.color.b, i);
                 yield return null;
             }
         }
@@ -183,7 +183,7 @@ public class AlertMeter : NetworkBehaviour
             for (float i = 0; i <= 1; i += Time.deltaTime / time)
             {
                 // Set color with i as alpha
-                alertImage.color = new Color(1, 1, 1, i);
+                alertImage.color = new Color(alertImage.color.r, alertImage.color.g, alertImage.color.b, i);
                 yield return null;
             }
         }
