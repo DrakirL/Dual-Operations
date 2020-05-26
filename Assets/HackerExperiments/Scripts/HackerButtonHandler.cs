@@ -29,7 +29,7 @@ public class HackerButtonHandler : NetworkBehaviour
     HackOptions currentOption;
     bool isMenuUp = false;
     bool isCameraup = false;
-    int currentCamera = 0;
+  public int currentCamera = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -119,18 +119,18 @@ public class HackerButtonHandler : NetworkBehaviour
             //play error sound?
         }
     }
-    private void takeDownCamera()
+    public void takeDownCamera()
     {
         cameraImage.enabled = false;
         isCameraup = false;
         allCameras[currentCamera].changeTextureHacked();
     }
-    private void forcedDown()
+    /*private void forcedDown()
     {
         cameraImage.enabled = false;
         isCameraup = false;
        // allCameras[currentCamera].changeTextureShutdown();
-    }
+    }*/
     public void turnOnRadio(int hackableNumber)
     {
         CameraManager.Instance.turnOnRadio(hackableNumber);
