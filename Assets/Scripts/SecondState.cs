@@ -8,7 +8,7 @@ using UnityEngine.AI;
 public class SecondState : State<AI>
 {
     private static SecondState _instance;
-
+    public float flashTimer = 1;
 
     private SecondState()
     {
@@ -56,6 +56,7 @@ public class SecondState : State<AI>
 
         AlertMeter._instance.AddAlert(10);
         _owner.warning.Play(true);
+        AlertMeter._instance.PlayAlertFlash(flashTimer);
         //_owner.gameObject.GetComponent<NavMeshAgent>().destination = _owner.goal2.position;
     }
 
