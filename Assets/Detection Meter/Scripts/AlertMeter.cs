@@ -71,11 +71,6 @@ public class AlertMeter : NetworkBehaviour
         {
             //nothing should happen here, you are not on the server 
         }
-
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            PlayAlertFlash(1);
-        }
     }
 
     void UpdateMeter()
