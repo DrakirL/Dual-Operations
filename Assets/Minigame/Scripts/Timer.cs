@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.UI;
 
 public class Timer : MonoBehaviour
 {
@@ -11,11 +12,13 @@ public class Timer : MonoBehaviour
     [SerializeField] TextMeshProUGUI text;
     bool paused;
     bool depleted = false;
+    [SerializeField] Text hackerText;
 
     public enum TimerTypes
     {
         agent, 
         minigame,
+        hacker
     }
 
     public TimerTypes timerType;
@@ -46,6 +49,7 @@ public class Timer : MonoBehaviour
             else
                 return;
         }
+        
     }
     void UpdateTimer()
     {
@@ -56,8 +60,17 @@ public class Timer : MonoBehaviour
             string seconds = Mathf.Floor(timer % 60).ToString("00");
 
             if (!IsDepleted())
-                text.text = string.Format("{0}:{1}", minutes, seconds);
-        }        
+            {
+                if (timerType == TimerTypes.agent)
+                {
+                    text.text = string.Format("{0}:{1}", minutes, seconds);
+                }
+                else if (timerType == TimerTypes.hacker)
+                {
+                    hackerText.text = string.Format("{0}:{1}", minutes, seconds);
+                }
+            }
+        }   
     }
 
     public void AddTime(float seconds)
