@@ -48,6 +48,18 @@ namespace Mirror
         {
             CameraManager.Instance.shutDownCamera(hackableNumber);
         }
+        [Command]
+        public void CmdCameraNoLongerShutdown(int index)
+        {
+
+        }
+        [Command]
+        public void CmdRadioIsNowTurnedOn()
+        {
+
+        }
+
+
 
         IEnumerator a()
         {
