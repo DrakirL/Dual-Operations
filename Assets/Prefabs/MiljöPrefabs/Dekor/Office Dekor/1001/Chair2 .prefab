@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &831979608994168455
+--- !u!1 &3038134345944206855
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,45 +8,45 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5799811817349381318}
-  - component: {fileID: 6220330571797182979}
-  - component: {fileID: 8565188612448854276}
+  - component: {fileID: 5679768771651482271}
+  - component: {fileID: 4969968870841355973}
+  - component: {fileID: 1685463144507525591}
   m_Layer: 8
-  m_Name: gas_kanister
+  m_Name: chair_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5799811817349381318
+--- !u!4 &5679768771651482271
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 831979608994168455}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.4, z: 0}
-  m_LocalScale: {x: 0.16333775, y: 0.36591366, z: 0.16333775}
+  m_GameObject: {fileID: 3038134345944206855}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.55, z: 0}
+  m_LocalScale: {x: 0.42858073, y: 0.4285807, z: 0.42858073}
   m_Children: []
-  m_Father: {fileID: 8933082749333189136}
+  m_Father: {fileID: 421745313087305987}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &6220330571797182979
+--- !u!33 &4969968870841355973
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 831979608994168455}
-  m_Mesh: {fileID: -2130527322869407287, guid: 8729d6156477d054b8db2c776aa9fe2f, type: 3}
---- !u!23 &8565188612448854276
+  m_GameObject: {fileID: 3038134345944206855}
+  m_Mesh: {fileID: 498376317060963982, guid: 8729d6156477d054b8db2c776aa9fe2f, type: 3}
+--- !u!23 &1685463144507525591
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 831979608994168455}
+  m_GameObject: {fileID: 3038134345944206855}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -58,7 +58,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a5890e628f0c31247a94f2c65c15cf75, type: 2}
+  - {fileID: 2100000, guid: df8e1ac9d3aede74683767f3e21be924, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -79,7 +79,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!1 &9069620725936928318
+--- !u!1 &4531522088949852034
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -87,26 +87,26 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8933082749333189136}
+  - component: {fileID: 421745313087305987}
   m_Layer: 8
-  m_Name: Kanister
+  m_Name: 'Chair2 '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8933082749333189136
+--- !u!4 &421745313087305987
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9069620725936928318}
+  m_GameObject: {fileID: 4531522088949852034}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 5799811817349381318}
+  - {fileID: 5679768771651482271}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
