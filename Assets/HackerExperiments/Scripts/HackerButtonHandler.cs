@@ -125,12 +125,18 @@ public class HackerButtonHandler : NetworkBehaviour
         isCameraup = false;
         allCameras[currentCamera].changeTextureHacked();
     }
-    /*private void forcedDown()
+    public void forcedDown(int index)
     {
-        cameraImage.enabled = false;
-        isCameraup = false;
-       // allCameras[currentCamera].changeTextureShutdown();
-    }*/
+        if (currentCamera == index)
+        {
+
+            cameraImage.enabled = false;
+            isCameraup = false;
+            //takeDownCamera();
+            //allCameras[currentCamera].changeTextureShutdown();
+        }
+        // allCameras[currentCamera].changeTextureShutdown();
+    }
     public void turnOnRadio(int hackableNumber)
     {
         CameraManager.Instance.turnOnRadio(hackableNumber);

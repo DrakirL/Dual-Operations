@@ -54,7 +54,7 @@ namespace Mirror
         [ClientRpc]
         public void RpcShutDownCamera(int hackableNumber)
         {
-            
+            HB.forcedDown(hackableNumber);
             CameraManager.Instance.shutDownCamera(hackableNumber);
         }
 
