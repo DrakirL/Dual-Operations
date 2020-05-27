@@ -74,6 +74,12 @@ public class MenuFunctions : MonoBehaviour
     }
 
     // Shut down the game
+    public void Credits()
+    {
+        Debug.Log("Credits message. No credits yet");
+    }
+
+    // Shut down the game
     public void Quit()
     {
         SwitchLayer(0);
@@ -84,10 +90,5 @@ public class MenuFunctions : MonoBehaviour
     public void Ready()
     {
         roomManager.ConfirmReady();
-    }
-
-    public void ManagePlayers(int amount)
-    {
-
     }
 }

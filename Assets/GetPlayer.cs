@@ -103,8 +103,9 @@ public class GetPlayer : NetworkBehaviour
     {
         CmdAddAlertOnServer(value);
 
-        if (isServer)
-            DualOperationsAudioPlayer.Instance.RpcDetected();
+        // Sound Pls
+        UnityEngine.Debug.Log("*earrape mic* Enemy Spotted");
+        DualOperationsAudioPlayer.Instance.Detected();
     }
     [Command]
     private void CmdAddAlertOnServer(float value)

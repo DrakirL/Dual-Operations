@@ -54,15 +54,18 @@ public class DualOperationsAudioPlayer : NetworkBehaviour
     [SerializeField]
     private string playerDetectedPath;
 
-    [ClientRpc]
-    public void RpcDetected()
+    public void Detected()
     {
-        UnityEngine.Debug.Log("Nådde ljudets Detected");
-        PlaySound(playerDetectedPath, GetPlayer.Instance.getPlayer());
+        UnityEngine.Debug.Log("Nådde ljudets Detected: is server = " + isServer);
+        
+        if (isServer)
+            RpcPlaySound(playerDetectedPath, GetPlayer.Instance.getPlayer());
     }
 
-    void PlaySound(string path, GameObject source)
+    [ClientRpc]
+    void RpcPlaySound(string path, GameObject source)
     {
-        FMODUnity.RuntimeManager.PlayOneShot(path, source.transform.position);
+            UnityEngine.Debug.Log("Borde spela ett ljud");
+            FMODUnity.RuntimeManager.PlayOneShot(path, source.transform.position);
     }
 }
