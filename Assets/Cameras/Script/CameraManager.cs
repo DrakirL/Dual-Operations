@@ -25,6 +25,7 @@ public class CameraManager : NetworkBehaviour
     // Use this for initialization
     [SerializeField] CameraStruct[] cameraStruct;
     public RadioStruct[] radioStruct;
+    [SerializeField] float flashTimer = 1;
 
     [SerializeField] float cameraAlertTime;
     GameObject Spy;
@@ -62,36 +63,39 @@ public class CameraManager : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Spy == null)
+        if (isClientOnly)
         {
-            try
+            if (Spy == null)
             {
-                Spy = GetPlayer.Instance.getPlayer();
-                spyCol = Spy.GetComponent<Collider>();
-            }
-            catch
-            {
-                Debug.LogWarning("if this appears more than two times something is wrong");
-            }
-        }
-        else
-        {
-            
-            List<CameraScript> alertTimes = new List<CameraScript>();
-            alertTimes = camerasThatSeeTheSpy();
-            if (alertTimes.Count == 0)
-            {
-                //   Debug.Log("no camera has spotted the agent");
+                try
+                {
+                    Spy = GetPlayer.Instance.getPlayer();
+                    spyCol = Spy.GetComponent<Collider>();
+                }
+                catch
+                {
+                    Debug.LogWarning("if this appears more than two times something is wrong");
+                }
             }
             else
             {
-                for (int i = 0; i < alertTimes.Count; i++)
-                {
-                    //TYPE HERE WHAT SHOULD HAPPEN WHEN CAMERA DETECT AGENT
-                    //Debug.Log(alertTimes[i].gameObject.name + " has spoted the agent!");
 
-                    GetPlayer.Instance.incAlertFromCamera(alertStateInc);
-                //AlertMeter._instance.AddAlert(alertStateInc);
+                List<CameraScript> alertTimes = new List<CameraScript>();
+                alertTimes = camerasThatSeeTheSpy();
+                if (alertTimes.Count == 0)
+                {
+                    //   Debug.Log("no camera has spotted the agent");
+                }
+                else
+                {
+                    for (int i = 0; i < alertTimes.Count; i++)
+                    {
+                        //TYPE HERE WHAT SHOULD HAPPEN WHEN CAMERA DETECT AGENT
+                        AlertMeter._instance.AddAlert(alertStateInc);
+                        AlertMeter._instance.PlayAlertFlash(flashTimer);
+
+                        //GetPlayer.Instance.incAlertFromCamera(alertStateInc);
+                    }
                 }
             }
         }

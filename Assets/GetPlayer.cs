@@ -12,7 +12,6 @@ public class GetPlayer : NetworkBehaviour
     public Text canvasText;
     public GameObject camera;
     
-    public float flashTimer = 1;
     [HideInInspector] public HackerScript Hs;
     // Use this for initialization
     void Start()
@@ -91,14 +90,14 @@ public class GetPlayer : NetworkBehaviour
     {
         return this.gameObject;
     }
-    public void incAlertFromCamera(float value)
+    /*public void incAlertFromCamera(float value)
     {
         if (isClientOnly)
         {
             AlertMeter._instance.AddAlert(value);
             AlertMeter._instance.PlayAlertFlash(flashTimer);
         }
-    }
+    }*/
     public void addAlertServer(float value)
     {
         CmdAddAlertOnServer(value);

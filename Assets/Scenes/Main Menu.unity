@@ -910,6 +910,10 @@ MonoBehaviour:
   - {fileID: 2109066487}
   roomManager: {fileID: 0}
   inputField: {fileID: 1368493207}
+  readyColor: {r: 0, g: 0, b: 0, a: 0}
+  unReadyColor: {r: 0, g: 0, b: 0, a: 0}
+  Host: {fileID: 0}
+  Client: {fileID: 0}
 --- !u!4 &822989605
 Transform:
   m_ObjectHideFlags: 0
@@ -1273,6 +1277,7 @@ GameObject:
   m_Component:
   - component: {fileID: 969535999}
   - component: {fileID: 969535998}
+  - component: {fileID: 969536000}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -1292,7 +1297,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 1
+  m_Intensity: 3.1415927
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -1332,7 +1337,7 @@ Light:
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
   m_Lightmapping: 4
-  m_LightShadowCasterMode: 0
+  m_LightShadowCasterMode: 2
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
   m_ColorTemperature: 6570

@@ -363,8 +363,10 @@ public class MinigameManager : MonoBehaviour
         {
             //activePulse = true;
             UpdateBoard();
-            if(WinCondition())
+            if (WinCondition())
+            {
                 Win();
+            }
             //StartCoroutine(Reset(resetTime));
         }
     }
