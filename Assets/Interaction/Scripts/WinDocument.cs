@@ -7,5 +7,6 @@ public class WinDocument : MonoBehaviour, IInteractable
     public void GetInteracted(List<int> io)
     {
         GameManager._instance.winState = true;
+        Destroy(this.gameObject);
     }
 }
