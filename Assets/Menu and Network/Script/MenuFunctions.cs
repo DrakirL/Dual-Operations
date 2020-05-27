@@ -82,7 +82,8 @@ public class MenuFunctions : MonoBehaviour
     // Shut down the game
     public void Credits()
     {
-        Debug.Log("Credits message. No credits yet");
+        SceneManager.LoadScene("Credtis", LoadSceneMode.Single);
+        Debug.Log("Credits message. You should change scene first.");
     }
 
     // Shut down the game
