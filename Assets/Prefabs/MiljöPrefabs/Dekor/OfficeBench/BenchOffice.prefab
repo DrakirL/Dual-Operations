@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &6926746428365834627
+--- !u!1 &1373419019006852789
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,47 +8,46 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6231828452432247696}
-  - component: {fileID: 3107730354248237478}
-  - component: {fileID: 8654908178152144223}
-  - component: {fileID: 6466081921976864528}
-  - component: {fileID: 7386069025064043164}
-  m_Layer: 8
-  m_Name: mesh_bench_office
+  - component: {fileID: 7398366956792534308}
+  - component: {fileID: 8244785879068964502}
+  - component: {fileID: 6913322493237668045}
+  - component: {fileID: 4294933753700740495}
+  m_Layer: 0
+  m_Name: desk
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6231828452432247696
+--- !u!4 &7398366956792534308
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6926746428365834627}
+  m_GameObject: {fileID: 1373419019006852789}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.45, z: 0}
-  m_LocalScale: {x: 0.0070842165, y: 0.008598066, z: 0.008318696}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8189822637842628211}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &3107730354248237478
+--- !u!33 &8244785879068964502
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6926746428365834627}
-  m_Mesh: {fileID: 2502843528329499362, guid: 84c020bc9e285b640984ad3d433713f5, type: 3}
---- !u!23 &8654908178152144223
+  m_GameObject: {fileID: 1373419019006852789}
+  m_Mesh: {fileID: 2502843528329499362, guid: d74902d78655f784d9af63b24d12bc3e, type: 3}
+--- !u!23 &6913322493237668045
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6926746428365834627}
+  m_GameObject: {fileID: 1373419019006852789}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -60,7 +59,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: eb8d5cd37c682e348b569438deeee2ce, type: 2}
+  - {fileID: 2100000, guid: aaba35b605c0fb64f9a0480a328e0bd7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -81,33 +80,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &6466081921976864528
+--- !u!65 &4294933753700740495
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6926746428365834627}
+  m_GameObject: {fileID: 1373419019006852789}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 99.99997, y: 106.28027, z: 104.67265}
-  m_Center: {x: 0, y: 3.1401403, z: 2.3363378}
---- !u!64 &7386069025064043164
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6926746428365834627}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 2502843528329499362, guid: 84c020bc9e285b640984ad3d433713f5, type: 3}
+  m_Size: {x: 0.7084214, y: 0.9138047, z: 0.8707393}
+  m_Center: {x: 0, y: 0.026999174, z: 0.019434629}
 --- !u!1 &8479781256121360377
 GameObject:
   m_ObjectHideFlags: 0
@@ -135,7 +120,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 6231828452432247696}
+  - {fileID: 7398366956792534308}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
