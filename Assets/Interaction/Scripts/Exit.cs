@@ -8,7 +8,7 @@ public class Exit : MonoBehaviour, IInteractable
     {
         if (GameManager._instance.winState)
         {
-            GameManager._instance.LoadScene("Win", 0);
+            GetPlayer.Instance.LoadScene("Win", 0);
         }
     }
 }
