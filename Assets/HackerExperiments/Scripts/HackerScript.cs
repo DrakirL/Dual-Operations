@@ -16,6 +16,7 @@ namespace Mirror
         // Start is called before the first frame update
         void Start()
         {
+            PlayerCanvasObject.SetActive(false);
             if (isLocalPlayer)
             {
                 MinigameManager.Instance.GetHackerCanvas(PlayerCanvasObject);
