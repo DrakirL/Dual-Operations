@@ -4,12 +4,17 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Mirror;
+using Unity;
 
 public class MenuFunctions : MonoBehaviour
 {
     public GameObject[] menuLayers;
     public DualOperationsNetworkRoomManager roomManager;
     public InputField inputField;
+    [SerializeField] Color readyColor, unReadyColor;
+    [SerializeField] Image Host, Client;
+    bool ready = false;
+
 
     void Start()
     {
@@ -46,6 +51,7 @@ public class MenuFunctions : MonoBehaviour
 
         roomManager.StartClient();
         roomManager.layer = 1;
+        
     }
 
     // Start the game with the current players
@@ -81,8 +87,21 @@ public class MenuFunctions : MonoBehaviour
         Debug.Log("Quit message");
     }
 
-    public void Ready()
+    public void Ready(Image image)
     {
+        ready = !ready;
+        Color color;
+
+        if(ready)
+        {
+            color = readyColor;
+        }
+        else
+        {
+            color = unReadyColor;
+        }
+        image.color = color;
+
         roomManager.ConfirmReady();
     }
 

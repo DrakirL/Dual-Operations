@@ -805,6 +805,10 @@ MonoBehaviour:
   - {fileID: 2109066487}
   roomManager: {fileID: 0}
   inputField: {fileID: 1368493207}
+  readyColor: {r: 0, g: 0, b: 0, a: 0}
+  unReadyColor: {r: 0, g: 0, b: 0, a: 0}
+  Host: {fileID: 0}
+  Client: {fileID: 0}
 --- !u!4 &822989605
 Transform:
   m_ObjectHideFlags: 0
@@ -903,7 +907,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &889031700
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2550,7 +2554,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2109066488
 RectTransform:
   m_ObjectHideFlags: 0
