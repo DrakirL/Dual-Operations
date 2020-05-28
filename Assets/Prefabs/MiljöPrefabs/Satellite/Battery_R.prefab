@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 2941131890508201467}
   - component: {fileID: 6164294706598463437}
   - component: {fileID: 483978679548164916}
-  m_Layer: 0
+  - component: {fileID: 5410047430068887676}
+  m_Layer: 8
   m_Name: mesh_battery_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -79,6 +80,20 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &5410047430068887676
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2201035395331166184}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -4978003056801169941, guid: b44918dedb3d7394e88b771a27590a6f, type: 3}
 --- !u!1 &4326366952430747043
 GameObject:
   m_ObjectHideFlags: 0
@@ -88,7 +103,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5555610605830324972}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Battery_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}

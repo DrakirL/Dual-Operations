@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 1180413580587307503}
   - component: {fileID: 7870793903664475097}
   - component: {fileID: 4469299476924782368}
-  m_Layer: 0
+  - component: {fileID: 131087048283559390}
+  m_Layer: 8
   m_Name: mesh_body_satelite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -79,6 +80,20 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &131087048283559390
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2754780467262841852}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -4022569328037595218, guid: adb05ab7563265845badd4c60b7813d5, type: 3}
 --- !u!1 &6950789190358495409
 GameObject:
   m_ObjectHideFlags: 0
@@ -88,7 +103,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8380893257024606586}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Satellite_body
   m_TagString: Untagged
   m_Icon: {fileID: 0}

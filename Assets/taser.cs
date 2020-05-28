@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
+using UnityEngine.UI;
 
 public class taser : NetworkBehaviour
 {
@@ -9,6 +10,12 @@ public class taser : NetworkBehaviour
     public Camera aimCam;
     public float range;
     public bool bengt = false;
+    public Text tasorText;
+
+    public int tasorSkott = 5;
+    private float reloadTime = 2f;
+    private bool tasorReady = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,10 +27,14 @@ public class taser : NetworkBehaviour
     {
         //if (!isServer)
         {
-            if (Input.GetButtonDown("Fire1"))
+            if (Input.GetButtonDown("Fire1") && tasorSkott > 0 && tasorReady == true)
             {
                 Debug.Log("fire");
                 CmdShoot();
+                //#bästadesign som fixat tasorn <3
+                tasorSkott--;
+                tasorReady = false;
+                StartCoroutine(Cooldown(reloadTime));
             }
         }
 
@@ -33,6 +44,14 @@ public class taser : NetworkBehaviour
         {
             CmdShoot();
         }
+
+        tasorText.text = tasorSkott.ToString();
+    }
+
+    private IEnumerator Cooldown(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        tasorReady = true;
     }
 
     [Command]
