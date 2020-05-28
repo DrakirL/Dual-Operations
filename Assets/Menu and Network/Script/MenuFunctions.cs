@@ -79,6 +79,13 @@ public class MenuFunctions : MonoBehaviour
         }
     }
 
+    // Roll the credits
+    public void Credits()
+    {
+        SceneManager.LoadScene("Credtis", LoadSceneMode.Single);
+        Debug.Log("Credits message. You should change scene first.");
+    }
+
     // Shut down the game
     public void Quit()
     {
