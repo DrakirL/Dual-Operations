@@ -109,6 +109,10 @@ public class GetPlayer : NetworkBehaviour
         AlertMeter._instance.timeStamp = Time.time;
         AlertMeter._instance.tmpCounter = 0;
         //RpcAddAlertOnClient(AlertMeter._instance.alertValue, AlertMeter._instance.timeStamp);
+
+        //sound pls
+        UnityEngine.Debug.Log("Nåd? " + (DualOperationsAudioPlayer.Instance != null));
+        DualOperationsAudioPlayer.Instance.Detected();
     }
    // [ClientRpc]
     //private void RpcAddAlertOnClient(float newAlerValue, float newTimeStamp)

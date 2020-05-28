@@ -23,7 +23,7 @@ public class DualOperationsAudioPlayer : NetworkBehaviour
     private StudioEventEmitter emitter;
     public float intenseStartValue;
 
-    public AlertMeter alert;
+    //public AlertMeter alert;
 
     void Start()
     {
@@ -32,10 +32,7 @@ public class DualOperationsAudioPlayer : NetworkBehaviour
 
     void Update()
     {
-        if(alert != null)
-        {
-            emitter.SetParameter("LVL", Mathf.Clamp(alert.alertValue, 0.0f, intenseStartValue) / intenseStartValue, false);
-        }
+            emitter.SetParameter("LVL", Mathf.Clamp(AlertMeter._instance.alertValue, 0.0f, intenseStartValue) / intenseStartValue, false);
     }
 
     //public event Action onUpdateRadio;
@@ -58,14 +55,20 @@ public class DualOperationsAudioPlayer : NetworkBehaviour
     {
         UnityEngine.Debug.Log("Nådde ljudets Detected: is server = " + isServer);
         
-        if (isServer)
-            RpcPlaySound(playerDetectedPath, GetPlayer.Instance.getPlayer(), false);
+        CmdPlaySound(playerDetectedPath, GetPlayer.Instance.getPlayer().transform.position, false);
+    }
+
+    [Command]
+    void CmdPlaySound(string path, Vector3 pos, bool agentOnly)
+    {
+        UnityEngine.Debug.Log("Nådde CMD");
+        RpcPlaySound(path, pos, agentOnly);
     }
 
     [ClientRpc]
-    void RpcPlaySound(string path, GameObject source, bool agentOnly)
+    void RpcPlaySound(string path, Vector3 pos, bool agentOnly)
     {
-            UnityEngine.Debug.Log("Borde spela ett ljud");
-            FMODUnity.RuntimeManager.PlayOneShot(path, source.transform.position);
+        UnityEngine.Debug.Log("Nådde RPC");
+        FMODUnity.RuntimeManager.PlayOneShot(path, pos);
     }
 }
