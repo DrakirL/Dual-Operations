@@ -101,6 +101,10 @@ public class GetPlayer : NetworkBehaviour
     public void addAlertServer(float value)
     {
         CmdAddAlertOnServer(value);
+
+        // Sound Pls
+        UnityEngine.Debug.Log("*earrape mic* Enemy Spotted");
+        DualOperationsAudioPlayer.Instance.Detected();
     }
     [Command]
     private void CmdAddAlertOnServer(float value)

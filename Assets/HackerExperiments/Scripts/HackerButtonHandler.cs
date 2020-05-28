@@ -13,6 +13,7 @@ public struct HackOptions
 }
 public class HackerButtonHandler : NetworkBehaviour
 {
+    
     [Tooltip("this is used to connect all buttons to this script")]
     [SerializeField] HackerButton[] allButtons;
      HackerButton[] allCameras;
@@ -140,6 +141,9 @@ public class HackerButtonHandler : NetworkBehaviour
     public void turnOnRadio(int hackableNumber)
     {
         CameraManager.Instance.turnOnRadio(hackableNumber);
+        
+        //Sounds pls
+        DualOperationsAudioPlayer.Instance.RpcUpdateRadio(1.0f, hackableNumber);
     }
     
     //functions to create and remove the menues

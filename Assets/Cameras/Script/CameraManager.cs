@@ -24,7 +24,7 @@ public class CameraManager : NetworkBehaviour
     public static CameraManager Instance { get { return instance; } }
     // Use this for initialization
     [SerializeField] CameraStruct[] cameraStruct;
-    [SerializeField] RadioStruct[] radioStruct;
+    public RadioStruct[] radioStruct;
     [SerializeField] float flashTimer = 1;
 
     [SerializeField] float cameraAlertTime;
@@ -52,6 +52,11 @@ public class CameraManager : NetworkBehaviour
         {
             if (cameraStruct[i].camera.distanceCameraCanRegisterAgent > maxDistance)
                 maxDistance = cameraStruct[i].camera.distanceCameraCanRegisterAgent;
+        }
+
+        for (int i = 0; i < radioStruct.Length; i++)
+        {
+            radioStruct[i].radio.index = i;
         }
     }
 

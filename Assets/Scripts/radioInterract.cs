@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
+using System.Security.Cryptography;
 
 public class radioInterract : NetworkBehaviour
 {
@@ -20,9 +21,13 @@ public class radioInterract : NetworkBehaviour
     {
         yield return new WaitForSeconds(10);
         on = false;
+
+        //Sound pls
+        if(isServer)
+        DualOperationsAudioPlayer.Instance.RpcUpdateRadio(0.0f, index);
+        
         GetPlayer.Instance.radioNoLongerInUse(index);
-        // CameraManager.Instance.hacker.CmdRadioIsNoTurnedOff(index);
-      
+        // CameraManager.Instance.hacker.CmdRadioIsNoTurnedOff(index);     
     }
 
         void checkPlayer()

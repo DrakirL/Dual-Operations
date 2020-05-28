@@ -80,6 +80,13 @@ public class MenuFunctions : MonoBehaviour
     }
 
     // Shut down the game
+    public void Credits()
+    {
+        SceneManager.LoadScene("Credtis", LoadSceneMode.Single);
+        Debug.Log("Credits message. You should change scene first.");
+    }
+
+    // Shut down the game
     public void Quit()
     {
         SwitchLayer(0);
@@ -103,10 +110,5 @@ public class MenuFunctions : MonoBehaviour
         image.color = color;
 
         roomManager.ConfirmReady();
-    }
-
-    public void ManagePlayers(int amount)
-    {
-
     }
 }

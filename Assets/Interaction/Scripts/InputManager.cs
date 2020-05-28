@@ -17,7 +17,6 @@ public class InputManager : MonoBehaviour
         orangeCard.SetActive(false);
         greenCard.SetActive(false);
         interactText = GameObject.FindGameObjectWithTag("InteractText");
-        interactText.SetActive(false);
         objectPlayerCanInterRactWith.Add(0);
     }
 
