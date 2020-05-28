@@ -59,11 +59,11 @@ public class DualOperationsAudioPlayer : NetworkBehaviour
         UnityEngine.Debug.Log("Nådde ljudets Detected: is server = " + isServer);
         
         if (isServer)
-            RpcPlaySound(playerDetectedPath, GetPlayer.Instance.getPlayer());
+            RpcPlaySound(playerDetectedPath, GetPlayer.Instance.getPlayer(), false);
     }
 
     [ClientRpc]
-    void RpcPlaySound(string path, GameObject source)
+    void RpcPlaySound(string path, GameObject source, bool agentOnly)
     {
             UnityEngine.Debug.Log("Borde spela ett ljud");
             FMODUnity.RuntimeManager.PlayOneShot(path, source.transform.position);
