@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4781037995598884131}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Rocket_motor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,7 +42,8 @@ GameObject:
   - component: {fileID: 2213579344040515260}
   - component: {fileID: 7197649476446743690}
   - component: {fileID: 3521737372258111603}
-  m_Layer: 0
+  - component: {fileID: 8632070635956032870}
+  m_Layer: 8
   m_Name: mesh_rocket_motor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -110,3 +111,17 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &8632070635956032870
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2946321140743382191}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 3862152761715866072, guid: 381711e6990247e488ccaf73ac9c97b0, type: 3}
