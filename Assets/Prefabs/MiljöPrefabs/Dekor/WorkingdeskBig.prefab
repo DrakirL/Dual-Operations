@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6361008580253955763}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: WorkingdeskBig
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,7 +42,8 @@ GameObject:
   - component: {fileID: 5613364386099462326}
   - component: {fileID: 3512151936604748416}
   - component: {fileID: 7170050561676232313}
-  m_Layer: 0
+  - component: {fileID: 8269752498751035515}
+  m_Layer: 8
   m_Name: mesh_workingdeskBig
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -110,3 +111,17 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &8269752498751035515
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8916552166003405477}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -604681538445691743, guid: 5da3efcbda89c6d4587b8a2754a3ad5a, type: 3}

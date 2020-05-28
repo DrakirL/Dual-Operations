@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2673824788477377594}
   - component: {fileID: 5329677509167866336}
   - component: {fileID: 9125503151302635607}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: sunpanel_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 3888772822939214205}
   - component: {fileID: 2196373274856265947}
   - component: {fileID: 7016499436648233871}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: rocket_motor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -169,7 +169,7 @@ GameObject:
   - component: {fileID: 5751465441737378945}
   - component: {fileID: 2566456118936536610}
   - component: {fileID: 2501262366228091468}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: sunpanel_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -246,7 +246,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8399739904572090366}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Satellite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -279,7 +279,7 @@ GameObject:
   - component: {fileID: 6858708746435294468}
   - component: {fileID: 6949948912733258540}
   - component: {fileID: 2609078695726643377}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: body_satelite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -358,7 +358,7 @@ GameObject:
   - component: {fileID: 9058289487092165936}
   - component: {fileID: 570247838978810627}
   - component: {fileID: 1466303747316501950}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Battery_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -437,7 +437,7 @@ GameObject:
   - component: {fileID: 3984885265350599456}
   - component: {fileID: 5269166094555161364}
   - component: {fileID: 5917282686287355961}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: parallel_rails
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -516,7 +516,7 @@ GameObject:
   - component: {fileID: 5091470188150094058}
   - component: {fileID: 7862655148193324828}
   - component: {fileID: 7447954353362618345}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Battery_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -595,7 +595,7 @@ GameObject:
   - component: {fileID: 3542056039638161441}
   - component: {fileID: 7940176176719306726}
   - component: {fileID: 8691853923654012140}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: rocket
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -672,7 +672,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7705682685502968690}
-  m_Layer: 0
+  - component: {fileID: 1159319230361281970}
+  m_Layer: 8
   m_Name: mesh_satellite_whole
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -703,6 +704,19 @@ Transform:
   m_Father: {fileID: 8399739904572090366}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1159319230361281970
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6677514760111432033}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 18.083338, y: 1.0530968, z: 7.722617}
+  m_Center: {x: -0.030760765, y: 0.026548386, z: -1.8424735}
 --- !u!1 &8376180114726502458
 GameObject:
   m_ObjectHideFlags: 0
@@ -714,7 +728,7 @@ GameObject:
   - component: {fileID: 3327484868250818094}
   - component: {fileID: 1832012396165443453}
   - component: {fileID: 4228841852998682324}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: moving_armature
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -793,7 +807,7 @@ GameObject:
   - component: {fileID: 1064930896524862431}
   - component: {fileID: 6329374880369246726}
   - component: {fileID: 299839442267609069}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: antenna
   m_TagString: Untagged
   m_Icon: {fileID: 0}

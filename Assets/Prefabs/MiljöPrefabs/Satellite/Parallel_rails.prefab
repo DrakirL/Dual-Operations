@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 2646652528224145720}
   - component: {fileID: 6476680719786552078}
   - component: {fileID: 782856298909947895}
-  m_Layer: 0
+  - component: {fileID: 1883133795546789788}
+  m_Layer: 8
   m_Name: mesh_parallel_rails
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -79,6 +80,20 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &1883133795546789788
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1360533125241135915}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -2264212154248192401, guid: 0b0e9f2af9bb3f1498d32aa43f843970, type: 3}
 --- !u!1 &6124848697118223310
 GameObject:
   m_ObjectHideFlags: 0
@@ -88,7 +103,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3911822274567403476}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Parallel_rails
   m_TagString: Untagged
   m_Icon: {fileID: 0}

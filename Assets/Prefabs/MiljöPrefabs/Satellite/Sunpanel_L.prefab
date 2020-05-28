@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9126122188956837019}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Sunpanel_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,7 +42,8 @@ GameObject:
   - component: {fileID: 6667903201529979796}
   - component: {fileID: 2437045658044946850}
   - component: {fileID: 8281743090694661467}
-  m_Layer: 0
+  - component: {fileID: 2047412783994886562}
+  m_Layer: 8
   m_Name: mesh_sunpanel_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -110,3 +111,17 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &2047412783994886562
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7697354878656745863}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 5324349858962506659, guid: 7c3e99538db14074c83c48fdac8b617b, type: 3}
