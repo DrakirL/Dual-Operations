@@ -24,7 +24,7 @@ public class CameraManager : NetworkBehaviour
     public static CameraManager Instance { get { return instance; } }
     // Use this for initialization
     [SerializeField] CameraStruct[] cameraStruct;
-    [SerializeField] RadioStruct[] radioStruct;
+    public RadioStruct[] radioStruct;
     [SerializeField] float flashTimer = 1;
 
     [SerializeField] float cameraAlertTime;

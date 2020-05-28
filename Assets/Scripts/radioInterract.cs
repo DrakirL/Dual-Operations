@@ -20,6 +20,11 @@ public class radioInterract : NetworkBehaviour
     {
         yield return new WaitForSeconds(10);
         on = false;
+
+        //Sound pls
+        if (isServer)
+            DualOperationsAudioPlayer.Instance.RpcUpdateRadio(0.0f, index);
+
         GetPlayer.Instance.radioNoLongerInUse(index);
         // CameraManager.Instance.hacker.CmdRadioIsNoTurnedOff(index);
       
