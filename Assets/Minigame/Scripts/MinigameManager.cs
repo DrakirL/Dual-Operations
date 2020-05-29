@@ -85,9 +85,12 @@ public class MinigameManager : MonoBehaviour
 
     void UpdateBoard()
     {
+        // Sound pls
+        DualOperationsAudioPlayer.Instance.Hack(2);
+
         // Update on mouseclick
-        
-         RefreshPuzzle();
+
+        RefreshPuzzle();
 
         // if (activePulse)
          CheckNeighbours(puzzle.startCoords.x, puzzle.startCoords.y);
@@ -226,6 +229,9 @@ public class MinigameManager : MonoBehaviour
             //if(activePulse)
             AlertMeter._instance.AddAlert(alertPenaltyValue);
             anim.Play("LoseAnimation");
+
+            // Sound pls
+            DualOperationsAudioPlayer.Instance.Hack(1);
             return;
         }
         else
@@ -323,14 +329,14 @@ public class MinigameManager : MonoBehaviour
     bool WinCondition() => !firewall && puzzle.pieces[puzzle.endCoords.x, puzzle.endCoords.y].active ? true : false;
 
     public void Win()
-        {
-            // Animation holder
-            anim.Play("WinAnimation");
+    {
+        // Animation holder
+        anim.Play("WinAnimation");
 
-            // Sound holder
-            audioSource.PlayOneShot(winSound);
+        // Sound pls
+        DualOperationsAudioPlayer.Instance.Hack(3);
 
-            Deactivate();     
+        Deactivate();     
     }
 
     void Lose()
@@ -343,8 +349,8 @@ public class MinigameManager : MonoBehaviour
                 // Animation holder
                 anim.Play("LoseAnimation");
 
-                // Sound holder/remove if fmod??
-                audioSource.PlayOneShot(loseSound);
+                // Sound pls
+                DualOperationsAudioPlayer.Instance.Hack(1);
 
                 // Remove if no reset after win
                 StartCoroutine(Reset(resetTime));
