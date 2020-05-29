@@ -231,7 +231,7 @@ public class MinigameManager : MonoBehaviour
             anim.Play("LoseAnimation");
 
             // Sound pls
-            DualOperationsAudioPlayer.Instance.Hack(0);
+            DualOperationsAudioPlayer.Instance.Hack(1);
             return;
         }
         else
