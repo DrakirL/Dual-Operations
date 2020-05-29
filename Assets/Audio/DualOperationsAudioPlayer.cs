@@ -48,14 +48,19 @@ public class DualOperationsAudioPlayer : NetworkBehaviour
 
     //[Header("SFX Settings")]
     // MANAGING OTHER SOUNDS
-    [SerializeField]
-    private string playerDetectedPath;
+    [SerializeField] private string detectedPath;
+    [SerializeField] private string[] hackingPaths;
 
     public void Detected()
     {
         UnityEngine.Debug.Log("Nådde ljudets Detected: is server = " + isServer);
-        
-        CmdPlaySound(playerDetectedPath, GetPlayer.Instance.getPlayer().transform.position, false);
+        CmdPlaySound(detectedPath, GetPlayer.Instance.getPlayer().transform.position, false);
+    }
+
+    public void Hack(int state)
+    {
+        UnityEngine.Debug.Log(state + " Hackety hack hack " + isServer);
+        CmdPlaySound(hackingPaths[state], GetPlayer.Instance.getPlayer().transform.position, false);
     }
 
     [Command]

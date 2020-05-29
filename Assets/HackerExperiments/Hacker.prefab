@@ -2559,7 +2559,12 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   intenseStartValue: 100
-  playerDetectedPath: event:/Enemy/Camera/Camera(Player Detected)_03
+  detectedPath: event:/Enemy/Camera/Camera(Player Detected)_03
+  hackingPaths:
+  - event:/Hacker/Puzzle Blocked
+  - event:/Hacker/Puzzle Negative
+  - event:/Hacker/Puzzle Neutral
+  - event:/Hacker/Puzzle Positive
 --- !u!114 &5555231585585497432
 MonoBehaviour:
   m_ObjectHideFlags: 0
