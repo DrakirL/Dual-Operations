@@ -34,6 +34,8 @@ namespace FMODUnity
         Switch,
         WebGL,
         Stadia,
+        Reserved_1,
+        Reserved_2,
         Count,
     }
 
@@ -89,8 +91,10 @@ namespace FMODUnity
     #endif
     public class Settings : ScriptableObject
     {
+        #if UNITY_EDITOR
         [SerializeField]
         bool SwitchSettingsMigration = false;
+        #endif
 
         const string SettingsAssetName = "FMODStudioSettings";
 
