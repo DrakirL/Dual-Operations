@@ -85,9 +85,6 @@ public class MinigameManager : MonoBehaviour
 
     void UpdateBoard()
     {
-        // Sound pls
-        DualOperationsAudioPlayer.Instance.Hack(2);
-
         // Update on mouseclick
 
         RefreshPuzzle();
@@ -225,13 +222,11 @@ public class MinigameManager : MonoBehaviour
             return;
         if (puzzle.pieces[w, h].firewall)
         {
-            //firewall = true;
+            firewall = true;
             //if(activePulse)
             AlertMeter._instance.AddAlert(alertPenaltyValue);
             anim.Play("LoseAnimation");
 
-            // Sound pls
-            DualOperationsAudioPlayer.Instance.Hack(1);
             return;
         }
         else
@@ -320,21 +315,18 @@ public class MinigameManager : MonoBehaviour
     // Check if firewalls are touched and set alert meter state accordingly
     void CheckFirewalls()
     {
-        if (firewall)
+        /*if (firewall)
             AlertMeter._instance.SetDetected(true);
-        else
+        else*/
             AlertMeter._instance.SetDetected(false);
     }
 
-    bool WinCondition() => !firewall && puzzle.pieces[puzzle.endCoords.x, puzzle.endCoords.y].active ? true : false;
+    bool WinCondition() => /*!firewall &&*/ puzzle.pieces[puzzle.endCoords.x, puzzle.endCoords.y].active ? true : false;
 
     public void Win()
     {
         // Animation holder
         anim.Play("WinAnimation");
-
-        // Sound pls
-        DualOperationsAudioPlayer.Instance.Hack(3);
 
         Deactivate();     
     }
@@ -348,9 +340,6 @@ public class MinigameManager : MonoBehaviour
                 AlertMeter._instance.AddAlert(alertPenaltyValue);
                 // Animation holder
                 anim.Play("LoseAnimation");
-
-                // Sound pls
-                DualOperationsAudioPlayer.Instance.Hack(1);
 
                 // Remove if no reset after win
                 StartCoroutine(Reset(resetTime));
@@ -369,7 +358,15 @@ public class MinigameManager : MonoBehaviour
             if (WinCondition())
             {
                 Win();
+                DualOperationsAudioPlayer.Instance.Hack(3);
             }
+            
+            else if(firewall)
+                DualOperationsAudioPlayer.Instance.Hack(1);
+
+            else
+                DualOperationsAudioPlayer.Instance.Hack(2);
+
             //StartCoroutine(Reset(resetTime));
         }
     }
