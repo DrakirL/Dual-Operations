@@ -11,12 +11,13 @@ GameObject:
   - component: {fileID: 2590486993596135987}
   - component: {fileID: 1709017460951919127}
   - component: {fileID: 6074240178071550481}
+  - component: {fileID: 7370162962703637899}
   m_Layer: 8
   m_Name: deskchair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &2590486993596135987
 Transform:
@@ -79,6 +80,20 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &7370162962703637899
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2322391765377564290}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -6859827617426203574, guid: 1f1a65fe70542294480d5e751cf2997e, type: 3}
 --- !u!1 &6831858409876332830
 GameObject:
   m_ObjectHideFlags: 0
@@ -93,7 +108,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &7535923907952857869
 Transform:
@@ -104,7 +119,7 @@ Transform:
   m_GameObject: {fileID: 6831858409876332830}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 32.770657, y: -1.7934651, z: 42.622086}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_Children:
   - {fileID: 2590486993596135987}
   - {fileID: 193796655635824080}
@@ -122,12 +137,13 @@ GameObject:
   - component: {fileID: 193796655635824080}
   - component: {fileID: 8622574441671487477}
   - component: {fileID: 6542259728671397386}
+  - component: {fileID: 8494418432375563853}
   m_Layer: 8
   m_Name: wheel_deskchair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &193796655635824080
 Transform:
@@ -190,3 +206,17 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &8494418432375563853
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6937675526969499248}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -7759969661408249793, guid: 1f1a65fe70542294480d5e751cf2997e, type: 3}
