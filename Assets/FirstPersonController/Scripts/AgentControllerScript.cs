@@ -15,6 +15,14 @@ public class AgentControllerScript : NetworkBehaviour
 		HorizontalOnly
 	};
 	
+	private enum PlayerState
+	{
+		eSneak,
+		eWalk,
+		eSprint
+	};
+	private PlayerState playerState;
+	
 	public MouseAimStyle mouseAimStyle;
 	
 	[Range(0,20)] public float mouseSensitivity = 4;
@@ -22,8 +30,10 @@ public class AgentControllerScript : NetworkBehaviour
 	public bool mouseInverted = false;
 	
 	public float moveSpeed = 3;
+	public float sprintSpeed = 8;
+	public float sneakSpeed = 1.0f;
+	
 	public float gravity = 10;
-	public float maxSlopeAngle = 25f;
 	
 	public LayerMask colMask;
 
@@ -32,16 +42,44 @@ public class AgentControllerScript : NetworkBehaviour
 	private Vector3 actorVelocity = Vector3.zero;
 
 	private float posRecover = 10f;
-	private float jumpSpeed = 10f;
 
-    //public float acceleration = 10;
-    //public float deacceleration = 3;
-    //public float friction = 4;
+    [Range(0.05f,0.75f)]public float accelMod = 0.1f;
+	[Range(0.05f,0.75f)]public float deaccelMod = 0.2f;
+    [Range(0.05f,0.75f)]public float sprintAccelMod = 0.1f;
+	[Range(0.05f,0.75f)]public float sprintDeaccelMod = 0.2f;
+	[Range(0.05f,0.75f)]public float sneakAccelMod = 0.1f;
+	[Range(0.05f,0.75f)]public float sneakDeaccelMod = 0.2f;
+	
+	protected float accelSpeed;
+	protected float deaccelSpeed;
+	
+	private float USE_SPEED;
+	private float USE_ACCELMOD;
+	private float USE_DEACCELMOD;
+	
+	Vector3 oldCameraPos = Vector3.zero;
+	bool wishMouse = true; 
+	
+	public KeyCode moveForward = KeyCode.W;
+	public KeyCode moveBackward = KeyCode.S;
+	public KeyCode strafeLeft = KeyCode.A;
+	public KeyCode strafeRight = KeyCode.D;
+	public KeyCode interactKey = KeyCode.E;
+	public KeyCode sprintKey = KeyCode.LeftShift;
+	public KeyCode sneakKey = KeyCode.C;
 
     void Start()
     {
         if (isLocalPlayer)
         {
+			oldCameraPos = cameraView.position;
+			
+			playerState = PlayerState.eWalk;
+			
+			USE_SPEED = moveSpeed;
+			USE_ACCELMOD = accelMod;
+			USE_DEACCELMOD = deaccelMod;
+			
             if (cameraView == null)
             {
                 Camera mainCamera = Camera.main;
@@ -55,74 +93,58 @@ public class AgentControllerScript : NetworkBehaviour
         }
     }
 	
-	void MoveWalk(float forward,float right)
+	Vector3 lastdir = Vector3.zero;
+	
+	void MoveWalk(ref Vector3 velocity)
 	{		   
-		//MoveFriction(friction);
-
-		Vector3 movdir = new Vector3(right,0,forward);
+		Vector3 movdir = new Vector3(velocity.x,0,velocity.z);
 		movdir.Normalize();
-		
-		//float speed = Vector3.Magnitude(movdir);
-		//speed *= moveSpeed;
-
-		//MoveAccelerate(movdir, speed, acceleration);
-	
-		movementDirection.x += moveSpeed * movdir.x;
-		movementDirection.z += moveSpeed * movdir.z;
-	}
-	
-	/*void MoveAccelerate(Vector3 dir, float speed, float accel)
-	{
-		float addSpeed,accelSpeed,currentSpeed;
-
-		
-		accelSpeed = accel * speed * Time.deltaTime;
-
-		Debug.Log("accelSpeed: "+accelSpeed);
-		
-		movementDirection.x += accelSpeed * dir.x;
-		movementDirection.z += accelSpeed * dir.z;
-		
-	}*/
-	
-	/*void MoveFriction(float frict)
-	{
-		Vector3 vec = actorVelocity;
-		float speed, newspeed, control;
-		float drop;
-		
-		vec.y = 0; //?
-		
-		float s = Vector3.Magnitude(vec);
-		
-		speed = s;//vec.magnitude;
-
-		drop = 0;
-		
-		control = speed < deacceleration ? deacceleration : speed;
-		drop += control * frict * Time.deltaTime;
-		
-		newspeed = speed - drop;
-		if(newspeed < 0)
+			
+		if((movdir.x != 0 || movdir.z != 0))
 		{
-			newspeed = 0;
+			accelSpeed = MoveAccelerate(accelSpeed);
+			deaccelSpeed = accelSpeed;
+			lastdir = new Vector3(velocity.x, 0, velocity.z);
 		}
 		else
-		{	
-			newspeed /= speed;
+		{
+			deaccelSpeed = MoveDeaccelerate(deaccelSpeed);
+			accelSpeed = deaccelSpeed;
+			movdir = new Vector3(lastdir.x, 0, lastdir.z);
 		}
 		
-		//Debug.Log(newspeed);
+		velocity.x = movdir.x * accelSpeed;			
+		velocity.z = movdir.z * accelSpeed;
+	}
 	
-		movementDirection.x *= newspeed;
-		movementDirection.z *= newspeed;
+	float MoveAccelerate(float speed)
+	{
+		if(speed >= USE_SPEED)
+		{
+			speed = USE_SPEED;
+			return speed;
+		}
 		
-	}*/
+		speed = speed + USE_ACCELMOD;//accelMod;
+		return speed;
+	}
+	
+	float MoveDeaccelerate(float speed)
+	{	
+		if(speed <= 0)
+		{
+			speed = 0;
+			return speed;
+		}
 
+		speed = speed - USE_DEACCELMOD;
+		return speed;		
+	}
+	
 	void MouseLook()
 	{
 		int inv = Convert.ToInt32(mouseInverted == true ? 1:-1);
-		Vector2 viewLimit = new Vector2(-90,90);
+		Vector2 viewLimit = new Vector2(-90, 90);
 		
 		rot.x += Input.GetAxisRaw("Mouse X") * mouseSensitivity;
 		
@@ -144,23 +166,26 @@ public class AgentControllerScript : NetworkBehaviour
 		transform.localRotation = Quaternion.Euler(0,x_axis,0);
 	}
 
-	void CollisionDetection(ref Vector3 velocity, float forward,float right,bool ColCorrect)
+	void CollisionDetection(ref Vector3 velocity, bool ColCorrect)
 	{		
 		RaycastHit hit;
-		
-		//float dist = (GetComponent<SphereCollider>().radius)*0.5f;
+
 		float distH = (GetComponent<CapsuleCollider>().radius);
 		float distV = (GetComponent<CapsuleCollider>().height)*0.5f;
 		
 		Ray downRay =  new Ray (transform.position, Vector3.down);
-		Ray upRay =  new Ray (transform.position, Vector3.up);
-		Ray downForwardRay =  new Ray (transform.position, Vector3.down+(forward*transform.forward));
-		Ray upForwardRay =  new Ray (transform.position, Vector3.up+(forward*transform.forward));
 
-		Ray frontRay =  new Ray (transform.position, forward*transform.forward);
-		Ray rightRay = new Ray (transform.position, right*transform.right);
+		Ray frontRay =  new Ray (transform.position, velocity.z * transform.forward);
+		Ray rightRay = new Ray (transform.position,  velocity.x * transform.right);
 		Ray uRightRay = new Ray (transform.position, transform.right);
 		Ray uLeftRay = new Ray (transform.position, -transform.right);
+		
+		// unused
+		//float dist = (GetComponent<SphereCollider>().radius)*0.5f;
+		//Ray upRay =  new Ray (transform.position, Vector3.up);
+		//Ray downForwardRay =  new Ray (transform.position, Vector3.down+(forward*transform.forward));
+		//Ray upForwardRay =  new Ray (transform.position, Vector3.up+(forward*transform.forward));
+
 		
 		// +=== HOW THE COLLISION WORKS ======+
 		// Calculation is done by looking for vertices on the mesh, then looking for the normal,
@@ -187,8 +212,7 @@ public class AgentControllerScript : NetworkBehaviour
 			for(int i = 0; i < v.Length;i++)
 			{
 				float n = Vector3.Dot(v[i] - velocity, hit.normal);
-				Debug.Log(n);
-				
+
 				if(n > 0.00f) 
 				{
 					velocity.y = 0;
@@ -245,8 +269,8 @@ public class AgentControllerScript : NetworkBehaviour
 			}
 		}*/
 
-		if(right !=0)
-		{
+		//if(right !=0)
+		//{
 			if(Physics.Raycast(rightRay, out hit, distH+0.05f, colMask,QueryTriggerInteraction.Ignore))
 			{
 				Mesh mesh = hit.transform.GetComponent<MeshFilter>().mesh;
@@ -263,10 +287,10 @@ public class AgentControllerScript : NetworkBehaviour
 					}
 				}		
 			}
-		}
+		//}
 		
-		if(forward !=0)
-		{		
+		//if(forward !=0)
+		//{		
 			if(Physics.Raycast(frontRay, out hit, distH+0.05f, colMask,QueryTriggerInteraction.Ignore))
 			{
 				Mesh mesh = hit.transform.GetComponent<MeshFilter>().mesh;
@@ -283,85 +307,84 @@ public class AgentControllerScript : NetworkBehaviour
 					}
 				}		
 			}
-		}
+		//}
 		//--------------------------
 		// Collision correction with Linear interpolation
 		//--------------------------
-		if(ColCorrect)
+		//if(ColCorrect)
 		{
-		if(Physics.Raycast(uRightRay, out hit, distH+0.05f, colMask,QueryTriggerInteraction.Ignore))
-		{
-			Mesh mesh = hit.transform.GetComponent<MeshFilter>().mesh;
-			Vector3[] v = mesh.vertices;
-
-			for(int i = 0; i < v.Length;i++)
+			if(Physics.Raycast(uRightRay, out hit, distH+0.05f, colMask,QueryTriggerInteraction.Ignore))
 			{
-				float n = Vector3.Dot(v[i] - velocity, hit.normal);
+				Mesh mesh = hit.transform.GetComponent<MeshFilter>().mesh;
+				Vector3[] v = mesh.vertices;
 
-				if(n > 0.00f || n < 0.00f)
+				for(int i = 0; i < v.Length;i++)
 				{
-					if(hit.distance < distH)
-					{
-						transform.position = Vector3.Lerp(transform.position, hit.point + (-transform.right) * distH, posRecover * Time.fixedDeltaTime);
-					}
-					
-					break;
-				}
-			}		
-		}
-		
-		if(Physics.Raycast(uLeftRay, out hit, distH+0.05f, colMask,QueryTriggerInteraction.Ignore))
-		{
-			Mesh mesh = hit.transform.GetComponent<MeshFilter>().mesh;
-			Vector3[] v = mesh.vertices;	
+					float n = Vector3.Dot(v[i] - velocity, hit.normal);
 
-			for(int i = 0; i < v.Length;i++)
-			{
-				float n = Vector3.Dot(v[i] - velocity, hit.normal);
-
-				if(n > 0.00f || n < 0.00f)
-				{
-					if(hit.distance < distH)
+					if(n > 0.00f || n < 0.00f)
 					{
-						transform.position = Vector3.Lerp(transform.position, hit.point + (transform.right) * distH, posRecover * Time.fixedDeltaTime);
-					}
-					
-					break;
-				}
-			}		
-		}
-		
-		/*if(Physics.Raycast(downForwardRay, out hit, dist + 0.05f, colMask,QueryTriggerInteraction.Ignore))
-		{
-			Mesh mesh = hit.transform.GetComponent<MeshFilter>().mesh;
-			Vector3[] v = mesh.vertices;
-			
-			//float n2 = (Vector3.Dot(hit.normal,Vector3.up));
-			//float ncos = Mathf.Acos(n2);
-			//float ang = (Mathf.Rad2Deg*ncos);	
-			
-			for(int i = 0; i < v.Length;i++)
-			{
-				float n = Vector3.Dot(v[i] - velocity, hit.normal);
-			
-				if(n > 0.00f) 
-				{
-					if(hit.distance < dist)
-					{
-						transform.position = Vector3.Lerp(transform.position, hit.point + Vector3.up * dist, posRecover * Time.fixedDeltaTime);
-					}
+						if(hit.distance < distH)
+						{
+							transform.position = Vector3.Lerp(transform.position, hit.point + (-transform.right) * distH, posRecover * Time.fixedDeltaTime);
+						}
 						
-					break;
-				}
-	
+						break;
+					}
+				}		
 			}
-		}*/
+			
+			if(Physics.Raycast(uLeftRay, out hit, distH+0.05f, colMask,QueryTriggerInteraction.Ignore))
+			{
+				Mesh mesh = hit.transform.GetComponent<MeshFilter>().mesh;
+				Vector3[] v = mesh.vertices;	
+
+				for(int i = 0; i < v.Length;i++)
+				{
+					float n = Vector3.Dot(v[i] - velocity, hit.normal);
+
+					if(n > 0.00f || n < 0.00f)
+					{
+						if(hit.distance < distH)
+						{
+							transform.position = Vector3.Lerp(transform.position, hit.point + (transform.right) * distH, posRecover * Time.fixedDeltaTime);
+						}
+						
+						break;
+					}
+				}		
+			}
+			
+			/*if(Physics.Raycast(downForwardRay, out hit, dist + 0.05f, colMask,QueryTriggerInteraction.Ignore))
+			{
+				Mesh mesh = hit.transform.GetComponent<MeshFilter>().mesh;
+				Vector3[] v = mesh.vertices;
+				
+				//float n2 = (Vector3.Dot(hit.normal,Vector3.up));
+				//float ncos = Mathf.Acos(n2);
+				//float ang = (Mathf.Rad2Deg*ncos);	
+				
+				for(int i = 0; i < v.Length;i++)
+				{
+					float n = Vector3.Dot(v[i] - velocity, hit.normal);
+				
+					if(n > 0.00f) 
+					{
+						if(hit.distance < dist)
+						{
+							transform.position = Vector3.Lerp(transform.position, hit.point + Vector3.up * dist, posRecover * Time.fixedDeltaTime);
+						}
+							
+						break;
+					}
+		
+				}
+			}*/
 		}
 		
 		//------------------------
 	}
-
-	//Doesn't need to be a function, but is a nice abstraction
+	
 	void Move(Vector3 vec)
 	{
 		transform.Translate(vec);
@@ -371,36 +394,100 @@ public class AgentControllerScript : NetworkBehaviour
 	{
         if (isLocalPlayer)
         {
-            MouseLook();
-        }
-	}
+			if(Input.GetKeyDown(KeyCode.Escape))
+				wishMouse = !wishMouse;
+			
+			if(wishMouse)
+			{	
+				Cursor.lockState = CursorLockMode.Locked;
+				MouseLook();
+			}
+			else
+			{
+				Cursor.lockState = CursorLockMode.None;
+		        if (Input.GetMouseButton(0) || Input.GetMouseButton(1) || Input.GetMouseButton(2))
+					wishMouse = true;
+			}
+		}
+	}	
 
-    void FixedUpdate()
+	Vector2 keyDirection = Vector2.zero;
+
+	void FixedUpdate()
     {
         if (isLocalPlayer)
-        {
-            movementDirection = Vector3.zero;
+        {		
 
-            Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+			if(Input.GetKeyDown(sprintKey))
+			{
+				playerState = PlayerState.eSprint;
+			}
+			
+			if(Input.GetKeyUp(sprintKey))
+			{
+				playerState = PlayerState.eWalk;
+			}
+			
+			if(Input.GetKeyDown(sneakKey))
+			{
+				playerState = PlayerState.eSneak;
+			}
+			
+			if(Input.GetKeyUp(sneakKey))
+			{
+				playerState = PlayerState.eWalk;
+			}						
+			
+			switch(playerState)
+			{
+				default:
+				case PlayerState.eWalk:
+					USE_SPEED = moveSpeed;
+					USE_ACCELMOD = accelMod;
+					USE_DEACCELMOD = deaccelMod;
+					
+				break;
+				
+				case PlayerState.eSneak:
+					USE_SPEED = sneakSpeed;
+					USE_ACCELMOD = sneakAccelMod;
+					USE_DEACCELMOD = sneakDeaccelMod;
+				break;
 
-            MoveWalk(input.y, input.x);
+				case PlayerState.eSprint:
+					USE_SPEED = sprintSpeed;
+					USE_ACCELMOD = sprintAccelMod;
+					USE_DEACCELMOD = sprintDeaccelMod;
+				break;				
+			}
+	
+			if(Input.GetKey(moveForward)) 
+				keyDirection.y = 1f; 
+			
+			if(Input.GetKey(moveBackward)) 
+				keyDirection.y =-1f; 
+			
+			if(Input.GetKey(strafeRight)) 
+				keyDirection.x = 1f;
+			
+			if(Input.GetKey(strafeLeft)) 
+				keyDirection.x =-1f; 
 
-            //Only for testing, not used in final version
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                //cameraView.transform.position = Vector3.Lerp(cameraView.transform.position,
-                //							cameraView.transform.position + new Vector3(0,-1f,0), Time.fixedDeltaTime);
-                //	movementDirection.y = jumpSpeed;
-            }
+			Vector2 input = new Vector2(keyDirection.x,keyDirection.y);
+			movementDirection = new Vector3(input.x, 0, input.y);
 
-            CollisionDetection(ref movementDirection, input.y, input.x, true);
+			MoveWalk(ref movementDirection);
+			CollisionDetection(ref movementDirection, true);
 
-            Move(movementDirection * Time.fixedDeltaTime);
+			Move(movementDirection * Time.fixedDeltaTime);
 
-            actorVelocity.y += -gravity * Time.fixedDeltaTime;
-
-            CollisionDetection(ref actorVelocity, 0, 0, false);
-            Move(actorVelocity * Time.fixedDeltaTime);
+			actorVelocity.y += -gravity * Time.fixedDeltaTime;
+			CollisionDetection(ref actorVelocity, false);
+			
+			Move(actorVelocity * Time.fixedDeltaTime);
+			
+			movementDirection = Vector3.zero;
+			keyDirection = Vector2.zero;
         }
     }
 }

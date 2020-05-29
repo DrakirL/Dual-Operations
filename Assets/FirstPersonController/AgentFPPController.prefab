@@ -586,7 +586,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5524880825172794005}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1ead0b584c24ac4ab5f03bef8dc188f, type: 3}
+  m_Script: {fileID: 11500000, guid: a01d88056f9ccf748a4f44aa70b13d07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   syncMode: 0
@@ -597,11 +597,25 @@ MonoBehaviour:
   mouseSensitivity: 4
   mouseInverted: 0
   moveSpeed: 1.5
+  sprintSpeed: 8
+  sneakSpeed: 1
   gravity: 10
-  maxSlopeAngle: 25
   colMask:
     serializedVersion: 2
     m_Bits: 256
+  accelMod: 0.1
+  deaccelMod: 0.2
+  sprintAccelMod: 0.1
+  sprintDeaccelMod: 0.2
+  sneakAccelMod: 0.1
+  sneakDeaccelMod: 0.2
+  moveForward: 119
+  moveBackward: 115
+  strafeLeft: 97
+  strafeRight: 100
+  interactKey: 101
+  sprintKey: 304
+  sneakKey: 99
 --- !u!114 &7087142220084282350
 MonoBehaviour:
   m_ObjectHideFlags: 0
