@@ -30,7 +30,7 @@ public class taser : NetworkBehaviour
     {
         //if (!isServer)
         {
-            if (Input.GetButtonDown("Fire1") && tasorSkott > 0 && tasorReady == true)
+            if (Input.GetKeyDown(agent.useTaser) && tasorSkott > 0 && tasorReady == true)
             {
                 Debug.Log("fire");
                 CmdShoot();
