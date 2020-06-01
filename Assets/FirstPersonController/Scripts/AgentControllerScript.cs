@@ -6,68 +6,88 @@ using Mirror;
 
 public class AgentControllerScript : NetworkBehaviour
 {
-	public Transform cameraView;
-	public Transform objectModel;
-	
-	public enum MouseAimStyle
-	{
-		VerticalHorizontal,
-		HorizontalOnly
-	};
-	
-	private enum PlayerState
-	{
-		eSneak,
-		eWalk,
-		eSprint
-	};
-	private PlayerState playerState;
-	
-	public MouseAimStyle mouseAimStyle;
-	
-	[Range(0,20)] public float mouseSensitivity = 4;
-	
-	public bool mouseInverted = false;
-	
-	public float moveSpeed = 3;
-	public float sprintSpeed = 8;
-	public float sneakSpeed = 1.0f;
-	
-	public float gravity = 10;
-	
-	public LayerMask colMask;
+    public Transform cameraView;
+    public Transform objectModel;
 
-	private Vector2 rot = Vector2.zero;
-	private Vector3 movementDirection = Vector3.zero;
-	private Vector3 actorVelocity = Vector3.zero;
+    public enum MouseAimStyle
+    {
+        VerticalHorizontal,
+        HorizontalOnly
+    };
 
-	private float posRecover = 10f;
+    private enum PlayerState
+    {
+        eSneak,
+        eWalk,
+        eSprint
+    };
+    private PlayerState playerState;
 
-    [Range(0.05f,0.75f)]public float accelMod = 0.1f;
-	[Range(0.05f,0.75f)]public float deaccelMod = 0.2f;
-    [Range(0.05f,0.75f)]public float sprintAccelMod = 0.1f;
-	[Range(0.05f,0.75f)]public float sprintDeaccelMod = 0.2f;
-	[Range(0.05f,0.75f)]public float sneakAccelMod = 0.1f;
-	[Range(0.05f,0.75f)]public float sneakDeaccelMod = 0.2f;
-	
-	protected float accelSpeed;
-	protected float deaccelSpeed;
-	
-	private float USE_SPEED;
-	private float USE_ACCELMOD;
-	private float USE_DEACCELMOD;
-	
-	Vector3 oldCameraPos = Vector3.zero;
-	bool wishMouse = true; 
-	
-	public KeyCode moveForward = KeyCode.W;
-	public KeyCode moveBackward = KeyCode.S;
-	public KeyCode strafeLeft = KeyCode.A;
-	public KeyCode strafeRight = KeyCode.D;
-	public KeyCode interactKey = KeyCode.E;
-	public KeyCode sprintKey = KeyCode.LeftShift;
-	public KeyCode sneakKey = KeyCode.C;
+    public MouseAimStyle mouseAimStyle;
 
+    [Range(0, 20)] public float mouseSensitivity = 4;
+
+    public bool mouseInverted = false;
+
+    public float moveSpeed = 3;
+    public float sprintSpeed = 8;
+    public float sneakSpeed = 1.0f;
+
+    public float gravity = 10;
+
+    public LayerMask colMask;
+
+    private Vector2 rot = Vector2.zero;
+    private Vector3 movementDirection = Vector3.zero;
+    private Vector3 actorVelocity = Vector3.zero;
+
+    private float posRecover = 10f;
+
+    [Range(0.05f, 0.75f)] public float accelMod = 0.1f;
+    [Range(0.05f, 0.75f)] public float deaccelMod = 0.2f;
+    [Range(0.05f, 0.75f)] public float sprintAccelMod = 0.1f;
+    [Range(0.05f, 0.75f)] public float sprintDeaccelMod = 0.2f;
+    [Range(0.05f, 0.75f)] public float sneakAccelMod = 0.1f;
+    [Range(0.05f, 0.75f)] public float sneakDeaccelMod = 0.2f;
+
+    protected float accelSpeed;
+    protected float deaccelSpeed;
+
+    private float USE_SPEED;
+    private float USE_ACCELMOD;
+    private float USE_DEACCELMOD;
+
+    Vector3 oldCameraPos = Vector3.zero;
+    bool wishMouse = true;
+
+    public KeyCode moveForward = KeyCode.W;
+    public KeyCode moveBackward = KeyCode.S;
+    public KeyCode strafeLeft = KeyCode.A;
+    public KeyCode strafeRight = KeyCode.D;
+    public KeyCode interactKey = KeyCode.E;
+    public KeyCode sprintKey = KeyCode.LeftShift;
+    public KeyCode sneakKey = KeyCode.C;
+    public KeyCode useTaser = KeyCode.Mouse0;
+
+    [SerializeField] AnimationHandler animationFPSHandler;
+    [SerializeField] taser Taser;
+ 
+    public void changeFPanimationState(string newAnimation)
+    {
+        animationFPSHandler.changeAnimation(newAnimation);
+    }
+    public void changeAnimationStateState(string newAnimation)
+    {
+        animationFPSHandler.changeAnimation(newAnimation);
+        CmdChangeAnimationState(newAnimation);
+    }
+    
+    [Command]
+    private void CmdChangeAnimationState(string NewAnimationName)
+    {
+        //fix to the real if his is still wanted
+        //animationFPSHandler.changeAnimation(NewAnimationName);
+    }
     void Start()
     {
         if (isLocalPlayer)
@@ -394,7 +414,8 @@ public class AgentControllerScript : NetworkBehaviour
 	{
         if (isLocalPlayer)
         {
-			if(Input.GetKeyDown(KeyCode.Escape))
+          
+            if (Input.GetKeyDown(KeyCode.Escape))
 				wishMouse = !wishMouse;
 			
 			if(wishMouse)
@@ -416,8 +437,8 @@ public class AgentControllerScript : NetworkBehaviour
 	void FixedUpdate()
     {
         if (isLocalPlayer)
-        {		
-
+        {
+            /*
 			if(Input.GetKeyDown(sprintKey))
 			{
 				playerState = PlayerState.eSprint;
@@ -437,8 +458,42 @@ public class AgentControllerScript : NetworkBehaviour
 			{
 				playerState = PlayerState.eWalk;
 			}						
-			
-			switch(playerState)
+			*/
+            bool isWalking = false;
+            if (Input.GetKey(moveForward))
+            {
+                keyDirection.y = 1f;
+                isWalking = true;
+            }
+            if (Input.GetKey(moveBackward))
+            {
+                keyDirection.y = -1f;
+                isWalking = true;
+            }
+
+            if (Input.GetKey(strafeRight))
+            {
+                keyDirection.x = 1f;
+                isWalking = true;
+            }
+
+            if (Input.GetKey(strafeLeft))
+            {
+                keyDirection.x = -1f;
+                isWalking = true;
+            }
+            if (Taser.tasorReady)
+            {
+                if (isWalking)
+                {
+                    changeFPanimationState("SPY_WALK");
+                }
+                else
+                {
+                    changeFPanimationState("SPY_IDLE");
+                }
+            }
+            switch (playerState)
 			{
 				default:
 				case PlayerState.eWalk:
@@ -460,20 +515,22 @@ public class AgentControllerScript : NetworkBehaviour
 					USE_DEACCELMOD = sprintDeaccelMod;
 				break;				
 			}
-	
-			if(Input.GetKey(moveForward)) 
-				keyDirection.y = 1f; 
-			
-			if(Input.GetKey(moveBackward)) 
-				keyDirection.y =-1f; 
-			
-			if(Input.GetKey(strafeRight)) 
-				keyDirection.x = 1f;
-			
-			if(Input.GetKey(strafeLeft)) 
-				keyDirection.x =-1f; 
+            if (Input.GetKey(moveForward))
+                keyDirection.y = 1f;
+             
+            if (Input.GetKey(moveBackward))
+                keyDirection.y = -1f;
 
-			Vector2 input = new Vector2(keyDirection.x,keyDirection.y);
+            if (Input.GetKey(strafeRight))
+                keyDirection.x = 1f;
+            
+
+            if (Input.GetKey(strafeLeft))
+                keyDirection.x = -1f;
+                
+            
+          
+            Vector2 input = new Vector2(keyDirection.x,keyDirection.y);
 			movementDirection = new Vector3(input.x, 0, input.y);
 
 			MoveWalk(ref movementDirection);

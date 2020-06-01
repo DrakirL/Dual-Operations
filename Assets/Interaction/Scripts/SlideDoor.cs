@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using Mirror;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 
 public class SlideDoor : NetworkBehaviour, IInteractable
 {
@@ -47,11 +48,17 @@ public class SlideDoor : NetworkBehaviour, IInteractable
             if (io.Contains(keyCode))
             {
                 GetPlayer.Instance.openDoorServer(gameObject.name);
+
+                // Sound pls
+                DualOperationsAudioPlayer.Instance.Door(true, transform.gameObject);
             }
             else
             {
                 AlertMeter._instance.AddAlert(alertInc);
                 AlertMeter._instance.PlayAlertFlash(flashTimer);
+
+                // Sound pls
+                DualOperationsAudioPlayer.Instance.Door(true, transform.gameObject);
             }
         }
         else
