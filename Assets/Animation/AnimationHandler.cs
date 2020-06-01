@@ -70,5 +70,27 @@ public class AnimationHandler : MonoBehaviour
                 changeAnimation("IDLE");
             }
         }
+        if (false)
+        {
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                changeAnimation("SPY_IDLE");
+            }
+
+            if (Input.GetKeyDown(KeyCode.W))
+            {
+                changeAnimation("SPY_RELOAD");
+            }
+
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                changeAnimation("SPY_SHOOT");
+            }
+
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                changeAnimation("SPY_WALK");
+            }
+        }
     }
 }
