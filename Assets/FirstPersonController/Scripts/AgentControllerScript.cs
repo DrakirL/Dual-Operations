@@ -72,16 +72,21 @@ public class AgentControllerScript : NetworkBehaviour
     [SerializeField] AnimationHandler animationFPSHandler;
     [SerializeField] taser Taser;
  
+    public void changeFPanimationState(string newAnimation)
+    {
+        animationFPSHandler.changeAnimation(newAnimation);
+    }
     public void changeAnimationStateState(string newAnimation)
     {
         animationFPSHandler.changeAnimation(newAnimation);
         CmdChangeAnimationState(newAnimation);
     }
-    //animation for agent
+    
     [Command]
     private void CmdChangeAnimationState(string NewAnimationName)
     {
-        animationFPSHandler.changeAnimation(NewAnimationName);
+        //fix to the real if his is still wanted
+        //animationFPSHandler.changeAnimation(NewAnimationName);
     }
     void Start()
     {
@@ -481,11 +486,11 @@ public class AgentControllerScript : NetworkBehaviour
             {
                 if (isWalking)
                 {
-                    changeAnimationStateState("SPY_WALK");
+                    changeFPanimationState("SPY_WALK");
                 }
                 else
                 {
-                    changeAnimationStateState("SPY_IDLE");
+                    changeFPanimationState("SPY_IDLE");
                 }
             }
             switch (playerState)

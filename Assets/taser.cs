@@ -39,7 +39,7 @@ public class taser : NetworkBehaviour
                 tasorReady = false;
                 StartCoroutine(Cooldown(reloadTime));
                 
-                agent.changeAnimationStateState("SPY_SHOOT");
+                agent.changeFPanimationState("SPY_SHOOT");
 
             }
         }
@@ -59,11 +59,11 @@ public class taser : NetworkBehaviour
         yield return new WaitForSeconds(waitTime);
         if(Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.S))
         {
-            agent.changeAnimationStateState("SPY_WALK");
+            agent.changeFPanimationState("SPY_WALK");
         }
         else
         {
-            agent.changeAnimationStateState("SPY_IDLE");
+            agent.changeFPanimationState("SPY_IDLE");
         }
         tasorReady = true;
     }
