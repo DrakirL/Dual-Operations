@@ -67,6 +67,7 @@ public class AgentControllerScript : NetworkBehaviour
     public KeyCode interactKey = KeyCode.E;
     public KeyCode sprintKey = KeyCode.LeftShift;
     public KeyCode sneakKey = KeyCode.C;
+    public KeyCode useTaser = KeyCode.Mouse0;
 
     [SerializeField] AnimationHandler animationFPSHandler;
     [SerializeField] taser Taser;
