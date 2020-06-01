@@ -14,12 +14,15 @@ public class taser : NetworkBehaviour
 
     public int tasorSkott = 5;
     private float reloadTime = 2f;
-    private bool tasorReady = true;
+    public bool tasorReady = true;
+    [SerializeField] AnimationHandler firstPersonAnimation;
+    [SerializeField] AgentControllerScript agent; 
 
     // Start is called before the first frame update
     void Start()
     {
-
+        //this is the time of the animation
+        reloadTime = 2.633f;
     }
 
     // Update is called once per frame
@@ -35,6 +38,9 @@ public class taser : NetworkBehaviour
                 tasorSkott--;
                 tasorReady = false;
                 StartCoroutine(Cooldown(reloadTime));
+                
+                agent.changeAnimationStateState("SPY_SHOOT");
+
             }
         }
 
@@ -51,6 +57,14 @@ public class taser : NetworkBehaviour
     private IEnumerator Cooldown(float waitTime)
     {
         yield return new WaitForSeconds(waitTime);
+        if(Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.S))
+        {
+            agent.changeAnimationStateState("SPY_WALK");
+        }
+        else
+        {
+            agent.changeAnimationStateState("SPY_IDLE");
+        }
         tasorReady = true;
     }
 
