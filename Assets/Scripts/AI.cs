@@ -24,6 +24,8 @@ public class AI : NetworkBehaviour
     public ParticleSystem warning;
     [SyncVar] public bool dead = false;
     [SerializeField] AnimationHandler animationH;
+    [HideInInspector]
+    public Quaternion rotateSave;
 
 
     private void Start()
@@ -32,6 +34,7 @@ public class AI : NetworkBehaviour
         stateMachine.ChangeState(FirstState.Instance);
         NavMeshAgent agent = GetComponent<NavMeshAgent>();
         warning = GetComponent<ParticleSystem>();
+        rotateSave = transform.rotation;
 
     }
     public void changeAnimation(string nameOfAnimation)
