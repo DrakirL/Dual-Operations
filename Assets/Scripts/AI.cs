@@ -14,8 +14,10 @@ public class AI : NetworkBehaviour
     public GameObject radio;
     public bool radioTurnOff;
     public bool fovtest123 = false;
+    public bool radiustest123 = false;
     public float maxAngle = 50;
     public float maxRadius = 5;
+    public float maxRadius2 = 8;
     [HideInInspector]
     public Transform player;
     [HideInInspector]
@@ -26,6 +28,7 @@ public class AI : NetworkBehaviour
     [SerializeField] AnimationHandler animationH;
     [HideInInspector]
     public Quaternion rotateSave;
+   
 
 
     private void Start()
