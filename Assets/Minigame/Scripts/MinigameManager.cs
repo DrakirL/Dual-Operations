@@ -85,6 +85,9 @@ public class MinigameManager : MonoBehaviour
 
     void UpdateBoard()
     {
+        // Sound pls
+        DualOperationsAudioPlayer.Instance.Hack(2);
+
         // Update on mouseclick
 
         RefreshPuzzle();
@@ -222,11 +225,13 @@ public class MinigameManager : MonoBehaviour
             return;
         if (puzzle.pieces[w, h].firewall)
         {
-            firewall = true;
+            //firewall = true;
             //if(activePulse)
             AlertMeter._instance.AddAlert(alertPenaltyValue);
             anim.Play("LoseAnimation");
 
+            // Sound pls
+            DualOperationsAudioPlayer.Instance.Hack(1);
             return;
         }
         else
@@ -316,13 +321,13 @@ public class MinigameManager : MonoBehaviour
     // Check if firewalls are touched and set alert meter state accordingly
     void CheckFirewalls()
     {
-        /*if (firewall)
+        if (firewall)
             AlertMeter._instance.SetDetected(true);
         else*/
         AlertMeter._instance.SetDetected(false);
     }
 
-    bool WinCondition() => /*!firewall &&*/ puzzle.pieces[puzzle.endCoords.x, puzzle.endCoords.y].active ? true : false;
+    bool WinCondition() => !firewall && puzzle.pieces[puzzle.endCoords.x, puzzle.endCoords.y].active ? true : false;
 
     public void Win()
     {
@@ -342,6 +347,9 @@ public class MinigameManager : MonoBehaviour
                 // Animation holder
                 anim.Play("LoseAnimation");
 
+                // Sound pls
+                DualOperationsAudioPlayer.Instance.Hack(1);
+
                 // Remove if no reset after win
                 StartCoroutine(Reset(resetTime));
                 Debug.Log("Batsoup dinner :()");
@@ -359,7 +367,6 @@ public class MinigameManager : MonoBehaviour
             if (WinCondition())
             {
                 Win();
-                DualOperationsAudioPlayer.Instance.Hack(3);
             }
 
             else if (firewall)
