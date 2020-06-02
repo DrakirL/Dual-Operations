@@ -48,14 +48,33 @@ public class DualOperationsAudioPlayer : NetworkBehaviour
 
     //[Header("SFX Settings")]
     // MANAGING OTHER SOUNDS
-    [SerializeField]
-    private string playerDetectedPath;
+    [SerializeField] private string detectedPath;
+    [SerializeField] private string[] hackingPaths;
+    [SerializeField] private string footstepPath;
+    [SerializeField] private string[] doorPaths;
 
     public void Detected()
     {
         UnityEngine.Debug.Log("Nådde ljudets Detected: is server = " + isServer);
-        
-        CmdPlaySound(playerDetectedPath, GetPlayer.Instance.getPlayer().transform.position, false);
+        CmdPlaySound(detectedPath, GetPlayer.Instance.getPlayer().transform.position, false);
+    }
+
+    public void Hack(int state)
+    {
+        UnityEngine.Debug.Log(state + " Hackety hack hack " + isServer);
+        CmdPlaySound(hackingPaths[state], GetPlayer.Instance.getPlayer().transform.position, false);
+    }
+
+    public void Step(GameObject source)
+    {
+        UnityEngine.Debug.Log("Step! " + isServer);
+        CmdPlaySound(footstepPath, source.transform.position, false);
+    }
+
+    public void Door(bool open, GameObject source)
+    {
+        UnityEngine.Debug.Log(open + " Access? " + isServer);
+        CmdPlaySound(doorPaths[open ? 1 : 0], source.transform.position, false);
     }
 
     [Command]

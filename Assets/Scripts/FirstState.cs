@@ -74,31 +74,35 @@ public class FirstState : State<AI>
         {
             _owner.stateMachine.ChangeState(SecondState.Instance);
         }
+        if (_owner.transform.rotation != _owner.rotateSave && _owner.GetComponent<NavMeshAgent>().velocity == new Vector3(0, 0, 0) && !_owner.radioTurnOff)
+            _owner.transform.rotation = Quaternion.Slerp(_owner.transform.rotation, _owner.rotateSave, Time.deltaTime * 0.5f);
     }
 
     public override void test222(AI _owner)
     {
-         bool inFov(Transform checkingObject, Transform target, float maxAngle, float maxRadius)
-        {
-            Vector3 direction = (target.position - checkingObject.position).normalized;
-            direction.y *= 0;
+        bool inFov(Transform checkingObject, Transform target, float maxAngle, float maxRadius)
 
-            RaycastHit hit;
-            if (Physics.Raycast(checkingObject.position, (target.position - checkingObject.position).normalized, out hit, maxRadius))
-            {
-                if (hit.transform.gameObject.tag == "Player")
-                {
-                    float angle = Vector3.Angle(checkingObject.forward, direction);
+       {
+           Vector3 direction = (target.position - checkingObject.position).normalized;
+           direction.y *= 0;
 
-                    if (angle <= maxAngle)
-                    {
-                        return true;
-                    }
-                }
-            }
-            return false;
-        }
-        _owner.fovtest123 = inFov(_owner.transform, _owner.player, _owner.maxAngle, _owner.maxRadius);
+           RaycastHit hit;
+           if (Physics.Raycast(checkingObject.position, (target.position - checkingObject.position).normalized, out hit, maxRadius))
+           {
+               if (hit.transform.gameObject.tag == "Player")
+               {
+                   float angle = Vector3.Angle(checkingObject.forward, direction);
+
+                   if (angle <= maxAngle)
+                   {
+                       return true;
+                   }
+               }
+           }
+           return false;
+       }
+
+       _owner.fovtest123 = inFov(_owner.transform, _owner.player, _owner.maxAngle, _owner.maxRadius);
     }
 
     public override void OnDrawGizmos(AI _owner)
