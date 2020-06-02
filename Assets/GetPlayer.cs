@@ -102,7 +102,8 @@ public class GetPlayer : NetworkBehaviour
     {
         CmdAddAlertOnServer(value);
 
-        // Sound pls
+        //sound pls
+        UnityEngine.Debug.Log("Nåd? " + isServer);
         DualOperationsAudioPlayer.Instance.Detected();
     }
     [Command]
