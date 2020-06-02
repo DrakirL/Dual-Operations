@@ -8,8 +8,9 @@ using UnityEngine.AI;
 public class FirstState : State<AI>
 {
     private static FirstState _instance;
-    Rigidbody lol;
-    Transform lmao;
+    float rotationSpeed = 2f;
+    Quaternion lookRotation;
+    Vector3 direction;
 
     private FirstState()
     {
@@ -70,6 +71,44 @@ public class FirstState : State<AI>
             _owner.gameObject.GetComponent<NavMeshAgent>().destination = _owner.radio.transform.GetChild(0).position;
         }
 
+        if (_owner.radiustest123 && _owner.player.GetComponent<AgentControllerScript>().USE_SPEED > 2)
+        {
+            direction = (_owner.player.transform.position - _owner.transform.position).normalized;
+            lookRotation = Quaternion.LookRotation(direction);
+            _owner.transform.rotation = Quaternion.Slerp(_owner.transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
+        }
+
+        if (_owner.player.GetComponent<AgentControllerScript>().USE_SPEED > 2)
+        {
+            _owner.maxRadius2 = 8;
+            if (_owner.radiustest123)
+            {
+                direction = (_owner.player.transform.position - _owner.transform.position).normalized;
+                lookRotation = Quaternion.LookRotation(direction);
+                _owner.transform.rotation = Quaternion.Slerp(_owner.transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
+            }
+        }
+        else if (_owner.player.GetComponent<AgentControllerScript>().USE_SPEED > 1.25)
+        {
+            _owner.maxRadius2 = 4;
+            if (_owner.radiustest123)
+            {
+                direction = (_owner.player.transform.position - _owner.transform.position).normalized;
+                lookRotation = Quaternion.LookRotation(direction);
+                _owner.transform.rotation = Quaternion.Slerp(_owner.transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
+            }
+        }
+        else
+        {
+            _owner.maxRadius2 = 2;
+            if (_owner.radiustest123)
+            {
+                direction = (_owner.player.transform.position - _owner.transform.position).normalized;
+                lookRotation = Quaternion.LookRotation(direction);
+                _owner.transform.rotation = Quaternion.Slerp(_owner.transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
+            }
+        }
+
         if (_owner.fovtest123)
         {
             _owner.stateMachine.ChangeState(SecondState.Instance);
@@ -103,6 +142,23 @@ public class FirstState : State<AI>
        }
 
        _owner.fovtest123 = inFov(_owner.transform, _owner.player, _owner.maxAngle, _owner.maxRadius);
+
+        bool inRadius(Transform checkingObject, Transform target, float maxRadius2)
+        {
+            Vector3 direction = (target.position - checkingObject.position).normalized;
+            direction.y *= 0;
+
+            RaycastHit hit;
+            if (Physics.Raycast(checkingObject.position, (target.position - checkingObject.position).normalized, out hit, maxRadius2))
+            {
+                if (hit.transform.gameObject.tag == "Player")
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+        _owner.radiustest123 = inRadius(_owner.transform, _owner.player, _owner.maxRadius2);
     }
 
     public override void OnDrawGizmos(AI _owner)
