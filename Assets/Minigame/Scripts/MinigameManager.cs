@@ -323,8 +323,8 @@ public class MinigameManager : MonoBehaviour
     {
         if (firewall)
             AlertMeter._instance.SetDetected(true);
-        else*/
-        AlertMeter._instance.SetDetected(false);
+        else
+            AlertMeter._instance.SetDetected(false);
     }
 
     bool WinCondition() => !firewall && puzzle.pieces[puzzle.endCoords.x, puzzle.endCoords.y].active ? true : false;
