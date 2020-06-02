@@ -265,6 +265,7 @@ namespace Mirror
         /// </summary>
         public virtual void Start()
         {
+
             // headless mode? then start the server
             // can't do this in Awake because Awake is for initialization.
             // some transports might not be ready until Start.

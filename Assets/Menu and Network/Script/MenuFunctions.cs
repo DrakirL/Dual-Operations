@@ -18,6 +18,7 @@ public class MenuFunctions : MonoBehaviour
 
     void Start()
     {
+       
         //Undo manipulation of the cursor
         Cursor.lockState = CursorLockMode.None;
 
@@ -33,7 +34,14 @@ public class MenuFunctions : MonoBehaviour
                 inputField.text = roomManager.networkAddress;
             }
         }
+        if(SceneManager.GetActiveScene().name == "Main Menu")
+        StopAndGoBack(0);
     }
+    /*private void OnLevelWasLoaded(int level)
+    {
+        Debug.Log("reload");
+        StopAndGoBack(0);
+    }*/
 
     public void HostGame()
     {
@@ -64,12 +72,25 @@ public class MenuFunctions : MonoBehaviour
     {
         roomManager.BreakConnection();
         SwitchLayer(n);
+        /*for (int i = 0; i < roomManager.roomSlots.Count; i++)
+        {
+            Destroy(roomManager.roomSlots[i].gameObject);
+        }
+        roomManager.roomSlots.Clear();*/
     }
 
     // Display a different part of the menu
     public void SwitchLayer(int n)
     {
         // Cut network-connection
+        /*if(n == 1)
+        {
+            for(int i = 0; i < roomManager.roomSlots.Count; i++)
+            {
+                Destroy(roomManager.roomSlots[i].gameObject);
+            }
+            roomManager.roomSlots.Clear();
+        }*/
 
         bool check;
         for (int i = menuLayers.Length - 1; i >= 0; i--)
