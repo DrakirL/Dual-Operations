@@ -16,10 +16,6 @@ public class GetPlayer : NetworkBehaviour
     // Use this for initialization
     void Start()
     {
-
-
-        
-
         camera.SetActive(false);
         if (isLocalPlayer)
             camera.SetActive(true);
@@ -105,6 +101,9 @@ public class GetPlayer : NetworkBehaviour
     public void addAlertServer(float value)
     {
         CmdAddAlertOnServer(value);
+
+        // Sound pls
+        DualOperationsAudioPlayer.Instance.Detected();
     }
     [Command]
     private void CmdAddAlertOnServer(float value)
