@@ -145,20 +145,21 @@ public class AlertMeter : NetworkBehaviour
         //{
         //UseAddAlert(value);
         if (isServer)
-            {
-                //Debug.Log("server add alert");
-                alertValue = Mathf.Clamp(alertValue + value, 0, 100);
-                timeStamp = Time.time;
+        {
+            //Debug.Log("server add alert");
+            alertValue = Mathf.Clamp(alertValue + value, 0, 100);
+            timeStamp = Time.time;
 
-                //sound pls
-                UnityEngine.Debug.Log("Nåd? " + (DualOperationsAudioPlayer.Instance != null));
-                DualOperationsAudioPlayer.Instance.Detected();
-            }
-            else
-            {
-                //Debug.Log("client add alert");
-                GetPlayer.Instance.addAlertServer(value);
-            }
+            //sound pls
+            UnityEngine.Debug.Log("Nåd? " + isServer);
+            DualOperationsAudioPlayer.Instance.Detected();
+        }
+            
+        else
+        {
+            //Debug.Log("client add alert");
+            GetPlayer.Instance.addAlertServer(value);
+        }
         //}
     }
     public float getAlert()

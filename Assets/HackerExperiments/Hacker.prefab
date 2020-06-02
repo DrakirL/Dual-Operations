@@ -2565,8 +2565,10 @@ MonoBehaviour:
   - event:/Hacker/Puzzle Negative
   - event:/Hacker/Puzzle Neutral
   - event:/Hacker/Puzzle Positive
-  footstepPath: 
-  doorPaths: []
+  footstepPath: event:/Enemy/Enemy_Foorsteps
+  doorPaths:
+  - event:/Interactables/Door_Error/Door_Error_04_Combined
+  - event:/Interactables/Door/Door_Open_03
 --- !u!114 &5555231585585497432
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -80,7 +80,7 @@ public class Piece : MonoBehaviour
     {
         if (input)
         {
-            if (Input.GetMouseButtonDown(0) && Input.GetMouseButtonDown(1) && rotation)
+            if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1) && rotation)
                 DualOperationsAudioPlayer.Instance.Hack(0);
 
             // Rotate left on left mouse click
