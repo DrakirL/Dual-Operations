@@ -3,7 +3,7 @@
 public class Piece : MonoBehaviour
 {
     public bool active;
-    [Header("Connection type")]   
+    [Header("Connection type")]
     public bool startConnector;
     public bool endConnector;
     public bool firewall;
@@ -21,8 +21,8 @@ public class Piece : MonoBehaviour
     public bool input = true;
 
     [Header("*Values will rotate automatically if piece has been rotated in editor*")]
-    public int [] values;
-    public int [] startValues;
+    public int[] values;
+    public int[] startValues;
 
     float realRotation;
 
@@ -31,21 +31,21 @@ public class Piece : MonoBehaviour
         sprite = GetComponent<SpriteRenderer>();
         // Rotates the values in runtime on objects that is rotated in editor
         int mod = Mathf.RoundToInt(transform.rotation.eulerAngles.z / 90);
-        if(mod > 0)
+        if (mod > 0)
             for (int i = 0; i < mod; i++)
             {
                 RotateValuesLeft();
             }
-       else
+        else
             for (int i = 0; i > mod; i--)
             {
                 RotateValuesRight();
-            }      
+            }
     }
 
     private void Start()
     {
-        if(defaultSprite != null)
+        if (defaultSprite != null)
             sprite.sprite = defaultSprite;
         realRotation = transform.rotation.eulerAngles.z;
         startRot = transform.rotation.eulerAngles.z;
@@ -56,7 +56,7 @@ public class Piece : MonoBehaviour
         }
     }
 
-    void Update()       
+    void Update()
     {
         if (active)
         {
@@ -68,12 +68,12 @@ public class Piece : MonoBehaviour
             if (defaultSprite != null)
                 sprite.sprite = defaultSprite;
         }
-                 
+
         if (transform.rotation.eulerAngles.z != realRotation)
         {
-            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0,0,realRotation), rotateSpeed / 10);
+            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 0, realRotation), rotateSpeed / 10);
         }
-        
+
     }
 
     private void OnMouseOver()
@@ -86,7 +86,7 @@ public class Piece : MonoBehaviour
             // Rotate right on right mouse click
             if (Input.GetMouseButtonDown(1) && rotation)
                 RotateRight();
-        }                    
+        }
     }
 
     public void RotateLeft()
@@ -94,7 +94,7 @@ public class Piece : MonoBehaviour
         realRotation += 90;
 
         // Convert to eulerAngles value
-        if(realRotation == 360)
+        if (realRotation == 360)
             realRotation = 0;
 
         RotateValuesLeft();
@@ -113,7 +113,7 @@ public class Piece : MonoBehaviour
     public void RotateValuesLeft()
     {
         int temp = values[0];
-        for (int i = 0; i < values.Length-1; i++)
+        for (int i = 0; i < values.Length - 1; i++)
         {
             values[i] = values[i + 1];
         }

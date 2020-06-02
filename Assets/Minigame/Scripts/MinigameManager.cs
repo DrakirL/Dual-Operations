@@ -10,7 +10,7 @@ using UnityEngine.UI;
 public class MinigameManager : MonoBehaviour
 {
     public static MinigameManager Instance { get; private set; }
-    
+
     [System.Serializable]
     public class Puzzle
     {
@@ -44,7 +44,7 @@ public class MinigameManager : MonoBehaviour
     public AudioClip loseSound;
 
     bool[,] visited;
-    bool firewall;   
+    bool firewall;
     bool input = true;
 
     private void Awake()
@@ -74,13 +74,13 @@ public class MinigameManager : MonoBehaviour
     {
         if (input)
         {
-           /*if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1))
-            {
-                UpdateBoard();              
-            }*/
+            /*if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1))
+             {
+                 UpdateBoard();              
+             }*/
 
             Lose();
-        }       
+        }
     }
 
     void UpdateBoard()
@@ -93,9 +93,9 @@ public class MinigameManager : MonoBehaviour
         RefreshPuzzle();
 
         // if (activePulse)
-         CheckNeighbours(puzzle.startCoords.x, puzzle.startCoords.y);
+        CheckNeighbours(puzzle.startCoords.x, puzzle.startCoords.y);
 
-         CheckFirewalls();       
+        CheckFirewalls();
     }
 
     public void GetPuzzle(Piece[,] p)
@@ -130,8 +130,8 @@ public class MinigameManager : MonoBehaviour
             {
                 if (lp.Contains(puzzle.pieces[i, j]))
                     isRepeated = true;
-                lp.Add(puzzle.pieces[i, j]);               
-            }           
+                lp.Add(puzzle.pieces[i, j]);
+            }
         }
         Debug.Log(isRepeated);
 
@@ -238,7 +238,7 @@ public class MinigameManager : MonoBehaviour
         {
             CheckNeighbours(w, h);
         }
-            
+
     }
 
     // Checks for neighbour pieces in every direction (not diagonally) recursively
@@ -258,7 +258,7 @@ public class MinigameManager : MonoBehaviour
             {
                 if (puzzle.pieces[w, h].values[0] == 1 && puzzle.pieces[w, h + 1].values[2] == 1)
                 {
-                    puzzle.pieces[w, h + 1].active = true;                   
+                    puzzle.pieces[w, h + 1].active = true;
                     CheckForFirewallNeighbours(w, h + 1);
                 }
             }
@@ -298,13 +298,14 @@ public class MinigameManager : MonoBehaviour
 
     void ResetPositions()
     {
-        foreach(Piece p in puzzle.pieces)
+        foreach (Piece p in puzzle.pieces)
         {
             p.GetStartPos();
         }
     }
 
-    void RefreshPuzzle() {
+    void RefreshPuzzle()
+    {
         firewall = false;
         // Initialize all visited/firewalls to false
         for (int i = 0; i < puzzle.width; i++)
@@ -314,7 +315,7 @@ public class MinigameManager : MonoBehaviour
                 visited[i, j] = false;
                 puzzle.pieces[i, j].active = false;
             }
-        }   
+        }
     }
 
     // Check if firewalls are touched and set alert meter state accordingly
@@ -322,8 +323,8 @@ public class MinigameManager : MonoBehaviour
     {
         if (firewall)
             AlertMeter._instance.SetDetected(true);
-        else
-            AlertMeter._instance.SetDetected(false);
+        else*/
+        AlertMeter._instance.SetDetected(false);
     }
 
     bool WinCondition() => !firewall && puzzle.pieces[puzzle.endCoords.x, puzzle.endCoords.y].active ? true : false;
@@ -333,15 +334,12 @@ public class MinigameManager : MonoBehaviour
         // Animation holder
         anim.Play("WinAnimation");
 
-        // Sound pls
-        DualOperationsAudioPlayer.Instance.Hack(3);
-
-        Deactivate();     
+        Deactivate();
     }
 
     void Lose()
     {
-        if(timer != null)
+        if (timer != null)
         {
             if (timer.IsDepleted())
             {
@@ -356,7 +354,7 @@ public class MinigameManager : MonoBehaviour
                 StartCoroutine(Reset(resetTime));
                 Debug.Log("Batsoup dinner :()");
             }
-        }      
+        }
     }
 
     // Toggle the pulse and update the board
@@ -370,6 +368,13 @@ public class MinigameManager : MonoBehaviour
             {
                 Win();
             }
+
+            else if (firewall)
+                DualOperationsAudioPlayer.Instance.Hack(1);
+
+            else
+                DualOperationsAudioPlayer.Instance.Hack(2);
+
             //StartCoroutine(Reset(resetTime));
         }
     }
@@ -377,13 +382,13 @@ public class MinigameManager : MonoBehaviour
     // Temporary input management
     void EnableInput(bool boolToSet)
     {
-        foreach(var piece in puzzle.pieces)
+        foreach (var piece in puzzle.pieces)
         {
             piece.input = boolToSet;
             input = boolToSet;
         }
     }
-    
+
     // May be used when there are animations
     IEnumerator Test(int w, int h)
     {
@@ -401,14 +406,14 @@ public class MinigameManager : MonoBehaviour
         //activePulse = false;
         RefreshPuzzle();
         CheckFirewalls();
-        if(shuffle)
-        ShuffleBoard();
+        if (shuffle)
+            ShuffleBoard();
         else
-        ResetPositions();       
+            ResetPositions();
         timer.ResetTimer();
         timer.TogglePause();
         button.interactable = true;
-        EnableInput(true);     
+        EnableInput(true);
     }
     GameObject o;
     public void Activate(HackerButton hb, GameObject o)
@@ -418,7 +423,7 @@ public class MinigameManager : MonoBehaviour
         o.SetActive(true);
         button.gameObject.SetActive(true);
         canvas.SetActive(false);
-        GetPuzzle(o.GetComponent<Minigame>().pieces);       
+        GetPuzzle(o.GetComponent<Minigame>().pieces);
     }
     public void Deactivate()
     {
