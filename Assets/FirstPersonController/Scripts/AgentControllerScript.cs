@@ -71,6 +71,7 @@ public class AgentControllerScript : NetworkBehaviour
     public KeyCode useTaser = KeyCode.Mouse0;
 
     [SerializeField] AnimationHandler animationFPSHandler;
+    [SerializeField] AnimationHandler animationFBHandler;
     [SerializeField] taser Taser;
  
     public void changeFPanimationState(string newAnimation)
@@ -79,7 +80,6 @@ public class AgentControllerScript : NetworkBehaviour
     }
     public void changeAnimationStateState(string newAnimation)
     {
-        animationFPSHandler.changeAnimation(newAnimation);
         CmdChangeAnimationState(newAnimation);
     }
     
@@ -87,7 +87,7 @@ public class AgentControllerScript : NetworkBehaviour
     private void CmdChangeAnimationState(string NewAnimationName)
     {
         //fix to the real if his is still wanted
-        //animationFPSHandler.changeAnimation(NewAnimationName);
+        animationFBHandler.changeAnimation(NewAnimationName);
     }
     void Start()
     {
@@ -488,9 +488,11 @@ public class AgentControllerScript : NetworkBehaviour
                 if (isWalking)
                 {
                     changeFPanimationState("SPY_WALK");
+                    changeAnimationStateState("WALK");
                 }
                 else
                 {
+                    changeAnimationStateState("IDLE");
                     changeFPanimationState("SPY_IDLE");
                 }
             }
