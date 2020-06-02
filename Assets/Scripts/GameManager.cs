@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
         else
             Destroy(gameObject);
     }
+
     private void Update()
     {
         if (AlertMeter._instance != null)
@@ -45,6 +46,14 @@ public class GameManager : MonoBehaviour
     IEnumerator Delay(float time, string s)
     {
         yield return new WaitForSeconds(time);
+        if(s == "Main Menu")
+        {
+            state = false;
+            /*foreach (GameObject o in Object.FindObjectsOfType<GameObject>())
+            {
+                Destroy(o);
+            }*/
+        }
         SceneManager.LoadScene(s);
     }
 }

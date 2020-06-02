@@ -10,6 +10,22 @@ public class DualOperationsNetworkRoomManager : NetworkRoomManager
     public MenuFunctions menu;
     public int layer = 0;
 
+    private void Start()
+    {
+
+        /*Debug.Log("ok");
+        if (SceneManager.GetActiveScene().name == "Main Menu")
+        {
+            for (int i = 0; i < roomSlots.Count; i++)
+            {
+                Debug.Log("ok2");
+                Destroy(roomSlots[i].gameObject);
+            }
+            roomSlots.Clear();
+        }
+        */
+    }
+
     /// <summary>
     /// Called just after GamePlayer object is instantiated and just before it replaces RoomPlayer object.
     /// This is the ideal point to pass any data like player name, credentials, tokens, colors, etc.
