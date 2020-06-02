@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 6421953436057309722}
   - component: {fileID: 3992780082732462386}
   - component: {fileID: 8747297839750049487}
-  m_Layer: 0
+  - component: {fileID: 7355295766285352093}
+  m_Layer: 8
   m_Name: Low_WallShapeEnvelope
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -79,6 +80,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &7355295766285352093
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1978034083457181052}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 200, y: 18.537695, z: 200.00005}
+  m_Center: {x: 200, y: 0, z: 0}
 --- !u!1 &2316020097352272437
 GameObject:
   m_ObjectHideFlags: 0
@@ -167,7 +181,7 @@ GameObject:
   - component: {fileID: 5208091975980469686}
   - component: {fileID: 3827455716091754368}
   - component: {fileID: 7359255464617708409}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
