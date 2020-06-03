@@ -106,6 +106,7 @@ public class HackerButtonHandler : NetworkBehaviour
         {
             if (isCameraup)
             {
+                CameraManager.Instance.afterHackerIsDone();
                 takeDownCamera();
             }
             isCameraup = true;

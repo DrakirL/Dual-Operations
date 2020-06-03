@@ -29,9 +29,9 @@ public class AgentControllerScript : NetworkBehaviour
 
     public bool mouseInverted = false;
 
-    public float moveSpeed = 3;
-    public float sprintSpeed = 8;
-    public float sneakSpeed = 1.0f;
+    public float moveSpeed;
+    public float sprintSpeed;
+    public float sneakSpeed;
 
     public float gravity = 10;
 
@@ -53,7 +53,8 @@ public class AgentControllerScript : NetworkBehaviour
     protected float accelSpeed;
     protected float deaccelSpeed;
 
-    private float USE_SPEED;
+    [HideInInspector]
+    public float USE_SPEED;
     private float USE_ACCELMOD;
     private float USE_DEACCELMOD;
 
@@ -69,7 +70,8 @@ public class AgentControllerScript : NetworkBehaviour
     public KeyCode sneakKey = KeyCode.C;
     public KeyCode useTaser = KeyCode.Mouse0;
 
-    [SerializeField] AnimationHandler animationFPSHandler;
+     public AnimationHandler animationFPSHandler;
+    public AnimationHandler animationFBHandler;
     [SerializeField] taser Taser;
  
     public void changeFPanimationState(string newAnimation)
@@ -78,7 +80,6 @@ public class AgentControllerScript : NetworkBehaviour
     }
     public void changeAnimationStateState(string newAnimation)
     {
-        animationFPSHandler.changeAnimation(newAnimation);
         CmdChangeAnimationState(newAnimation);
     }
     
@@ -86,7 +87,7 @@ public class AgentControllerScript : NetworkBehaviour
     private void CmdChangeAnimationState(string NewAnimationName)
     {
         //fix to the real if his is still wanted
-        //animationFPSHandler.changeAnimation(NewAnimationName);
+        animationFBHandler.changeAnimation(NewAnimationName);
     }
     void Start()
     {
@@ -331,7 +332,7 @@ public class AgentControllerScript : NetworkBehaviour
 		//--------------------------
 		// Collision correction with Linear interpolation
 		//--------------------------
-		//if(ColCorrect)
+		if(ColCorrect)
 		{
 			if(Physics.Raycast(uRightRay, out hit, distH+0.05f, colMask,QueryTriggerInteraction.Ignore))
 			{
@@ -482,17 +483,46 @@ public class AgentControllerScript : NetworkBehaviour
                 keyDirection.x = -1f;
                 isWalking = true;
             }
-            if (Taser.tasorReady)
+            if  (Taser.tasorReady)
             {
                 if (isWalking)
                 {
                     changeFPanimationState("SPY_WALK");
+                    changeAnimationStateState("WALK");
                 }
                 else
                 {
+                    changeAnimationStateState("IDLE");
                     changeFPanimationState("SPY_IDLE");
                 }
             }
+            /*if(!animationFBHandler.isAnimationPlaying("SHOOT") ||
+                !animationFBHandler.isAnimationPlaying("SHOOT2") ||
+                !animationFBHandler.isAnimationPlaying("RELOAD"))
+            {
+                if (isWalking)
+                {
+                    changeAnimationStateState("WALK");
+                }
+                else
+                {
+                    changeAnimationStateState("IDLE");
+                }
+            }
+            if (!animationFPSHandler.isAnimationPlaying("SPY_SHOOT") ||
+                !animationFPSHandler.isAnimationPlaying("SPY_SHOOT2") ||
+                !animationFBHandler.isAnimationPlaying("SPY_RELOAD"))
+            {
+                if (isWalking)
+                {
+                    changeAnimationStateState("SPY_WALK");
+                }
+                else
+                {
+                    changeAnimationStateState("SPY_IDLE");
+                }
+            }*/
+
             switch (playerState)
 			{
 				default:
