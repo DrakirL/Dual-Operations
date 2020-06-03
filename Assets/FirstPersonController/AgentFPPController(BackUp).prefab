@@ -535,7 +535,7 @@ GameObject:
   - component: {fileID: -3376478667481377432}
   - component: {fileID: 241902681443630070}
   m_Layer: 11
-  m_Name: AgentFPPController
+  m_Name: AgentFPPController(BackUp)
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -577,6 +577,9 @@ MonoBehaviour:
   bengt: 0
   tasorText: {fileID: 664232661975241224}
   tasorSkott: 5
+  tasorReady: 1
+  firstPersonAnimation: {fileID: 0}
+  agent: {fileID: 0}
 --- !u!114 &5524880825172794006
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -609,6 +612,7 @@ MonoBehaviour:
   sprintDeaccelMod: 0.2
   sneakAccelMod: 0.1
   sneakDeaccelMod: 0.2
+  USE_SPEED: 0
   moveForward: 119
   moveBackward: 115
   strafeLeft: 97
@@ -616,6 +620,10 @@ MonoBehaviour:
   interactKey: 101
   sprintKey: 304
   sneakKey: 99
+  useTaser: 323
+  animationFPSHandler: {fileID: 0}
+  animationFBHandler: {fileID: 0}
+  Taser: {fileID: 0}
 --- !u!114 &7087142220084282350
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1278,7 +1286,7 @@ PrefabInstance:
     - target: {fileID: 5208699780064194852, guid: b0ec87efd9118ed408e89e528717d052,
         type: 3}
       propertyPath: timer
-      value: 27.4
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 5208699780064194854, guid: b0ec87efd9118ed408e89e528717d052,
         type: 3}
