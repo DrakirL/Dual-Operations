@@ -45,8 +45,7 @@ public class taser : NetworkBehaviour
                     agent.changeFPanimationState("SPY_SHOOT");
                     agent.changeAnimationStateState("SHOOT");
                     StartCoroutine(Cooldown(Shoot.length + Reload.length));
-
-                    //agent.animationFPSHandler.gameObject.GetComponent<Animator>().SetBool("hasAmmo", false);
+                    
                 }
                 else
                 {
@@ -54,8 +53,7 @@ public class taser : NetworkBehaviour
                     CmdreloadNoMore();
                     agent.changeFPanimationState("SPY_SHOOT");
                     agent.changeAnimationStateState("SHOOT");
-                    StartCoroutine(Cooldown(Shoot.length + Reload.length));
-                    //StartCoroutine(shootNoMoreAmmoAfter(0.633f));
+                    StartCoroutine(Cooldown(Shoot.length));
                 }
                
                
@@ -82,47 +80,10 @@ public class taser : NetworkBehaviour
     private IEnumerator Cooldown(float waitTime)
     {
         yield return new WaitForSeconds(waitTime);
-        /*if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.S))
-        {
-            agent.changeFPanimationState("SPY_WALK");
-            agent.changeAnimationStateState("WALK");
-        }
-        else
-        {
-            agent.changeFPanimationState("SPY_IDLE");
-            agent.changeAnimationStateState("IDLE");
-        }*/
+       
         tasorReady = true;
     }
-    /*private IEnumerator Cooldown(float waitTime)
-    {
-        yield return new WaitForSeconds(waitTime);
-        if(Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.S))
-        {
-            agent.changeFPanimationState("SPY_WALK");
-            agent.changeAnimationStateState("WALK");
-        }
-        else
-        {
-            agent.changeFPanimationState("SPY_IDLE");
-            agent.changeAnimationStateState("IDLE");
-        }
-        tasorReady = true;
-    }
-    private IEnumerator shootNoMoreAmmoAfter(float waitTime)
-    {
-        yield return new WaitForSeconds(waitTime);
-        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.S))
-        {
-            agent.changeFPanimationState("SPY_WALK");
-            agent.changeAnimationStateState("WALK");
-        }
-        else
-        {
-            agent.changeFPanimationState("SPY_IDLE");
-            agent.changeAnimationStateState("IDLE");
-        }
-    }*/
+   
 
     [Command]
     public void CmdShoot()
