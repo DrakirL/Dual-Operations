@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5180967856399829157}
+  - component: {fileID: 5723948873257836268}
   m_Layer: 8
   m_Name: DekorationDator
   m_TagString: Untagged
@@ -33,6 +34,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &5723948873257836268
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 156111937625492078}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.3096638, y: 1.83492, z: 1.2881858}
+  m_Center: {x: 0.00018417003, y: 0.9965347, z: -0.017929066}
 --- !u!1 &3297708241679570871
 GameObject:
   m_ObjectHideFlags: 0
@@ -243,7 +257,6 @@ GameObject:
   - component: {fileID: 6655215126864316448}
   - component: {fileID: 2379893307858940438}
   - component: {fileID: 8231345581999066863}
-  - component: {fileID: 7035290834803169271}
   m_Layer: 8
   m_Name: mesh_dator
   m_TagString: Untagged
@@ -312,19 +325,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &7035290834803169271
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7640158019482499635}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.4169695, y: 1.8299685, z: 1.6582426}
-  m_Center: {x: 0, y: -0.000000059604645, z: 0}
 --- !u!1001 &3890190547068890917
 PrefabInstance:
   m_ObjectHideFlags: 0
