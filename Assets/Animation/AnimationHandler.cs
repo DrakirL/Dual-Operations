@@ -15,7 +15,7 @@ public class AnimationHandler : MonoBehaviour
 {
     [SerializeField] AnimationFunction[] allAnimations;
     private AnimationFunction currentAnimation;
-    [SerializeField] Animator anim;
+   public /*[SerializeField]*/ Animator anim;
     string comp = "new";
 
     public void changeAnimation(string newAnimation)
@@ -43,6 +43,10 @@ public class AnimationHandler : MonoBehaviour
         }
         Debug.LogError("no animation found with the name " + nameOfAnim);
         return tempFunc;
+    }
+    public bool isAnimationPlaying(string nameOfAnimation)
+    {
+        return anim.GetCurrentAnimatorStateInfo(0).IsName(nameOfAnimation);
     }
 
     //update is only debug tools, delete when done

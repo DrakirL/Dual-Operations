@@ -483,7 +483,7 @@ public class AgentControllerScript : NetworkBehaviour
                 keyDirection.x = -1f;
                 isWalking = true;
             }
-            if (Taser.tasorReady)
+            if  (Taser.tasorReady)
             {
                 if (isWalking)
                 {
@@ -496,6 +496,33 @@ public class AgentControllerScript : NetworkBehaviour
                     changeFPanimationState("SPY_IDLE");
                 }
             }
+            /*if(!animationFBHandler.isAnimationPlaying("SHOOT") ||
+                !animationFBHandler.isAnimationPlaying("SHOOT2") ||
+                !animationFBHandler.isAnimationPlaying("RELOAD"))
+            {
+                if (isWalking)
+                {
+                    changeAnimationStateState("WALK");
+                }
+                else
+                {
+                    changeAnimationStateState("IDLE");
+                }
+            }
+            if (!animationFPSHandler.isAnimationPlaying("SPY_SHOOT") ||
+                !animationFPSHandler.isAnimationPlaying("SPY_SHOOT2") ||
+                !animationFBHandler.isAnimationPlaying("SPY_RELOAD"))
+            {
+                if (isWalking)
+                {
+                    changeAnimationStateState("SPY_WALK");
+                }
+                else
+                {
+                    changeAnimationStateState("SPY_IDLE");
+                }
+            }*/
+
             switch (playerState)
 			{
 				default:
