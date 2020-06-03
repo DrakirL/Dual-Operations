@@ -332,7 +332,7 @@ public class AgentControllerScript : NetworkBehaviour
 		//--------------------------
 		// Collision correction with Linear interpolation
 		//--------------------------
-		//if(ColCorrect)
+		if(ColCorrect)
 		{
 			if(Physics.Raycast(uRightRay, out hit, distH+0.05f, colMask,QueryTriggerInteraction.Ignore))
 			{
