@@ -15,7 +15,6 @@ public class taser : NetworkBehaviour
     public int tasorSkott = 5;
     //private float reloadTime = 2f;
     public bool tasorReady = true;
-    [SerializeField] AnimationHandler firstPersonAnimation;
     [SerializeField] AgentControllerScript agent;
     [SerializeField] AnimationClip Shoot;
     [SerializeField] AnimationClip Reload;
@@ -46,14 +45,19 @@ public class taser : NetworkBehaviour
                     agent.changeFPanimationState("SPY_SHOOT");
                     agent.changeAnimationStateState("SHOOT");
                     StartCoroutine(Cooldown(Shoot.length + Reload.length));
+
+                    //agent.animationFPSHandler.gameObject.GetComponent<Animator>().SetBool("hasAmmo", false);
                 }
                 else
                 {
+                    agent.animationFPSHandler.anim.SetBool("hasAmmo", false);
+                    CmdreloadNoMore();
                     agent.changeFPanimationState("SPY_SHOOT");
                     agent.changeAnimationStateState("SHOOT");
-                    StartCoroutine(Cooldown(Shoot.length));
+                    StartCoroutine(Cooldown(Shoot.length + Reload.length));
                     //StartCoroutine(shootNoMoreAmmoAfter(0.633f));
                 }
+               
                
 
             }
@@ -67,6 +71,13 @@ public class taser : NetworkBehaviour
         }
 
         tasorText.text = tasorSkott.ToString();
+    }
+
+    [Command]
+    void CmdreloadNoMore()
+    {
+        agent.animationFPSHandler.anim.SetBool("hasAmmo", false);
+        agent.animationFBHandler.anim.SetBool("hasAmmo", false);
     }
     private IEnumerator Cooldown(float waitTime)
     {

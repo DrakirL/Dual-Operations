@@ -70,8 +70,8 @@ public class AgentControllerScript : NetworkBehaviour
     public KeyCode sneakKey = KeyCode.C;
     public KeyCode useTaser = KeyCode.Mouse0;
 
-    [SerializeField] AnimationHandler animationFPSHandler;
-    [SerializeField] AnimationHandler animationFBHandler;
+     public AnimationHandler animationFPSHandler;
+    public AnimationHandler animationFBHandler;
     [SerializeField] taser Taser;
  
     public void changeFPanimationState(string newAnimation)
