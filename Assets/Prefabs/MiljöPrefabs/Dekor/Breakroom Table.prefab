@@ -196,7 +196,8 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 592713069595046848, guid: b31fb1ec9c2960341a9bff008b48362b, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b31fb1ec9c2960341a9bff008b48362b, type: 3}
 --- !u!4 &7871350262519746490 stripped
 Transform:
@@ -211,6 +212,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2672997093973550523}
     m_Modifications:
+    - target: {fileID: 592713069595046848, guid: b31fb1ec9c2960341a9bff008b48362b,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 1.9226872
+      objectReference: {fileID: 0}
+    - target: {fileID: 592713069595046848, guid: b31fb1ec9c2960341a9bff008b48362b,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 592713069595046848, guid: b31fb1ec9c2960341a9bff008b48362b,
+        type: 3}
+      propertyPath: m_Center.z
+      value: 0.24
+      objectReference: {fileID: 0}
     - target: {fileID: 884977426910686372, guid: b31fb1ec9c2960341a9bff008b48362b,
         type: 3}
       propertyPath: m_Name
