@@ -16,10 +16,6 @@ public class GetPlayer : NetworkBehaviour
     // Use this for initialization
     void Start()
     {
-
-
-        
-
         camera.SetActive(false);
         if (isLocalPlayer)
             camera.SetActive(true);
@@ -43,6 +39,8 @@ public class GetPlayer : NetworkBehaviour
         {
             instance = this;
         }
+
+        UnityEngine.Debug.Log("GetPlayer hasAuthority = " + hasAuthority);
     }
 
     private void Update()
@@ -180,5 +178,19 @@ public class GetPlayer : NetworkBehaviour
     void RpcLoadScene(string scene, float time)
     {
         GameManager._instance.LoadScene(scene, time);
+    }
+
+    [Command]
+    public void CmdPlaySound(string path, Vector3 pos, bool agentOnly)
+    {
+        UnityEngine.Debug.Log("Nådde CMD");
+        RpcPlaySound(path, pos, agentOnly);
+    }
+
+    [ClientRpc]
+    void RpcPlaySound(string path, Vector3 pos, bool agentOnly)
+    {
+        UnityEngine.Debug.Log("Nådde RPC");
+        FMODUnity.RuntimeManager.PlayOneShot(path, pos);
     }
 }

@@ -29,9 +29,9 @@ public class AgentControllerScript : NetworkBehaviour
 
     public bool mouseInverted = false;
 
-    public float moveSpeed = 3;
-    public float sprintSpeed = 8;
-    public float sneakSpeed = 1.0f;
+    public float moveSpeed;
+    public float sprintSpeed;
+    public float sneakSpeed;
 
     public float gravity = 10;
 
@@ -53,7 +53,8 @@ public class AgentControllerScript : NetworkBehaviour
     protected float accelSpeed;
     protected float deaccelSpeed;
 
-    private float USE_SPEED;
+    [HideInInspector]
+    public float USE_SPEED;
     private float USE_ACCELMOD;
     private float USE_DEACCELMOD;
 
@@ -331,7 +332,7 @@ public class AgentControllerScript : NetworkBehaviour
 		//--------------------------
 		// Collision correction with Linear interpolation
 		//--------------------------
-		//if(ColCorrect)
+		if(ColCorrect)
 		{
 			if(Physics.Raycast(uRightRay, out hit, distH+0.05f, colMask,QueryTriggerInteraction.Ignore))
 			{
