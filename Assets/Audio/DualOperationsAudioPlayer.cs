@@ -103,4 +103,18 @@ public class DualOperationsAudioPlayer : NetworkBehaviour
         UnityEngine.Debug.Log("Nådde RPC");
         FMODUnity.RuntimeManager.PlayOneShot(path, pos);
     }
+
+    [TargetRpc]
+    void TargetRpcPlaySoundAgent(string path, Vector3 pos)
+    {
+        UnityEngine.Debug.Log("Nådde agent RPC");
+        FMODUnity.RuntimeManager.PlayOneShot(path, pos);
+    }
+
+    [TargetRpc]
+    void TargetRpcPlaySoundHacker(string path, Vector3 pos)
+    {
+        UnityEngine.Debug.Log("Nådde hacker RPC");
+        FMODUnity.RuntimeManager.PlayOneShot(path, pos);
+    }
 }
