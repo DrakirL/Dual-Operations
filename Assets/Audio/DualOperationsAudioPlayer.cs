@@ -7,6 +7,8 @@ using UnityEngine;
 using FMODUnity;
 using Mirror;
 using System.Diagnostics;
+using System.IO;
+using System.Threading;
 
 public class DualOperationsAudioPlayer : NetworkBehaviour
 {
@@ -17,6 +19,8 @@ public class DualOperationsAudioPlayer : NetworkBehaviour
     void Awake()
     {
         instance = this;
+
+        UnityEngine.Debug.Log("DOAP hasAuthority = " + hasAuthority);
     }
 
     // MANAGING MUSIC
@@ -56,25 +60,34 @@ public class DualOperationsAudioPlayer : NetworkBehaviour
     public void Detected()
     {
         UnityEngine.Debug.Log("Nådde ljudets Detected: is server = " + isServer);
-        CmdPlaySound(detectedPath, GetPlayer.Instance.getPlayer().transform.position, false);
+        PlaySound(detectedPath, GetPlayer.Instance.getPlayer().transform.position, false);
     }
 
     public void Hack(int state)
     {
         UnityEngine.Debug.Log(state + " Hackety hack hack " + isServer);
-        CmdPlaySound(hackingPaths[state], GetPlayer.Instance.getPlayer().transform.position, false);
+        PlaySound(hackingPaths[state], GetPlayer.Instance.getPlayer().transform.position, false);
     }
 
     public void Step(GameObject source)
     {
         UnityEngine.Debug.Log("Step! " + isServer);
-        CmdPlaySound(footstepPath, source.transform.position, false);
+        PlaySound(footstepPath, source.transform.position, false);
     }
 
     public void Door(bool open, GameObject source)
     {
         UnityEngine.Debug.Log(open + " Access? " + isServer);
-        CmdPlaySound(doorPaths[open ? 1 : 0], source.transform.position, false);
+        PlaySound(doorPaths[open ? 1 : 0], source.transform.position, false);
+    }
+
+    void PlaySound(string path, Vector3 pos, bool agentOnly)
+    {
+        if (hasAuthority)
+            CmdPlaySound(path, pos, agentOnly);
+        
+        else
+            GetPlayer.Instance.CmdPlaySound(path, pos, agentOnly);
     }
 
     [Command]
