@@ -144,15 +144,16 @@ public class AlertMeter : NetworkBehaviour
         //if (NetworkServer.localConnection.connectionId == 1)
         //{
         //UseAddAlert(value);
+
+        //sound pls
+        UnityEngine.Debug.Log("Nåd? " + isServer);
+        DualOperationsAudioPlayer.Instance.Detected();
+
         if (isServer)
         {
             //Debug.Log("server add alert");
             alertValue = Mathf.Clamp(alertValue + value, 0, 100);
             timeStamp = Time.time;
-
-            //sound pls
-            UnityEngine.Debug.Log("Nåd? " + isServer);
-            DualOperationsAudioPlayer.Instance.Detected();
         }
             
         else
