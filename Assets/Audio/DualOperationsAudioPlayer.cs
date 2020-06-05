@@ -54,19 +54,24 @@ public class DualOperationsAudioPlayer : NetworkBehaviour
     // MANAGING OTHER SOUNDS
     [SerializeField] private string detectedPath;
     [SerializeField] private string[] hackingPaths;
+    [SerializeField] private string tasorPath;
     [SerializeField] private string footstepPath;
     [SerializeField] private string[] doorPaths;
 
     public void Detected()
     {
-        UnityEngine.Debug.Log("Nådde ljudets Detected: is server = " + isServer);
         PlaySound(detectedPath, GetPlayer.Instance.getPlayer().transform.position, false);
     }
 
     public void Hack(int state)
     {
-        UnityEngine.Debug.Log(state + " Hackety hack hack " + isServer);
         PlaySound(hackingPaths[state], GetPlayer.Instance.getPlayer().transform.position, false);
+    }
+
+    public void Tasor()
+    {
+        UnityEngine.Debug.Log("Taser! isServer = " + isServer);
+        PlaySound(tasorPath, GetPlayer.Instance.getPlayer().transform.position, false);
     }
 
     public void Step(GameObject source)
@@ -77,8 +82,17 @@ public class DualOperationsAudioPlayer : NetworkBehaviour
 
     public void Door(bool open, GameObject source)
     {
-        UnityEngine.Debug.Log(open + " Access? " + isServer);
-        PlaySound(doorPaths[open ? 1 : 0], source.transform.position, false);
+        UnityEngine.Debug.Log("open = " + open + " isServer = " + isServer);
+
+        if (open)
+        {
+            PlaySound(doorPaths[1], source.transform.position, false);
+        }
+
+        else
+        {
+            PlaySound(doorPaths[0], source.transform.position, false);
+        }
     }
 
     void PlaySound(string path, Vector3 pos, bool agentOnly)
@@ -105,7 +119,7 @@ public class DualOperationsAudioPlayer : NetworkBehaviour
     }
 
     [TargetRpc]
-    void TargetRpcPlaySoundAgent(string path, Vector3 pos)
+    void TargetRpcPlaySoundAgent(NetworkConnection target, string path, Vector3 pos)
     {
         UnityEngine.Debug.Log("Nådde agent RPC");
         FMODUnity.RuntimeManager.PlayOneShot(path, pos);
