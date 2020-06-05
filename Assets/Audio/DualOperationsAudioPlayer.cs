@@ -52,6 +52,11 @@ public class DualOperationsAudioPlayer : NetworkBehaviour
 
     //[Header("SFX Settings")]
     // MANAGING OTHER SOUNDS
+    NetworkConnection AgentConn { get { return GetPlayer.Instance.getPlayer().GetComponent<NetworkIdentity>().connectionToClient; } }
+
+    public enum Listerners
+    { Agent, Hacker, Both };
+
     [SerializeField] private string detectedPath;
     [SerializeField] private string[] hackingPaths;
     [SerializeField] private string tasorPath;
@@ -60,62 +65,68 @@ public class DualOperationsAudioPlayer : NetworkBehaviour
 
     public void Detected()
     {
-        PlaySound(detectedPath, GetPlayer.Instance.getPlayer().transform.position, false);
+        PlaySound(detectedPath, GetPlayer.Instance.getPlayer().transform.position, Listerners.Both);
     }
 
     public void Hack(int state)
     {
-        PlaySound(hackingPaths[state], GetPlayer.Instance.getPlayer().transform.position, false);
+        PlaySound(hackingPaths[state], GetPlayer.Instance.getPlayer().transform.position, Listerners.Hacker);
     }
 
     public void Tasor()
     {
         UnityEngine.Debug.Log("Taser! isServer = " + isServer);
-        PlaySound(tasorPath, GetPlayer.Instance.getPlayer().transform.position, false);
+        PlaySound(tasorPath, GetPlayer.Instance.getPlayer().transform.position, Listerners.Agent);
     }
 
     public void Step(GameObject source)
     {
         UnityEngine.Debug.Log("Step! " + isServer);
-        PlaySound(footstepPath, source.transform.position, false);
+        PlaySound(footstepPath, source.transform.position, Listerners.Agent);
     }
 
     public void Door(bool open, GameObject source)
     {
         UnityEngine.Debug.Log("open = " + open + " isServer = " + isServer);
 
-        if (open)
-        {
-            PlaySound(doorPaths[1], source.transform.position, false);
-        }
+        int x = 0;
 
-        else
-        {
-            PlaySound(doorPaths[0], source.transform.position, false);
-        }
+        if (open = true)
+            x = 1;
+
+        PlaySound(doorPaths[x], source.transform.position, Listerners.Agent);
     }
 
-    void PlaySound(string path, Vector3 pos, bool agentOnly)
+    void PlaySound(string path, Vector3 pos, Listerners listeners)
     {
         if (hasAuthority)
-            CmdPlaySound(path, pos, agentOnly);
+            CmdPlaySound(path, pos, listeners);
         
         else
-            GetPlayer.Instance.CmdPlaySound(path, pos, agentOnly);
+            GetPlayer.Instance.CmdPlaySound(path, pos, listeners);
     }
 
     [Command]
-    void CmdPlaySound(string path, Vector3 pos, bool agentOnly)
+    void CmdPlaySound(string path, Vector3 pos, Listerners listeners)
     {
         UnityEngine.Debug.Log("Nådde CMD");
-        RpcPlaySound(path, pos, agentOnly);
-    }
 
-    [ClientRpc]
-    void RpcPlaySound(string path, Vector3 pos, bool agentOnly)
-    {
-        UnityEngine.Debug.Log("Nådde RPC");
-        FMODUnity.RuntimeManager.PlayOneShot(path, pos);
+        switch (listeners)
+        {
+            case Listerners.Agent:
+                TargetRpcPlaySoundAgent(AgentConn, path, pos);
+                break;
+            case Listerners.Hacker:
+                TargetRpcPlaySoundHacker(path, pos);
+                break;
+            case Listerners.Both:
+                TargetRpcPlaySoundAgent(AgentConn, path, pos);
+                TargetRpcPlaySoundHacker(path, pos);
+                break;
+            default:
+                UnityEngine.Debug.LogError("Somehow tried to use a null enum I guess?");
+                break;
+        }
     }
 
     [TargetRpc]

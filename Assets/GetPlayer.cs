@@ -180,17 +180,43 @@ public class GetPlayer : NetworkBehaviour
         GameManager._instance.LoadScene(scene, time);
     }
 
+    //SOUND STUFF!!!!!!!!!!!!!!
+    NetworkConnection HackerConn { get { return DualOperationsAudioPlayer.Instance.gameObject.GetComponent<NetworkIdentity>().connectionToClient; } }
+
     [Command]
-    public void CmdPlaySound(string path, Vector3 pos, bool agentOnly)
+    public void CmdPlaySound(string path, Vector3 pos, DualOperationsAudioPlayer.Listerners listeners)
     {
         UnityEngine.Debug.Log("Nådde CMD");
-        RpcPlaySound(path, pos, agentOnly);
+
+        switch (listeners)
+        {
+            case DualOperationsAudioPlayer.Listerners.Agent:
+                TargetRpcPlaySoundAgent(path, pos);
+                break;
+            case DualOperationsAudioPlayer.Listerners.Hacker:
+                TargetRpcPlaySoundHacker(HackerConn, path, pos);
+                break;
+            case DualOperationsAudioPlayer.Listerners.Both:
+                TargetRpcPlaySoundAgent(path, pos);
+                TargetRpcPlaySoundHacker(HackerConn, path, pos);
+                break;
+            default:
+                UnityEngine.Debug.LogError("Somehow tried to use a null enum I guess?");
+                break;
+        }
     }
 
-    [ClientRpc]
-    void RpcPlaySound(string path, Vector3 pos, bool agentOnly)
+    [TargetRpc]
+    void TargetRpcPlaySoundAgent(string path, Vector3 pos)
     {
-        UnityEngine.Debug.Log("Nådde RPC");
+        UnityEngine.Debug.Log("Nådde agent RPC");
+        FMODUnity.RuntimeManager.PlayOneShot(path, pos);
+    }
+
+    [TargetRpc]
+    void TargetRpcPlaySoundHacker(NetworkConnection target, string path, Vector3 pos)
+    {
+        UnityEngine.Debug.Log("Nådde hacker RPC");
         FMODUnity.RuntimeManager.PlayOneShot(path, pos);
     }
 }
