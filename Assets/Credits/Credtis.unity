@@ -740,6 +740,107 @@ RectTransform:
   m_AnchoredPosition: {x: 5.85, y: -6.8}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &326159485
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 326159486}
+  - component: {fileID: 326159489}
+  - component: {fileID: 326159488}
+  - component: {fileID: 326159487}
+  m_Layer: 0
+  m_Name: TMP SubMesh [agency-fb_[allfont Material + LiberationSans SDF Atlas]
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &326159486
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 326159485}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 439513743}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &326159487
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 326159485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07994bfe8b0e4adb97d706de5dea48d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_spriteAsset: {fileID: 0}
+  m_material: {fileID: 0}
+  m_sharedMaterial: {fileID: 0}
+  m_isDefaultMaterial: 0
+  m_padding: 1.25
+  m_renderer: {fileID: 326159489}
+  m_meshFilter: {fileID: 326159488}
+  m_TextComponent: {fileID: 439513744}
+--- !u!33 &326159488
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 326159485}
+  m_Mesh: {fileID: 0}
+--- !u!23 &326159489
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 326159485}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
 --- !u!1 &400651001
 GameObject:
   m_ObjectHideFlags: 0
@@ -977,6 +1078,7 @@ RectTransform:
   m_LocalScale: {x: 0.44407997, y: 0.44407997, z: 0.44407997}
   m_Children:
   - {fileID: 1651010820}
+  - {fileID: 326159486}
   m_Father: {fileID: 946053566}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1003,7 +1105,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Lead Programmer:...... Erik Gustafsson\nProgrammer:............... Filip
+  m_text: "Lead Programmer:...... Erik Gustafsson\nProgrammer:................ Filip
     Antonijevic\n                                     Rikard Larsson\n                                    
     Rasmus M\xF6ller\n                                     Anton Lindgren"
   m_isRightToLeft: 0
@@ -1075,7 +1177,7 @@ MonoBehaviour:
   m_margin: {x: -55.850304, y: 0, z: 0, w: -7.1045465}
   m_textInfo:
     textComponent: {fileID: 439513744}
-    characterCount: 238
+    characterCount: 239
     spriteCount: 0
     spaceCount: 123
     wordCount: 13
@@ -1091,7 +1193,7 @@ MonoBehaviour:
   m_subTextObjects:
   - {fileID: 0}
   - {fileID: 1651010821}
-  - {fileID: 0}
+  - {fileID: 326159487}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -1415,7 +1517,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Lead Designer:............ Arvid Fredlund \nDesigner:.....................
+  m_text: "Lead Designer:............ Arvid Fredlund \nDesigner:......................
     Elin Hallne\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 090273f2fbccdd540b041c2e5da3672b, type: 2}
@@ -1486,7 +1588,7 @@ MonoBehaviour:
   m_margin: {x: -55.850304, y: 0, z: 0, w: -7.1045465}
   m_textInfo:
     textComponent: {fileID: 589878102}
-    characterCount: 86
+    characterCount: 87
     spriteCount: 0
     spaceCount: 8
     wordCount: 7
@@ -1826,8 +1928,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Lead & 2D artist:......... Nora Svensson\n3D Art:.........................
-    Jesper Karlsson\n                                     Marissa Dewati Olsson\nAnimation:...................
+  m_text: "Lead & 2D artist:......... Nora Svensson\n3D Art:...........................
+    Jesper Karlsson\n                                   Marissa Dewati Olsson\nAnimation:....................
     Gustav Frick  "
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 090273f2fbccdd540b041c2e5da3672b, type: 2}
@@ -1898,9 +2000,9 @@ MonoBehaviour:
   m_margin: {x: -55.850304, y: 0, z: 0, w: -7.1045465}
   m_textInfo:
     textComponent: {fileID: 639127222}
-    characterCount: 193
+    characterCount: 194
     spriteCount: 0
-    spaceCount: 54
+    spaceCount: 52
     wordCount: 15
     linkCount: 0
     lineCount: 4
@@ -2035,7 +2137,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Lead Music:................. Erik Gudmundsson
 
-    Music:..........................
+    Music:...........................
     Johan Wetterin'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 090273f2fbccdd540b041c2e5da3672b, type: 2}
@@ -2106,7 +2208,7 @@ MonoBehaviour:
   m_margin: {x: -55.850304, y: 0, z: 0, w: -7.1045465}
   m_textInfo:
     textComponent: {fileID: 639893098}
-    characterCount: 93
+    characterCount: 94
     spriteCount: 0
     spaceCount: 6
     wordCount: 7
@@ -2343,8 +2445,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Lead Game Writer:..... Oscar Mackenrott\nGame Writer:.............. (Ola
-    Brattrok Hallstr\xF6m)"
+  m_text: Lead Game Writer:........ Oscar Mackenrott
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 090273f2fbccdd540b041c2e5da3672b, type: 2}
   m_sharedMaterial: {fileID: 8304587400441754824, guid: 090273f2fbccdd540b041c2e5da3672b,
@@ -2390,7 +2491,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: 40
+  m_firstOverflowCharacterIndex: -1
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -2414,14 +2515,14 @@ MonoBehaviour:
   m_margin: {x: -55.850304, y: 0, z: 0, w: -7.1045465}
   m_textInfo:
     textComponent: {fileID: 694556121}
-    characterCount: 91
+    characterCount: 42
     spriteCount: 0
-    spaceCount: 9
-    wordCount: 10
+    spaceCount: 4
+    wordCount: 5
     linkCount: 0
-    lineCount: 2
+    lineCount: 1
     pageCount: 1
-    materialCount: 2
+    materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
@@ -2551,7 +2652,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Creative directory:....... Elin Hallne
 
-    Manager:.....................
+    Manager:..........................
     Rikard Larsson'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 090273f2fbccdd540b041c2e5da3672b, type: 2}
@@ -2622,7 +2723,7 @@ MonoBehaviour:
   m_margin: {x: -55.850304, y: 0, z: 0, w: -7.1045465}
   m_textInfo:
     textComponent: {fileID: 728108203}
-    characterCount: 83
+    characterCount: 88
     spriteCount: 0
     spaceCount: 6
     wordCount: 7
