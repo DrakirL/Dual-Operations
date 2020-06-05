@@ -81,33 +81,24 @@ public class FirstState : State<AI>
         if (_owner.player.GetComponent<AgentControllerScript>().USE_SPEED > 2)
         {
             _owner.maxRadius2 = 8;
-            if (_owner.radiustest123)
-            {
-                direction = (_owner.player.transform.position - _owner.transform.position).normalized;
-                lookRotation = Quaternion.LookRotation(direction);
-                _owner.transform.rotation = Quaternion.Slerp(_owner.transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
-            }
         }
         else if (_owner.player.GetComponent<AgentControllerScript>().USE_SPEED > 1.25)
         {
             _owner.maxRadius2 = 4;
-            if (_owner.radiustest123)
-            {
-                direction = (_owner.player.transform.position - _owner.transform.position).normalized;
-                lookRotation = Quaternion.LookRotation(direction);
-                _owner.transform.rotation = Quaternion.Slerp(_owner.transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
-            }
         }
         else
         {
             _owner.maxRadius2 = 2;
-            if (_owner.radiustest123)
-            {
-                direction = (_owner.player.transform.position - _owner.transform.position).normalized;
-                lookRotation = Quaternion.LookRotation(direction);
-                _owner.transform.rotation = Quaternion.Slerp(_owner.transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
-            }
         }
+
+        if (_owner.radiustest123)
+        {
+            direction = (_owner.player.transform.position - _owner.transform.position).normalized;
+            lookRotation = Quaternion.LookRotation(direction);
+            _owner.transform.rotation = Quaternion.Slerp(_owner.transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
+            _owner.gameObject.GetComponent<NavMeshAgent>().isStopped = true;
+        }
+        else { _owner.gameObject.GetComponent<NavMeshAgent>().isStopped = false; }
 
         if (_owner.fovtest123)
         {

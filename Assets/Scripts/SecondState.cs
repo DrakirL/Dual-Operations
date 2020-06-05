@@ -9,6 +9,9 @@ public class SecondState : State<AI>
 {
     private static SecondState _instance;
     public float flashTimer = 1;
+    float rotationSpeed = 2f;
+    Quaternion lookRotation;
+    Vector3 direction;
 
     private SecondState()
     {
@@ -50,6 +53,8 @@ public class SecondState : State<AI>
         _owner.StartCoroutine(lol(_owner));
         Debug.Log("Enter 2");
 
+        _owner.gameObject.GetComponent<NavMeshAgent>().isStopped = true;
+
         //Filip 
         var obj = _owner.gameObject.GetComponentInChildren<ChangeAlertnessTexture>();
         obj.setTexture = ChangeAlertnessTexture.SetTexture.Alerted;
@@ -63,6 +68,8 @@ public class SecondState : State<AI>
     public override void ExitState(AI _owner)
     {
         Debug.Log("Exit 2");
+
+        _owner.gameObject.GetComponent<NavMeshAgent>().isStopped = false;
 
         //Filip 
         var obj = _owner.gameObject.GetComponentInChildren<ChangeAlertnessTexture>();
@@ -90,17 +97,12 @@ public class SecondState : State<AI>
         }
 
         test222(_owner);
+
+        direction = (_owner.player.transform.position - _owner.transform.position).normalized;
+        lookRotation = Quaternion.LookRotation(direction);
+        _owner.transform.rotation = Quaternion.Slerp(_owner.transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
         
-        if (_owner.fovtest123)
-        {
-            NavMeshAgent agent = _owner.gameObject.GetComponent<NavMeshAgent>();
-            agent.isStopped = true;
-        }
-        else {
-            _owner.gameObject.GetComponent<NavMeshAgent>().isStopped = false;
-            _owner.stateMachine.ChangeState(FirstState.Instance);
-        }
-            
+
     }
 
     public override void test222(AI _owner)
