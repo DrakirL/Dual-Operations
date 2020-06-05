@@ -8,7 +8,6 @@ using UnityEngine.AI;
 public class FirstState : State<AI>
 {
     private static FirstState _instance;
-    float rotationSpeed = 2f;
     Quaternion lookRotation;
     Vector3 direction;
 
@@ -56,6 +55,9 @@ public class FirstState : State<AI>
 
     public override void UpdateState(AI _owner)
     {
+        Debug.Log(_owner.player.GetComponent<AgentControllerScript>().USE_SPEED);
+        
+
         if (_owner.dead)
         {
             _owner.stateMachine.ChangeState(ThirdState.Instance);
@@ -71,31 +73,31 @@ public class FirstState : State<AI>
             _owner.gameObject.GetComponent<NavMeshAgent>().destination = _owner.radio.transform.GetChild(0).position;
         }
 
-        if (_owner.radiustest123 && _owner.player.GetComponent<AgentControllerScript>().USE_SPEED > 2)
+        if (_owner.player.GetComponent<AgentControllerScript>().isWalking)
         {
-            direction = (_owner.player.transform.position - _owner.transform.position).normalized;
-            lookRotation = Quaternion.LookRotation(direction);
-            _owner.transform.rotation = Quaternion.Slerp(_owner.transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
-        }
-
-        if (_owner.player.GetComponent<AgentControllerScript>().USE_SPEED > 2)
-        {
-            _owner.maxRadius2 = 8;
-        }
-        else if (_owner.player.GetComponent<AgentControllerScript>().USE_SPEED > 1.25)
-        {
-            _owner.maxRadius2 = 4;
+            if (_owner.player.GetComponent<AgentControllerScript>().USE_SPEED > 2)
+            {
+                _owner.maxRadius2 = 4;
+            }
+            else if (_owner.player.GetComponent<AgentControllerScript>().USE_SPEED > 1.25)
+            {
+                _owner.maxRadius2 = 3;
+            }
+            else
+            {
+                _owner.maxRadius2 = 2;
+            }
         }
         else
         {
-            _owner.maxRadius2 = 2;
+            _owner.maxRadius2 = 0;
         }
 
         if (_owner.radiustest123)
         {
             direction = (_owner.player.transform.position - _owner.transform.position).normalized;
             lookRotation = Quaternion.LookRotation(direction);
-            _owner.transform.rotation = Quaternion.Slerp(_owner.transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
+            _owner.transform.rotation = Quaternion.Slerp(_owner.transform.rotation, lookRotation, Time.deltaTime * _owner.rotationSpeed);
             _owner.gameObject.GetComponent<NavMeshAgent>().isStopped = true;
         }
         else { _owner.gameObject.GetComponent<NavMeshAgent>().isStopped = false; }

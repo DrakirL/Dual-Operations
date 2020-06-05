@@ -9,7 +9,6 @@ public class SecondState : State<AI>
 {
     private static SecondState _instance;
     public float flashTimer = 1;
-    float rotationSpeed = 2f;
     Quaternion lookRotation;
     Vector3 direction;
 
@@ -100,7 +99,7 @@ public class SecondState : State<AI>
 
         direction = (_owner.player.transform.position - _owner.transform.position).normalized;
         lookRotation = Quaternion.LookRotation(direction);
-        _owner.transform.rotation = Quaternion.Slerp(_owner.transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
+        _owner.transform.rotation = Quaternion.Slerp(_owner.transform.rotation, lookRotation, Time.deltaTime * _owner.rotationSpeed);
         
 
     }
