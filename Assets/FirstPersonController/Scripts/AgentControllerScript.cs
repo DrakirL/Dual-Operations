@@ -439,27 +439,26 @@ public class AgentControllerScript : NetworkBehaviour
     {
         if (isLocalPlayer)
         {
-            /*
-			if(Input.GetKeyDown(sprintKey))
-			{
-				playerState = PlayerState.eSprint;
-			}
-			
-			if(Input.GetKeyUp(sprintKey))
-			{
-				playerState = PlayerState.eWalk;
-			}
-			
-			if(Input.GetKeyDown(sneakKey))
-			{
-				playerState = PlayerState.eSneak;
-			}
-			
-			if(Input.GetKeyUp(sneakKey))
-			{
-				playerState = PlayerState.eWalk;
-			}						
-			*/
+
+            if (Input.GetKeyDown(sprintKey))
+            {
+                playerState = PlayerState.eSprint;
+            }
+
+            if (Input.GetKeyUp(sprintKey))
+            {
+                playerState = PlayerState.eWalk;
+            }
+
+            if (Input.GetKeyDown(sneakKey))
+            {
+                playerState = PlayerState.eSneak;
+            }
+
+            if (Input.GetKeyUp(sneakKey))
+            {
+                playerState = PlayerState.eWalk;
+            }
             bool isWalking = false;
             if (Input.GetKey(moveForward))
             {
