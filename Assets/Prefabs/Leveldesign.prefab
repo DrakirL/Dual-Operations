@@ -287,6 +287,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &6651154347653045204
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8656061794398576949}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: 8333d8c831a654c43bf87e658f49d0ff, type: 2}
 --- !u!1001 &29310332543395567
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -994,6 +1008,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Part 4
       objectReference: {fileID: 0}
+    - target: {fileID: 25080747900991126, guid: 3b616a4dcc0b55541a31f3f370213d39,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 78731077510519390, guid: 3b616a4dcc0b55541a31f3f370213d39,
         type: 3}
       propertyPath: m_AssetId
@@ -1089,6 +1108,11 @@ PrefabInstance:
       propertyPath: m_AssetId
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 2038503049476762768, guid: 3b616a4dcc0b55541a31f3f370213d39,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 2130988687993379683, guid: 3b616a4dcc0b55541a31f3f370213d39,
         type: 3}
       propertyPath: m_AssetId
@@ -1119,6 +1143,11 @@ PrefabInstance:
       propertyPath: m_AssetId
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 2899951754221602546, guid: 3b616a4dcc0b55541a31f3f370213d39,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 4300000, guid: 8333d8c831a654c43bf87e658f49d0ff, type: 2}
     - target: {fileID: 3589373032937419775, guid: 3b616a4dcc0b55541a31f3f370213d39,
         type: 3}
       propertyPath: m_InnerSpotPercent
@@ -1148,6 +1177,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AssetId
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5829427236838857419, guid: 3b616a4dcc0b55541a31f3f370213d39,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5916334193624593612, guid: 3b616a4dcc0b55541a31f3f370213d39,
         type: 3}
@@ -1293,6 +1327,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Intensity
       value: 7.957747
+      objectReference: {fileID: 0}
+    - target: {fileID: 6513416102069367918, guid: 3b616a4dcc0b55541a31f3f370213d39,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6550932925796891208, guid: 3b616a4dcc0b55541a31f3f370213d39,
         type: 3}
@@ -1544,6 +1583,11 @@ PrefabInstance:
       propertyPath: m_AssetId
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 9150488586558256326, guid: 3b616a4dcc0b55541a31f3f370213d39,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 9218068621138583656, guid: 3b616a4dcc0b55541a31f3f370213d39,
         type: 3}
       propertyPath: m_AssetId
@@ -1554,6 +1598,12 @@ PrefabInstance:
 --- !u!4 &5609485479963382333 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8042349672204830566, guid: 3b616a4dcc0b55541a31f3f370213d39,
+    type: 3}
+  m_PrefabInstance: {fileID: 2469326337124488539}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8656061794398576949 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6513416102069367918, guid: 3b616a4dcc0b55541a31f3f370213d39,
     type: 3}
   m_PrefabInstance: {fileID: 2469326337124488539}
   m_PrefabAsset: {fileID: 0}
@@ -2494,6 +2544,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: CombinedMeshes_Ram
+      objectReference: {fileID: 0}
+    - target: {fileID: 7427520404482969853, guid: 2db8e25f63017704a8ec32a51dfe978d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2db8e25f63017704a8ec32a51dfe978d, type: 3}
