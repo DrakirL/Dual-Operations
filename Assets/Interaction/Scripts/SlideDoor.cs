@@ -58,7 +58,7 @@ public class SlideDoor : NetworkBehaviour, IInteractable
                 AlertMeter._instance.PlayAlertFlash(flashTimer);
 
                 // Sound pls
-                DualOperationsAudioPlayer.Instance.Door(true, transform.gameObject);
+                DualOperationsAudioPlayer.Instance.Door(false, transform.gameObject);
             }
         }
         else

@@ -39,14 +39,14 @@ public class taser : NetworkBehaviour
                 tasorSkott--;
                 tasorReady = false;
 
-             
+                // Sound pls
+                DualOperationsAudioPlayer.Instance.Tasor();
+
                 if (tasorSkott >= 1)
                 {
                     agent.changeFPanimationState("SPY_SHOOT");
                     agent.changeAnimationStateState("SHOOT");
                     StartCoroutine(Cooldown(Shoot.length + Reload.length));
-
-                    //agent.animationFPSHandler.gameObject.GetComponent<Animator>().SetBool("hasAmmo", false);
                 }
                 else
                 {
@@ -57,13 +57,8 @@ public class taser : NetworkBehaviour
                     StartCoroutine(Cooldown(Shoot.length + Reload.length));
                     //StartCoroutine(shootNoMoreAmmoAfter(0.633f));
                 }
-               
-               
-
             }
         }
-
-
 
         if (bengt)
         {
