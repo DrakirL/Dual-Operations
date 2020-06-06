@@ -29,6 +29,11 @@ public class GameManager : MonoBehaviour
                 state = true;
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.F11))
+        {
+            Screen.fullScreen = !Screen.fullScreen;
+        }
     }
     public void LoseState()
     {
