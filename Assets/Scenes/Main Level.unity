@@ -409,7 +409,15 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   playerType: 0
-  tutorialText: 
+  tutorialText: "Your mission is to manually retrieve the schematic data from the
+    central server and escape without getting detected. \n\nUse WASD to move, Left
+    Shift to sprint. Use sprint carfully, the Guards can hear you. Mouse to look
+    around and Left Click to use the Tazor. E to interact with objects.\n\nYou carry
+    a standard issue Neural Shock Emitter, a short ranged taser able to knock out
+    a target\u2019s perceptive senses and short term memory, pacifying them for 10
+    seconds. It requires a moment to recharge between shots, and carries limited
+    ammunition.\r\n\nYour mission requires you to stay undetected. If you are spotted
+    by a guard, stun them with your taser and slip away.\n\n\n"
 --- !u!114 &40546459
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -619,7 +627,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 263062948}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -34.22, y: 0, z: 12.58}
+  m_LocalPosition: {x: 1.42, y: 0, z: 47.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1797607294}
@@ -659,7 +667,12 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   playerType: 0
-  tutorialText: 
+  tutorialText: 'Equipped keycards are used to open facility doors of different tiers,
+    represented by colors. Each keycard you pick up will allow you to open the next
+    tier of doors, but only your partner know which doors belong to which tier. You
+    already have the keycard of the first tier.
+
+'
 --- !u!114 &263062952
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -756,7 +769,11 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   playerType: 0
-  tutorialText: 
+  tutorialText: 'Your partner does not have access to the entire facility map. Activate
+    the central terminal in the north to allow your partner further access to the
+    network grid, revealing more of the map on their screen.
+
+'
 --- !u!114 &279923828
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1975,7 +1992,17 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   playerType: 0
-  tutorialText: 
+  tutorialText: 'Avoid getting detected by surveillance cameras. Your partner can
+    see their location on their screen and disable them temporarily, allowing you
+    to slip past.
+
+
+    Security alertness is translated to a gauge, displayed on
+    your screen. Getting spotted and using your taser increases the alertness. If
+    the gauge reaches maximum level, your intrusion is detected and the operation
+    will fail.
+
+'
 --- !u!114 &1266461745
 MonoBehaviour:
   m_ObjectHideFlags: 0
