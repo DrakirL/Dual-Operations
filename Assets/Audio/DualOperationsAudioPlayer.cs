@@ -84,6 +84,9 @@ public class DualOperationsAudioPlayer : NetworkBehaviour
 
         int x = 0;
 
+        if (source == GetPlayer.Instance.getPlayer().transform.root)
+            x = 1;
+
         UnityEngine.Debug.Log(x + "step " + isServer);
         PlaySound(footstepPaths[x], source.transform.position, Listerners.Agent);
     }
