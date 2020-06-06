@@ -18,7 +18,7 @@ public class radioInterract : NetworkBehaviour
     
     IEnumerator waiter()
     {
-        yield return new WaitForSeconds(10);
+        yield return new WaitForSeconds(20);
         on = false;
 
         DualOperationsAudioPlayer.Instance.RpcUpdateRadio(0.0f, index);
