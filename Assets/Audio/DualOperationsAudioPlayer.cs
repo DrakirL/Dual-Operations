@@ -58,6 +58,7 @@ public class DualOperationsAudioPlayer : NetworkBehaviour
     { Agent, Hacker, Both };
 
     [SerializeField] private string detectedPath;
+    [SerializeField] private string interactPath;
     [SerializeField] private string[] hackingPaths;
     [SerializeField] private string tasorPath;
     [SerializeField] private string[] footstepPaths;
@@ -66,6 +67,11 @@ public class DualOperationsAudioPlayer : NetworkBehaviour
     public void Detected()
     {
         PlaySound(detectedPath, GetPlayer.Instance.getPlayer().transform.position, Listerners.Both);
+    }
+
+    public void Interact()
+    {
+        PlaySound(interactPath, GetPlayer.Instance.getPlayer().transform.position, Listerners.Agent);
     }
 
     public void Hack(int state)
