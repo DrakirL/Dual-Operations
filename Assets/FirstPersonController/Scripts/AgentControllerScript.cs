@@ -54,9 +54,11 @@ public class AgentControllerScript : NetworkBehaviour
     protected float deaccelSpeed;
 
     [HideInInspector]
-    public float USE_SPEED;
+    [SyncVar] public float USE_SPEED;
     private float USE_ACCELMOD;
     private float USE_DEACCELMOD;
+
+    public bool isWalking = false;
 
     Vector3 oldCameraPos = Vector3.zero;
     bool wishMouse = true;
@@ -89,6 +91,19 @@ public class AgentControllerScript : NetworkBehaviour
         //fix to the real if his is still wanted
         animationFBHandler.changeAnimation(NewAnimationName);
     }
+
+    [Command]
+    private void CmdUpdatePlayerSpeed(float NewSpeed)
+    {
+        USE_SPEED = NewSpeed;
+    }
+
+    [Command]
+    private void CmdisWalking(bool newState)
+    {
+        isWalking = newState;
+    }
+
     void Start()
     {
         if (isLocalPlayer)
@@ -97,7 +112,7 @@ public class AgentControllerScript : NetworkBehaviour
 			
 			playerState = PlayerState.eWalk;
 			
-			USE_SPEED = moveSpeed;
+			CmdUpdatePlayerSpeed(moveSpeed);
 			USE_ACCELMOD = accelMod;
 			USE_DEACCELMOD = deaccelMod;
 			
@@ -459,28 +474,33 @@ public class AgentControllerScript : NetworkBehaviour
             {
                 playerState = PlayerState.eWalk;
             }
-            bool isWalking = false;
+            isWalking = false;
+            CmdisWalking(false);
             if (Input.GetKey(moveForward))
             {
                 keyDirection.y = 1f;
                 isWalking = true;
+                CmdisWalking(true);
             }
             if (Input.GetKey(moveBackward))
             {
                 keyDirection.y = -1f;
                 isWalking = true;
+                CmdisWalking(true);
             }
 
             if (Input.GetKey(strafeRight))
             {
                 keyDirection.x = 1f;
                 isWalking = true;
+                CmdisWalking(true);
             }
 
             if (Input.GetKey(strafeLeft))
             {
                 keyDirection.x = -1f;
                 isWalking = true;
+                CmdisWalking(true);
             }
             if  (Taser.tasorReady)
             {
@@ -526,21 +546,21 @@ public class AgentControllerScript : NetworkBehaviour
 			{
 				default:
 				case PlayerState.eWalk:
-					USE_SPEED = moveSpeed;
-					USE_ACCELMOD = accelMod;
+					CmdUpdatePlayerSpeed(moveSpeed);
+                    USE_ACCELMOD = accelMod;
 					USE_DEACCELMOD = deaccelMod;
 					
 				break;
 				
 				case PlayerState.eSneak:
-					USE_SPEED = sneakSpeed;
-					USE_ACCELMOD = sneakAccelMod;
+					CmdUpdatePlayerSpeed(sneakSpeed);
+                    USE_ACCELMOD = sneakAccelMod;
 					USE_DEACCELMOD = sneakDeaccelMod;
 				break;
 
 				case PlayerState.eSprint:
-					USE_SPEED = sprintSpeed;
-					USE_ACCELMOD = sprintAccelMod;
+					CmdUpdatePlayerSpeed(sprintSpeed);
+                    USE_ACCELMOD = sprintAccelMod;
 					USE_DEACCELMOD = sprintDeaccelMod;
 				break;				
 			}

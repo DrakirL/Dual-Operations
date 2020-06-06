@@ -50,73 +50,8 @@ public class AnimationHandler : MonoBehaviour
     }
 
     //update is only debug tools, delete when done
-    private void Update()
+    public void Step()
     {
-        if (false)
-        {
-            if (Input.GetKeyDown(KeyCode.Q))
-            {
-                changeAnimation("WALK");
-            }
-
-            if (Input.GetKeyDown(KeyCode.W))
-            {
-                changeAnimation("GUN DRAW");
-            }
-
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                changeAnimation("STUNNED");
-            }
-
-            if (Input.GetKeyDown(KeyCode.R))
-            {
-                changeAnimation("IDLE");
-            }
-        }
-        if (false)
-        {
-            if (Input.GetKeyDown(KeyCode.Q))
-            {
-                changeAnimation("SPY_IDLE");
-            }
-
-            if (Input.GetKeyDown(KeyCode.W))
-            {
-                changeAnimation("SPY_RELOAD");
-            }
-
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                changeAnimation("SPY_SHOOT");
-            }
-
-            if (Input.GetKeyDown(KeyCode.R))
-            {
-                changeAnimation("SPY_WALK");
-            }
-        }
-        if (false)
-        {
-            if (Input.GetKeyDown(KeyCode.Q))
-            {
-                changeAnimation("IDLE");
-            }
-
-            if (Input.GetKeyDown(KeyCode.W))
-            {
-                changeAnimation("RELOAD");
-            }
-
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                changeAnimation("SHOOT");
-            }
-
-            if (Input.GetKeyDown(KeyCode.R))
-            {
-                changeAnimation("WALK");
-            }
-        }
+        DualOperationsAudioPlayer.Instance.Step(transform.gameObject);
     }
 }
