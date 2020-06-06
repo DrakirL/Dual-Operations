@@ -102,11 +102,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ccfd0553e1a1e14ebba3a979dfa95f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  text: {fileID: 0}
+  slider: {fileID: 0}
+  alertImage: {fileID: 0}
   alertDecreaseTimer: 5
-  decreaseSpeed: 1
+  alertDecreaseSpeed: 1
+  alertDecreaseValue: 1
+  alertIncreaseTimer: 1
+  alertIncreaseSpeed: 1
+  alertIncreaseValue: 1
   alertValue: 0
-  activateTest: 1
-  alertIncreaseAmount: 1
+  detected: 0
+  timeStamp: 0
+  tmpCounter: 0
 --- !u!1 &3487524296167951641
 GameObject:
   m_ObjectHideFlags: 0
@@ -245,8 +255,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: 00:00
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 090273f2fbccdd540b041c2e5da3672b, type: 2}
+  m_sharedMaterial: {fileID: 8304587400441754824, guid: 090273f2fbccdd540b041c2e5da3672b,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
