@@ -159,7 +159,8 @@ public class taser : NetworkBehaviour
     {
         yield return new WaitForSeconds(laserDisplayTime);
         laserDisplay.SetActive(false);
-        laserDisplay = laserParent;
+        laserDisplay.transform.parent = laserParent.transform;
+        laserDisplay.transform.localPosition = Vector3.zero;
         //  Destroy(spawnedBeam);
     }
 }
