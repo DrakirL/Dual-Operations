@@ -9,10 +9,13 @@ public class Generator : MonoBehaviour, IInteractable
     [Tooltip("Connected to the index in the GeneratorItems script in the hackers' map holder. Starts at 0")]
     [SerializeField] int generatorNum;
 
+    public GameObject objj;
+
     public void GetInteracted(List<int> io)
     {
         if(!activated)
             GetPlayer.Instance.ActivateGeneratorItemsServer(generatorNum, true);
-        activated = true;        
+        activated = true;
+        Destroy(objj);
     }
 }
