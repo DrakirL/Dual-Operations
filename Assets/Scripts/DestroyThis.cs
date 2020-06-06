@@ -5,7 +5,7 @@ using UnityEngine;
 public class DestroyThis : MonoBehaviour, IInteractable
 {
     public GameObject gen0;
-
+    
     public void GetInteracted(List<int> io)
     {
         gen0.SetActive(false);
