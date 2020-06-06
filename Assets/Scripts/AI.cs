@@ -18,6 +18,7 @@ public class AI : NetworkBehaviour
     public float maxAngle = 50;
     public float maxRadius = 5;
     public float maxRadius2 = 8;
+    public float rotationSpeed = 2f;
     [HideInInspector]
     public Transform player;
     [HideInInspector]

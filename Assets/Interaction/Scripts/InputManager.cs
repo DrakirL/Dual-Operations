@@ -53,6 +53,9 @@ public class InputManager : MonoBehaviour
                 if(interactable != null)
                 {
                     interactable.GetInteracted(objectPlayerCanInterRactWith); //????
+
+                    // Sound Pls
+                    DualOperationsAudioPlayer.Instance.Interact();
                 }                  
             }
         }

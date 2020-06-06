@@ -58,14 +58,20 @@ public class DualOperationsAudioPlayer : NetworkBehaviour
     { Agent, Hacker, Both };
 
     [SerializeField] private string detectedPath;
+    [SerializeField] private string interactPath;
     [SerializeField] private string[] hackingPaths;
     [SerializeField] private string tasorPath;
-    [SerializeField] private string footstepPath;
+    [SerializeField] private string[] footstepPaths;
     [SerializeField] private string[] doorPaths;
 
     public void Detected()
     {
         PlaySound(detectedPath, GetPlayer.Instance.getPlayer().transform.position, Listerners.Both);
+    }
+
+    public void Interact()
+    {
+        PlaySound(interactPath, GetPlayer.Instance.getPlayer().transform.position, Listerners.Agent);
     }
 
     public void Hack(int state)
@@ -81,8 +87,14 @@ public class DualOperationsAudioPlayer : NetworkBehaviour
 
     public void Step(GameObject source)
     {
-        UnityEngine.Debug.Log("Step! " + isServer);
-        PlaySound(footstepPath, source.transform.position, Listerners.Agent);
+
+        int x = 0;
+
+        if (source.transform.root == GetPlayer.Instance.getPlayer())
+            x = 1;
+
+        UnityEngine.Debug.Log(x + "step " + isServer);
+        PlaySound(footstepPaths[x], source.transform.position, Listerners.Agent);
     }
 
     public void Door(bool open, GameObject source)
