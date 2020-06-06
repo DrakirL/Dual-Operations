@@ -39,8 +39,6 @@ public class GetPlayer : NetworkBehaviour
         {
             instance = this;
         }
-
-        UnityEngine.Debug.Log("GetPlayer hasAuthority = " + hasAuthority);
     }
 
     private void Update()

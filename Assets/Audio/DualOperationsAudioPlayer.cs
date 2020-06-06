@@ -19,8 +19,6 @@ public class DualOperationsAudioPlayer : NetworkBehaviour
     void Awake()
     {
         instance = this;
-
-        UnityEngine.Debug.Log("DOAP hasAuthority = " + hasAuthority);
     }
 
     // MANAGING MUSIC
@@ -99,13 +97,12 @@ public class DualOperationsAudioPlayer : NetworkBehaviour
 
     public void Door(bool open, GameObject source)
     {
-        UnityEngine.Debug.Log("open = " + open + " isServer = " + isServer);
-
         int x = 0;
 
-        if (open = true)
+        if (open == true)
             x = 1;
 
+        UnityEngine.Debug.Log("open = " + open + x + " isServer = " + isServer);
         PlaySound(doorPaths[x], source.transform.position, Listerners.Agent);
     }
 
