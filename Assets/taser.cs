@@ -86,20 +86,20 @@ public class taser : NetworkBehaviour
         tasorReady = true;
     }
 
-    [SyncVar] GameObject uslessTrash;
+    [SyncVar] GameObject currentVFXeffectHolder;
     [Command]
     public void CmdShoot()
     {
         //create VFX
-        if (uslessTrash != null)
+        if (currentVFXeffectHolder != null)
         {
-            NetworkServer.UnSpawn(uslessTrash);
+            NetworkServer.UnSpawn(currentVFXeffectHolder);
         }
         GameObject GO = Instantiate(laserVFX, laserVFXspawnTransform.position, laserVFXspawnTransform.rotation);
         NetworkServer.Spawn(GO);
-        uslessTrash = GO;
+        currentVFXeffectHolder = GO;
         StartCoroutine(destroyBeam());
-        RpcSetPos();
+       
        
 
         //RpcDispalyBeam(aimCam.transform.forward.normalized * range);
@@ -107,7 +107,8 @@ public class taser : NetworkBehaviour
         Ray ray = new Ray(aimCam.transform.position, aimCam.transform.forward);
         if (Physics.Raycast(ray, out hit, range))
         {
-            
+            RpcSetPos(ray.GetPoint(range));
+
             AI target = hit.transform.GetComponent<AI>();
             Debug.Log(target);
             if (target != null)
@@ -119,17 +120,18 @@ public class taser : NetworkBehaviour
     }
 
     [ClientRpc]
-    void RpcSetPos()
+    void RpcSetPos(Vector3 point)
     {
-        uslessTrash.transform.GetChild(0).GetComponent<LineRenderer>().SetPosition(1, uslessTrash.transform.GetChild(0).GetComponent<LineRenderer>().GetPosition(1) + transform.forward * range);
+        currentVFXeffectHolder.transform.GetChild(0).GetComponent<LineRenderer>().SetPosition(1, point);
     }
 
     IEnumerator destroyBeam()
     {
         yield return new WaitForSeconds(laserDisplayTime);
-        if (uslessTrash != null)
+        if (currentVFXeffectHolder != null)
         {
-            NetworkServer.UnSpawn(uslessTrash);
+            NetworkServer.UnSpawn(currentVFXeffectHolder);
+            Destroy(currentVFXeffectHolder);
         }
     }
 }
