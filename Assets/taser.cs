@@ -18,10 +18,16 @@ public class taser : NetworkBehaviour
     [SerializeField] AgentControllerScript agent;
     [SerializeField] AnimationClip Shoot;
     [SerializeField] AnimationClip Reload;
+    //[SerializeField] Transform lightStartPos;
+    [SerializeField] GameObject laserDisplay;
+    [Range(0,2)]
+    [SerializeField] float laserDisplayTime = 0.3f;
+    GameObject laserParent;
 
     // Start is called before the first frame update
     void Start()
     {
+        laserParent = laserDisplay.transform.parent.gameObject;
         //this is the time of the animation
        // reloadTime = 2.633f;
     }
@@ -33,7 +39,7 @@ public class taser : NetworkBehaviour
         {
             if (Input.GetKeyDown(agent.useTaser) && tasorSkott > 0 && tasorReady == true)
             {
-                Debug.Log("fire");
+             
                 CmdShoot();
                 //#bästadesign som fixat tasorn <3
                 tasorSkott--;
@@ -122,9 +128,11 @@ public class taser : NetworkBehaviour
     [Command]
     public void CmdShoot()
     {
+        //RpcDispalyBeam(aimCam.transform.forward.normalized * range);
         RaycastHit hit;
         if (Physics.Raycast(aimCam.transform.position, aimCam.transform.forward, out hit, range))
         {
+            RpcDispalyBeam(hit.point);
             AI target = hit.transform.GetComponent<AI>();
             Debug.Log(target);
             if (target != null)
@@ -132,5 +140,26 @@ public class taser : NetworkBehaviour
                 target.dead = true;
             }
         }
+    }
+
+   //GameObject spawnedBeam;
+    [ClientRpc]
+    private void RpcDispalyBeam(Vector3 point)
+    {
+        laserDisplay.SetActive(true);
+     //   GameObject spawnedBeam = Instantiate(laserDisplay, lightStartPos);
+        LineRenderer LR = laserDisplay.transform.GetChild(0).gameObject.GetComponent<LineRenderer>();
+        //LR.SetPosition(0, lightStartPos.position);
+        LR.SetPosition(1, point);
+        StartCoroutine(destroyBeam());
+        laserDisplay.transform.parent = null;
+
+    }
+    IEnumerator destroyBeam()
+    {
+        yield return new WaitForSeconds(laserDisplayTime);
+        laserDisplay.SetActive(false);
+        laserDisplay = laserParent;
+        //  Destroy(spawnedBeam);
     }
 }
