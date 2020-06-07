@@ -9,7 +9,6 @@ public class taser : NetworkBehaviour
 
     public Camera aimCam;
     public float range;
-    public bool bengt = false;
     public Text tasorText;
 
     public int tasorSkott = 5;
@@ -46,7 +45,8 @@ public class taser : NetworkBehaviour
                 tasorReady = false;
 
                 // Sound pls
-                DualOperationsAudioPlayer.Instance.Tasor();
+                if(isClientOnly)
+                    DualOperationsAudioPlayer.Instance.Tasor();
 
                 if (tasorSkott >= 1)
                 {
@@ -64,12 +64,6 @@ public class taser : NetworkBehaviour
                 }
             }
         }
-
-        if (bengt)
-        {
-            CmdShoot();
-        }
-
         tasorText.text = tasorSkott.ToString();
     }
 
