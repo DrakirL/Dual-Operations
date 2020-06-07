@@ -23,8 +23,8 @@ public class AI : NetworkBehaviour
     public Transform player;
     [HideInInspector]
     public GameObject detectCount;
-    [HideInInspector]
-    public ParticleSystem warning;
+    //[HideInInspector]
+    //public ParticleSystem warning;
     [SyncVar] public bool dead = false;
     [SerializeField] AnimationHandler animationH;
     [HideInInspector]
@@ -37,7 +37,7 @@ public class AI : NetworkBehaviour
         stateMachine = new StateMachine<AI>(this);
         stateMachine.ChangeState(FirstState.Instance);
         NavMeshAgent agent = GetComponent<NavMeshAgent>();
-        warning = GetComponent<ParticleSystem>();
+       // warning = GetComponent<ParticleSystem>();
         rotateSave = transform.rotation;
 
     }
@@ -96,6 +96,7 @@ public class AI : NetworkBehaviour
             }
             radioTurnOff = radio.GetComponent<radioInterract>().on;
 
+        
             stateMachine.Update();
 
             Done:

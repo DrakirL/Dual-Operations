@@ -41,9 +41,10 @@ public class ThirdState : State<AI>
 
     public override void EnterState(AI _owner)
     {
+        Debug.Log("Enter 3");
         _owner.changeAnimation("STUNNED");
         _owner.gameObject.GetComponent<NavMeshAgent>().isStopped = true;
-        Debug.Log("Enter 3");
+        
         _owner.StartCoroutine(waiter(_owner));
     }
 
@@ -61,7 +62,7 @@ public class ThirdState : State<AI>
 
     public override void UpdateState(AI _owner)
     {
-
+        _owner.gameObject.GetComponent<NavMeshAgent>().isStopped = true;
     }
 
     public override void test222(AI _owner)

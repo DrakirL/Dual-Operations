@@ -59,7 +59,7 @@ public class SecondState : State<AI>
         obj.setTexture = ChangeAlertnessTexture.SetTexture.Alerted;
 
         AlertMeter._instance.AddAlert(10);
-        _owner.warning.Play(true);
+       // _owner.warning.Play(true);
         AlertMeter._instance.PlayAlertFlash(flashTimer);
         //_owner.gameObject.GetComponent<NavMeshAgent>().destination = _owner.goal2.position;
     }
@@ -68,13 +68,13 @@ public class SecondState : State<AI>
     {
         Debug.Log("Exit 2");
 
-        _owner.gameObject.GetComponent<NavMeshAgent>().isStopped = false;
+        //_owner.gameObject.GetComponent<NavMeshAgent>().isStopped = false;
 
         //Filip 
         var obj = _owner.gameObject.GetComponentInChildren<ChangeAlertnessTexture>();
         obj.setTexture = ChangeAlertnessTexture.SetTexture.Unsuspected;
 
-        _owner.warning.Stop();
+      //  _owner.warning.Stop();
     }
     public override void movePos(AI _owner)
     {
@@ -86,12 +86,13 @@ public class SecondState : State<AI>
     public override void UpdateState(AI _owner)
     {
       //  if (!_owner.gameObject.GetComponent<NavMeshAgent>().pathPending && _owner.gameObject.GetComponent<NavMeshAgent>().remainingDistance < 0.5f)
-        {
+       // {
    //         _owner.stateMachine.ChangeState(FirstState.Instance);
-        }
+        //}
 
         if (_owner.dead)
         {
+            Debug.Log("WORK pLZ");
             _owner.stateMachine.ChangeState(ThirdState.Instance);
         }
 
