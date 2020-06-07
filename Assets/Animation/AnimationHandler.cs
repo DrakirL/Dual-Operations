@@ -54,4 +54,9 @@ public class AnimationHandler : MonoBehaviour
     {
         DualOperationsAudioPlayer.Instance.Step(transform.gameObject);
     }
+
+    public void Shoot()
+    {
+        DualOperationsAudioPlayer.Instance.Gun();
+    }
 }

@@ -60,6 +60,7 @@ public class DualOperationsAudioPlayer : NetworkBehaviour
     [SerializeField] private string[] hackingPaths;
     [SerializeField] private string tasorPath;
     [SerializeField] private string[] footstepPaths;
+    [SerializeField] private string gunPath;
     [SerializeField] private string[] doorPaths;
 
     public void Detected()
@@ -93,6 +94,12 @@ public class DualOperationsAudioPlayer : NetworkBehaviour
 
         UnityEngine.Debug.Log(x + "step " + isServer);
         PlaySound(footstepPaths[x], source.transform.position, Listerners.Agent);
+    }
+
+    public void Gun()
+    {
+        UnityEngine.Debug.Log("Uh oh... You're dead." + isServer);
+        PlaySound(gunPath, GetPlayer.Instance.getPlayer().transform.position, Listerners.Both);
     }
 
     public void Door(bool open, GameObject source)
